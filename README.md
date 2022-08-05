@@ -1,19 +1,20 @@
+## 🎉 2022 이화여대 대동제 사이트
+
+- 미정
+
 ## 🎉 프론트엔드 팀원 소개
 
-<table border="1" cellspacing="0" cellpadding="0" width="90%">
+<table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
-        <td width="20%" align="center"><a href= "">정다윤</a></td>
-        <td width="20%" align="center"><a href= "">김민주</a></td>
-        <td width="20%" align="center"><a href= "">이서진</a></td>
-        <td width="20%" align="center"><a href= "">허윤</a></td>
-        <td width="20%" align="center"><a href= "">이채원</a></td>
-        <td width="20%" align="center"><a href= "">정연주</a></td>
+        <td width="30%" align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
+        <td width="30%" align="center"><a href= "">김민주</a></td>
+        <td width="30%" align="center"><a href= "">이서진</a></td>
+           <td width="30%" align="center"><a href= "">허윤</a></td>
+        <td width="30%" align="center"><a href= "">이채원</a></td>
+        <td width="30%" align="center"><a href= "">정연주</a></td>
     </tr>
     <tr width="100%">
         <td width="30%" align="center"><img src = "" width="80%"/></td>
-        <td width="30%" align="center"><img src = "" width="80%"/></td>
-        <td width="30%" align="center"><img src = "" width="80%"/></td>
-         <td width="30%" align="center"><img src = "" width="80%"/></td>
         <td width="30%" align="center"><img src = "" width="80%"/></td>
         <td width="30%" align="center"><img src = "" width="80%"/></td>
     </tr>
@@ -28,26 +29,18 @@
    </tr>
 </table>
 
-## 🎉 프로젝트 설명
-
 ## 🎉 기술 스택
 
-<img src=""/>
-
-- Package Manager <img src="">
-
-- Frontend <img src="">
-
-- Code Formmater <img src="">
-
-- ETC &nbsp;
-  <img src=""/>
+- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">
+- Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
+- Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
+- ETC : 미정
 
 </br>
 
 ## 🎉 라이브러리
 
--styled-components: "^5.3.5",
+- 미정
 
 ## 🎉 프로젝트 구조
 
