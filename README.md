@@ -6,25 +6,28 @@
 
 <table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
-        <td width="30%" align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
-        <td width="30%" align="center"><a href= "">김민주</a></td>
-        <td width="30%" align="center"><a href= "">이서진</a></td>
-           <td width="30%" align="center"><a href= "">허윤</a></td>
-        <td width="30%" align="center"><a href= "">이채원</a></td>
-        <td width="30%" align="center"><a href= "">정연주</a></td>
+        <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
+        <td  align="center"><a href= "">김민주</a></td>
+        <td  align="center"><a href= "">이서진</a></td>
+           <td " align="center"><a href= "">허윤</a></td>
+        <td  align="center"><a href= "">이채원</a></td>
+        <td  align="center"><a href= "">정연주</a></td>
     </tr>
     <tr width="100%">
-        <td width="30%" align="center"><img src = "" width="80%"/></td>
-        <td width="30%" align="center"><img src = "" width="80%"/></td>
-        <td width="30%" align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-       <td width="30%" align="center">미정</td>
-       <td width="30%" align="center">미정</td>
-       <td width="30%" align="center">미정</td>
-       <td width="30%" align="center">미정</td>
-       <td width="30%" align="center">미정</td>
-       <td width="30%" align="center">미정</td>
+       <td  align="center">미정</td>
+      <td  align="center">미정</td>
+      <td  align="center">미정</td>
+      <td  align="center">미정</td>
+      <td  align="center">미정</td>
+      <td  align="center">미정</td>
       
    </tr>
 </table>
