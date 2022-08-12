@@ -27,7 +27,7 @@
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-       <td  align="center">미정</td>
+       <td  align="center">메인페이지</td>
               <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
