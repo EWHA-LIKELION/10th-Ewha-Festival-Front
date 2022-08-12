@@ -49,9 +49,10 @@ const CardSlider = () => {
 export default CardSlider;
 
 const ViewWindow = styled.div`
+  z-index: 5;
   width: 221px;
-  height: 362px;
-  border-radius: 116px;
+  height: 363px;
+  border-radius: 110px;
   border: 2px solid red;
 
   overflow: auto;
