@@ -1,12 +1,16 @@
 ## 💚🎉 2022 이화여대 대동제 사이트 🎉💚
 
-- 미정
+### 프로젝트 소개
+~
+### 개발 기간
+~
 
 ## 🎉 프론트엔드 팀원 소개
 
 <table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
+         <td align="center"><a href= "">김혜빈</a></td>
         <td  align="center"><a href= "">김민주</a></td>
         <td  align="center"><a href= "">이서진</a></td>
            <td " align="center"><a href= "">허윤</a></td>
@@ -20,9 +24,11 @@
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
        <td  align="center">미정</td>
+              <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
