@@ -1,99 +1,53 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+// css
 import "../../styles/star.css";
+// components
 import { Star } from "../../images/stars/star";
-import background from "../../images/background.png";
+import CardSlider from "../../components/MainPage/CardSlider";
+// images
+import background from "../../images/main/background.png";
+import Re_wha from "../../images/logo/Re_wha.svg";
+import paper from "../../images/main/paper.svg";
+import title from "../../images/main/title.svg";
+import day14 from "../../images/main/day14.svg";
+import day15 from "../../images/main/day15.svg";
+import day16 from "../../images/main/day16.svg";
+import day914 from "../../images/main/914.svg";
 
 const MainPage = () => {
-  const elementLength = 4;
-  const [count, setCount] = useState(0);
-
-  const boolean = useRef(false);
-
-  useEffect(() => {
-    const timer = setInterval(
-      () => {
-        if (count < elementLength - 1) {
-          boolean.current = false;
-          setCount(prev => prev + 1);
-        } else {
-          boolean.current = true;
-          setCount(0);
-        }
-      },
-      boolean.current ? 0 : 2500,
-    );
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [count]);
-
   return (
-    <GrayBackground>
-      <Star></Star>
-      <Text>안녕하세요</Text>
+    <div>
+      <GrayBackground>
+        <Star></Star>
 
-      <ViewWindow>
-        <Elements count={count}>
-          <Element name="1" color="F4BFBF">
-            One
-          </Element>
-          <Element name="2" color="FFD9C0">
-            Two
-          </Element>
-          <Element name="3" color="FAF0D7">
-            Three
-          </Element>
-          <Element name="copy 1" color="F4BFBF">
-            Copy One
-          </Element>
-        </Elements>
-      </ViewWindow>
-    </GrayBackground>
+        <CardSlider />
+        <img src={Re_wha} />
+        <Text_P>2022 이화대동제</Text_P>
+        <Text_N>
+          <p>9.14</p>(수) ~ <p>9.16</p>(금)
+        </Text_N>
+        <Paper />
+      </GrayBackground>
+
+      <Beige>
+        <Title src={title} />
+        <Day src={day14} />
+        <Day src={day15} />
+        <Day src={day16} />
+        <Test>9.14</Test>
+      </Beige>
+    </div>
   );
 };
 
 export default MainPage;
 
-const ViewWindow = styled.div`
-  width: 221px;
-  height: 362px;
-  border-radius: 116px;
-  border: 2px solid red;
-
-  overflow: auto;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-const Elements = styled.div`
-  display: flex;
-  align-items: center;
-
-  transition: ${props => (props.boolean ? "" : "transform 1.5s ease-in")};
-  transform: ${props => "translateX(-" + props.count * 221 + "px)"};
-
-  border: 1px solid blue;
-  width: 2800px;
-  height: 362px;
-
-  transition: all 1000ms ease 0s;
-`;
-const Element = styled.div`
-  width: 221px;
-  height: 362px;
-
-  background: ${props => "#" + props.color};
-`;
-
-const Text = styled.p`
-  font-family: var(--ph-font);
-`;
-
 const GrayBackground = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   width: 100%;
   height: 774px;
@@ -101,6 +55,56 @@ const GrayBackground = styled.div`
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
+`;
 
-  z-index: -5;
+const Text_P = styled.p`
+  font-family: var(--ph-font);
+  color: var(--text);
+
+  font-weight: 300;
+  font-size: 24px;
+`;
+
+const Text_N = styled.p`
+  display: flex;
+  font-family: var(--nanum-font);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+
+  p {
+    color: var(--green);
+  }
+`;
+
+const Paper = styled.div`
+  position: absolute;
+  bottom: -15px;
+
+  width: 100%;
+  height: 32px;
+  background-image: url(${paper});
+`;
+
+const Beige = styled.div`
+  background-color: var(--beige);
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.img`
+  margin-top: 80px;
+`;
+
+const Day = styled.img`
+  height: 150px;
+`;
+
+const Test = styled.p`
+  font-family: wargika;
+  font-style: regular;
+  font-size: 40px;
 `;
