@@ -1,6 +1,4 @@
-body {
-  /*background-color: black; */
-}
+
 svg {
   -webkit-mask: url("star1.svg") no-repeat center;
   mask: url("star1.svg") no-repeat center;
