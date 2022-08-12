@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+
 @font-face {
   font-family: "PyeongChangPeace";
   font-weight: 300;
