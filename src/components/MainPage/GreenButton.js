@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-const GreenButton = ({ children, onClick }) => {
-  return <Button onClick={onClick}>{children}</Button>;
+const GreenButton = ({ children, onClick, margin }) => {
+  return (
+    <Button onClick={onClick} margin={margin}>
+      {children}
+    </Button>
+  );
 };
 
 export default GreenButton;
 
 const Button = styled.button`
+  margin: ${({ margin }) => margin};
+
   color: var(--white);
   font-family: var(--pre-font);
   font-size: 14px;
