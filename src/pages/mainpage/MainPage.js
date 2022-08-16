@@ -57,18 +57,26 @@ const MainPage = () => {
           <img src={star5} className="star5" /> */}
         </Wrapper>
 
-        <img src={Re_wha} />
-        <PyeongChang_Peace color="var(--text)" size="24px">
+        <Rewha src={Re_wha} />
+        <PyeongChang_Peace
+          color="var(--text)"
+          weight="300"
+          size="24px"
+          margin="24px 0 0 0"
+        >
           2022 이화대동제
         </PyeongChang_Peace>
+
         <NanumSquare
           weight="700"
           color=" var(--text)"
+          margin="24px 0 0 0 "
           style={{ display: "flex" }}
         >
           <p style={{ color: "var(--green)" }}>9.14</p>(수) ~
           <p style={{ color: "var(--green)" }}>9.16</p>(금)
         </NanumSquare>
+
         <Paper />
       </GrayBackground>
 
@@ -143,6 +151,10 @@ const MainPage = () => {
 
 export default MainPage;
 
+const Rewha = styled.img`
+  margin-top: 21px;
+`;
+
 const TopBar = styled.div`
   display: flex;
   justify-content: space-around;
@@ -155,10 +167,11 @@ const Map = styled.img`
 `;
 
 const Wrapper = styled.div`
+  margin-top: 53px;
   position: relative;
   display: flex;
   justify-content: center;
-  border: 1px solid red;
+  //border: 1px solid red;
   height: 362px;
   width: 100%;
 `;
