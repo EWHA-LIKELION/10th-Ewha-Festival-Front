@@ -3,9 +3,9 @@ import { PyeongChang } from "../../components/Text";
 
 import star3 from "../../images/stars/star3.svg";
 
-const StarTitle = ({ title }) => {
+const StarTitle = ({ title, margin }) => {
   return (
-    <SmallTitle>
+    <SmallTitle margin={margin}>
       <TitleStar src={star3} />
       <PyeongChang weight="700" color="#858585" size="15px">
         {title}
@@ -17,6 +17,7 @@ const StarTitle = ({ title }) => {
 
 const SmallTitle = styled.div`
   display: flex;
+  margin: ${({ margin }) => margin};
 `;
 
 const TitleStar = styled.img`
