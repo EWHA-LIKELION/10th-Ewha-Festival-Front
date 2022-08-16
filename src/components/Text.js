@@ -5,6 +5,7 @@ export const PyeongChang = styled.p`
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size};
   color: ${({ color }) => color};
+  margin: ${({ margin }) => margin};
 `;
 
 export const PyeongChang_Peace = styled.p`
@@ -12,6 +13,7 @@ export const PyeongChang_Peace = styled.p`
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size};
   color: ${({ color }) => color};
+  margin: ${({ margin }) => margin};
 `;
 
 export const NanumSquare = styled.p`
@@ -19,6 +21,7 @@ export const NanumSquare = styled.p`
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size};
   color: ${({ color }) => color};
+  margin: ${({ margin }) => margin};
 `;
 
 export const Pretendard = styled.p`
@@ -27,4 +30,5 @@ export const Pretendard = styled.p`
   font-size: ${({ size }) => size};
   color: ${({ color }) => color};
   line-height: ${({ height }) => height};
+  margin: ${({ margin }) => margin};
 `;
