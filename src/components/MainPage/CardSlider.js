@@ -1,9 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
+import card1 from "../../images/main/slider/card1.svg";
+import card2 from "../../images/main/slider/card2.svg";
+import card3 from "../../images/main/slider/card3.svg";
+import card4 from "../../images/main/slider/card4.svg";
+
 const CardSlider = () => {
-  const elementLength = 4;
-  const [count, setCount] = useState(0);
+  const elementLength = 5;
+  const [count, setCount] = useState(1);
 
   const boolean = useRef(false);
 
@@ -29,18 +34,11 @@ const CardSlider = () => {
   return (
     <ViewWindow>
       <Elements count={count}>
-        <Element name="1" color="F4BFBF">
-          One
-        </Element>
-        <Element name="2" color="FFD9C0">
-          Two
-        </Element>
-        <Element name="3" color="FAF0D7">
-          Three
-        </Element>
-        <Element name="copy 1" color="F4BFBF">
-          Copy One
-        </Element>
+        <Element name="1" src={card1} />
+        <Element name="1" src={card1} />
+        <Element name="2" src={card2} />
+        <Element name="3" src={card3} />
+        <Element name="4" src={card4} />
       </Elements>
     </ViewWindow>
   );
@@ -49,10 +47,14 @@ const CardSlider = () => {
 export default CardSlider;
 
 const ViewWindow = styled.div`
+  pointer-events: none;
+
+  z-index: 5;
   width: 221px;
-  height: 362px;
-  border-radius: 116px;
-  border: 2px solid red;
+  height: 363px;
+  border-radius: 110px;
+
+  box-shadow: inset 5px 5px 10px 5px rgb(77, 71, 71);
 
   overflow: auto;
 
@@ -67,13 +69,12 @@ const Elements = styled.div`
   transition: ${props => (props.boolean ? "" : "transform 1.5s ease-in")};
   transform: ${props => "translateX(-" + props.count * 221 + "px)"};
 
-  border: 1px solid blue;
   width: 2800px;
   height: 362px;
 
   transition: all 1000ms ease 0s;
 `;
-const Element = styled.div`
+const Element = styled.img`
   width: 221px;
   height: 362px;
 
