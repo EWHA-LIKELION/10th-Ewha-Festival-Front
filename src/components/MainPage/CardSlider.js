@@ -47,12 +47,14 @@ const CardSlider = () => {
 export default CardSlider;
 
 const ViewWindow = styled.div`
+  pointer-events: none;
+
   z-index: 5;
   width: 221px;
   height: 363px;
   border-radius: 110px;
 
-  //box-shadow: inset 5px 5px 10px 5px rgb(77, 71, 71);
+  box-shadow: inset 5px 5px 10px 5px rgb(77, 71, 71);
 
   overflow: auto;
 
