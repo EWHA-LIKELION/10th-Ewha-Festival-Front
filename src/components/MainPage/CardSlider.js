@@ -33,6 +33,7 @@ const CardSlider = () => {
 
   return (
     <ViewWindow>
+      <Shadow />
       <Elements count={count}>
         <Element name="1" src={card1} />
         <Element name="1" src={card1} />
@@ -45,6 +46,19 @@ const CardSlider = () => {
 };
 
 export default CardSlider;
+
+const Shadow = styled.div`
+  position: absolute;
+
+  pointer-events: none;
+
+  z-index: 10;
+  width: 221px;
+  height: 363px;
+  border-radius: 110px;
+
+  box-shadow: inset 1px 4px rgba(0, 0, 0, 0.25);
+`;
 
 const ViewWindow = styled.div`
   pointer-events: none;

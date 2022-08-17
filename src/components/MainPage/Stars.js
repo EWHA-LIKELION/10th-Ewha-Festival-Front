@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // css
-// import "../../styles/star.css";
+import "../../styles/star.css";
 
 import star1 from "../../images/stars/star1.svg";
 import star2 from "../../images/stars/star2.svg";
