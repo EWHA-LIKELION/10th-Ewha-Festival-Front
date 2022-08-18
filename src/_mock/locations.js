@@ -1,0 +1,17 @@
+export const locations = [
+  { name: "경영관", isSelected: true },
+  { name: "학문관", isSelected: false },
+  { name: "본관", isSelected: false },
+  { name: "포관", isSelected: false },
+  { name: "ECC", isSelected: false },
+  { name: "경영관", isSelected: true },
+  { name: "학문관", isSelected: false },
+  { name: "본관", isSelected: false },
+  { name: "포관", isSelected: false },
+  { name: "ECC", isSelected: false },
+  { name: "경영관", isSelected: true },
+  { name: "학문관", isSelected: false },
+  { name: "본관", isSelected: false },
+  { name: "포관", isSelected: false },
+  { name: "ECC", isSelected: false },
+];

@@ -2,28 +2,17 @@ import styled from "styled-components";
 
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
+import Footer from "../../components/Footer/Footer";
+import { locations } from "../../_mock/locations";
+
 import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
 import map from "../../images/map.svg";
-
+import greenheart from "../../images/greenheart.svg";
+import heart from "../../images/heart.svg";
 const Category = () => {
-  const locations = [
-    { name: "경영관", isSelected: true },
-    { name: "학문관", isSelected: false },
-    { name: "본관", isSelected: false },
-    { name: "포관", isSelected: false },
-    { name: "ECC", isSelected: false },
-    { name: "경영관", isSelected: true },
-    { name: "학문관", isSelected: false },
-    { name: "본관", isSelected: false },
-    { name: "포관", isSelected: false },
-    { name: "ECC", isSelected: false },
-    { name: "경영관", isSelected: true },
-    { name: "학문관", isSelected: false },
-    { name: "본관", isSelected: false },
-    { name: "포관", isSelected: false },
-    { name: "ECC", isSelected: false },
-  ];
+  const booths = [1, 2, 3, 4, 5, 6, 7, 8];
+
   return (
     <Wrapper>
       <Navbar>
@@ -78,19 +67,77 @@ const Category = () => {
           총 6개의 부스
         </Pretendard>
 
-        <Booth></Booth>
+        {booths.map(() => {
+          return (
+            <Booth>
+              <BoothImg />
+              <BootInfo>
+                <p className="num">포01</p>
+                <p className="name">부스 이름</p>
+                <p className="info">
+                  달리기는 동물이 육상에서 다리를 이용해 움직이는 가장 빠른
+                  방법을 말한다.
+                </p>
+              </BootInfo>
+              <Heart src={greenheart} />
+            </Booth>
+          );
+        })}
       </BoothBox>
+
+      <Footer />
     </Wrapper>
   );
 };
 
 export default Category;
 
-const BoothImg = styled.img``;
+const Heart = styled.img`
+  position: absolute;
+  top: 16px;
+  right: 14px;
+`;
 
-const BootInfo = styled.div``;
+const BoothImg = styled.div`
+  background-color: #f6f6f6;
+  margin-right: 12px;
+  width: 89px;
+  height: 90px;
+  border-radius: 10px 0 0 10px;
+  border: none;
+`;
+
+const BootInfo = styled.div`
+  width: 176px;
+
+  padding: 12px 0 12px 0;
+  .num {
+    font-size: 10px;
+    font-style: "Pretendard-Regular";
+    font-weight: 400;
+    color: var(--orange);
+  }
+
+  .name {
+    font-size: 15px;
+    font-style: "Pretendard-Regular";
+    font-weight: 700;
+    color: var(--green3);
+  }
+
+  .info {
+    letter-spacing: -2px;
+    font-size: 11px;
+    font-style: "Pretendard-Regular";
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--black);
+  }
+`;
 
 const Booth = styled.div`
+  margin-top: 16px;
+  position: relative;
   display: flex;
   width: 335px;
   height: 90px;
@@ -99,10 +146,14 @@ const Booth = styled.div`
 `;
 
 const BoothBox = styled.div`
-  width: 100%;
+  margin: 0 auto 50px auto;
+  width: 335px;
   height: 100%;
 
-  padding: 19px;
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 26px;
 `;
 
 const LocationBox = styled.div`
