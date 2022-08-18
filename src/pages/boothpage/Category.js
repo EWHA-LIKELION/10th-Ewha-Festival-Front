@@ -13,11 +13,12 @@ import search from "../../images/navbar/search.svg";
 import map from "../../images/map.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+import { useEffect } from "react";
 
 const Category = () => {
-  const likes = [3, 4]; // 임시 좋아요 목록
   const [days, setDays] = useState(dayData); // 날짜
   const [locations, setLocations] = useState(locationData); //장소
+  const [booths, setBooths] = useState(boothData);
 
   //날짜 선택
   const selectDay = id => {
@@ -38,6 +39,29 @@ const Category = () => {
           : { ...loc, selected: false },
       ),
     );
+  };
+
+  // 좋아요 클릭
+  const Like = id => {
+    setBooths(
+      booths.map(booth =>
+        booth.id === id ? { ...booth, is_liked: true } : { ...booth },
+      ),
+    );
+    console.log("좋아요", id);
+    // 좋아요 요청 보내기
+    // 업데이트
+  };
+
+  const unLike = id => {
+    setBooths(
+      booths.map(booth =>
+        booth.id === id ? { ...booth, is_liked: false } : { ...booth },
+      ),
+    );
+    console.log("좋아요 삭제", id);
+    // 좋아요 삭제
+    // 업데이트
   };
 
   return (
@@ -114,13 +138,7 @@ const Category = () => {
           총 6개의 부스
         </Pretendard>
 
-        {boothData.map(b => {
-          var liked;
-          if (likes.includes(b.id)) {
-            var liked = true;
-          } else {
-            liked = false;
-          }
+        {booths.map(b => {
           return (
             <Booth key={b.id}>
               <BoothImg />
@@ -130,7 +148,11 @@ const Category = () => {
                 <p className="info">{b.info}</p>
               </BootInfo>
 
-              <Heart src={liked ? greenheart : heart} />
+              {b.is_liked ? (
+                <Heart src={greenheart} onClick={() => unLike(b.id)} />
+              ) : (
+                <Heart src={heart} onClick={() => Like(b.id)} />
+              )}
             </Booth>
           );
         })}
