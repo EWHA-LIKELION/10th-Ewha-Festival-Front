@@ -1,17 +1,44 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { useState } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
-import { locations } from "../../_mock/locations";
+import { locationData } from "../../_mock/locations";
+import { dayData } from "../../_mock/dayData";
+import { boothData } from "../../_mock/boothData";
 
 import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
 import map from "../../images/map.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+
 const Category = () => {
-  const booths = [1, 2, 3, 4, 5, 6, 7, 8];
+  const likes = [3, 4]; // 임시 좋아요 목록
+  const [days, setDays] = useState(dayData); // 날짜
+  const [locations, setLocations] = useState(locationData); //장소
+
+  //날짜 선택
+  const selectDay = id => {
+    setDays(
+      days.map(day =>
+        id === day.id
+          ? { ...day, selected: true }
+          : { ...day, selected: false },
+      ),
+    );
+  };
+  // 장소 선택
+  const selectLocation = id => {
+    setLocations(
+      locations.map(loc =>
+        id === loc.id
+          ? { ...loc, selected: true }
+          : { ...loc, selected: false },
+      ),
+    );
+  };
 
   return (
     <Wrapper>
@@ -34,29 +61,49 @@ const Category = () => {
       <Map src={map} />
 
       <DayBox>
-        <Day>
-          <p className="date">14</p>
-          <p className="day">수요일</p>
-        </Day>
-        <Day>
-          <p className="date">15</p>
-          <p className="day">목요일</p>
-        </Day>
-        <Day>
-          <p className="date">16</p>
-          <p className="day">금요일</p>
-        </Day>
+        {days.map(day => {
+          if (day.selected) {
+            return (
+              <Day key={day.id} onClick={() => selectDay(day.id)} selected>
+                <p className="date">{day.date}</p>
+                <p className="day">{day.day}</p>
+              </Day>
+            );
+          } else {
+            return (
+              <Day key={day.id} onClick={() => selectDay(day.id)}>
+                <p className="date">{day.date}</p>
+                <p className="day">{day.day}</p>
+              </Day>
+            );
+          }
+        })}
       </DayBox>
 
       <Hr />
 
       <LocationBox>
         <div style={{ display: "flex" }}>
-          {locations.map(location => {
-            if (location.isSelected) {
-              return <LocationBtn selected>{location.name}</LocationBtn>;
+          {locations.map(loc => {
+            if (loc.selected === true) {
+              return (
+                <LocationBtn
+                  key={loc.id}
+                  onClick={() => selectLocation(loc.id)}
+                  selected
+                >
+                  {loc.name}
+                </LocationBtn>
+              );
             } else {
-              return <LocationBtn>{location.name}</LocationBtn>;
+              return (
+                <LocationBtn
+                  key={loc.id}
+                  onClick={() => selectLocation(loc.id)}
+                >
+                  {loc.name}
+                </LocationBtn>
+              );
             }
           })}
         </div>
@@ -67,19 +114,23 @@ const Category = () => {
           총 6개의 부스
         </Pretendard>
 
-        {booths.map(() => {
+        {boothData.map(b => {
+          var liked;
+          if (likes.includes(b.id)) {
+            var liked = true;
+          } else {
+            liked = false;
+          }
           return (
-            <Booth>
+            <Booth key={b.id}>
               <BoothImg />
               <BootInfo>
-                <p className="num">포01</p>
-                <p className="name">부스 이름</p>
-                <p className="info">
-                  달리기는 동물이 육상에서 다리를 이용해 움직이는 가장 빠른
-                  방법을 말한다.
-                </p>
+                <p className="num">{b.num}</p>
+                <p className="name">{b.name}</p>
+                <p className="info">{b.info}</p>
               </BootInfo>
-              <Heart src={greenheart} />
+
+              <Heart src={liked ? greenheart : heart} />
             </Booth>
           );
         })}
@@ -196,8 +247,6 @@ const Day = styled.div`
   width: 51px;
   height: 45px;
 
-  border-bottom: 1px solid var(--green3);
-
   .date {
     font-family: "Pretendard";
     font-weight: 300;
@@ -214,6 +263,22 @@ const Day = styled.div`
 
     width: 42px;
   }
+
+  ${props =>
+    props.selected
+      ? css`
+          border-bottom: 1px solid var(--green3);
+
+          .day {
+            color: var(--green3);
+          }
+          .date {
+            color: var(--green3);
+          }
+        `
+      : css`
+          border: none;
+        `}
 `;
 
 const Map = styled.img`

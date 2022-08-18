@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 
-const LocationBtn = ({ selected, children }) => {
-  return <Button selected={selected}>{children}</Button>;
+const LocationBtn = ({ selected, children, onClick }) => {
+  return (
+    <Button onClick={onClick} selected={selected}>
+      {children}
+    </Button>
+  );
 };
 
 export default LocationBtn;
