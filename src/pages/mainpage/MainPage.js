@@ -24,7 +24,7 @@ import title from "../../images/main/title.svg";
 import day from "../../images/main/day.svg";
 
 import circle from "../../images/main/circle.svg";
-import map from "../../images/main/map.svg";
+import map from "../../images/map.svg";
 import likelion from "../../images/main/likelion.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import person from "../../images/main/person.svg";

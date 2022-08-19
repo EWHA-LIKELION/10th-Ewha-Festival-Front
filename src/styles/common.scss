@@ -1,10 +1,24 @@
 :root {
+  --green1: rgba(0, 164, 40, 1);
+  --green2: rgba(0, 122, 40, 1);
+  --green3: rgba(0, 70, 40, 1);
+
+  --gray3: rgba(108, 108, 108, 1);
+  --gray2: rgba(165, 165, 165, 1);
+  --gray: rgba(234, 234, 234, 1);
+  --gray0: "F9F9F9";
+
+  --orange: rgba(251, 176, 59, 1);
+
+  --black: rgba(14, 14, 14, 1);
+
   --ph-font: "PyeongChangPeace";
   --nanum-font: "NanumSquare";
+  --pre-font: "Pretendard-Regular";
+
   --text: #515151;
   --green: rgba(0, 164, 40, 1);
   --beige: #fffef5;
   --ewha-green: #004628;
   --white: #fffef5;
-  --pre-font: "Pretendard-Regular";
 }
