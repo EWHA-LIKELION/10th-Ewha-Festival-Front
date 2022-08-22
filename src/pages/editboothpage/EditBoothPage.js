@@ -97,9 +97,7 @@ const Input = styled.input`
   outline: none;
   border: none;
   border-radius: 8px;
-  /* background-color: var(--gray0); */
-  /* 여기 var(--gray0) 왜 안되는지 찾아보기 */
-  background-color: #f9f9f9;
+  background-color: var(--gray0);
   padding: 10px;
 `;
 
@@ -110,7 +108,7 @@ const TextArea = styled.textarea`
   outline: none;
   border: none;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: var(--gray0);
   padding: 10px;
 `;
 

@@ -48,7 +48,7 @@ const TextWrapper = styled.div`
   display: inline;
   width: fit-content;
   margin: 0 auto;
-  padding-right: 1px;
+  padding-right: 16px;
 `;
 
 const Background = styled.div`
@@ -58,6 +58,5 @@ const Background = styled.div`
   align-items: center;
 
   padding-top: 47px;
-
   width: 100%;
 `;
