@@ -4,9 +4,11 @@ import { useState } from "react";
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
+import { GetKeywordBooth } from "../../api/booth";
+
 import { locationData } from "../../_mock/locations";
 import { dayData } from "../../_mock/dayData";
-import { boothData } from "../../_mock/boothData";
+import { categoryData } from "../../_mock/categoryData";
 
 import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
@@ -16,11 +18,23 @@ import heart from "../../images/heart.svg";
 import { useEffect } from "react";
 
 const Category = () => {
-  const [days, setDays] = useState(dayData); // 날짜
-  const [locations, setLocations] = useState(locationData); //장소
-  const [booths, setBooths] = useState(boothData);
+  const [days, setDays] = useState(dayData); // 요일들
+  const [locations, setLocations] = useState(locationData); // 장소들
+  const [pickedDay, setPickedDay] = useState(); // 선택 된 요일
+  const [pickedLocation, setPickedLocation] = useState(""); // 선택된 장소
+  const [booths, setBooths] = useState(categoryData.data); // 부스 목록
 
-  //날짜 선택
+  //날짜 또는 장소 선택 바뀌면 get api 실행
+  useEffect(() => {
+    GetKeywordBooth(pickedDay, pickedLocation)
+      .then(res => {
+        console.log("요일 장소 부스 조회 성공");
+        setBooths(res.data);
+      })
+      .catch(err => console.log(err));
+  }, [pickedDay, pickedLocation]);
+
+  /**요일 선택 : 요일 버튼 ui 변경 + 선택된 요일 변경*/
   const selectDay = id => {
     setDays(
       days.map(day =>
@@ -29,8 +43,16 @@ const Category = () => {
           : { ...day, selected: false },
       ),
     );
+
+    // 선택된 날짜 바꾸기
+    days.map(day => {
+      if (id === day.id) {
+        setPickedDay(id);
+      }
+    });
   };
-  // 장소 선택
+
+  /** 장소 선택 : 장소 버튼 ui 변경 + 선택된 장소 변경 */
   const selectLocation = id => {
     setLocations(
       locations.map(loc =>
@@ -39,29 +61,40 @@ const Category = () => {
           : { ...loc, selected: false },
       ),
     );
+
+    // 선택된 장소 바꾸기
+    locations.map(lo => {
+      if (id === lo.id) {
+        setPickedLocation(id);
+      }
+    });
   };
 
-  // 좋아요 클릭
+  /** 좋아요 클릭 : api 실행 -> 부스 목록 다시 get */
   const Like = id => {
+    // 이 부분은 임시. api 구현 후 삭제
     setBooths(
       booths.map(booth =>
         booth.id === id ? { ...booth, is_liked: true } : { ...booth },
       ),
     );
     console.log("좋아요", id);
-    // 좋아요 요청 보내기
-    // 업데이트
+    // 좋아요 api 요청 보내기
+
+    // 부스 목록 업데이트
   };
 
+  /**좋아요 취소 : api 실행 -> 부스 목록 다시 get*/
   const unLike = id => {
+    // 이 부분은 임시. api 구현 후 삭제
     setBooths(
       booths.map(booth =>
         booth.id === id ? { ...booth, is_liked: false } : { ...booth },
       ),
     );
-    console.log("좋아요 삭제", id);
-    // 좋아요 삭제
-    // 업데이트
+
+    // 좋아요 삭제 api
+    // 부스 목록 업데이트
   };
 
   return (
@@ -141,11 +174,11 @@ const Category = () => {
         {booths.map(b => {
           return (
             <Booth key={b.id}>
-              <BoothImg />
+              <BoothImg src={b.image} />
               <BootInfo>
-                <p className="num">{b.num}</p>
+                <p className="num">{b.number}</p>
                 <p className="name">{b.name}</p>
-                <p className="info">{b.info}</p>
+                {/* <p className="info">{b.description}</p> */}
               </BootInfo>
 
               {b.is_liked ? (
@@ -171,7 +204,7 @@ const Heart = styled.img`
   right: 14px;
 `;
 
-const BoothImg = styled.div`
+const BoothImg = styled.img`
   background-color: #f6f6f6;
   margin-right: 12px;
   width: 89px;
