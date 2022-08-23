@@ -10,10 +10,10 @@
 <table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
-         <td align="center"><a href= "">김혜빈</a></td>
+        <td align="center"><a href= "">김혜빈</a></td>
         <td  align="center"><a href= "">김민주</a></td>
-        <td  align="center"><a href= "">이서진</a></td>
-           <td " align="center"><a href= "">허윤</a></td>
+        <td  align="center"><a href= "https://github.com/529539">이서진</a></td>
+        <td " align="center"><a href= "">허윤</a></td>
         <td  align="center"><a href= "">이채원</a></td>
         <td  align="center"><a href= "">정연주</a></td>
     </tr>
@@ -28,13 +28,12 @@
     </tr>
     <tr width="100%">
        <td  align="center">메인페이지</td>
-              <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      
+       <td  align="center">미정</td>
+       <td  align="center">미정</td>
+       <td  align="center">부스 상세 페이지</td>
+       <td  align="center">미정</td>
+       <td  align="center">미정</td>
+       <td  align="center">미정</td>
    </tr>
 </table>
 
