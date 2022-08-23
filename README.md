@@ -13,7 +13,7 @@
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
          <td align="center"><a href= "">김혜빈</a></td>
-        <td  align="center"><a href= "">김민주</a></td>
+        <td  align="center"><a href= "https://github.com/miinjoo">김민주</a></td>
         <td  align="center"><a href= "">이서진</a></td>
            <td " align="center"><a href= "">허윤</a></td>
         <td  align="center"><a href= "">이채원</a></td>
