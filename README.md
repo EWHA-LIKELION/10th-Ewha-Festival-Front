@@ -29,24 +29,14 @@
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-<<<<<<< HEAD
+
       <td  align="center">메인페이지 / 카테고리 페이지</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
+     <td  align="center">부스 상세 페이지</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      
-=======
-       <td  align="center">메인페이지</td>
-       <td  align="center">미정</td>
-       <td  align="center">미정</td>
-       <td  align="center">부스 상세 페이지</td>
-       <td  align="center">미정</td>
-       <td  align="center">미정</td>
-       <td  align="center">미정</td>
->>>>>>> a32accef8980a01bd4849f7eed4ed52979509043
    </tr>
 </table>
 
