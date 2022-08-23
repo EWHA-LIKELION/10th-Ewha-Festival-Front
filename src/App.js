@@ -6,6 +6,9 @@ import MainPage from "./pages/mainpage/MainPage";
 import Category from "./pages/boothpage/Category";
 //테스트
 import ReduxTest from "./pages/reduxTest";
+// 수정페이지
+import EditBoothPage from "./pages/editboothpage/EditBoothPage";
+import EditMenuPage from "./pages/editmenupage/EditMenuPage";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route exact path="/category" element={<Category />} />
         {/* 테스트 */}
         <Route exact path="/test" element={<ReduxTest />} />
+         {/* 수정 */}
+        <Route exact path="/editbooth" element={<EditBoothPage />} />
+        <Route exact path="/editmenu" element={<EditMenuPage />} />
       </Routes>
     </BrowserRouter>
   );
