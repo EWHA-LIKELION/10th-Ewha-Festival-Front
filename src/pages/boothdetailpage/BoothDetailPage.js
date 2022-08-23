@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useState } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
@@ -125,10 +125,12 @@ const BoothDetailPage = () => {
         </NoticeWrapper>
 
         <InfoWrapper>
-          <PartTitle title="부스 소개" />
-          <InfoUpDown onClick={() => handleInfo()}>
-            {info ? <Up src={back} /> : <Down src={back} />}
-          </InfoUpDown>
+          <div onClick={() => handleInfo()}>
+            <PartTitle title="부스 소개" />
+            <InfoUpDown>
+              {info ? <Up src={back} /> : <Down src={back} />}
+            </InfoUpDown>
+          </div>
           <InfoTextContainer>
             {info ? (
               <LongInfo>{infostring}</LongInfo>
@@ -147,22 +149,61 @@ const BoothDetailPage = () => {
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return (
               <>
-                <MenuContainer>
-                  <MenuImage />
-                  <div>
-                    <Pretendard
-                      size="14px"
-                      weight="500"
-                      color="var(--black)"
-                      style={{ marginBottom: "5px" }}
-                    >
-                      {menu.name}
-                    </Pretendard>
-                    <Pretendard size="13px" weight="300" color="var(--black)">
-                      {commaMoney}원
-                    </Pretendard>
-                  </div>
-                </MenuContainer>
+                {menu.is_soldout ? (
+                  <>
+                    <MenuContainer>
+                      <MenuImage />
+                      <MenuTextWrapper>
+                        <Pretendard
+                          size="14px"
+                          weight="500"
+                          color="var(--black)"
+                          style={{ marginBottom: "5px", opacity: "0.4" }}
+                        >
+                          {menu.name}
+                        </Pretendard>
+                        <Pretendard
+                          size="13px"
+                          weight="300"
+                          color="var(--black)"
+                          style={{ opacity: "0.4" }}
+                        >
+                          {commaMoney}원
+                        </Pretendard>
+                      </MenuTextWrapper>
+                      <Pretendard
+                        size="12px"
+                        weight="400"
+                        color="var(--orange)"
+                      >
+                        sold out
+                      </Pretendard>
+                    </MenuContainer>
+                  </>
+                ) : (
+                  <>
+                    <MenuContainer>
+                      <MenuImage />
+                      <MenuTextWrapper>
+                        <Pretendard
+                          size="14px"
+                          weight="500"
+                          color="var(--black)"
+                          style={{ marginBottom: "5px" }}
+                        >
+                          {menu.name}
+                        </Pretendard>
+                        <Pretendard
+                          size="13px"
+                          weight="300"
+                          color="var(--black)"
+                        >
+                          {commaMoney}원
+                        </Pretendard>
+                      </MenuTextWrapper>
+                    </MenuContainer>
+                  </>
+                )}
               </>
             );
           })}
@@ -370,6 +411,10 @@ const MenuImage = styled.div`
   background: #f7f7f7;
   border-radius: 10px;
   margin-right: 15px;
+`;
+
+const MenuTextWrapper = styled.div`
+  width: calc(100% - 130px);
 `;
 
 const CommentsWrapper = styled.div`
