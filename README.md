@@ -26,7 +26,7 @@
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="100px"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
