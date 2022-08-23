@@ -4,9 +4,9 @@ import { PURGE } from "redux-persist";
 const name = "UserSlice";
 
 const initialState = {
-  userNumber: 0,
-  id: "dy6678",
-  nickname: "닉네임",
+  userNumber: "",
+  id: "",
+  nickname: "",
 };
 
 export const userSlice = createSlice({
