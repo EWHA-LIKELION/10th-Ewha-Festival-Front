@@ -24,7 +24,7 @@
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
@@ -33,7 +33,7 @@
       <td  align="center">미정</td>
       <td  align="center">미정</td>
      <td  align="center">부스 상세 페이지</td>
-      <td  align="center">미정</td>
+      <td  align="center">공지게시판 페이지</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
    </tr>
