@@ -287,8 +287,9 @@ const InfoUpDown = styled.div`
 
 const InfoTextContainer = styled.div`
   width: calc(100% - 65px);
-  word-break: keep-all;
   margin: 0 auto;
+  word-break: keep-all;
+  overflow-x: hidden;
 `;
 
 const ShortInfo = styled.p`

@@ -30,6 +30,12 @@ const Container = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
+  @media all and (min-width: 1200px) {
+    justify-content: center;
+  }
+  @media (orientation: landscape) {
+    justify-content: center;
+  }
 `;
 
 const Background = styled.div`
@@ -63,15 +69,32 @@ const Block = styled.div`
       margin-top: 0;
     }
   }
+  @media all and (min-width: 1200px) {
+    width: auto;
+    height: 100vh;
+  }
+  @media (orientation: landscape) {
+    width: auto;
+    height: 100vh;
+  }
 `;
 
 const Img = styled.img`
   width: 100%;
   height: auto;
+  @media all and (min-width: 768px) {
+    //태블릿
+  }
+  @media all and (min-width: 1200px) {
+  }
+  @media (orientation: landscape) {
+    width: auto;
+    height: 100vh;
+  }
 `;
 
 const Close = styled.img`
   position: absolute;
-  right: 20px;
   margin-top: 20px;
+  right: 20px;
 `;
