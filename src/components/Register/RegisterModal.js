@@ -60,7 +60,6 @@ const BoxWrapper = styled.div`
   width: 294px;
   height: 213px;
   margin-top: 261px;
-
   text-align: center;
 `;
 const ModalBox = styled.div`
