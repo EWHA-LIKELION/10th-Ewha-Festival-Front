@@ -10,8 +10,6 @@ const LoginPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  const userList = [];
-
   //const navigate = useNavigate();
 
   const SubmitInfo = e => {
@@ -122,6 +120,7 @@ const PwWrapper = styled.div`
   }
 `;
 const LoginBtn = styled.button`
+  cursor: pointer;
   width: 294px;
   height: 41px;
 
