@@ -31,7 +31,7 @@
     <tr width="100%">
       <td  align="center">메인페이지 / 카테고리 페이지</td>
       <td  align="center">미정</td>
-      <td  align="center">미정</td>
+      <td  align="center">마이페이지(유저/관리자)</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
