@@ -2,21 +2,22 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { PyeongChang_Peace, Pretendard } from "../../components/Text";
-import Footer from "../../components/Footer/Footer";
+import { PyeongChang_Peace } from "../../components/Text";
 import PartTitle from "../../components/BoothDetail/PartTitle";
+import Footer from "../../components/Footer/Footer";
+import BoothNotice from "../../components/BoothDetail/BoothNotice";
+import BoothInfo from "../../components/BoothDetail/BoothInfo";
 import BoothMenu from "../../components/BoothDetail/BoothMenu";
 import BoothComments from "../../components/BoothDetail/BoothComments";
-import { boothDetailData } from "../../_mock/boothDetailData";
+import ImgModal from "../../components/BoothDetail/ImgModal";
 
+import { boothDetailData } from "../../_mock/boothDetailData";
 import back from "../../images/navbar/back.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
-import noticeicon from "../../images/detail/notice.svg";
-import MenuImgModal from "../../components/BoothDetail/MenuImgModal";
 
 const BoothDetailPage = () => {
-  const id = 2;
+  const id = 1;
   const index = id - 1;
   const [booths, setBooths] = useState(boothDetailData);
   const nav = useNavigate();
@@ -60,6 +61,20 @@ const BoothDetailPage = () => {
   };
   const infoString = booths[index].info;
 
+  const [imgs, setImgs] = useState([]);
+  const getImgs = () => {
+    booths.map(booth => (booth.id === id ? setImgs(booth.img) : null));
+    console.log(imgs);
+  };
+  useEffect(() => {
+    getImgs();
+  });
+  const [src, setSrc] = useState("");
+  const openModal = src => {
+    setSrc(src);
+    setImgModal(true);
+  };
+
   useEffect(() => {
     setImgModal(false);
     setNotice(false);
@@ -69,11 +84,12 @@ const BoothDetailPage = () => {
   return (
     <>
       <Wrapper>
-        <Image onClick={() => setImgModal(true)} />
+        <MainImage onClick={() => openModal(booths[index].mainimg)}>
+          <MainImg src={booths[index].mainimg} />
+        </MainImage>
         <BackBtn onClick={() => nav("/category")}>
           <Back src={back} />
         </BackBtn>
-
         <TitleWrapper>
           <PyeongChang_Peace size="22px" weight="700" color="var(--green3)">
             {booths[index].name}
@@ -84,95 +100,37 @@ const BoothDetailPage = () => {
             <Heart src={heart} onClick={() => Like(id)} />
           )}
         </TitleWrapper>
-
-        <NoticeWrapper>
-          <NoticeContainer
-            onClick={() => handleNotice()}
-            style={{ height: notice ? "auto" : "35px" }}
-          >
-            <Notice src={noticeicon} />
-            <NoticeTextContainer>
-              <Pretendard size="14px" weight="500" color="var(--black)">
-                부스 공지사항
-              </Pretendard>
-              {notice ? (
-                <div style={{ margin: "10px 0 10px 0", wordBreak: "keep-all" }}>
-                  <Pretendard
-                    size="14px"
-                    weight="300"
-                    color="var(--black)"
-                    style={{ lineHeight: "17px" }}
-                  >
-                    {noticeString.split("\n").map(line => {
-                      return (
-                        <span>
-                          {line}
-                          <br />
-                        </span>
-                      );
-                    })}
-                  </Pretendard>
-                </div>
-              ) : null}
-            </NoticeTextContainer>
-            {notice ? (
-              <Up
-                src={back}
-                style={{
-                  margin: "11px 0 0 5px",
-                }}
-              />
-            ) : (
-              <Down
-                src={back}
-                style={{
-                  margin: "11px 0 0 5px",
-                }}
-              />
-            )}
-          </NoticeContainer>
-        </NoticeWrapper>
-
-        <InfoWrapper>
-          <div onClick={() => handleInfo()}>
-            <PartTitle title="부스 소개" />
-            <InfoUpDown>
-              {info ? <Up src={back} /> : <Down src={back} />}
-            </InfoUpDown>
-          </div>
-          <InfoTextContainer>
-            {info ? (
-              <LongInfo>
-                {infoString.split("\n").map(line => {
-                  return (
-                    <span>
-                      {line}
-                      <br />
-                    </span>
-                  );
-                })}
-              </LongInfo>
-            ) : (
-              <ShortInfo>
-                {infoString.split("\n").map(line => {
-                  return (
-                    <span>
-                      {line}
-                      <br />
-                    </span>
-                  );
-                })}
-              </ShortInfo>
-            )}
-          </InfoTextContainer>
-        </InfoWrapper>
-
+        <BoothNotice
+          thisId={id}
+          noticeString={noticeString}
+          notice={notice}
+          handleNotice={handleNotice}
+        />
+        <BoothInfo
+          thisId={id}
+          infoString={infoString}
+          info={info}
+          handleInfo={handleInfo}
+        />
         <BoothMenu thisId={id} />
+        <ImageWrapper>
+          <PartTitle title="사진" />
+          <ImageContainer>
+            {imgs.map(img => {
+              return (
+                <>
+                  <ImgRect onClick={() => openModal(img)}>
+                    <Img src={img} />
+                  </ImgRect>
+                </>
+              );
+            })}
+          </ImageContainer>
+        </ImageWrapper>
         <BoothComments thisId={id} />
-
         <Footer />
       </Wrapper>
-      {imgModal ? <MenuImgModal closeModal={closeModal} /> : null}
+      {imgModal ? <ImgModal src={src} closeModal={closeModal} /> : null}
     </>
   );
 };
@@ -189,10 +147,16 @@ const Wrapper = styled.div`
   padding-top: 47px;
 `;
 
-const Image = styled.div`
+const MainImage = styled.div`
   width: 100%;
   height: 250px;
-  background-color: gray;
+`;
+
+const MainImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
 `;
 
 const Back = styled.img`
@@ -232,86 +196,36 @@ const Heart = styled.img`
   width: 20px;
 `;
 
-const NoticeWrapper = styled.div`
-  width: 100%;
-  min-height: 50px;
-
-  display: flex;
-  justify-content: center;
-`;
-
-const NoticeContainer = styled.div`
-  width: calc(100% - 40px);
-  margin-top: 7.5px;
-  display: flex;
-
-  background-color: var(--gray0);
-  border-radius: 10px;
-`;
-
-const Notice = styled.img`
-  width: 16px;
-  height: 16px;
-  margin: 9px 7px 0 10px;
-`;
-
-const NoticeTextContainer = styled.div`
-  margin-top: 9px;
-  width: calc(100% - 60px);
-  height: auto;
-`;
-
-const Up = styled.img`
-  transform: rotate(90deg);
-  width: 12px;
-  height: 12px;
-`;
-
-const Down = styled.img`
-  transform: rotate(270deg);
-  width: 12px;
-  height: 12px;
-`;
-
-const InfoWrapper = styled.div`
+const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const InfoUpDown = styled.div`
-  position: absolute;
-  top: 35px;
-  right: 30px;
-  width: 12px;
-  height: 12px;
-`;
-
-const InfoTextContainer = styled.div`
-  width: calc(100% - 65px);
+const ImageContainer = styled.div`
+  width: calc(100% - 40px);
+  height: 140px;
   margin: 0 auto;
-  word-break: keep-all;
-  overflow-x: hidden;
+
+  display: flex;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const ShortInfo = styled.p`
-  font-family: "Pretendard-Regular";
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--black);
-  line-height: 160%;
-
-  height: 44px;
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+const ImgRect = styled.div`
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  margin-right: 15px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  flex-shrink: 0;
 `;
 
-const LongInfo = styled.p`
-  font-family: "Pretendard-Regular";
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--black);
-  line-height: 160%;
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
 `;

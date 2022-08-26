@@ -1,17 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-
 import imgmodalclose from "../../images/detail/imgmodalclose.svg";
-import modal1 from "../../images/detail/modal1.svg";
-import modal2 from "../../images/detail/modal2.svg";
-import modal3 from "../../images/detail/modal3.svg";
 
-const MenuImgModal = ({ closeModal, ...rest }) => {
+const MenuImgModal = ({ src, closeModal, ...rest }) => {
   return (
     <Container>
       <Background onClick={() => closeModal()} />
       <Block>
-        <Img src={modal3} />
+        <Img src={src} />
         <Close src={imgmodalclose} onClick={() => closeModal()} />
       </Block>
     </Container>
