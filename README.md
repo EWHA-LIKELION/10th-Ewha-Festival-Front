@@ -1,10 +1,13 @@
 ## 💚🎉 2022 이화여대 대동제 : 부스 통합 안내 서비스 🎉💚
 
 ### 프로젝트 소개
+
 ~ 2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 부스 통합 안내 서비스를 제작하였습니다.
+
 - 움짤, 사진 추가
 
 ### 개발 기간
+
 ~
 
 ## 🎉 프론트엔드 팀원 소개
@@ -23,7 +26,7 @@
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
@@ -41,7 +44,7 @@
 
 ## 🎉 기술 스택
 
-- Frontend :  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">  
+- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - ETC : 미정
@@ -53,9 +56,10 @@
 - 미정
 
 ## 🎉 프로젝트 구조
+
 - 사진 추가
 
-### 폴더 구조 
+### 폴더 구조
 
 ```
 📂 src
@@ -69,4 +73,4 @@
 
 ```
 
-## UI 
+## UI
