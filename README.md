@@ -21,7 +21,7 @@
     </tr>
     <tr width="100%">
         <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
@@ -32,17 +32,16 @@
       <td  align="center">메인페이지 / 카테고리 페이지</td>
       <td  align="center">미정</td>
       <td  align="center">마이페이지(유저/관리자)</td>
+     <td  align="center">부스 상세 페이지</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
-      <td  align="center">미정</td>
-      
    </tr>
 </table>
 
 ## 🎉 기술 스택
 
-- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">
+- Frontend :  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">  
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - ETC : 미정
