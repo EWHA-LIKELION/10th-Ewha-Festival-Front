@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
+//_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
 
 // components
-import CardSlider from "../../components/MainPage/CardSlider";
-import GreenButton from "../../components/MainPage/GreenButton";
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
 import Pagination from "../../components/NoticePage/Pagination";
@@ -47,24 +47,31 @@ export function NoticePage() {
           </PyeongChang>
           <img src={star3} />
         </SubTitle>
+        {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
         <NoticeWrite>
           <p>공지 작성하기</p>
           <img src={write} />
         </NoticeWrite>
+        {/* ~ */}
       </SubTitleBox>
-
       <Line />
       {notices.slice(offset, offset + limit).map(notice => {
         return (
           <>
-            <NoticeBox key={notice.id}>
-              <p class="title">{notice.title}</p>
-              <NoticeInfo>
-                <p class="writer">{notice.writer}</p>
-                <p class="date">{notice.date}</p>
-                <p class="time">{notice.time}</p>
-              </NoticeInfo>
-            </NoticeBox>
+            <Link
+              to={`/notice/${notice.id}`}
+              state={{ notice: notice }}
+              style={{ textDecoration: "none" }}
+            >
+              <NoticeBox key={notice.id}>
+                <p class="title">{notice.title}</p>
+                <NoticeInfo>
+                  <p class="writer">{notice.writer}</p>
+                  <p class="date">{notice.date}</p>
+                  <p class="time">{notice.time}</p>
+                </NoticeInfo>
+              </NoticeBox>
+            </Link>
             <Line />
           </>
         );
@@ -121,6 +128,7 @@ const NoticeBox = styled.div`
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
+    color: var(--black);
   }
 `;
 const NoticeInfo = styled.div`
