@@ -8,6 +8,7 @@ import CardSlider from "../../components/MainPage/CardSlider";
 import GreenButton from "../../components/MainPage/GreenButton";
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
+import Pagination from "../../components/NoticePage/Pagination";
 
 import {
   PyeongChang_Peace,
@@ -18,9 +19,13 @@ import {
 
 // image
 import star3 from "../../images/stars/star3.svg";
+import write from "../../images/write.svg";
 
 export function NoticePage() {
   const [notices, setNotices] = useState(noticeData);
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   return (
     <>
@@ -30,19 +35,26 @@ export function NoticePage() {
         <span style={{ color: "var(--green3)" }}>사항</span>
       </TitleBar>
       <SubTitleBox>
-        <img src={star3} />
-        <PyeongChang
-          color="var(--orange)"
-          weight="700"
-          size="15px"
-          style={{ margin: "4px 8px" }}
-        >
-          NOTICE
-        </PyeongChang>
-        <img src={star3} />
+        <SubTitle>
+          <img src={star3} />
+          <PyeongChang
+            color="var(--orange)"
+            weight="700"
+            size="15px"
+            style={{ margin: "4px 8px" }}
+          >
+            NOTICE
+          </PyeongChang>
+          <img src={star3} />
+        </SubTitle>
+        <NoticeWrite>
+          <p>공지 작성하기</p>
+          <img src={write} />
+        </NoticeWrite>
       </SubTitleBox>
+
       <Line />
-      {notices.map(notice => {
+      {notices.slice(offset, offset + limit).map(notice => {
         return (
           <>
             <NoticeBox key={notice.id}>
@@ -57,19 +69,41 @@ export function NoticePage() {
           </>
         );
       })}
-
-      <div style={{ margin: "100px" }} />
-
+      <Pagination
+        total={notices.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
       <Footer />
     </>
   );
 }
-
 const SubTitleBox = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  height: 45px;
+`;
+
+const SubTitle = styled.div`
   display: flex;
   width: 103px;
   box-sizing: border-box;
-  margin: 20px auto;
+  margin: 20px auto 0px;
+`;
+const NoticeWrite = styled.div`
+  position: absolute;
+  display: flex;
+  right: 0;
+  margin: 0 8% 0;
+  p {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    margin-right: 2px;
+    color: var(--green2);
+  }
 `;
 
 const Line = styled.hr`
