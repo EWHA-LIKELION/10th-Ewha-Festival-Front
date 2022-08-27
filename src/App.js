@@ -16,6 +16,10 @@ import BoothDetailPage from "./pages/boothdetailpage/BoothDetailPage";
 // 수정페이지
 import EditBoothPage from "./pages/editboothpage/EditBoothPage";
 import EditMenuPage from "./pages/editmenupage/EditMenuPage";
+// 공지 게시판 페이지
+import NoticePage from "./pages/noticepage/NoticePage";
+// 공지 상세 보기 페이지
+import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 
 function App() {
   return (
@@ -38,6 +42,10 @@ function App() {
         {/* 수정 */}
         <Route exact path="/editbooth" element={<EditBoothPage />} />
         <Route exact path="/editmenu" element={<EditMenuPage />} />
+        {/* {공지 게시판} */}
+        <Route exact path="/notice" element={<NoticePage />} />
+        {/* 공지 상세 보기 페이지 */}
+        <Route path="/notice/:id" element={<NoticeDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
