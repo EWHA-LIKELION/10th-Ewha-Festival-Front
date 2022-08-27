@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const CancelButton = ({ children, onClick, margin }) => {
+const GrayButton = ({ children, onClick, margin }) => {
   return (
     <Button onClick={onClick} margin={margin}>
       {children}
@@ -8,7 +8,7 @@ const CancelButton = ({ children, onClick, margin }) => {
   );
 };
 
-export default CancelButton;
+export default GrayButton;
 
 const Button = styled.button`
     margin: ${({ margin }) => margin};
@@ -16,7 +16,7 @@ const Button = styled.button`
     color: var(--green3);
     font-family: var(--green2);
     font-size: 14px;
-    width: 56px;
+    width: 70px;
     height: 28px;
 
     border: none;

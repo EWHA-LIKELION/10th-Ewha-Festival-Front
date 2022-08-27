@@ -11,21 +11,18 @@ const UploadButton = ({ children, onClick, margin }) => {
 export default UploadButton;
 
 const Button = styled.button`
-  margin: ${({ margin }) => margin};
-
   color: var(--white);
   font-family: var(--pre-font);
   font-size: 14px;
 
-//   padding: 5px 12px;
-    width: 56px;
-    height: 28px;
+  padding: 5px 12px;
+  width: 56px;
+  height: 28px;
 
   border: none;
-  border-radius: 100px;
-  display: flex;
-  justify-content: center;
+  border-radius: 10px;
+
   align-items: center;
   text-align: center;
-  background-color: var(--green3);
+  background: var(--green3);
 `;
