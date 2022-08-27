@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import { PyeongChang_Peace, Pretendard } from "../Text";
+import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
 import { boothDetailData } from "../../_mock/boothDetailData";
 
@@ -34,7 +34,6 @@ const BoothMenu = props => {
               {menu.is_soldout ? (
                 <>
                   <MenuContainer>
-                    <MenuImage />
                     <MenuTextWrapper>
                       <Pretendard
                         size="14px"
@@ -44,24 +43,27 @@ const BoothMenu = props => {
                       >
                         {menu.name}
                       </Pretendard>
-                      <Pretendard
+                      {/*<Pretendard
                         size="13px"
                         weight="300"
                         color="var(--black)"
                         style={{ opacity: "0.4" }}
                       >
                         {commaMoney}원
+                      </Pretendard>*/}
+                      <Pretendard
+                        size="13px"
+                        weight="300"
+                        color="var(--orange)"
+                      >
+                        sold out
                       </Pretendard>
                     </MenuTextWrapper>
-                    <Pretendard size="12px" weight="400" color="var(--orange)">
-                      sold out
-                    </Pretendard>
                   </MenuContainer>
                 </>
               ) : (
                 <>
                   <MenuContainer>
-                    <MenuImage />
                     <MenuTextWrapper>
                       <Pretendard
                         size="14px"
@@ -95,20 +97,13 @@ const MenuWrapper = styled.div`
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
-  width: calc(100% - 40px);
+  width: calc(100% - 50px);
   margin: 0 auto;
-  margin-bottom: 15px;
-`;
-
-const MenuImage = styled.div`
-  width: 60px;
-  width: 60px;
-  height: 60px;
-  background: #f7f7f7;
-  border-radius: 10px;
-  margin-right: 15px;
 `;
 
 const MenuTextWrapper = styled.div`
-  width: calc(100% - 130px);
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
 `;

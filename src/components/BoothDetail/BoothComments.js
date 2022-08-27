@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import { PyeongChang_Peace, Pretendard } from "../Text";
+import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
 import { boothDetailData } from "../../_mock/boothDetailData";
+import commentdelete from "../../images/detail/commentdelete.svg";
+import commentwrite from "../../images/detail/commentwrite.svg";
 
 const BoothComments = props => {
   const id = props.thisId;
   const [booths, setBooths] = useState(boothDetailData);
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
   console.log(boothDetailData);
 
   const getComment = () => {
@@ -19,6 +22,14 @@ const BoothComments = props => {
   useEffect(() => {
     getComment();
   });
+
+  const DeleteComment = id => {};
+
+  const SubmitComment = e => {
+    e.preventDefault();
+    //axios
+    setNewComment("");
+  };
 
   return (
     <>
@@ -31,7 +42,11 @@ const BoothComments = props => {
             <>
               <CommentContainer>
                 <div style={{ display: "flex", position: "relative" }}>
-                  <Pretendard size="12px" weight="600" color="var(--green2)">
+                  <Pretendard
+                    size="12px"
+                    weight="600"
+                    color={comment.isTF ? "var(--orange)" : "var(--green2)"}
+                  >
                     {comment.nickname}
                   </Pretendard>
                   <Pretendard
@@ -45,6 +60,10 @@ const BoothComments = props => {
                   >
                     {dotTime}
                   </Pretendard>
+                  <Delete
+                    src={commentdelete}
+                    onClick={() => DeleteComment(comment.id)}
+                  />
                 </div>
                 <Pretendard
                   size="14px"
@@ -65,6 +84,18 @@ const BoothComments = props => {
             </>
           );
         })}
+        <CommentInputWrapper>
+          <CommentInputContainer onSubmit={SubmitComment}>
+            <CommentInput
+              placeholder="댓글을 입력하세요"
+              value={newComment}
+              onChange={e => setNewComment(e.target.value)}
+            />
+            <WriteBtn type="submit">
+              <Write src={commentwrite} />
+            </WriteBtn>
+          </CommentInputContainer>
+        </CommentInputWrapper>
       </CommentsWrapper>
     </>
   );
@@ -86,4 +117,63 @@ const CommentContainer = styled.div`
 
   background-color: var(--gray0);
   border-radius: 10px;
+`;
+
+const Delete = styled.img`
+  position: absolute;
+  right: 5px;
+  width: 8px;
+  height: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CommentInputWrapper = styled.div`
+  width: 100%;
+  height: 50px;
+  margin-top: 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const CommentInputContainer = styled.form`
+  width: calc(100% - 40px);
+  height: 40px;
+  margin: 0 auto;
+  background-color: var(--gray0);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const CommentInput = styled.input`
+  margin-left: 15px;
+  width: calc(100% - 50px);
+  height: 30px;
+  background-color: transparent;
+  border: 0;
+  &:focus {
+    outline: none;
+  }
+
+  font-family: "Pretendard";
+  font-weight: 300;
+  font-size: 14px;
+`;
+
+const WriteBtn = styled.button`
+  width: 14px;
+  height: 13.5px;
+  position: absolute;
+  right: 15px;
+  background-color: transparent;
+  border: 0;
+`;
+
+const Write = styled.img`
+  width: 14px;
+  height: 13.5px;
 `;
