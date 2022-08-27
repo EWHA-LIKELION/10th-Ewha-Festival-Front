@@ -15,7 +15,7 @@ import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 
 // images
-import back from "../../images/notice/leftarrow.png";
+import leftarrow from "../../images/notice/leftarrow.png";
 // import { text } from "body-parser";
 
 const Create = (props) => {
@@ -31,7 +31,10 @@ const Create = (props) => {
     return (
         <>
             <TopBar>
-                <img src="{ back }" left="10px"/>
+                <img 
+                src={ leftarrow } 
+                height="17px"
+                />
                 <PyeongChang_Peace 
                 size="22px"
                 weight="700"
@@ -62,7 +65,7 @@ const Create = (props) => {
                     <CancelButton onClick={openModal}>취소</CancelButton>
                 </CancelStyle>
                 <UploadStyle>
-                    <UploadButton>등록</UploadButton>
+                    <UploadButton htmlType="submit">등록</UploadButton>
                 </UploadStyle>
             </Upload>
             <Modal open={modalOpen} close={closeModal} header="공지 작성 취소">
@@ -88,6 +91,11 @@ const TopBar = styled.div`
     padding-bottom: 24px;
     border-bottom: 1px solid #EAEAEA;
 `;
+
+// const BackButton = styled.img`
+//     position: relative;
+//     margin-top: 10px;
+// `
 
 const CreateSpace = styled.div`
     width: 335px;
