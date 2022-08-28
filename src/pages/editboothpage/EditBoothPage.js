@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/Footer/Footer";
+import TitleBar from "../../components/TitleBar";
 
 // import font
 import {
@@ -10,9 +11,13 @@ import {
   Pretendard,
 } from "../../components/Text";
 
-import TitleBar from "../../components/TitleBar";
-
 const EditBoothPage = () => {
+  const [name, setName] = useState("name");
+  const [notice, setNotice] = useState("notice");
+  const [info, setInfo] = useState("information");
+
+  
+
   return (
     <>
       <TitleBar>
@@ -26,7 +31,9 @@ const EditBoothPage = () => {
             <Title>부스 이름</Title>
           </Pretendard>
           <Input
-            placeholder="기존 부스 이름"
+            type="text"
+            value={name}
+            placeholder="부스 이름"
             style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
           />
         </BoxWrapper>
@@ -35,8 +42,10 @@ const EditBoothPage = () => {
             <Title>공지사항</Title>
           </Pretendard>
           <TextArea
+            type="text"
+            value={notice}
+            placeholder="공지사항"
             style={{ fontFamily: "Pretendard-Regular" }}
-            placeholder="기존 공지사항"
           />
         </BoxWrapper>
         <BoxWrapper>
@@ -44,8 +53,10 @@ const EditBoothPage = () => {
             <Title>부스 소개</Title>
           </Pretendard>
           <TextArea
+            type="text"
+            value={info}
+            placeholder="부스 소개"
             style={{ fontFamily: "Pretendard-Regular", color: "var(--black)" }}
-            placeholder="기존 소개"
           />
         </BoxWrapper>
       </ContentWrapper>
@@ -79,13 +90,13 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border: none;
-  margin: 0 30 0 30;
+  margin: 0 30px 0 30px;
 `;
 
 const BoxWrapper = styled.div`
   border: none;
   width: 100%;
-  padding: 12px;
+  padding: 12px 0 12px 0;
 `;
 
 const Title = styled.div`
