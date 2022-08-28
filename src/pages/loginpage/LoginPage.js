@@ -1,31 +1,37 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled, { createGlobalStyle } from "styled-components";
 //images
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
+//유저 정보 관련 
+import { GetUser } from "../../api/user";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const SubmitInfo = e => {
-    e.prevent.default();
+    e.preventDefault();
     //----------api 연결 부분----------
+    GetUser(id,password).then(data=>{
+      console.log(data);
+    })
     // axios
-    //   .post("api주소", {
-    //     ID: id,
-    //     PW: password,
+    //   .post("http://43.200.53.202/accounts/login/", {
+    //     username: id,
+    //     password: password,
     //   })
     //   .then(res => {
-    //     console.log(res.data.message);
-    //     Navigate('/다음페이지')
+    //     alert(res.data.message);
+    //     navigate('/다음페이지');
     //   })
-    //   .catch(res => {
-    //     console.log(res.data.message);
+    //   .catch(error =>{
+    //     error.response.data.data.non_field_errors? alert("올바르지 않은 비밀번호입니다.") : alert("아이디와 비밀번호를 모두 입력해주세요.")
     //   });
   };
 
@@ -33,7 +39,7 @@ const LoginPage = () => {
     <>
       <LoginWrapper>
         <Title src={title} />
-        <LoginForm onSubmit={SubmitInfo}>
+      <LoginForm onSubmit={SubmitInfo}>
           <IdWrapper>
             <FiUser className="idIcon" />
             <input
