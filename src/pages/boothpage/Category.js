@@ -16,22 +16,26 @@ import map from "../../images/map.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
 import { useEffect } from "react";
+import { http } from "../../api/http";
 
 const Category = () => {
   const [days, setDays] = useState(dayData); // 요일들
   const [locations, setLocations] = useState(locationData); // 장소들
-  const [pickedDay, setPickedDay] = useState(); // 선택 된 요일
-  const [pickedLocation, setPickedLocation] = useState(""); // 선택된 장소
+  const [pickedDay, setPickedDay] = useState(1); // 선택 된 요일
+  const [pickedLocation, setPickedLocation] = useState("교육관"); // 선택된 장소
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
   useEffect(() => {
     GetKeywordBooth(pickedDay, pickedLocation)
       .then(res => {
-        console.log("요일 장소 부스 조회 성공");
-        setBooths(res.data);
+        console.log("요일 장소 부스 조회 성공,", res);
+
+        setBooths(res.data.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log("부스 조회 실패", err);
+      });
   }, [pickedDay, pickedLocation]);
 
   /**요일 선택 : 요일 버튼 ui 변경 + 선택된 요일 변경*/
@@ -174,7 +178,7 @@ const Category = () => {
         {booths.map(b => {
           return (
             <Booth key={b.id}>
-              <BoothImg src={b.image} />
+              <BoothImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name}</p>
