@@ -1,28 +1,30 @@
 import styled, { css } from "styled-components";
-import { useState } from "react";
-
+import { useState, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
+//컴포넌트
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
-import { GetKeywordBooth } from "../../api/booth";
-
+import { GetKeywordBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
+// 데이터
 import { locationData } from "../../_mock/locations";
 import { dayData } from "../../_mock/dayData";
 import { categoryData } from "../../_mock/categoryData";
-
+import { boothMaps } from "../../_mock/boothMap";
+// 이미지
 import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
 import map from "../../images/map.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
 import { useEffect } from "react";
-import { http } from "../../api/http";
 
 const Category = () => {
   const [days, setDays] = useState(dayData); // 요일들
   const [locations, setLocations] = useState(locationData); // 장소들
   const [pickedDay, setPickedDay] = useState(1); // 선택 된 요일
-  const [pickedLocation, setPickedLocation] = useState("교육관"); // 선택된 장소
+  const [pickedLocation, setPickedLocation] = useState("정문"); // 선택된 장소 (한글)
+  const [pickedMap, setPickedMap] = useState(0); // 선택된 지도
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
@@ -30,7 +32,7 @@ const Category = () => {
     GetKeywordBooth(pickedDay, pickedLocation)
       .then(res => {
         console.log("요일 장소 부스 조회 성공,", res);
-
+        console.log(pickedDay, pickedLocation);
         setBooths(res.data.data);
       })
       .catch(err => {
@@ -69,42 +71,59 @@ const Category = () => {
     // 선택된 장소 바꾸기
     locations.map(lo => {
       if (id === lo.id) {
-        setPickedLocation(id);
+        setPickedLocation(locationData[id - 1].name);
+        setPickedMap(id);
       }
     });
   };
 
   /** 좋아요 클릭 : api 실행 -> 부스 목록 다시 get */
   const Like = id => {
-    // 이 부분은 임시. api 구현 후 삭제
-    setBooths(
-      booths.map(booth =>
-        booth.id === id ? { ...booth, is_liked: true } : { ...booth },
-      ),
-    );
-    console.log("좋아요", id);
-    // 좋아요 api 요청 보내기
-
-    // 부스 목록 업데이트
+    const token = localStorage.getItem("token");
+    if (token) {
+      // 하트 ui 수정
+      setBooths(
+        booths.map(booth =>
+          booth.id === id ? { ...booth, is_liked: true } : { ...booth },
+        ),
+      );
+      // 좋아요 api 요청 보내기
+      LikeBooth(id)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    } else {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   /**좋아요 취소 : api 실행 -> 부스 목록 다시 get*/
   const unLike = id => {
-    // 이 부분은 임시. api 구현 후 삭제
+    // 하트 ui 수정
     setBooths(
       booths.map(booth =>
         booth.id === id ? { ...booth, is_liked: false } : { ...booth },
       ),
     );
-
     // 좋아요 삭제 api
-    // 부스 목록 업데이트
+    UnLikeBooth(id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
+
+  const navigate = useNavigate();
+
+  const Detail = (ref, event, id) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      navigate(`/category/detail/${id}`);
+    }
+  };
+
+  const wrapperRef = useRef(null);
 
   return (
     <Wrapper>
       <Navbar>
-        <Back src={back} />
+        <Back src={back} onClick={() => navigate(-1)} />
 
         <PyeongChang_Peace
           size="22px"
@@ -116,10 +135,12 @@ const Category = () => {
           <p style={{ color: "var(--green2)" }}>스&nbsp;</p>
           카테고리
         </PyeongChang_Peace>
-        <Search src={search} />
+        <Link to="/">
+          <Search src={search} />
+        </Link>
       </Navbar>
 
-      <Map src={map} />
+      <Map src={boothMaps[pickedMap]} />
 
       <DayBox>
         {days.map(day => {
@@ -144,30 +165,25 @@ const Category = () => {
       <Hr />
 
       <LocationBox>
-        <div style={{ display: "flex" }}>
-          {locations.map(loc => {
-            if (loc.selected === true) {
-              return (
-                <LocationBtn
-                  key={loc.id}
-                  onClick={() => selectLocation(loc.id)}
-                  selected
-                >
-                  {loc.name}
-                </LocationBtn>
-              );
-            } else {
-              return (
-                <LocationBtn
-                  key={loc.id}
-                  onClick={() => selectLocation(loc.id)}
-                >
-                  {loc.name}
-                </LocationBtn>
-              );
-            }
-          })}
-        </div>
+        {locations.map(loc => {
+          if (loc.selected === true) {
+            return (
+              <LocationBtn
+                key={loc.id}
+                onClick={() => selectLocation(loc.id)}
+                selected
+              >
+                {loc.name}
+              </LocationBtn>
+            );
+          } else {
+            return (
+              <LocationBtn key={loc.id} onClick={() => selectLocation(loc.id)}>
+                {loc.name}
+              </LocationBtn>
+            );
+          }
+        })}
       </LocationBox>
 
       <BoothBox>
@@ -177,18 +193,29 @@ const Category = () => {
 
         {booths.map(b => {
           return (
-            <Booth key={b.id}>
+            <Booth
+              key={b.id}
+              onClick={event => Detail(wrapperRef, event, b.id)}
+            >
               <BoothImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name}</p>
-                {/* <p className="info">{b.description}</p> */}
+                <p className="info">{b.description}</p>
               </BootInfo>
 
               {b.is_liked ? (
-                <Heart src={greenheart} onClick={() => unLike(b.id)} />
+                <Heart
+                  src={greenheart}
+                  onClick={() => unLike(b.id)}
+                  ref={wrapperRef}
+                />
               ) : (
-                <Heart src={heart} onClick={() => Like(b.id)} />
+                <Heart
+                  src={heart}
+                  onClick={() => Like(b.id)}
+                  ref={wrapperRef}
+                />
               )}
             </Booth>
           );
@@ -267,9 +294,10 @@ const BoothBox = styled.div`
 `;
 
 const LocationBox = styled.div`
-  display: flex;
-  justify-content: center;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 12px;
   margin: 0 auto 0 auto;
 
   width: 345px;
