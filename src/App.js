@@ -11,6 +11,7 @@ import BoothDetailPage from "./pages/boothdetailpage/BoothDetailPage";
 // 수정페이지
 import EditBoothPage from "./pages/editboothpage/EditBoothPage";
 import EditMenuPage from "./pages/editmenupage/EditMenuPage";
+import EditMenuDetailPage from "./pages/editmenupage/EditMenuDetailPage";
 
 function App() {
   return (
@@ -23,12 +24,13 @@ function App() {
 
         {/* 로그인 테스트 */}
         <Route exact path="/test" element={<ReduxTest />} />
-         {/* 디테일 */}
+        {/* 디테일 */}
 
         <Route exact path="/category/detail" element={<BoothDetailPage />} />
- {/* 수정 */}
+        {/* 수정 */}
         <Route exact path="/editbooth" element={<EditBoothPage />} />
         <Route exact path="/editmenu" element={<EditMenuPage />} />
+        <Route path="/editmenu/:id" element={<EditMenuDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
