@@ -2,13 +2,19 @@
 
 ### 프로젝트 소개
 
-~ 2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 부스 통합 안내 서비스를 제작하였습니다.
+2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 부스 통합 안내 서비스를 제작하였습니다. 
+<br/> nnn개의 부스를 한 번에 조회 가능한 유일한 플랫폼으로써, 
 
 - 움짤, 사진 추가
 
 ### 개발 기간
+- 퍼블리싱 : 2022.08.26
+- 기능 구현과 API 연결 : 2022.09.05
+- 알파 테스트 : 2022.09.08
+- 배포 : 2022.09.00
+- 버그 수정 : 2022.09.14
 
-~
+<br/>
 
 ## 🎉 프론트엔드 팀원 소개
 
@@ -23,7 +29,7 @@
         <td  align="center"><a href= "">정연주</a></td>
     </tr>
     <tr width="100%">
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/J8FJYy.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
@@ -32,8 +38,8 @@
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-      <td  align="center">메인페이지 / 카테고리 페이지</td>
-      <td  align="center">공지사항 작성 / 공지사항 수정 페이지</td>
+      <td  align="center"><p>메인 페이지</p><p>카테고리 페이지</p><p>유저인증& 로그인유지</p></td>
+      <td  align="center"><p>공지사항 작성</p><p>공지사항 수정</p></td>
       <td  align="center">마이페이지(유저/관리자)</td>
      <td  align="center">부스 상세 페이지</td>
       <td  align="center">공지게시판 페이지</td>
