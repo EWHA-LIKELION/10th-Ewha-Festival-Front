@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import axios from 'axios';
 //images
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
@@ -28,25 +29,30 @@ const RegisterPage = () => {
 
   //회원가입 정보 전달
   const Register = e => {
-    e.prevent.default();
+    e.preventDefault();
     //----------api 연결 부분----------
-    // if (CheckInputs()) {
-    //   axios
-    //     .post("api주소", {
-    //       ID: id,
-    //       PW: password,
-    //       name: name,
-    //     })
-    //     .then(res => {
-    //       alert(res.data.message);
-    //       Navigate("/다음페이지");
-    //     })
-    //     .catch(res => {
-    //       alert(res.data.message);
-    //     });
-    // } else {
-    //     alert("회원가입에 필요한 모든 정보를 입력해주세요.");
-    // }
+    //console.log(CheckInputs());
+    if (CheckInputs()) {
+      axios
+        .post("http://43.200.53.202/accounts/signup/", 
+          {
+            "username": id,
+            "password": password,
+            "nickname": name,
+        }
+        )
+        .then(res => {
+          console.log(res);
+          //alert(res.data.message);
+          //Navigate("/다음페이지");
+        })
+        .catch(error => {
+          //alert(res.data.message);
+          console.log(error);
+        });
+    } else {
+        alert("회원가입에 필요한 모든 정보를 입력해주세요.");
+    }
   };
 
   //동일한 비밀번호 입력시 색 변경 함수
@@ -140,7 +146,7 @@ const RegisterPage = () => {
               />
             </SecreteWrapper>
           </InputWrapper>
-          <RegisterBtn>회원가입</RegisterBtn>
+          <RegisterBtn type="submit">회원가입</RegisterBtn>
         </RegisterForm>
       </RegisterWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
@@ -228,6 +234,9 @@ const NameWrapper = styled.div`
 `;
 const SecreteWrapper = styled.div`
   margin: 16px 0 26px 0;
+  input {
+    width: 262px;
+  }
   img {
     width: 18px;
     position: absolute;
