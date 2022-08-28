@@ -9,6 +9,24 @@ export const GetKeywordBooth = async (day, college) => {
   }
 };
 
+export const LikeBooth = async boothId => {
+  try {
+    const response = await BoothService.likeBooth(boothId);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 좋아요 실패");
+  }
+};
+
+export const UnLikeBooth = async boothId => {
+  try {
+    const response = await BoothService.unLikeBooth(boothId);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 좋아요 취소 실패");
+  }
+};
+
 // 이 밑으로 작업 아직 안됨
 export const GetAllBooth = async () => {
   try {
