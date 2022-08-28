@@ -21,8 +21,8 @@ const ReduxTest = () => {
   const Login = () => {
     axios
       .post("http://43.200.53.202/accounts/login/", {
-        username: "5678",
-        password: "5678",
+        username: "1234",
+        password: "1234",
       })
       .then(res => {
         console.log(res);
@@ -42,42 +42,42 @@ const ReduxTest = () => {
       .catch(err => console.log(err));
   };
 
-  http
-    .get("/notices/")
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err));
+  // http
+  //   .get("/notices/")
+  //   .then(res => {
+  //     console.log(res);
+  //   })
+  //   .catch(err => console.log(err));
 
-  http
-    .post("/notices/", {
-      title: "우와앙",
-      content: "ㄴㅇㄹㅇㄴㄹ",
-    })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err));
+  // http
+  //   .post("/notices/", {
+  //     title: "우와앙",
+  //     content: "ㄴㅇㄹㅇㄴㄹ",
+  //   })
+  //   .then(res => {
+  //     console.log(res);
+  //   })
+  //   .catch(err => console.log(err));
 
-  http
-    .post("/booths/1/comments/", {
-      content: "새로운 댓글",
-    })
-    .then(res => {
-      console.log("댓글 작성", res);
-    })
-    .catch(err => console.log("댓글 실패", err));
+  // http
+  //   .post("/booths/1/comments/", {
+  //     content: "새로운 댓글",
+  //   })
+  //   .then(res => {
+  //     console.log("댓글 작성", res);
+  //   })
+  //   .catch(err => console.log("댓글 실패", err));
 
-  http
-    .delete("/booths/1/comments/", {
-      data: {
-        comment_id: 13,
-      },
-    })
-    .then(res => {
-      console.log("댓글 삭제", res);
-    })
-    .catch(err => console.log("댓글 삭제 실퍂", err));
+  // http
+  //   .delete("/booths/1/comments/", {
+  //     data: {
+  //       comment_id: 13,
+  //     },
+  //   })
+  //   .then(res => {
+  //     console.log("댓글 삭제", res);
+  //   })
+  //   .catch(err => console.log("댓글 삭제 실퍂", err));
 
   const Regi = () => {
     axios
