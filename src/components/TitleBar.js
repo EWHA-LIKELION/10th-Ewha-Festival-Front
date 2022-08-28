@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // import font
@@ -8,12 +9,17 @@ import { PyeongChang_Peace } from "../components/Text";
 import { ReactComponent as Backbutton } from "../images/navbar/back.svg";
 
 const TitleBar = ({ children }) => {
+  const navigate = useNavigate();
+
+  const handleBackButton = () => {
+    navigate(-1);
+  };
   return (
     <>
       <Background>
         <TopBar>
           <ButtonWrapper>
-            <Backbutton></Backbutton>
+            <Backbutton onClick={handleBackButton}></Backbutton>
           </ButtonWrapper>
           <TextWrapper>
             <PyeongChang_Peace weight="700" size="22px">
