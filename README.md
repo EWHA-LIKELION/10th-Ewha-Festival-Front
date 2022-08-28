@@ -16,8 +16,6 @@
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
          <td align="center"><a href= "https://github.com/aoqlsdl">김혜빈</a></td>
-        <td  align="center"><a href= "">김민주</a></td>
-        <td align="center"><a href= "https://github.com/aoqlsdl">김혜빈</a></td>
         <td  align="center"><a href= "https://github.com/miinjoo">김민주</a></td>
         <td  align="center"><a href= "">이서진</a></td>
         <td " align="center"><a href= "">허윤</a></td>
@@ -28,8 +26,6 @@
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
         <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
@@ -38,7 +34,6 @@
     <tr width="100%">
       <td  align="center">메인페이지 / 카테고리 페이지</td>
       <td  align="center">공지사항 작성 / 공지사항 수정 페이지</td>
-      <td  align="center">미정</td>
       <td  align="center">마이페이지(유저/관리자)</td>
      <td  align="center">부스 상세 페이지</td>
       <td  align="center">공지게시판 페이지</td>
