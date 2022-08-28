@@ -23,7 +23,7 @@ const MyManager = () => {
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구닉네임</Pretendard>
+          <Pretendard>어쩌구 닉네임</Pretendard>
         </p>
         <p className="user">
           <Pretendard>likelion</Pretendard>
