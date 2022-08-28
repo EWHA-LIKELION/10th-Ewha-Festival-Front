@@ -27,7 +27,6 @@ import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 //로그인 페이지
 import LoginPage from "./pages/loginpage/LoginPage";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -57,8 +56,6 @@ function App() {
         <Route path="/notice/:id" element={<NoticeDetailPage />} />
         {/*로그인*/}
         <Route exact path="/login" element={<LoginPage />} />
-        {/* 로그인 테스트 */}
-        <Route exact path="/test" element={<ReduxTest />} />
         {/* 회원 가입 */}
         <Route exact path="/register" element={<RegisterPage />} />
       </Routes>

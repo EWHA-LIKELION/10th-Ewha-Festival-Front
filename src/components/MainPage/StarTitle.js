@@ -7,7 +7,7 @@ const StarTitle = ({ title, margin }) => {
   return (
     <SmallTitle margin={margin}>
       <TitleStar src={star3} />
-      <PyeongChang weight="700" color="#858585" size="15px">
+      <PyeongChang weight="700" color="#858585" size="15px" height="28px">
         {title}
       </PyeongChang>
       <TitleStar src={star3} />

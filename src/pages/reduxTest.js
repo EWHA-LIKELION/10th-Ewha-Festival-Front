@@ -21,8 +21,8 @@ const ReduxTest = () => {
   const Login = () => {
     axios
       .post("http://43.200.53.202/accounts/login/", {
-        username: "1234",
-        password: "1234",
+        username: "5678",
+        password: "5678",
       })
       .then(res => {
         console.log(res);
@@ -82,9 +82,9 @@ const ReduxTest = () => {
   const Regi = () => {
     axios
       .post("http://43.200.53.202/accounts/signup/", {
-        username: "testdddd",
+        username: "1111",
         password: "1234",
-        nickname: "우왕",
+        nickname: "1111",
       })
       .then(res => console.log(res))
       .catch(err => console.log(err));
