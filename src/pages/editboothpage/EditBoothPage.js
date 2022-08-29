@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/Footer/Footer";
 import TitleBar from "../../components/TitleBar";
+import axios from "axios";
 
 // import font
 import {
@@ -12,11 +13,33 @@ import {
 } from "../../components/Text";
 
 const EditBoothPage = () => {
-  const [name, setName] = useState("name");
-  const [notice, setNotice] = useState("notice");
-  const [info, setInfo] = useState("information");
+  // const getInfo = async () => {
+  //   const response = await axios.get(`http://43.200.53.202/booths/${id}`);
+  //   console.log(response.data.data.name);
+  //   console.log(response.data.data.notice);
+  //   console.log(response.data.data.description);
+  // };
 
-  
+  const [name, setName] = useState("기존 이름");
+  const [notice, setNotice] = useState("기존 공지사항");
+  const [description, setDescription] = useState("기존 소개");
+
+  var id = 1;
+
+  const handleName = e => {
+    setName(e.target.value);
+    // console.log(name);
+  };
+
+  const handleNotice = e => {
+    setNotice(e.target.value);
+    // console.log(notice);
+  };
+
+  const handleDescription = e => {
+    setDescription(e.target.value);
+    // console.log(description);
+  };
 
   return (
     <>
@@ -33,6 +56,7 @@ const EditBoothPage = () => {
           <Input
             type="text"
             value={name}
+            onChange={handleName}
             placeholder="부스 이름"
             style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
           />
@@ -44,6 +68,7 @@ const EditBoothPage = () => {
           <TextArea
             type="text"
             value={notice}
+            onChange={handleNotice}
             placeholder="공지사항"
             style={{ fontFamily: "Pretendard-Regular" }}
           />
@@ -54,7 +79,8 @@ const EditBoothPage = () => {
           </Pretendard>
           <TextArea
             type="text"
-            value={info}
+            value={description}
+            onChange={handleDescription}
             placeholder="부스 소개"
             style={{ fontFamily: "Pretendard-Regular", color: "var(--black)" }}
           />
