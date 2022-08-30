@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles/static.css";
 import "./styles/common.scss";
+import "./styles/fadeIn.css";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
