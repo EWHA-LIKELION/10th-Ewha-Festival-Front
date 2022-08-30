@@ -15,7 +15,7 @@ import ReduxTest from "./pages/reduxTest";
 //회원가입 페이지
 import RegisterPage from "./pages/registerpage/RegisterPage";
 // 디테일
-import BoothDetailPage from "./pages/boothdetailpage/BoothDetailPage";
+import BoothDetailPage from "./pages/boothpage/BoothDetailPage";
 // 수정페이지
 import EditBoothPage from "./pages/editboothpage/EditBoothPage";
 import EditMenuPage from "./pages/editmenupage/EditMenuPage";

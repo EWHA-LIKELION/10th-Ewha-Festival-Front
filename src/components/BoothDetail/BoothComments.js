@@ -13,11 +13,9 @@ const BoothComments = props => {
   const [booths, setBooths] = useState(boothDetailData);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  console.log(boothDetailData);
 
   const getComment = () => {
     booths.map(booth => (booth.id === id ? setComments(booth.comments) : null));
-    console.log(comments);
   };
 
   useEffect(() => {
@@ -45,7 +43,8 @@ const BoothComments = props => {
 
   const SubmitComment = e => {
     e.preventDefault();
-    //axios
+    console.log("댓글 작성", newComment);
+    //api
     setNewComment("");
   };
 
@@ -102,19 +101,19 @@ const BoothComments = props => {
             </>
           );
         })}
-        <CommentInputWrapper>
-          <CommentInputContainer onSubmit={SubmitComment}>
-            <CommentInput
-              placeholder="댓글을 입력하세요"
-              value={newComment}
-              onChange={e => setNewComment(e.target.value)}
-            />
-            <WriteBtn type="submit">
-              <Write src={commentwrite} />
-            </WriteBtn>
-          </CommentInputContainer>
-        </CommentInputWrapper>
       </CommentsWrapper>
+      <CommentInputWrapper>
+        <CommentInputContainer onSubmit={SubmitComment}>
+          <CommentInput
+            placeholder="댓글을 입력하세요"
+            value={newComment}
+            onChange={e => setNewComment(e.target.value)}
+          />
+          <WriteBtn type="submit">
+            <Write src={commentwrite} />
+          </WriteBtn>
+        </CommentInputContainer>
+      </CommentInputWrapper>
       {deleteModal ? (
         <DeleteModal
           open={deleteModal}
@@ -131,7 +130,7 @@ export default BoothComments;
 
 const CommentsWrapper = styled.div`
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 `;
 
 const CommentContainer = styled.div`
@@ -157,11 +156,14 @@ const Delete = styled.img`
 
 const CommentInputWrapper = styled.div`
   width: 100%;
-  height: 50px;
+  height: 60px;
   margin-top: 25px;
-  position: relative;
+  position: fixed;
+  bottom: 0;
   display: flex;
   align-items: center;
+  background-color: #fff;
+  border-top: 1px solid var(--gray);
 `;
 
 const CommentInputContainer = styled.form`

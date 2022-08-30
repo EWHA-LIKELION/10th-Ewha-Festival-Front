@@ -9,11 +9,9 @@ const BoothMenu = props => {
   const id = props.thisId;
   const [booths, setBooths] = useState(boothDetailData);
   const [menus, setMenus] = useState([]);
-  console.log(boothDetailData);
 
   const getMenu = () => {
     booths.map(booth => (booth.id === id ? setMenus(booth.menus) : null));
-    console.log(menus);
   };
 
   useEffect(() => {
@@ -43,14 +41,6 @@ const BoothMenu = props => {
                       >
                         {menu.name}
                       </Pretendard>
-                      {/*<Pretendard
-                        size="13px"
-                        weight="300"
-                        color="var(--black)"
-                        style={{ opacity: "0.4" }}
-                      >
-                        {commaMoney}원
-                      </Pretendard>*/}
                       <Pretendard
                         size="13px"
                         weight="300"
