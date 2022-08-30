@@ -25,6 +25,8 @@ import NoticePage from "./pages/noticepage/NoticePage";
 import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 //로그인 페이지
 import LoginPage from "./pages/loginpage/LoginPage";
+//쓰레기통 페이지
+import TrashPage from "./pages/trashbinpage/TrashPage";
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         {/* 회원 가입 */}
         <Route exact path="/register" element={<RegisterPage />} />
+        {/* 쓰레기통 */}
+        <Route exact path="/trashbin" element={<TrashPage />} />
       </Routes>
     </BrowserRouter>
   );
