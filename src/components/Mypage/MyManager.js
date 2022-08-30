@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
+import { useNavigate } from "react-router-dom";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -17,6 +18,15 @@ import edit2 from "../../images/mypage/edit2.png";
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(4);
+
+  const navigate = useNavigate();
+
+  const goEditbooth = () => {
+    navigate("/editbooth");
+  };
+  const goEditMenu = () => {
+    navigate("/editmenu");
+  };
 
   return (
     <Wrapper>
@@ -33,8 +43,8 @@ const MyManager = () => {
         </p>
       </Userbox>
       <EditBooth>
-        <img src={edit1}></img>
-        <img src={edit2}></img>
+        <img src={edit1} onClick={goEditbooth}></img>
+        <img src={edit2} onClick={goEditMenu}></img>
       </EditBooth>
       <BoothBox>
         <Titlebox>
@@ -196,5 +206,6 @@ const EditBooth = styled.div`
   img:active {
     box-shadow: inset 0px 2px 6px #bbc4c0;
     border-radius: 8px;
+    cursor: pointer;
   }
 `;
