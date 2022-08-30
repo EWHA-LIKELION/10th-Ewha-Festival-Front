@@ -12,7 +12,7 @@ import Mypage from "./pages/mypage/Mypage";
 //테스트
 import ReduxTest from "./pages/reduxTest";
 //회원가입 페이지
-import RegisterPage from "./pages/registerpage/RegisterPage";
+import RegisterPage from "./pages/authpage/RegisterPage";
 // 디테일
 import BoothDetailPage from "./pages/boothpage/BoothDetailPage";
 // 수정페이지
@@ -24,7 +24,7 @@ import NoticePage from "./pages/noticepage/NoticePage";
 // 공지 상세 보기 페이지
 import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 //로그인 페이지
-import LoginPage from "./pages/loginpage/LoginPage";
+import LoginPage from "./pages/authpage/LoginPage";
 //쓰레기통 페이지
 import TrashPage from "./pages/trashbinpage/TrashPage";
 
