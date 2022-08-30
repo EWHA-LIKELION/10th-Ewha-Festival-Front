@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import axios from 'axios';
 //images
@@ -10,59 +10,76 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 import flowerIcon from "../../images/signup/flowerIcon.svg";
 import keyIcon from "../../images/signup/keyIcon.svg";
 import { AiFillInfoCircle } from "react-icons/ai";
-//모달창
+// 모달창
 import RegisterModal from "../../components/Register/RegisterModal";
+// 유저 정보 관련
+import { useAppDispatch} from "../../redux/store";
+import { GetUser, PostUser, GetProfile } from "../../api/user";
+import { setUser } from "../../redux/userSlice";
 
 const RegisterPage = () => {
-  //입력 관리
+  // 유저 리덕스
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  // 입력 관리
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [name, setName] = useState("");
   const [secreteWord, setSecreteWord] = useState("");
 
-  //비밀번호 체크 아이콘 색상 관리
+  // 비밀번호 체크 아이콘 색상 관리
   const [checkColor, setCheckColor] = useState("#EAEAEA");
 
-  //모달창 관리
+  // 모달창 관리
   const [modal, setModal] = useState(false);
 
-  //회원가입 정보 전달
+  // 회원가입 함수
   const Register = e => {
     e.preventDefault();
-    //----------api 연결 부분----------
-    //console.log(CheckInputs());
-    if (CheckInputs()) {
-      axios
-        .post("http://43.200.53.202/accounts/signup/", 
-          {
-            "username": id,
-            "password": password,
-            "nickname": name,
-        }
-        )
-        .then(res => {
-          console.log(res);
-          //alert(res.data.message);
-          //Navigate("/다음페이지");
-        })
-        .catch(error => {
-          //alert(res.data.message);
-          console.log(error);
-        });
+    // 회원가입에 필요한 정보 전부 입력시 post
+    if (CheckInputs() === 1) {
+      e.preventDefault();
+      // 회원가입
+      PostUser(id, password, name)
+      .then(data => {
+        alert(data.message);
+        // 로그인
+        GetUser(id,password)
+        .then(data=>{
+          console.log("회원가입 후 로그인", data.data);
+          const token = data.data.access_token; 
+          console.log("회원가입 후 로그인 토큰", token);
+          window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
+         })
+         .then(()=>{
+            // 유저 프로필 가져오기 
+            GetProfile()
+              .then(res=>{
+              console.log("프로필 토큰",window.localStorage.getItem("token"));
+              console.log("프로필", res.data);
+              dispatch(setUser(res.data));
+              //navigate("/") //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+            })
+              .catch(error => console.log("프로필 가져오기 실패"));
+         }) 
+      })
     } else {
-        alert("회원가입에 필요한 모든 정보를 입력해주세요.");
+        if(CheckInputs() === 2) alert("정확한 비밀단어를 입력해주세요.");
+        else alert("회원가입에 필요한 모든 정보를 입력해주세요.");
     }
   };
 
-  //동일한 비밀번호 입력시 색 변경 함수
+  // 동일한 비밀번호 입력시 색 변경 함수
   const ChangeBtn = () => {
     password === password2 && password !== ""
       ? setCheckColor("#007A28")
       : setCheckColor("#EAEAEA");
   };
 
-  //회원가입에 필요한 정보를 전부 입력한 경우 true를 반환하는 함수
+  // 회원가입에 필요한 정보 입력, 비밀단어 일치 여부에 따라 다른 숫자값을 반환하는 함수
   const CheckInputs = () => {
     if (
       id !== " " &&
@@ -70,8 +87,11 @@ const RegisterPage = () => {
       name !== "" &&
       secreteWord === "비밀단어"
     )
-      return true;
-    else return false;
+      return 1;
+    else{
+      if(secreteWord !== "비밀단어") return 2;
+      else return 3;
+    }
   };
 
   return (
