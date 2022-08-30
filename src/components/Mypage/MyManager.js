@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 
-import { PyeongChang_Peace, Pretendard } from "../../components/Text";
-import Footer from "../../components/Footer/Footer";
+import { PyeongChang_Peace, Pretendard } from "../Text";
+import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 
-import Logout from "../../components/Mypage/Logout";
-import Navbar from "../../components/Mypage/Navbar";
+import Logout from "./Logout";
+import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
@@ -195,5 +195,6 @@ const EditBooth = styled.div`
   }
   img:active {
     box-shadow: inset 0px 2px 6px #bbc4c0;
+    border-radius: 8px;
   }
 `;
