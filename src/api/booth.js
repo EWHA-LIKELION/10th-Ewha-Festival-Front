@@ -37,9 +37,9 @@ export const GetAllBooth = async () => {
   }
 };
 
-export const GetBooth = async () => {
+export const GetBooth = async boothId => {
   try {
-    const response = await BoothService.getBooth();
+    const response = await BoothService.getBooth(boothId);
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error, "부스 상세 조회 실패");

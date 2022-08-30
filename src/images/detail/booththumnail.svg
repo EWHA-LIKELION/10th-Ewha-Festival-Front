@@ -1,0 +1,14 @@
+<svg width="375" height="288" viewBox="0 0 375 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="375" height="288" fill="white"/>
+<mask id="path-2-inside-1_911_6093" fill="white">
+<rect width="85.5135" height="69.3505" rx="5" transform="matrix(0.992834 -0.119501 0.113999 0.993481 136 102.219)"/>
+</mask>
+<rect width="85.5135" height="69.3505" rx="5" transform="matrix(0.992834 -0.119501 0.113999 0.993481 136 102.219)" stroke="#ABABAB" stroke-width="14" mask="url(#path-2-inside-1_911_6093)"/>
+<mask id="path-3-inside-2_911_6093" fill="white">
+<rect width="85.5008" height="68.1008" rx="5" transform="matrix(0.996043 0.0888758 -0.0847598 0.996401 154.837 109.448)"/>
+</mask>
+<rect width="85.5008" height="68.1008" rx="5" transform="matrix(0.996043 0.0888758 -0.0847598 0.996401 154.837 109.448)" fill="white" stroke="#ABABAB" stroke-width="14" mask="url(#path-3-inside-2_911_6093)"/>
+<path d="M184.427 134.882C185.782 132.952 188.738 133.286 189.649 135.473L206.762 176.539C207.642 178.65 205.943 180.922 203.674 180.665L161.113 175.853C158.845 175.596 157.67 173 158.979 171.136L184.427 134.882Z" fill="#ABABAB"/>
+<path d="M204.088 147.52C205.399 145.735 208.132 145.95 209.162 147.919L223.934 176.156C225.027 178.246 223.401 180.716 221.053 180.531L187.471 177.888C185.122 177.703 183.884 175.008 185.277 173.113L204.088 147.52Z" fill="#ABABAB"/>
+<ellipse cx="217.5" cy="138" rx="5.5" ry="6" fill="#ABABAB"/>
+</svg>

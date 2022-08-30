@@ -1,26 +1,29 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { GetBooth } from "../../api/booth";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
 import DeleteModal from "../../components/BoothDetail/DeleteModal.js";
-import { boothDetailData } from "../../_mock/boothDetailData";
 import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
 
-const BoothComments = props => {
-  const id = props.thisId;
-  const [booths, setBooths] = useState(boothDetailData);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-
-  const getComment = () => {
-    booths.map(booth => (booth.id === id ? setComments(booth.comments) : null));
-  };
+const BoothComments = () => {
+  let { id } = useParams();
+  const [thisComments, setThisComments] = useState([]);
 
   useEffect(() => {
-    getComment();
-  });
+    GetBooth(id)
+      .then(res => {
+        console.log("부스 상세 조회 성공", res);
+        console.log(res.data.data.comments);
+        setThisComments(res.data.data.comments);
+      })
+      .catch(err => {
+        console.log("부스 상세 조회 실패", err);
+      });
+  }, []);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const openDeleteModal = () => {
@@ -36,10 +39,12 @@ const BoothComments = props => {
     setDeleteModal(false);
   }, []);
 
-  const DeleteComment = id => {
+  const DeleteComment = cId => {
     openDeleteModal();
-    setCurrentId(id);
+    setCurrentId(cId);
   };
+
+  const [newComment, setNewComment] = useState("");
 
   const SubmitComment = e => {
     e.preventDefault();
@@ -51,8 +56,8 @@ const BoothComments = props => {
   return (
     <>
       <CommentsWrapper>
-        <PartTitle title={"댓글 (" + comments.length + ")"} />
-        {comments.map(comment => {
+        <PartTitle title={"댓글 (" + thisComments.length + ")"} />
+        {thisComments.map(comment => {
           let time = comment.created_at;
           let dotTime = time.toString();
           return (
@@ -64,7 +69,7 @@ const BoothComments = props => {
                     weight="600"
                     color={comment.isTF ? "var(--orange)" : "var(--green2)"}
                   >
-                    {comment.nickname}
+                    {comment.user}
                   </Pretendard>
                   <Pretendard
                     size="10px"

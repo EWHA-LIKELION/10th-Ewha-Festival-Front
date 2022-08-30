@@ -11,8 +11,8 @@ const BoothService = {
     http.delete(`/booths/${boothId}/likes/
 `),
   // 이 밑으로 아직 작업 안함
-  getAllBooth: () => http.get(""), // 모든 부스 조회
-  getBooth: boothId => http.get(""), // 부스 상세
+  getAllBooth: () => http.get("/booths/"), // 모든 부스 조회
+  getBooth: boothId => http.get(`/booths/${boothId}/`), // 부스 상세
 };
 
 export default BoothService;

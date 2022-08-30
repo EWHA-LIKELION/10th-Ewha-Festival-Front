@@ -45,7 +45,11 @@ function App() {
         {/* 로그인 테스트 */}
         <Route exact path="/test" element={<ReduxTest />} />
         {/* 디테일 */}
-        <Route exact path="/category/detail" element={<BoothDetailPage />} />
+        <Route
+          exact
+          path="/category/detail/:id"
+          element={<BoothDetailPage />}
+        />
         {/* 수정 */}
         <Route exact path="/editbooth" element={<EditBoothPage />} />
         <Route exact path="/editmenu" element={<EditMenuPage />} />

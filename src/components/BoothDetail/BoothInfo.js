@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
+import { useEffect, useState } from "react";
 
 const BoothInfo = props => {
   const infoString = props.infoString;
+  const [isBr, setIsBr] = useState();
+  const haveBr = () => {
+    if (infoString.includes("\n")) {
+      setIsBr(true);
+    } else {
+      setIsBr(false);
+    }
+  };
+  useEffect(() => {
+    haveBr();
+  }, []);
+
   return (
     <>
       <InfoWrapper>
@@ -16,25 +29,41 @@ const BoothInfo = props => {
         <InfoTextContainer>
           {props.info ? (
             <LongInfo>
-              {infoString.split("\n").map(line => {
-                return (
-                  <span>
-                    {line}
-                    <br />
-                  </span>
-                );
-              })}
+              {isBr ? (
+                <>
+                  {infoString.split("\n").map(line => {
+                    return (
+                      <span>
+                        {line}
+                        <br />
+                      </span>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  <span>{infoString}</span>
+                </>
+              )}
             </LongInfo>
           ) : (
             <ShortInfo>
-              {infoString.split("\n").map(line => {
-                return (
-                  <span>
-                    {line}
-                    <br />
-                  </span>
-                );
-              })}
+              {isBr ? (
+                <>
+                  {infoString.split("\n").map(line => {
+                    return (
+                      <span>
+                        {line}
+                        <br />
+                      </span>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  <span>{infoString}</span>
+                </>
+              )}
             </ShortInfo>
           )}
         </InfoTextContainer>
@@ -71,6 +100,7 @@ const InfoUpDown = styled.div`
 
 const InfoTextContainer = styled.div`
   width: calc(100% - 65px);
+  min-height: 44px;
   margin: 0 auto;
   word-break: keep-all;
   overflow-x: hidden;
