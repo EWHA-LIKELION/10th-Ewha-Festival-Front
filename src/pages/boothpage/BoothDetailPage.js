@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { PyeongChang_Peace } from "../../components/Text";
 import PartTitle from "../../components/BoothDetail/PartTitle";
-import Footer from "../../components/Footer/Footer";
 import BoothNotice from "../../components/BoothDetail/BoothNotice";
 import BoothInfo from "../../components/BoothDetail/BoothInfo";
 import BoothMenu from "../../components/BoothDetail/BoothMenu";
@@ -64,7 +63,6 @@ const BoothDetailPage = () => {
   const [imgs, setImgs] = useState([]);
   const getImgs = () => {
     booths.map(booth => (booth.id === id ? setImgs(booth.img) : null));
-    console.log(imgs);
   };
   useEffect(() => {
     getImgs();
@@ -128,7 +126,6 @@ const BoothDetailPage = () => {
           </ImageContainer>
         </ImageWrapper>
         <BoothComments thisId={id} />
-        <Footer />
       </Wrapper>
       {imgModal ? <ImgModal src={src} closeModal={closeModal} /> : null}
     </>

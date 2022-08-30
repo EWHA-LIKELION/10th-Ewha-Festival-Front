@@ -64,13 +64,6 @@ const Modal = props => {
   );
 };
 
-// 모달창 띄울 페이지 js return() 안에 이 코드 넣으세용
-{
-  /* <Modal open={modalOpen} close={closeModal} header="모달 제목">
-    모달 팝업창입니다. 내용을 입력하세요.
-</Modal> */
-}
-
 export default Modal;
 
 const Cancel = styled.button`

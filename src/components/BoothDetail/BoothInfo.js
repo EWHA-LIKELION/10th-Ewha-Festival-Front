@@ -1,13 +1,9 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
 
 const BoothInfo = props => {
-  const id = props.thisId;
   const infoString = props.infoString;
-
   return (
     <>
       <InfoWrapper>
