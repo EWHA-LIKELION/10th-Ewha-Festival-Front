@@ -40,8 +40,7 @@ const EditMenuDetailPage = () => {
           </Pretendard>
           <PriceWrapper>
             <InputPrice
-              type="text"
-              dir="rtl"
+              type="number"
               style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
             />
             <Pretendard weight="600" size="16px">
@@ -84,7 +83,7 @@ export default EditMenuDetailPage;
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 30px 30px 0 30px;
+  margin: 30px 30px 180px 30px;
 `;
 
 const BoxWrapper = styled.div`
@@ -120,6 +119,7 @@ const InputPrice = styled.input`
   background-color: var(--gray0);
   padding: 10px;
   font-size: 18px;
+  text-align: right;
 `;
 
 const Soldout = styled.div`

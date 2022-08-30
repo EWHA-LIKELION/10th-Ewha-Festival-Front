@@ -36,7 +36,7 @@
         <td  align="center"><a href= "https://github.com/miinjoo">김민주</a></td>
         <td  align="center"><a href= "">이서진</a></td>
         <td " align="center"><a href= "">허윤</a></td>
-        <td  align="center"><a href= "">이채원</a></td>
+        <td  align="center"><a href= "https://github.com/gchaewon">이채원</a></td>
         <td  align="center"><a href= "">정연주</a></td>
     </tr>
     <tr width="100%">
@@ -45,7 +45,7 @@
         <td  align="center"><img src = "" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/v-A7GZBY.png" width="80%"/></td>
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
@@ -54,7 +54,7 @@
       <td  align="center">마이페이지(유저/관리자)</td>
      <td  align="center">부스 상세 페이지</td>
       <td  align="center">공지게시판 페이지</td>
-      <td  align="center">미정</td>
+      <td  align="center"><p>로그인&회원가입</p><p>만든이들페이지</p></td>
       <td  align="center">미정</td>
    </tr>
 </table>
