@@ -1,14 +1,10 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-
 import { Pretendard } from "../Text";
 import back from "../../images/navbar/back.svg";
 import noticeicon from "../../images/detail/notice.svg";
 
 const BoothNotice = props => {
-  const id = props.thisId;
   const noticeString = props.noticeString;
-
   return (
     <>
       <NoticeWrapper>
