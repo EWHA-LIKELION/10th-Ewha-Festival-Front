@@ -24,7 +24,7 @@ const Category = () => {
   const [locations, setLocations] = useState(locationData); // 장소들
   const [pickedDay, setPickedDay] = useState(1); // 선택 된 요일
   const [pickedLocation, setPickedLocation] = useState("정문"); // 선택된 장소 (한글)
-  const [pickedMap, setPickedMap] = useState(0); // 선택된 지도
+  const [pickedMap, setPickedMap] = useState(1); // 선택된 지도
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
@@ -36,7 +36,7 @@ const Category = () => {
         setBooths(res.data.data);
       })
       .catch(err => {
-        console.log("부스 조회 실패", err);
+        console.log("부스 조회 실패", err, pickedDay, pickedLocation);
       });
   }, [pickedDay, pickedLocation]);
 
@@ -114,7 +114,8 @@ const Category = () => {
 
   const Detail = (ref, event, id) => {
     if (ref.current && !ref.current.contains(event.target)) {
-      navigate(`/category/detail/${id}`);
+      console.log("페이지 이동");
+      //navigate(`/category/detail/${id}`);
     }
   };
 
@@ -188,7 +189,7 @@ const Category = () => {
 
       <BoothBox>
         <Pretendard color="var(--gray3)" weight="500" size="12px">
-          총 6개의 부스
+          총 {booths.length}개의 부스
         </Pretendard>
 
         {booths.map(b => {
