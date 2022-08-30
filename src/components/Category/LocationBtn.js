@@ -10,8 +10,8 @@ const LocationBtn = ({ selected, children, onClick }) => {
 
 export default LocationBtn;
 const Button = styled.button`
-  width: 58px;
-  height: 25px;
+  width: 74px;
+  height: 28px;
 
   border-radius: 100px;
   margin: 0 6px 0 6px;

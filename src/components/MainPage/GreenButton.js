@@ -14,6 +14,7 @@ const Button = styled.button`
   margin: ${({ margin }) => margin};
 
   color: var(--white);
+  text-decoration-line: none;
   font-family: var(--pre-font);
   font-size: 14px;
 

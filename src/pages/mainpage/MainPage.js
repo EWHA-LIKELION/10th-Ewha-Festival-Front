@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-
+import { Link } from "react-router-dom";
 // components
 import CardSlider from "../../components/MainPage/CardSlider";
 import GreenButton from "../../components/MainPage/GreenButton";
@@ -8,7 +8,6 @@ import StarTitle from "../../components/MainPage/StarTitle";
 import Footer from "../../components/Footer/Footer";
 import TimeLine from "../../components/MainPage/TimeLine";
 import Stars from "../../components/MainPage/Stars";
-
 import {
   PyeongChang_Peace,
   PyeongChang,
@@ -20,9 +19,7 @@ import background from "../../images/main/background.png";
 import Re_wha from "../../images/logo/Re_wha.svg";
 import paper from "../../images/main/paper.svg";
 import title from "../../images/main/title.svg";
-
 import day from "../../images/main/day.svg";
-
 import circle from "../../images/main/circle.svg";
 import map from "../../images/map.svg";
 import likelion from "../../images/main/likelion.svg";
@@ -31,13 +28,24 @@ import person from "../../images/main/person.svg";
 import hamburger from "../../images/main/hamburger.svg";
 
 const MainPage = () => {
+  const isLogin = localStorage.getItem("token");
+
   return (
     <div>
       <GrayBackground>
         <TopBar>
           <img src={hamburger} />
+
           <img src={toplogo} />
-          <img src={person} />
+          {isLogin ? (
+            <Link to="/mypage_user">
+              <img src={person} />
+            </Link>
+          ) : (
+            <Link to="/login">
+              <img src={person} />
+            </Link>
+          )}
         </TopBar>
 
         <Wrapper>
@@ -94,13 +102,16 @@ const MainPage = () => {
           </Pretendard>
         </div>
 
-        <GreenButton margin="36px auto 59px auto">
-          TF팀 공지 보러가기
-        </GreenButton>
+        <Link to="/notice" style={{ textDecoration: "none" }}>
+          <GreenButton margin="36px auto 59px auto">
+            TF팀 공지 보러가기
+          </GreenButton>
+        </Link>
 
         <Map src={map} />
-
-        <GreenButton margin="32px auto 0 auto">부스 보러가기</GreenButton>
+        <Link to="/category" style={{ textDecoration: "none" }}>
+          <GreenButton margin="32px auto 0 auto">부스 보러가기</GreenButton>
+        </Link>
 
         <StarTitle margin="132px auto 0 auto" title="일정 소개" />
 
@@ -142,7 +153,12 @@ const MainPage = () => {
           제공하는 2022년 대동제 홈페이지입니다!
         </Pretendard>
 
-        <GreenButton margin="24px auto 203px auto">멋사 구경하기</GreenButton>
+        <a
+          href="https://www.instagram.com/likelion_ewha/"
+          style={{ textDecoration: "none" }}
+        >
+          <GreenButton margin="24px auto 203px auto">멋사 구경하기</GreenButton>
+        </a>
 
         <br />
         <Footer />

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
+import DeleteModal from "../../components/BoothDetail/DeleteModal.js";
 import { boothDetailData } from "../../_mock/boothDetailData";
 import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
@@ -23,7 +24,24 @@ const BoothComments = props => {
     getComment();
   });
 
-  const DeleteComment = id => {};
+  const [deleteModal, setDeleteModal] = useState(false);
+  const openDeleteModal = () => {
+    setDeleteModal(true);
+  };
+  const closeDeleteModal = () => {
+    setDeleteModal(false);
+  };
+
+  const [currentId, setCurrentId] = useState("");
+
+  useEffect(() => {
+    setDeleteModal(false);
+  }, []);
+
+  const DeleteComment = id => {
+    openDeleteModal();
+    setCurrentId(id);
+  };
 
   const SubmitComment = e => {
     e.preventDefault();
@@ -97,6 +115,14 @@ const BoothComments = props => {
           </CommentInputContainer>
         </CommentInputWrapper>
       </CommentsWrapper>
+      {deleteModal ? (
+        <DeleteModal
+          open={deleteModal}
+          close={closeDeleteModal}
+          id={currentId}
+          header="댓글 삭제"
+        />
+      ) : null}
     </>
   );
 };
@@ -159,7 +185,7 @@ const CommentInput = styled.input`
     outline: none;
   }
 
-  font-family: "Pretendard";
+  font-family: "Pretendard-Regular";
   font-weight: 300;
   font-size: 14px;
 `;

@@ -9,12 +9,22 @@ const Footer = () => {
   return (
     <Wrapper>
       <hr style={{ marginBottom: "36px", backgroundColor: "#A5A5A5" }} />
-      <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
-        멋쟁이 사자처럼 10기 | https://open.kakao.com/o/sUzTxYue
-      </Pretendard>
-      <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
-        Likelion Ewha - 10th | https://open.kakao.com/o/sUzTxYue
-      </Pretendard>
+      <a
+        href="https://open.kakao.com/o/sUzTxYue"
+        style={{ textDecoration: "none" }}
+      >
+        <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
+          멋쟁이 사자처럼 10기 | https://open.kakao.com/o/sUzTxYue
+        </Pretendard>
+      </a>
+      <a
+        href="https://open.kakao.com/o/sUzTxYue"
+        style={{ textDecoration: "none" }}
+      >
+        <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
+          Likelion Ewha - 10th | https://open.kakao.com/o/sUzTxYue
+        </Pretendard>
+      </a>
 
       <div
         style={{
@@ -24,9 +34,24 @@ const Footer = () => {
           margin: "24px auto 0 auto",
         }}
       >
-        <img src={graylikelion} />
-        <img src={github} />
-        <img src={insta} />
+        <a
+          href="https://www.instagram.com/likelion_ewha/"
+          style={{ textDecoration: "none" }}
+        >
+          <img src={graylikelion} />
+        </a>
+        <a
+          href="https://github.com/EWHA-LIKELION"
+          style={{ textDecoration: "none" }}
+        >
+          <img src={github} />
+        </a>
+        <a
+          href="https://www.instagram.com/likelion_ewha/"
+          style={{ textDecoration: "none" }}
+        >
+          <img src={insta} />
+        </a>
       </div>
 
       <Pretendard
