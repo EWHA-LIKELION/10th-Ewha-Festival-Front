@@ -7,7 +7,9 @@ import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
 //유저 정보 관련 
-import { GetUser } from "../../api/user";
+import { GetUser, GetProfile } from "../../api/user";
+import { useAppDispatch } from "../../redux/store";
+import { setUser } from "../../redux/userSlice";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
@@ -15,31 +17,43 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const SubmitInfo = e => {
+  // 유저 리덕스
+  const dispatch = useAppDispatch();
+
+  // 로그인 함수
+  const Login = e => {
     e.preventDefault();
-    //----------api 연결 부분----------
-    GetUser(id,password).then(data=>{
-      console.log(data);
+    //로그인
+    GetUser(id,password)
+    .then(data=>{
+      console.log("로그인", data);
+      alert(data.message);
+      const token = data.data.access_token;
+      window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
     })
-    // axios
-    //   .post("http://43.200.53.202/accounts/login/", {
-    //     username: id,
-    //     password: password,
-    //   })
-    //   .then(res => {
-    //     alert(res.data.message);
-    //     navigate('/다음페이지');
-    //   })
-    //   .catch(error =>{
-    //     error.response.data.data.non_field_errors? alert("올바르지 않은 비밀번호입니다.") : alert("아이디와 비밀번호를 모두 입력해주세요.")
-    //   });
+    .then(()=>{
+      //유저 프로필 가져오기
+      GetProfile()
+      .then(data=>{
+        console.log("프로필",data);
+        dispatch(setUser(data.data));
+        //navigate("/") // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+      })
+      .catch(error => console.log("프로필 가져오기 실패"));
+    })
+    .catch(error=>{
+      // 에러에 따라 다른 경고 문구 출력
+      console.log(error);
+      let type = error.data.non_field_errors;
+      type ? type == "잘못된 비밀번호입니다." ? alert("비밀번호를 확인해주세요."): alert(type): alert("아이디와 비밀번호를 모두 입력해주세요.");
+    })
   };
 
   return (
     <>
       <LoginWrapper>
         <Title src={title} />
-      <LoginForm onSubmit={SubmitInfo}>
+      <LoginForm onSubmit={Login}>
           <IdWrapper>
             <FiUser className="idIcon" />
             <input
