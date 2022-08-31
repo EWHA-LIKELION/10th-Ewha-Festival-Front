@@ -11,7 +11,6 @@ import { GetUser, GetProfile } from "../../api/user";
 import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/userSlice";
 import { persistor } from "../../index";
-import userEvent from "@testing-library/user-event";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
@@ -39,20 +38,17 @@ const LoginPage = () => {
       alert(data.message);
       const token = data.data.access_token;
       window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
-      window.location.reload();
-
-    })
-    .then(()=>{
-      //유저 프로필 가져오기
-      GetProfile()
-      .then(data=>{
-        dispatch(setUser(data.data));
-        //navigate("/") // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
-      })
-      .catch(error => {
-        console.log("프로필 가져오기 실패")
-      }
-        );
+       //유저 프로필 가져오기
+       GetProfile(token)
+       .then(data=>{
+         console.log(data.data);
+         dispatch(setUser(data.data));
+       })
+       .catch(error => {
+          console.log(error);
+       }
+         );
+      navigate("/") // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
     })
     .catch(error=>{
       // 에러에 따라 다른 경고 문구 출력
@@ -90,6 +86,7 @@ const LoginPage = () => {
         <GoSignup>
           <Link to="/register">회원가입</Link>
         </GoSignup>
+        <button onClick={Logout}>로그아웃</button>
       </LoginWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
     </>

@@ -51,17 +51,14 @@ const RegisterPage = () => {
         .then(data=>{
           const token = data.data.access_token; 
           window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
-           window.location.reload();
+          // 유저 프로필 가져오기 
+          GetProfile(token)
+          .then(res=>{
+            dispatch(setUser(res.data));
+            navigate("/") //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+          })
+          .catch(error => console.log(error));
          })
-         .then(()=>{
-            // 유저 프로필 가져오기 
-            GetProfile()
-              .then(res=>{
-              dispatch(setUser(res.data));
-              //navigate("/") //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
-            })
-              .catch(error => console.log("프로필 가져오기 실패"));
-         }) 
       })
       .catch(error=>{
         const message = error.response.data.data.username
