@@ -16,9 +16,9 @@ import RegisterPage from "./pages/authpage/RegisterPage";
 // 디테일
 import BoothDetailPage from "./pages/boothpage/BoothDetailPage";
 // 수정페이지
-import EditBoothPage from "./pages/editboothpage/EditBoothPage";
-import EditMenuPage from "./pages/editmenupage/EditMenuPage";
-import EditMenuDetailPage from "./pages/editmenupage/EditMenuDetailPage";
+import EditBoothPage from "./pages/boothpage/EditBoothPage";
+import EditMenuPage from "./pages/boothpage/EditMenuPage";
+import EditMenuDetailPage from "./pages/boothpage/EditMenuDetailPage";
 // 공지 게시판 페이지
 import NoticePage from "./pages/noticepage/NoticePage";
 // 공지 상세 보기 페이지

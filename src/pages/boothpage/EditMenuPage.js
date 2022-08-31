@@ -10,7 +10,6 @@ const EditMenuPage = () => {
   const [item, setItem] = useState(null);
 
   const onSubmit = () => {
-    console.log("제출 " + item);
     navigate(`/editmenu/:${item}`);
   };
 
@@ -25,11 +24,11 @@ const EditMenuPage = () => {
       </TitleBar>
       <br />
       <ContentWrapper>
-        <Pretendard color="var(--green3)" weight="500" size="14px">
+        <Pretendard color="var(--green3)" weight="400" size="14px">
           <span>수정할 메뉴를 선택하세요</span>
         </Pretendard>
         <MenuItem setItem={setItem} />
-        <Pretendard color="var(--white)" weight="500" size="16px">
+        <Pretendard color="var(--white)" weight="600" size="16px">
           <Button onClick={onSubmit}>수정하기</Button>
         </Pretendard>
       </ContentWrapper>
@@ -59,5 +58,5 @@ const Button = styled.div`
   border: none;
   border-radius: 10px;
   padding: 12px;
-  background-color: var(--green3);
+  background: linear-gradient(90deg, #004628 0%, #107047 100%);
 `;
