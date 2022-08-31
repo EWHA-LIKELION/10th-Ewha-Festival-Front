@@ -124,7 +124,7 @@ const Category = () => {
   return (
     <Wrapper>
       <Navbar>
-        <Back src={back} onClick={() => navigate(-1)} />
+        <Back src={back} onClick={() => navigate("/")} />
 
         <PyeongChang_Peace
           size="22px"
