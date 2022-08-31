@@ -19,9 +19,9 @@ const ReduxTest = () => {
 
   const Login = () => {
     axios
-      .post("http://43.200.53.202/accounts/login/", {
-        username: "1234",
-        password: "1234",
+      .post("https://api.rewha2022.com/accounts/login/", {
+        username: "0000",
+        password: "0000",
       })
       .then(res => {
         console.log(res);
@@ -37,21 +37,7 @@ const ReduxTest = () => {
       .get("/accounts/")
       .then(res => {
         console.log(res);
-        const id = res.data.data.id;
-        const nickname = res.data.data.nickname;
-        const username = res.data.data.username;
-        const isBooth = res.data.data.is_booth;
-        const isTf = res.data.data.is_tf;
-        console.log(isBooth, isTf, "뭐냐");
-        dispatch(
-          setUser({
-            id: id,
-            nickname: nickname,
-            username: username,
-            isBooth: isBooth,
-            isTf: isTf,
-          }),
-        );
+        dispatch(setUser(res.data.data));
       })
       .catch(err => console.log(err));
   };
