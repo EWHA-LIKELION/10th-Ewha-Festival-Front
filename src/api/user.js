@@ -12,9 +12,9 @@ export const GetUser = async (id, password) => {
   };
 
 // 프로필 조회 
-export const GetProfile = async () => {
+export const GetProfile = async (token) => {
   try {
-    const response = await UserService.getProfile();
+    const response = await UserService.getProfile(token);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "프로필 조회 실패");
