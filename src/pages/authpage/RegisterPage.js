@@ -55,6 +55,7 @@ const RegisterPage = () => {
           GetProfile(token)
           .then(res=>{
             dispatch(setUser(res.data));
+            console.log(res.data);
             navigate("/") //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
           })
           .catch(error => console.log(error));
