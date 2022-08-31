@@ -29,21 +29,6 @@ const LoginPage = () => {
     window.localStorage.removeItem("token");
   };
 
-  // 프로필 조회 함수
-  const Profile = () =>{
-    GetProfile()
-    .then(data=>{
-      console.log("프로필 토큰", window.localStorage.getItem("token"));
-      console.log("프로필",data);
-      dispatch(setUser(data.data));
-      //navigate("/") // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
-    })
-    .catch(error => {
-      console.log("프로필 가져오기 실패")
-      console.log(error);
-    }
-      );
-  }
 
   // 로그인 함수
   const Login = e => {
@@ -108,9 +93,6 @@ const LoginPage = () => {
         <GoSignup>
           <Link to="/register">회원가입</Link>
         </GoSignup>
-        <button onClick={Logout}>로그아웃</button>
-        <button onClick={Profile}>프로필 조회</button>
-        <p></p>
       </LoginWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
     </>
