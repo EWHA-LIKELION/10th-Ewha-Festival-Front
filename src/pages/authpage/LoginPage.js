@@ -39,7 +39,6 @@ const LoginPage = () => {
       alert(data.message);
       const token = data.data.access_token;
       window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
-      console.log("로그인 토큰", window.localStorage.getItem("token"));
       window.location.reload();
 
     })
@@ -52,13 +51,11 @@ const LoginPage = () => {
       })
       .catch(error => {
         console.log("프로필 가져오기 실패")
-        console.log(error);
       }
         );
     })
     .catch(error=>{
       // 에러에 따라 다른 경고 문구 출력
-      console.log(error);
       let type = error.data.non_field_errors;
       type ? type == "잘못된 비밀번호입니다." ? alert("비밀번호를 확인해주세요."): alert(type): alert("아이디와 비밀번호를 모두 입력해주세요.");
     })
