@@ -4,7 +4,11 @@ import axios from "axios";
 
 const UserService = {
   //프로필 조회
-  getProfile: () => http.get("/accounts/"),
+  getProfile: (token) => axios.get("/accounts/",{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  }),
 
   //로그인 
   getUser: (id, password) =>
