@@ -25,7 +25,6 @@ const BoothDetailPage = () => {
     GetBooth(id)
       .then(res => {
         console.log("부스 상세 조회 성공", res);
-        console.log(res.data.data);
         setBooth(res.data.data);
       })
       .catch(err => {
@@ -87,9 +86,13 @@ const BoothDetailPage = () => {
   return (
     <>
       <Wrapper>
-        <MainImage onClick={() => openModal(booth.thumnail)}>
+        <MainImage
+          onClick={() =>
+            openModal(booth.thumnail !== null ? booththumnail : booth.thumnail)
+          }
+        >
           <MainImg
-            src={booth.thumnail === null ? booththumnail : booth.thumnail}
+            src={booth.thumnail !== null ? booththumnail : booth.thumnail}
           />
         </MainImage>
         <BackBtn onClick={() => nav("/category")}>

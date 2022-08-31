@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BoothInfo = props => {
   const infoString = props.infoString;
@@ -13,6 +13,7 @@ const BoothInfo = props => {
       setIsBr(false);
     }
   };
+
   useEffect(() => {
     haveBr();
   }, []);
