@@ -11,6 +11,7 @@ export const GetUser = async (id, password) => {
   }
 };
 
+
 // 프로필 조회
 export const GetProfile = async token => {
   try {

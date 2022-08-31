@@ -56,7 +56,6 @@ const MainPage = () => {
           )}
         </TopBar>
         {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
-
         <Wrapper>
           <Stars />
           <CardSlider />

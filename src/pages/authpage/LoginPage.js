@@ -6,12 +6,11 @@ import styled, { createGlobalStyle } from "styled-components";
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
-//유저 정보 관련
+//유저 정보 관련 
 import { GetUser, GetProfile } from "../../api/user";
 import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/userSlice";
 import { persistor } from "../../index";
-import userEvent from "@testing-library/user-event";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
@@ -29,40 +28,40 @@ const LoginPage = () => {
     window.localStorage.removeItem("token");
   };
 
+
   // 로그인 함수
   const Login = e => {
     e.preventDefault();
     //로그인
-    GetUser(id, password)
-      .then(data => {
-        const token = data.data.access_token;
-        window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
-
-        GetProfile(token)
-          .then(res => {
-            console.log(res);
-            dispatch(setUser(res.data));
-          })
-          .catch(err => console.log(err));
-
-        navigate("/");
-      })
-      .catch(error => {
-        // 에러에 따`라 다른 경고 문구 출력
-        let type = error.data.non_field_errors;
-        type
-          ? type == "잘못된 비밀번호입니다."
-            ? alert("비밀번호를 확인해주세요.")
-            : alert(type)
-          : alert("아이디와 비밀번호를 모두 입력해주세요.");
-      });
+    GetUser(id,password)
+    .then(data=>{
+      alert(data.message);
+      const token = data.data.access_token;
+      window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
+       //유저 프로필 가져오기
+       GetProfile(token)
+       .then(data=>{
+         console.log(data.data);
+         dispatch(setUser(data.data));
+       })
+       .catch(error => {
+          console.log(error);
+       }
+         );
+      navigate("/") // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+    })
+    .catch(error=>{
+      // 에러에 따라 다른 경고 문구 출력
+      let type = error.data.non_field_errors;
+      type ? type == "잘못된 비밀번호입니다." ? alert("비밀번호를 확인해주세요."): alert(type): alert("아이디와 비밀번호를 모두 입력해주세요.");
+    })
   };
 
   return (
     <>
       <LoginWrapper>
         <Title src={title} />
-        <LoginForm onSubmit={Login}>
+      <LoginForm onSubmit={Login}>
           <IdWrapper>
             <FiUser className="idIcon" />
             <input
@@ -87,6 +86,7 @@ const LoginPage = () => {
         <GoSignup>
           <Link to="/register">회원가입</Link>
         </GoSignup>
+        <button onClick={Logout}>로그아웃</button>
       </LoginWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
     </>
