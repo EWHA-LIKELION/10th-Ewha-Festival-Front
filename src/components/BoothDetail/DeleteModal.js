@@ -4,12 +4,18 @@ import { Pretendard } from "../Text";
 import GrayButton from "../Modal/GrayButton";
 import GreenButton from "../Modal/GreenButton";
 import "../Modal/Modal.css";
+import { DeleteComment } from "../../api/booth";
 
 const Modal = props => {
-  const { open, close, id, header } = props;
-  const Delete = id => {
-    console.log(id, "댓글 삭제");
-    //axios
+  const { open, close, id, cId, header } = props;
+  const Delete = cId => {
+    console.log(cId, "댓글 삭제");
+    DeleteComment(id, cId)
+      .then(res => {
+        console.log(res.data);
+        props.getComments();
+      })
+      .catch(err => console.log(err.data));
     close();
   };
 
@@ -50,7 +56,7 @@ const Modal = props => {
                 </GrayButton>
               </Cancel>
               <Upload>
-                <GreenButton onClick={() => Delete(id)}>
+                <GreenButton onClick={() => Delete(props.cId)}>
                   <Pretendard size="14px" weight="500" color="var(--white)">
                     확인
                   </Pretendard>

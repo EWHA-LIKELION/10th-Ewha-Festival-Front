@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import { GetBooth } from "../../api/booth";
-import { GetProfile } from "../../api/user";
+import { SubmitComment } from "../../api/booth";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { http } from "../../api/http";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
@@ -14,10 +17,33 @@ import { persistor } from "../../index";
 
 const BoothComments = () => {
   let { id } = useParams();
-  const [thisUser, setThisUser] = useState({});
-  const [thisComments, setThisComments] = useState([]);
-
+  const [isLogin, setIsLogin] = useState(false);
+  const token = localStorage.getItem("token");
   useEffect(() => {
+    if (token === null) {
+      setIsLogin(false);
+    }
+    if (token !== null) {
+      setIsLogin(true);
+    }
+    console.log("로그인? ", isLogin);
+  }, []);
+  useEffect(() => {
+    if (isLogin === true) {
+      document.getElementById("input").disabled = false;
+    }
+    if (isLogin === false) {
+      document.getElementById("input").disabled = true;
+    }
+  });
+
+  const [thisUser, setThisUser] = useState({});
+  const dispatch = useAppDispatch();
+  const { username, user_id, nickname, isBooth, isTf } = useAppSelector(
+    state => state.user,
+  );
+  const [thisComments, setThisComments] = useState([]);
+  const getComments = () => {
     GetBooth(id)
       .then(res => {
         console.log("부스 상세 조회 성공", res);
@@ -27,21 +53,19 @@ const BoothComments = () => {
       .catch(err => {
         console.log("부스 상세 조회 실패", err);
       });
-    GetProfile()
-      .then(res => {
-        console.log("프로필 조회 성공", res);
-        setThisUser(res.data.data);
-      })
-      .catch(err => {
-        console.log("프로필 조회 실패", err);
-      });
-  }, []);
-
-  const Logout = async () => {
-    window.location.reload();
-    await persistor.purge();
-    window.localStorage.removeItem("token");
   };
+
+  useEffect(() => {
+    getComments();
+    http
+      .get("/accounts/")
+      .then(res => {
+        console.log(res.data);
+        dispatch(setThisUser(res.data.data));
+        console.log(thisUser);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const openDeleteModal = () => {
@@ -63,17 +87,24 @@ const BoothComments = () => {
   };
 
   const [newComment, setNewComment] = useState("");
-
-  const SubmitComment = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    console.log("댓글 작성", newComment);
-    //api
-    setNewComment("");
+    if (newComment === "") {
+      alert("내용을 입력해주세요.");
+    } else {
+      console.log("댓글 작성", newComment);
+      SubmitComment(id, newComment)
+        .then(res => {
+          console.log(res.data);
+          getComments();
+        })
+        .catch(err => console.log(err.data));
+      setNewComment("");
+    }
   };
 
   return (
     <>
-      <button onClick={async () => Logout()}>로그아웃</button>
       <CommentsWrapper>
         <PartTitle title={"댓글 (" + thisComments.length + ")"} />
         {thisComments.map(comment => {
@@ -86,7 +117,7 @@ const BoothComments = () => {
                   <Pretendard
                     size="12px"
                     weight="600"
-                    color={comment.isTF ? "var(--orange)" : "var(--green2)"}
+                    color={comment.is_booth ? "var(--orange)" : "var(--green2)"}
                   >
                     {comment.user}
                   </Pretendard>
@@ -101,10 +132,12 @@ const BoothComments = () => {
                   >
                     {dotTime}
                   </Pretendard>
-                  <Delete
-                    src={commentdelete}
-                    onClick={() => DeleteComment(comment.id)}
-                  />
+                  {comment.user === thisUser.username ? (
+                    <Delete
+                      src={commentdelete}
+                      onClick={() => DeleteComment(comment.id)}
+                    />
+                  ) : null}
                 </div>
                 <Pretendard
                   size="14px"
@@ -126,23 +159,32 @@ const BoothComments = () => {
           );
         })}
       </CommentsWrapper>
+      <Bottom />
       <CommentInputWrapper>
-        <CommentInputContainer onSubmit={SubmitComment}>
+        <CommentInputContainer onSubmit={e => onSubmit(e)}>
           <CommentInput
-            placeholder="댓글을 입력하세요"
+            placeholder={
+              isLogin ? "댓글을 입력하세요" : "로그인 후 댓글을 입력해보세요"
+            }
             value={newComment}
             onChange={e => setNewComment(e.target.value)}
+            autoComplete="off"
+            id="input"
           />
-          <WriteBtn type="submit">
-            <Write src={commentwrite} />
-          </WriteBtn>
+          {isLogin ? (
+            <WriteBtn type="submit">
+              <Write src={commentwrite} />
+            </WriteBtn>
+          ) : null}
         </CommentInputContainer>
       </CommentInputWrapper>
       {deleteModal ? (
         <DeleteModal
           open={deleteModal}
           close={closeDeleteModal}
-          id={currentId}
+          id={id}
+          cId={currentId}
+          getComments={getComments}
           header="댓글 삭제"
         />
       ) : null}
@@ -152,9 +194,13 @@ const BoothComments = () => {
 
 export default BoothComments;
 
+const Bottom = styled.div`
+  width: 100%;
+  height: 70px;
+`;
+
 const CommentsWrapper = styled.div`
   position: relative;
-  margin-bottom: 70px;
 `;
 
 const CommentContainer = styled.div`

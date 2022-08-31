@@ -33,15 +33,24 @@ const BoothDetailPage = () => {
   }, []);
 
   const Like = id => {
-    setBooth({ ...booth, is_liked: true });
-    console.log("좋아요", id);
-    LikeBooth(id);
+    const token = localStorage.getItem("token");
+    if (token) {
+      setBooth({ ...booth, is_liked: true });
+      console.log("좋아요", id);
+      LikeBooth(id)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err.data));
+    } else {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   const unLike = id => {
     setBooth({ ...booth, is_liked: false });
     console.log("좋아요 삭제", id);
-    UnLikeBooth(id);
+    UnLikeBooth(id)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.data));
   };
 
   const [imgModal, setImgModal] = useState(false);
