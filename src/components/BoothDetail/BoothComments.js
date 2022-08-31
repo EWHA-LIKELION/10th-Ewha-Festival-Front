@@ -9,7 +9,7 @@ import { http } from "../../api/http";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
-import DeleteModal from "../../components/BoothDetail/DeleteModal.js";
+import Modal from "../Modal/Modal";
 import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
 
@@ -72,20 +72,35 @@ const BoothComments = () => {
 
   const [currentId, setCurrentId] = useState("");
 
-  useEffect(() => {
-    setDeleteModal(false);
-  }, []);
-
-  const DeleteComment = cId => {
+  const PreDeleteComment = cId => {
     openDeleteModal();
     setCurrentId(cId);
   };
 
+  const DeleteComment = cId => {
+    console.log(cId, "댓글 삭제");
+    DeleteComment(id, cId)
+      .then(res => {
+        console.log(res.data);
+        getComments();
+      })
+      .catch(err => console.log(err.data));
+    closeDeleteModal();
+  };
+
   const [newComment, setNewComment] = useState("");
+  const [inputModal, setInputModal] = useState(false);
+  const openInputModal = () => {
+    setInputModal(true);
+  };
+  const closeInputModal = () => {
+    setInputModal(false);
+  };
+
   const onSubmit = e => {
     e.preventDefault();
     if (newComment === "") {
-      alert("내용을 입력해주세요.");
+      setInputModal(true);
     } else {
       console.log("댓글 작성", newComment);
       SubmitComment(id, newComment)
@@ -97,6 +112,11 @@ const BoothComments = () => {
       setNewComment("");
     }
   };
+
+  useEffect(() => {
+    setDeleteModal(false);
+    setInputModal(false);
+  }, []);
 
   return (
     <>
@@ -130,7 +150,7 @@ const BoothComments = () => {
                   {comment.user === thisUser.username ? (
                     <Delete
                       src={commentdelete}
-                      onClick={() => DeleteComment(comment.id)}
+                      onClick={() => PreDeleteComment(comment.id)}
                     />
                   ) : null}
                 </div>
@@ -173,14 +193,26 @@ const BoothComments = () => {
           ) : null}
         </CommentInputContainer>
       </CommentInputWrapper>
+      {inputModal ? (
+        <Modal
+          isOne={true}
+          open={openInputModal}
+          close={closeInputModal}
+          header="댓글 내용 없음"
+          subtext="-"
+          maintext="댓글 내용을 입력해주세요."
+          onClick={() => closeInputModal()}
+        />
+      ) : null}
       {deleteModal ? (
-        <DeleteModal
+        <Modal
+          isOne={false}
           open={deleteModal}
           close={closeDeleteModal}
-          id={id}
-          cId={currentId}
-          getComments={getComments}
-          header="댓글 삭제"
+          header="댓글 작성 취소"
+          subtext="작성 취소된 댓글은 저장되지 않습니다."
+          maintext="댓글 작성을 취소하시겠습니까?"
+          onClick={() => DeleteComment(currentId)}
         />
       ) : null}
     </>
