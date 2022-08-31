@@ -1,39 +1,68 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled, { createGlobalStyle } from "styled-components";
 //images
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
+//유저 정보 관련
+import { GetUser, GetProfile } from "../../api/user";
+import { useAppDispatch } from "../../redux/store";
+import { setUser } from "../../redux/userSlice";
+import { persistor } from "../../index";
+import userEvent from "@testing-library/user-event";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const SubmitInfo = e => {
-    e.prevent.default();
-    //----------api 연결 부분----------
-    // axios
-    //   .post("api주소", {
-    //     ID: id,
-    //     PW: password,
-    //   })
-    //   .then(res => {
-    //     console.log(res.data.message);
-    //     Navigate('/다음페이지')
-    //   })
-    //   .catch(res => {
-    //     console.log(res.data.message);
-    //   });
+  // 유저 리덕스
+  const dispatch = useAppDispatch();
+
+  // 로그아웃 함수
+  const Logout = async () => {
+    window.location.reload();
+    await persistor.purge();
+    window.localStorage.removeItem("token");
+  };
+
+  // 로그인 함수
+  const Login = e => {
+    e.preventDefault();
+    //로그인
+    GetUser(id, password)
+      .then(data => {
+        const token = data.data.access_token;
+        window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
+
+        GetProfile(token)
+          .then(res => {
+            console.log(res);
+            dispatch(setUser(res.data));
+          })
+          .catch(err => console.log(err));
+
+        navigate("/");
+      })
+      .catch(error => {
+        // 에러에 따`라 다른 경고 문구 출력
+        let type = error.data.non_field_errors;
+        type
+          ? type == "잘못된 비밀번호입니다."
+            ? alert("비밀번호를 확인해주세요.")
+            : alert(type)
+          : alert("아이디와 비밀번호를 모두 입력해주세요.");
+      });
   };
 
   return (
     <>
       <LoginWrapper>
         <Title src={title} />
-        <LoginForm onSubmit={SubmitInfo}>
+        <LoginForm onSubmit={Login}>
           <IdWrapper>
             <FiUser className="idIcon" />
             <input

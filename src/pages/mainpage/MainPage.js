@@ -8,6 +8,7 @@ import StarTitle from "../../components/MainPage/StarTitle";
 import Footer from "../../components/Footer/Footer";
 import TimeLine from "../../components/MainPage/TimeLine";
 import Stars from "../../components/MainPage/Stars";
+import SideBar from "../../components/SideBar";
 import {
   PyeongChang_Peace,
   PyeongChang,
@@ -29,16 +30,20 @@ import hamburger from "../../images/main/hamburger.svg";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
+  
+  // 사이드바 관리
+  const [sideBar, setSideBar] = useState(false);
 
   return (
     <div>
       <GrayBackground>
         <TopBar>
-          <img src={hamburger} />
-
+          <img src={hamburger} onClick={()=>{
+            setSideBar(true)
+          }}/>
           <img src={toplogo} />
           {isLogin ? (
-            <Link to="/mypage_user">
+            <Link to="/mypage">
               <img src={person} />
             </Link>
           ) : (
@@ -47,6 +52,7 @@ const MainPage = () => {
             </Link>
           )}
         </TopBar>
+        {sideBar ? <SideBar setSideBar={setSideBar}/> : null}
 
         <Wrapper>
           <Stars />
