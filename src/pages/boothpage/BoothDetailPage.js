@@ -88,11 +88,11 @@ const BoothDetailPage = () => {
       <Wrapper>
         <MainImage
           onClick={() =>
-            openModal(booth.thumnail !== null ? booththumnail : booth.thumnail)
+            openModal(booth.thumnail === null ? booththumnail : booth.thumnail)
           }
         >
           <MainImg
-            src={booth.thumnail !== null ? booththumnail : booth.thumnail}
+            src={booth.thumnail === null ? booththumnail : booth.thumnail}
           />
         </MainImage>
         <BackBtn onClick={() => nav("/category")}>

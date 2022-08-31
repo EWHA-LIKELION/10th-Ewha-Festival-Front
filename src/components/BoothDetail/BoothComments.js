@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GetBooth } from "../../api/booth";
+import { GetProfile } from "../../api/user";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
@@ -9,8 +10,11 @@ import DeleteModal from "../../components/BoothDetail/DeleteModal.js";
 import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
 
+import { persistor } from "../../index";
+
 const BoothComments = () => {
   let { id } = useParams();
+  const [thisUser, setThisUser] = useState({});
   const [thisComments, setThisComments] = useState([]);
 
   useEffect(() => {
@@ -23,7 +27,21 @@ const BoothComments = () => {
       .catch(err => {
         console.log("부스 상세 조회 실패", err);
       });
+    GetProfile()
+      .then(res => {
+        console.log("프로필 조회 성공", res);
+        setThisUser(res.data.data);
+      })
+      .catch(err => {
+        console.log("프로필 조회 실패", err);
+      });
   }, []);
+
+  const Logout = async () => {
+    window.location.reload();
+    await persistor.purge();
+    window.localStorage.removeItem("token");
+  };
 
   const [deleteModal, setDeleteModal] = useState(false);
   const openDeleteModal = () => {
@@ -55,6 +73,7 @@ const BoothComments = () => {
 
   return (
     <>
+      <button onClick={async () => Logout()}>로그아웃</button>
       <CommentsWrapper>
         <PartTitle title={"댓글 (" + thisComments.length + ")"} />
         {thisComments.map(comment => {
