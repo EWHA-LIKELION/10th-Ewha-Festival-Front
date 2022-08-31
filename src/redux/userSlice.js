@@ -26,8 +26,8 @@ export const userSlice = createSlice({
       state.username = action.payload.username;
       state.id = action.payload.id;
       state.nickname = action.payload.nickname;
-      state.isBooth = action.payload.isBooth;
-      state.isTf = action.payload.isTf;
+      state.isBooth = action.payload.is_booth;
+      state.isTf = action.payload.is_tf;
     },
   },
   extraReducers: builder => {
