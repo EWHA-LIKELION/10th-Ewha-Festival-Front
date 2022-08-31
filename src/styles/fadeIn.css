@@ -1,0 +1,72 @@
+@keyframes test {
+  0% {
+    position: absolute;
+    bottom: 0;
+  }
+
+  100% {
+    position: absolute;
+    top: 0;
+  }
+}
+
+@keyframes test2 {
+  from {
+    transform: translateY(0);
+  }
+
+  t0 {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes test3 {
+  from {
+    bottom: 0px;
+  }
+
+  t0 {
+    bottom: 200px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll {
+  0% {
+  }
+  33% {
+    transform: translateY(-500px);
+  }
+  67% {
+    transform: translateY(-1300px);
+  }
+  100% {
+    transform: translateY(-1900px);
+  }
+}
+
+.box {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0.8s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
+
+.text {
+  animation-name: scroll;
+  animation-duration: 50s;
+  animation-delay: 2.6s;
+
+  /* animation-timing-function: cubic-bezier(0.81, 0, 0.19, 1); */
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}

@@ -118,24 +118,53 @@ const MainPage = () => {
         <DayBack>
           <Day>9. 14</Day>
         </DayBack>
-        <TimeLine title="개막식" time="11:00-12:00" />
-        <TimeLine title="동아리 공연" time="11:00-12:00" />
-        <TimeLine title="Ewhackers" time="11:00-12:00" />
-        <TimeLine title="이화 최고의 마스터셰프" time="11:00-12:00" />
+        <TimeLine title="부스 운영" time="10:00-17:00" />
+        <TimeLine
+          title="동아리 서브 공연"
+          time="3교시~7교시 쉬는 시간 학문관 광장"
+        />
+
+        <TimeLine title="벗의 편지" time="11:00-11:30 포관20" />
+        <TimeLine title="이화인 한솥밥" time="11:30-14:30 학문관 1층" />
+        <TimeLine
+          title="동아리 스포츠 트랙 공연"
+          time="17:00 정문 스포츠 트랙"
+        />
+
         <DayBack>
           <Day>9. 15</Day>
         </DayBack>
-        <TimeLine title="개막식" time="11:00-12:00" />
-        <TimeLine title="동아리 공연" time="11:00-12:00" />
-        <TimeLine title="Ewhackers" time="11:00-12:00" />
-        <TimeLine title="이화 최고의 마스터셰프" time="11:00-12:00" />
+        <TimeLine title="부스 운영" time="10:00-16:00" />
+        <TimeLine title="동아리 메인 공연" time="12:00-16:00 잔디광장" />
+        <TimeLine
+          title="동아리 서브 공연"
+          time="3교시~7교시 쉬는 시간 학문관 광장"
+        />
+
+        <TimeLine title="랜덤 플레이화 댄스" time="17:00-18:00 박물관 앞" />
+        <TimeLine
+          title="동아리 스포츠 트랙 공연"
+          time="18:30 정문 스포츠 트랙"
+        />
+
+        <TimeLine title="이화그린 영화제" time="18:30-20:00 잔디광장" />
+
         <DayBack>
           <Day>9. 16</Day>
         </DayBack>
-        <TimeLine title="개막식" time="11:00-12:00" />
-        <TimeLine title="동아리 공연" time="11:00-12:00" />
-        <TimeLine title="Ewhackers" time="11:00-12:00" />
-        <TimeLine title="이화 최고의 마스터셰프" time="11:00-12:00" />
+        <TimeLine title="부스 운영" time="10:00-16:00" />
+        <TimeLine
+          title="동아리 서브 공연"
+          time="3교시~7교시 쉬는 시간 학문관 광장"
+        />
+
+        <TimeLine
+          title="니가그린그린은이화그린"
+          time="16:00-17:30 잔디광장 메인 무대"
+        />
+        <TimeLine title="동아리 메인 공연" time="12:00-15:00 잔디광장" />
+
+        <TimeLine title="가수 섭외 무대" time="19:00" />
 
         <StarTitle title="About" margin="130px auto 23px auto" />
 
