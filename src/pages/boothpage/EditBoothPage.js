@@ -13,12 +13,24 @@ import {
 } from "../../components/Text";
 
 const EditBoothPage = () => {
-  // const getInfo = async () => {
-  //   const response = await axios.get(`http://43.200.53.202/booths/${id}`);
-  //   console.log(response.data.data.name);
-  //   console.log(response.data.data.notice);
-  //   console.log(response.data.data.description);
-  // };
+  const getInfo = async () => {
+    const response = await axios.get(`http://43.200.53.202/booths/${id}`);
+    console.log(response.data);
+    console.log(response.data.data.name);
+    console.log(response.data.data.notice);
+    console.log(response.data.data.description);
+  };
+
+  const editInfo = async () => {
+    const response = await axios
+      .patch(`http://43.200.53.202/booths/${id}`, {
+        name: name,
+        notice: notice,
+        description: description,
+      })
+      .then(console.log(response.data.json))
+      .catch(console.log("실패"));
+  };
 
   const [name, setName] = useState("기존 이름");
   const [notice, setNotice] = useState("기존 공지사항");
@@ -41,6 +53,9 @@ const EditBoothPage = () => {
     // console.log(description);
   };
 
+  const onSubmit = () => {
+    editInfo();
+  };
   return (
     <>
       <TitleBar>
@@ -86,24 +101,12 @@ const EditBoothPage = () => {
           />
         </BoxWrapper>
       </ContentWrapper>
-
       <Pretendard weight="600" size="18x">
         <ButtonWrapper>
-          <Button style={{ background: "var(--gray)", color: "var(--green3)" }}>
-            취소
-          </Button>
-          <Button
-            style={{ background: "var(--green3)", color: "var(--white)" }}
-          >
-            완료
-          </Button>
+          <Button className="Cancel">취소</Button>
+          <Button className="Approve">완료</Button>
         </ButtonWrapper>
       </Pretendard>
-
-      <br />
-      <br />
-      <br />
-      <br />
       <Footer />
     </>
   );
@@ -151,18 +154,25 @@ const TextArea = styled.textarea`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: 0 auto;
+  justify-content: flex-end;
+  margin: 10px 20px 20px 30px;
+
+  .Cancel {
+    font-family: "Pretendard-Regular";
+    color: "var(--green3)";
+  }
+
+  .Approve {
+    font-family: "Pretendard-Regular";
+    color: var(--white);
+    background: linear-gradient(90deg, #004628 0%, #107047 100%);
+  }
 `;
 
-const Button = styled.div`
-  width: 120px;
-  height: 35px;
+const Button = styled.button`
+  width: 56px;
+  height: 28px;
   border: none;
-  border-radius: 8px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  border-radius: 6px;
+  margin: 10px;
 `;
