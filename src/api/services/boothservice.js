@@ -15,7 +15,7 @@ const BoothService = {
   submitComment: (boothId, newComment) =>
     http.post(`/booths/${boothId}/comments/`, { content: newComment }), //댓글 작성
   deleteComment: (boothId, cId) =>
-    http.delete(`/booths/${boothId}/comments/${cId}/`),
+    http.delete(`/booths/${boothId}/comments/${cId}/`), //댓글 삭제
 };
 
 export default BoothService;

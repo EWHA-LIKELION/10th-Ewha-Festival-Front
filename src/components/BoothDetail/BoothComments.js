@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { GetBooth } from "../../api/booth";
 import { SubmitComment } from "../../api/booth";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { http } from "../../api/http";
 
 import { Pretendard } from "../Text";
@@ -12,8 +12,6 @@ import PartTitle from "./PartTitle";
 import DeleteModal from "../../components/BoothDetail/DeleteModal.js";
 import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
-
-import { persistor } from "../../index";
 
 const BoothComments = () => {
   let { id } = useParams();
@@ -39,9 +37,6 @@ const BoothComments = () => {
 
   const [thisUser, setThisUser] = useState({});
   const dispatch = useAppDispatch();
-  const { username, user_id, nickname, isBooth, isTf } = useAppSelector(
-    state => state.user,
-  );
   const [thisComments, setThisComments] = useState([]);
   const getComments = () => {
     GetBooth(id)
