@@ -30,7 +30,7 @@ import hamburger from "../../images/main/hamburger.svg";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
-  
+
   // 사이드바 관리
   const [sideBar, setSideBar] = useState(false);
 
@@ -38,9 +38,12 @@ const MainPage = () => {
     <div>
       <GrayBackground>
         <TopBar>
-          <img src={hamburger} onClick={()=>{
-            setSideBar(true)
-          }}/>
+          <img
+            src={hamburger}
+            onClick={() => {
+              setSideBar(true);
+            }}
+          />
           <img src={toplogo} />
           {isLogin ? (
             <Link to="/mypage">
@@ -52,7 +55,7 @@ const MainPage = () => {
             </Link>
           )}
         </TopBar>
-        {sideBar ? <SideBar setSideBar={setSideBar}/> : null}
+        {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
 
         <Wrapper>
           <Stars />
@@ -153,7 +156,7 @@ const MainPage = () => {
           time="18:30 정문 스포츠 트랙"
         />
 
-        <TimeLine title="이화그린 영화제" time="18:30-20:00 잔디광장" />
+        <TimeLine title="이화그린 영화제" time="19:00-21:00 잔디광장" />
 
         <DayBack>
           <Day>9. 16</Day>
