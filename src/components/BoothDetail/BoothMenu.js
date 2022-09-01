@@ -14,7 +14,7 @@ const BoothMenu = () => {
     GetBooth(id)
       .then(res => {
         console.log("부스 상세 조회 성공", res);
-        console.log(res.data.data.menus);
+        console.log("[메뉴]\n", res.data.data.menus);
         setThisMenus(res.data.data.menus);
       })
       .catch(err => {
