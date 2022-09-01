@@ -15,9 +15,11 @@ import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
 
 const BoothComments = () => {
+
   let { id } = useParams();
   const [isLogin, setIsLogin] = useState(false);
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (token === null) {
       setIsLogin(false);
@@ -42,6 +44,7 @@ const BoothComments = () => {
   const dispatch = useAppDispatch();
   const [thisBoothUserId, setThisBoothUserId] = useState();
   const [thisComments, setThisComments] = useState([]);
+
   const getComments = () => {
     GetBooth(id)
       .then(res => {
@@ -50,6 +53,7 @@ const BoothComments = () => {
         setThisBoothUserId(res.data.data.user);
         console.log("[댓글]\n", res.data.data.comments);
         setThisComments(res.data.data.comments);
+
       })
       .catch(err => {
         console.log("부스 상세 조회 실패", err);
@@ -102,6 +106,7 @@ const BoothComments = () => {
     closeDeleteModal();
   };
 
+
   const [newComment, setNewComment] = useState("");
   const [inputModal, setInputModal] = useState(false);
   const openInputModal = () => {
@@ -117,10 +122,13 @@ const BoothComments = () => {
       setInputModal(true);
     } else {
       console.log("댓글 작성", newComment);
+
+
       SubmitComment(id, newComment)
         .then(res => {
           console.log(res.data);
           getComments();
+         
         })
         .catch(err => console.log(err.data));
       setTimeout(() => setIsAdd(isAdd + 1), 500); //thisComments 변경 시 동기로 처리해야함
