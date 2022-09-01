@@ -14,6 +14,7 @@ const Logout = () => {
     window.localStorage.removeItem("token");
     console.log("마이페이지 로그아웃");
   };
+
   return (
     <LogoutBox onClick={Logout}>
       <Link to="/">

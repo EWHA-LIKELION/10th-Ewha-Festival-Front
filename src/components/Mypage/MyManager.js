@@ -6,18 +6,22 @@ import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { useNavigate } from "react-router-dom";
 
+import { useAppSelector } from "../../redux/store";
+
 import Logout from "./Logout";
 import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
-import edit from "../../images/mypage/editbg.svg";
+import edit1 from "../../images/mypage/edit1.svg";
+import edit2 from "../../images/mypage/edit2.svg";
 
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(4);
-
+  const { nickname } = useAppSelector(state => state.user);
+  const { username } = useAppSelector(state => state.user);
   const navigate = useNavigate();
 
   const goEditbooth = () => {
@@ -32,18 +36,18 @@ const MyManager = () => {
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구 닉네임</Pretendard>
+          <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
-          <Pretendard>likelion</Pretendard>
+          <Pretendard>{username}</Pretendard>
         </p>
         <p className="manager">
           <Pretendard>부스이름관리자</Pretendard>
         </p>
       </Userbox>
       <EditBooth>
-        <img src={edit} onClick={goEditbooth}></img>
-        <img src={edit} onClick={goEditMenu}></img>
+        <img src={edit1} onClick={goEditbooth}></img>
+        <img src={edit2} onClick={goEditMenu}></img>
       </EditBooth>
       <BoothBox>
         <Titlebox>
