@@ -1,65 +1,69 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Pretendard } from "../Text";
 import emptycheck from "../../images/edit/emptycheck.svg";
 import fullcheck from "../../images/edit/fullcheck.svg";
+import axios from "axios";
+
+const MenuData = ({ handleCheck, props, checked }) => {
+  return (
+    <>
+      <Wrapper id={props.id} onClick={() => handleCheck}>
+        <TextContainer id={props.id}>
+          <Pretendard weight="500" size="14px">
+            <MenuName id={props.id}>{props.menu}</MenuName>
+          </Pretendard>
+          <Pretendard weight="300" size="13px">
+            <MenuPrice id={props.id}>{props.price}원</MenuPrice>
+          </Pretendard>
+        </TextContainer>
+        {checked == props.id ? (
+          <img src={fullcheck} id={props.id} />
+        ) : (
+          <img src={emptycheck} id={props.id} />
+        )}
+      </Wrapper>
+    </>
+  );
+};
 
 const MenuItem = props => {
-  const MENU = [
-    {
-      id: "1",
-      name: "첫번째 메뉴",
-      price: "2,000원",
-    },
-    {
-      id: "2",
-      name: "두번째 메뉴",
-      price: "3,000원",
-    },
-    {
-      id: "3",
-      name: "세번째 메뉴",
-      price: "4,000원",
-    },
-  ];
-
   const [checked, setChecked] = useState(null);
+  const [menus, setMenus] = useState([]);
+
+  const id = 1;
 
   const handleCheck = e => {
-    console.log(e.target.id);
     setChecked(e.target.id);
     props.setItem(e.target.id);
   };
 
-  const onClickItem = useCallback(e => {
-    const targetItem = e.target.id;
-    // setItem(targetItem);
+  const getMenu = async () => {
+    const response = await axios
+      .get(`https://api.rewha2022.com/booths/${id}/menus/`)
+      .then(response => {
+        setMenus(response.data.data);
+      });
+  };
+
+  useEffect(() => {
+    getMenu();
   }, []);
 
   return (
     <>
-      {MENU.map(props => (
-        <Wrapper
-          id={props.id}
-          type="radio"
-          name="checkbox"
-          onClick={handleCheck}
-        >
-          <Image />
-          <TextContainer id={props.id}>
-            <Pretendard weight="500" size="14px">
-              <MenuName id={props.id}>{props.name}</MenuName>
-            </Pretendard>
-            <Pretendard weight="300" size="13px">
-              <MenuPrice id={props.id}>{props.price}</MenuPrice>
-            </Pretendard>
-          </TextContainer>
-          {checked === props.id ? (
-            <img src={fullcheck} id={props.id} />
-          ) : (
-            <img src={emptycheck} id={props.id} />
-          )}
-        </Wrapper>
+      {menus.map(props => (
+        <>
+          <div onClick={handleCheck}>
+            <MenuData
+              key={props.id}
+              props={props}
+              checked={checked}
+              onClick={handleCheck}
+              handleCheck={handleCheck}
+            />
+          </div>
+        </>
       ))}
     </>
   );
@@ -70,16 +74,13 @@ export default MenuItem;
 const Wrapper = styled.li`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 90px;
   border: none;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin-top: 10px;
-
-  input[type="radio"] {
-    display: none;
-  }
+  padding: 30px;
 `;
 
 const Image = styled.div`
@@ -93,8 +94,15 @@ const Image = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 4px;
 `;
 
-const MenuName = styled.span``;
+const MenuName = styled.div`
+  margin-bottom: 2px;
+  font-weight: 500;
+`;
 
-const MenuPrice = styled.span``;
+const MenuPrice = styled.span`
+  font-size: 13px;
+  font-weight: 300;
+`;

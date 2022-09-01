@@ -1,37 +1,54 @@
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 
-import { PyeongChang_Peace, Pretendard } from "../../components/Text";
-import Footer from "../../components/Footer/Footer";
+import { PyeongChang_Peace, Pretendard } from "../Text";
+import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
+import { useNavigate } from "react-router-dom";
 
-import Logout from "../../components/Mypage/Logout";
-import Navbar from "../../components/Mypage/Navbar";
+import Logout from "./Logout";
+import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
+import edit1 from "../../images/mypage/edit1.png";
+import edit2 from "../../images/mypage/edit2.png";
 
-const UserMy = () => {
+const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(4);
+
+  const navigate = useNavigate();
+
+  const goEditbooth = () => {
+    navigate("/editbooth");
+  };
+  const goEditMenu = () => {
+    navigate("/editmenu");
+  };
 
   return (
     <Wrapper>
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구닉네임</Pretendard>
+          <Pretendard>어쩌구 닉네임</Pretendard>
         </p>
         <p className="user">
           <Pretendard>likelion</Pretendard>
         </p>
+        <p className="manager">
+          <Pretendard>부스이름관리자</Pretendard>
+        </p>
       </Userbox>
-
+      <EditBooth>
+        <img src={edit1} onClick={goEditbooth}></img>
+        <img src={edit2} onClick={goEditMenu}></img>
+      </EditBooth>
       <BoothBox>
         <Titlebox>
           <Likebooth src={likebooth} />
-
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -66,7 +83,7 @@ const UserMy = () => {
   );
 };
 
-export default UserMy;
+export default MyManager;
 
 const Heart = styled.img`
   position: absolute;
@@ -143,12 +160,13 @@ const Wrapper = styled.div`
 const Likebooth = styled.img`
   width: 17px;
   height: 28px;
-  margin-bottom: 7px;
   margin-right: 7px;
+  margin-bottom: 7px;
 `;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
+  margin-top: 22px;
 `;
 
 const Userbox = styled.div`
@@ -169,5 +187,25 @@ const Userbox = styled.div`
     color: var(--green1);
     width: fit-content;
     margin: 0 auto 2px;
+  }
+  .manager {
+    width: fit-content;
+    margin: 4px auto 2px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--orange);
+  }
+`;
+const EditBooth = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  img {
+    display: block;
+    margin-top: 12px;
+  }
+  img:active {
+    box-shadow: inset 0px 2px 6px #bbc4c0;
+    border-radius: 8px;
+    cursor: pointer;
   }
 `;

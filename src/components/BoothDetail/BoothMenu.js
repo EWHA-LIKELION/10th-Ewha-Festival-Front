@@ -1,30 +1,32 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { GetBooth } from "../../api/booth";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
-import { boothDetailData } from "../../_mock/boothDetailData";
 
-const BoothMenu = props => {
-  const id = props.thisId;
-  const [booths, setBooths] = useState(boothDetailData);
-  const [menus, setMenus] = useState([]);
-  console.log(boothDetailData);
-
-  const getMenu = () => {
-    booths.map(booth => (booth.id === id ? setMenus(booth.menus) : null));
-    console.log(menus);
-  };
+const BoothMenu = () => {
+  let { id } = useParams();
+  const [thisMenus, setThisMenus] = useState([]);
 
   useEffect(() => {
-    getMenu();
-  });
+    GetBooth(id)
+      .then(res => {
+        console.log("부스 상세 조회 성공", res);
+        console.log(res.data.data.menus);
+        setThisMenus(res.data.data.menus);
+      })
+      .catch(err => {
+        console.log("부스 상세 조회 실패", err);
+      });
+  }, []);
 
   return (
     <>
       <MenuWrapper>
         <PartTitle title="메뉴" />
-        {menus.map(menu => {
+        {thisMenus.map(menu => {
           let money = menu.price;
           let commaMoney = money
             .toString()
@@ -41,16 +43,8 @@ const BoothMenu = props => {
                         color="var(--black)"
                         style={{ marginBottom: "5px", opacity: "0.4" }}
                       >
-                        {menu.name}
+                        {menu.menu}
                       </Pretendard>
-                      {/*<Pretendard
-                        size="13px"
-                        weight="300"
-                        color="var(--black)"
-                        style={{ opacity: "0.4" }}
-                      >
-                        {commaMoney}원
-                      </Pretendard>*/}
                       <Pretendard
                         size="13px"
                         weight="300"
@@ -71,7 +65,7 @@ const BoothMenu = props => {
                         color="var(--black)"
                         style={{ marginBottom: "5px" }}
                       >
-                        {menu.name}
+                        {menu.menu}
                       </Pretendard>
                       <Pretendard size="13px" weight="300" color="var(--black)">
                         {commaMoney}원
