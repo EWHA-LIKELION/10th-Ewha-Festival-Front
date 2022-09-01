@@ -9,7 +9,9 @@ import { noticeData } from "../../_mock/noticeData";
 // components
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
-import GreenButton from "../../components/MainPage/GreenButton";
+import DeleteButton from "../../components/NoticePage/DeleteButton";
+import ModifyButton from "../../components/NoticePage/ModifyButton";
+import Modal from "../../components/Modal/Modal";
 
 import {
   PyeongChang_Peace,
@@ -18,9 +20,21 @@ import {
   Pretendard,
 } from "../../components/Text";
 
+function Update(e) {
+  window.location.href = "/update";
+}
+
 export function NoticeDetailPage() {
   const location = useLocation();
   const notice = location.state.notice;
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -50,10 +64,14 @@ export function NoticeDetailPage() {
       </Pretendard>
       {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
       <ButtonBox>
-        <GrayBtn>삭제</GrayBtn>
-        <GreenBtn>수정</GreenBtn>
+        <DeleteButton onClick={openModal}>삭제</DeleteButton>
+        <ModifyButton onClick={Update}>수정</ModifyButton>
       </ButtonBox>
       {/* ~ */}
+      <Modal open={modalOpen} close={closeModal} header="공지 삭제">
+        <div className="warning">삭제 된 글은 다시 불러올 수 없습니다.</div>
+        <div className="asking">공지 글을 삭제하시겠습니까?</div>
+      </Modal>
       <Footer />
     </>
   );
@@ -97,46 +115,6 @@ const Line = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   margin-bottom: 10%;
-`;
-const GrayBtn = styled.button`
-  margin-right: 3%;
-  box-sizing: border-box;
-  margin-left: auto;
-  color: var(--green3);
-  font-family: "Pretendard";
-  font-size: 14px;
-  padding: 10px 22px;
-  width: 56px;
-  height: 28px;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  background: var(--gray);
-`;
-const GreenBtn = styled.button`
-  margin-right: 7%;
-  color: var(--white);
-  font-family: "Pretendard";
-  font-size: 14px;
-  padding: 10px 22px;
-  width: 56px;
-  height: 28px;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  background: linear-gradient(
-    to right,
-    rgba(0, 70, 40, 1),
-    rgba(16, 112, 71, 1)
-  );
 `;
 
 export default NoticeDetailPage;

@@ -21,6 +21,10 @@ import {
 import star3 from "../../images/stars/star3.svg";
 import write from "../../images/write.svg";
 
+function Write(e) {
+  window.location.href = "/create";
+}
+
 export function NoticePage() {
   const [notices, setNotices] = useState(noticeData);
   const [limit, setLimit] = useState(5);
@@ -48,7 +52,7 @@ export function NoticePage() {
           <img src={star3} />
         </SubTitle>
         {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
-        <NoticeWrite>
+        <NoticeWrite onClick={Write}>
           <p>공지 작성하기</p>
           <img src={write} />
         </NoticeWrite>
