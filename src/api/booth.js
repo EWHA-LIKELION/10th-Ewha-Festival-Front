@@ -62,3 +62,26 @@ export const DeleteComment = async (boothId, cId) => {
     return Promise.reject(error, "부스 댓글 삭제 실패");
   }
 };
+
+export const PatchBooth = async (boothId, name, notice, description) => {
+  try {
+    const response = await BoothService.patchBooth(
+      boothId,
+      name,
+      notice,
+      description,
+    );
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 수정 실패");
+  }
+};
+
+export const GetMenu = async boothId => {
+  try {
+    const response = await BoothService.getMenu(boothId);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "메뉴 조회 실패");
+  }
+};

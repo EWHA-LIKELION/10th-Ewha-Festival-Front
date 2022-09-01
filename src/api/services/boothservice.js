@@ -16,6 +16,13 @@ const BoothService = {
     http.post(`/booths/${boothId}/comments/`, { content: newComment }), //댓글 작성
   deleteComment: (boothId, cId) =>
     http.delete(`/booths/${boothId}/comments/${cId}/`), //댓글 삭제
+  patchBooth: (boothId, name, notice, description) =>
+    http.patch(`/booths/${boothId}/`, {
+      name: name,
+      notice: notice,
+      description: description,
+    }),
+  getMenu: boothId => http.get(`/booths/${boothId}/menus`),
 };
 
 export default BoothService;

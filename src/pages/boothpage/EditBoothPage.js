@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/Footer/Footer";
 import TitleBar from "../../components/TitleBar";
@@ -11,32 +11,33 @@ import {
   NanumSquare,
   Pretendard,
 } from "../../components/Text";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
+import { GetBooth, PatchBooth } from "../../api/booth";
+import { http } from "../../api/http";
 
 const EditBoothPage = () => {
-  const getInfo = async () => {
-    const response = await axios.get(`http://43.200.53.202/booths/${id}`);
-    console.log(response.data);
-    console.log(response.data.data.name);
-    console.log(response.data.data.notice);
-    console.log(response.data.data.description);
+  const id = useAppSelector(state => state.user.id);
+  console.log(id);
+
+  useEffect(() => {
+    GetBooth(3).then(response => {
+      setName(response.data.data.name);
+      setNotice(response.data.data.notice);
+      setDescription(response.data.data.description);
+    });
+  }, []);
+
+  const onSubmit = () => {
+    PatchBooth(3, name, notice, description)
+      .then(response => console.log(response))
+      .catch(response => {
+        console.log(response);
+      });
   };
 
-  const editInfo = async () => {
-    const response = await axios
-      .patch(`http://43.200.53.202/booths/${id}`, {
-        name: name,
-        notice: notice,
-        description: description,
-      })
-      .then(console.log(response.data.json))
-      .catch(console.log("실패"));
-  };
-
-  const [name, setName] = useState("기존 이름");
-  const [notice, setNotice] = useState("기존 공지사항");
-  const [description, setDescription] = useState("기존 소개");
-
-  var id = 1;
+  const [name, setName] = useState("");
+  const [notice, setNotice] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleName = e => {
     setName(e.target.value);
@@ -53,9 +54,6 @@ const EditBoothPage = () => {
     // console.log(description);
   };
 
-  const onSubmit = () => {
-    editInfo();
-  };
   return (
     <>
       <TitleBar>
@@ -104,7 +102,9 @@ const EditBoothPage = () => {
       <Pretendard weight="600" size="18x">
         <ButtonWrapper>
           <Button className="Cancel">취소</Button>
-          <Button className="Approve">완료</Button>
+          <Button onClick={onSubmit} className="Approve">
+            완료
+          </Button>
         </ButtonWrapper>
       </Pretendard>
       <Footer />
