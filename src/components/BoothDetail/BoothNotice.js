@@ -25,14 +25,23 @@ const BoothNotice = props => {
                   color="var(--black)"
                   style={{ lineHeight: "17px" }}
                 >
-                  {noticeString.split("\n").map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
+                  {noticeString &&
+                    (noticeString.includes("\n") ? (
+                      <>
+                        {noticeString.split("\n").map(line => {
+                          return (
+                            <span>
+                              {line}
+                              <br />
+                            </span>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <>
+                        <span>{noticeString}</span>
+                      </>
+                    ))}
                 </Pretendard>
               </div>
             ) : null}

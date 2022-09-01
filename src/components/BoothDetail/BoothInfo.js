@@ -1,23 +1,10 @@
 import styled from "styled-components";
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const BoothInfo = props => {
   const infoString = props.infoString;
-  const [isBr, setIsBr] = useState();
-  const haveBr = () => {
-    if (infoString.includes("\n")) {
-      setIsBr(true);
-    } else {
-      setIsBr(false);
-    }
-  };
-
-  useEffect(() => {
-    haveBr();
-  }, []);
-
   return (
     <>
       <InfoWrapper>
@@ -30,41 +17,43 @@ const BoothInfo = props => {
         <InfoTextContainer>
           {props.info ? (
             <LongInfo>
-              {isBr ? (
-                <>
-                  {infoString.split("\n").map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
-                </>
-              ) : (
-                <>
-                  <span>{infoString}</span>
-                </>
-              )}
+              {infoString &&
+                (infoString.includes("\n") ? (
+                  <>
+                    {infoString.split("\n").map(line => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    <span>{infoString}</span>
+                  </>
+                ))}
             </LongInfo>
           ) : (
             <ShortInfo>
-              {isBr ? (
-                <>
-                  {infoString.split("\n").map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
-                </>
-              ) : (
-                <>
-                  <span>{infoString}</span>
-                </>
-              )}
+              {infoString &&
+                (infoString.includes("\n") ? (
+                  <>
+                    {infoString.split("\n").map(line => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    <span>{infoString}</span>
+                  </>
+                ))}
             </ShortInfo>
           )}
         </InfoTextContainer>
