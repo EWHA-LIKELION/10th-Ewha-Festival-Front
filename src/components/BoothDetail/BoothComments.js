@@ -176,7 +176,7 @@ const BoothComments = () => {
       </CommentsWrapper>
       <Bottom />
       <CommentInputWrapper>
-        <CommentInputContainer onSubmit={e => onSubmit(e)}>
+        <CommentInputContainer>
           <CommentInput
             placeholder={
               isLogin ? "댓글을 입력하세요" : "로그인 후 댓글을 입력해보세요"
@@ -187,7 +187,7 @@ const BoothComments = () => {
             id="input"
           />
           {isLogin ? (
-            <WriteBtn type="submit">
+            <WriteBtn onClick={e => onSubmit(e)}>
               <Write src={commentwrite} />
             </WriteBtn>
           ) : null}
@@ -263,7 +263,7 @@ const CommentInputWrapper = styled.div`
   border-top: 1px solid var(--gray);
 `;
 
-const CommentInputContainer = styled.form`
+const CommentInputContainer = styled.div`
   width: calc(100% - 40px);
   height: 40px;
   margin: 0 auto;
