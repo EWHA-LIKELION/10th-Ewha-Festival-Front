@@ -9,11 +9,12 @@ import linkDeco from "../images/linkDeco.svg";
 import { PyeongChang_Peace } from "../components/Text";
 
 const SideBar = (props) =>{
+    const isLogin = localStorage.getItem("token");
+
     // 사이드바 안보이게 하는 함수
     const DeleteSideBar = () =>{
         props.setSideBar(false);
     }
-
     return (
         <BarWrapper  onClick={DeleteSideBar}>
         <DeleteBtn src={deleteIcon} onClick={DeleteSideBar}/>
@@ -21,15 +22,18 @@ const SideBar = (props) =>{
         <LinkWrapper> 
             <PyeongChang_Peace>
                 <img src={linkDeco}/>
-                <Link to="/notice">공지사항</Link>
+                {<Link to="/notice">공지사항</Link>}
             </PyeongChang_Peace>
             <PyeongChang_Peace style={{marginRight:"32px"}}>
                 <img src={linkDeco}/>
                 <Link to="/trashbin">쓰레기통 위치</Link>
             </PyeongChang_Peace>
             <PyeongChang_Peace style={{marginRight:"16px"}}>
-                <img src={linkDeco}/>   
-                <Link to="/mypage">마이페이지</Link>
+                <img src={linkDeco}/>
+                {isLogin ? 
+                <Link to="/mypage">마이페이지</Link> :
+                <Link to="/login">마이페이지</Link>
+                 }
             </PyeongChang_Peace>
             <PyeongChang_Peace>
                 <img src={linkDeco}/>

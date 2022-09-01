@@ -12,16 +12,14 @@ const UserService = {
 
   //로그인
   getUser: (id, password) =>
-    //http.post("/accounts/login/"){
-    axios.post("http://43.200.53.202/accounts/login/", {
+    axios.post("https://api.rewha2022.com/accounts/login/", {
       username: id,
       password: password,
     }),
 
   //회원가입 api
   postUser: (id, password, name) =>
-    //http.post("/accounts/signup/"){
-    axios.post("http://43.200.53.202/accounts/signup/", {
+    axios.post("https://api.rewha2022.com/accounts/signup/", {
       username: id,
       password: password,
       nickname: name,
