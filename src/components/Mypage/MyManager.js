@@ -12,8 +12,7 @@ import Navbar from "./Navbar";
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
-import edit1 from "../../images/mypage/edit1.png";
-import edit2 from "../../images/mypage/edit2.png";
+import edit from "../../images/mypage/editbg.svg";
 
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
@@ -43,8 +42,8 @@ const MyManager = () => {
         </p>
       </Userbox>
       <EditBooth>
-        <img src={edit1} onClick={goEditbooth}></img>
-        <img src={edit2} onClick={goEditMenu}></img>
+        <img src={edit} onClick={goEditbooth}></img>
+        <img src={edit} onClick={goEditMenu}></img>
       </EditBooth>
       <BoothBox>
         <Titlebox>
@@ -202,6 +201,7 @@ const EditBooth = styled.div`
   img {
     display: block;
     margin-top: 12px;
+    width: 80%;
   }
   img:active {
     box-shadow: inset 0px 2px 6px #bbc4c0;
