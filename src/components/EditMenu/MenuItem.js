@@ -4,6 +4,8 @@ import { Pretendard } from "../Text";
 import emptycheck from "../../images/edit/emptycheck.svg";
 import fullcheck from "../../images/edit/fullcheck.svg";
 import axios from "axios";
+import { GetMenu } from "../../api/booth";
+import { useAppSelector } from "../../redux/store";
 
 const MenuData = ({ handleCheck, props, checked }) => {
   return (
@@ -31,23 +33,17 @@ const MenuItem = props => {
   const [checked, setChecked] = useState(null);
   const [menus, setMenus] = useState([]);
 
-  const id = 1;
+  const id = useAppSelector(state => state.user.id);
 
   const handleCheck = e => {
     setChecked(e.target.id);
     props.setItem(e.target.id);
   };
 
-  const getMenu = async () => {
-    const response = await axios
-      .get(`https://api.rewha2022.com/booths/${id}/menus/`)
-      .then(response => {
-        setMenus(response.data.data);
-      });
-  };
-
   useEffect(() => {
-    getMenu();
+    GetMenu(3).then(response => {
+      setMenus(response.data.data);
+    });
   }, []);
 
   return (
