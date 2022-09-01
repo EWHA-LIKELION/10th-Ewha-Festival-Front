@@ -6,6 +6,7 @@ import { GetBooth } from "../../api/booth";
 import { SubmitComment } from "../../api/booth";
 import { useAppDispatch } from "../../redux/store";
 import { http } from "../../api/http";
+import {DeleteComments} from '../../api/booth';
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
@@ -14,9 +15,11 @@ import commentdelete from "../../images/detail/commentdelete.svg";
 import commentwrite from "../../images/detail/commentwrite.svg";
 
 const BoothComments = () => {
+
   let { id } = useParams();
   const [isLogin, setIsLogin] = useState(false);
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (token === null) {
       setIsLogin(false);
@@ -38,12 +41,14 @@ const BoothComments = () => {
   const [thisUser, setThisUser] = useState({});
   const dispatch = useAppDispatch();
   const [thisComments, setThisComments] = useState([]);
+
   const getComments = () => {
     GetBooth(id)
       .then(res => {
         console.log("부스 상세 조회 성공", res);
         console.log(res.data.data.comments);
         setThisComments(res.data.data.comments);
+
       })
       .catch(err => {
         console.log("부스 상세 조회 실패", err);
@@ -79,7 +84,7 @@ const BoothComments = () => {
 
   const DeleteComment = cId => {
     console.log(cId, "댓글 삭제");
-    DeleteComment(id, cId)
+    DeleteComments(id, cId)
       .then(res => {
         console.log(res.data);
         getComments();
@@ -87,6 +92,7 @@ const BoothComments = () => {
       .catch(err => console.log(err.data));
     closeDeleteModal();
   };
+
 
   const [newComment, setNewComment] = useState("");
   const [inputModal, setInputModal] = useState(false);
@@ -103,13 +109,18 @@ const BoothComments = () => {
       setInputModal(true);
     } else {
       console.log("댓글 작성", newComment);
+
+
       SubmitComment(id, newComment)
         .then(res => {
           console.log(res.data);
           getComments();
+         
         })
         .catch(err => console.log(err.data));
       setNewComment("");
+
+      setTimeout(()=>  window.scrollTo(0, document.body.scrollHeight), 500)
     }
   };
 
