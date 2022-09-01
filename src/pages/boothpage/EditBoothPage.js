@@ -2,56 +2,76 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/Footer/Footer";
 import TitleBar from "../../components/TitleBar";
-import axios from "axios";
 
 // import font
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
-import { useAppSelector, useAppDispatch } from "../../redux/store";
+import { Pretendard } from "../../components/Text";
 import { GetBooth, PatchBooth } from "../../api/booth";
 import { http } from "../../api/http";
+import { useNavigate } from "react-router-dom";
 
 const EditBoothPage = () => {
-  const id = useAppSelector(state => state.user.id);
-  console.log(id);
+  // navigate
+  const navigate = useNavigate();
 
+  // user의 부스 ID
+  const [id, setId] = useState(null);
+
+  // user account 불러오기
   useEffect(() => {
-    GetBooth(3).then(response => {
+    http
+      .get("/accounts/")
+      .then(response => {
+        setId(response.data.data.booth_id);
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  // 기존 부스 정보 불러오기
+  useEffect(() => {
+    if (id !== null) {
+      getPrev(id);
+    }
+  }, [id]);
+
+  const getPrev = () => {
+    GetBooth(id).then(response => {
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
     });
-  }, []);
+  };
 
+  // 부스 정보 수정하기
   const onSubmit = () => {
-    PatchBooth(3, name, notice, description)
+    PatchBooth(id, name, notice, description)
       .then(response => console.log(response))
       .catch(response => {
         console.log(response);
       });
+
+    navigate(-1);
   };
 
+  // 취소버튼 클릭시 뒤로가기
+  const onCancel = () => {
+    navigate(-1);
+  };
+
+  // 각각의 상태 관리
   const [name, setName] = useState("");
   const [notice, setNotice] = useState("");
   const [description, setDescription] = useState("");
 
   const handleName = e => {
     setName(e.target.value);
-    // console.log(name);
   };
 
   const handleNotice = e => {
     setNotice(e.target.value);
-    // console.log(notice);
   };
 
   const handleDescription = e => {
     setDescription(e.target.value);
-    // console.log(description);
   };
 
   return (
@@ -101,7 +121,9 @@ const EditBoothPage = () => {
       </ContentWrapper>
       <Pretendard weight="600" size="18x">
         <ButtonWrapper>
-          <Button className="Cancel">취소</Button>
+          <Button onClick={onCancel} className="Cancel">
+            취소
+          </Button>
           <Button onClick={onSubmit} className="Approve">
             완료
           </Button>
