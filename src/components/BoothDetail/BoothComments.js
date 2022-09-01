@@ -123,7 +123,8 @@ const BoothComments = () => {
           getComments();
         })
         .catch(err => console.log(err.data));
-      setTimeout(() => setIsAdd(isAdd + 1), 500); //thisComments 변경 시 동기로 처리해야함
+      //setTimeout(() => setIsAdd(isAdd + 1), 500);
+      setIsAdd(true);
       setNewComment("");
     }
   };
@@ -137,11 +138,16 @@ const BoothComments = () => {
   const scrollToBottom = () => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
   };
-  const [isAdd, setIsAdd] = useState(0);
+  const [isAdd, setIsAdd] = useState(false);
   useEffect(() => {
-    console.log("==스크롤==");
-    scrollToBottom();
-  }, [isAdd]);
+    if (isAdd == true) {
+      console.log("==스크롤==");
+      scrollToBottom();
+      setIsAdd(false);
+    } else {
+      setIsAdd(false);
+    }
+  }, [thisComments]);
 
   return (
     <>
