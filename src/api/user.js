@@ -32,9 +32,9 @@ export const PostUser = async (id, password, name) => {
 };
 
 // 좋아요한 부스 조회
-export const GetLikes = async () => {
+export const GetLikes = async token => {
   try {
-    const response = await UserService.getLikes();
+    const response = await UserService.getLikes(token);
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error, "좋아요한 부스 조회 실패");

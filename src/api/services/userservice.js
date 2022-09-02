@@ -25,9 +25,9 @@ const UserService = {
       nickname: name,
     }),
 
-  //회원가입 api
+  //좋아요한
   getLikes: token =>
-    http.get("https://api.rewha2022.com/accounts/likes/", {
+    axios.get("https://api.rewha2022.com/accounts/likes/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

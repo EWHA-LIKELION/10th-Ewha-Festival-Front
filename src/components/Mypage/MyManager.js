@@ -34,7 +34,7 @@ const MyManager = () => {
   };
 
   useEffect(() => {
-    GetLikes()
+    GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
         console.log("좋아요한 부스 조회 성공", res);
         setBooths(res.data.data);
@@ -42,7 +42,7 @@ const MyManager = () => {
       .catch(err => {
         console.log("좋아요한 부스 조회 실패", err);
       });
-  });
+  }, []);
 
   return (
     <Wrapper>
