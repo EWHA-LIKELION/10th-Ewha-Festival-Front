@@ -22,8 +22,6 @@
     "sass": "^1.54.4",
     "styled-component": "^2.8.0",
     "styled-components": "^5.3.5",
-    "urix": "^0.1.0",
-    "uuid": "^7.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
