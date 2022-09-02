@@ -30,7 +30,13 @@ const TrashPage = () => {
         <img id="pin4" src={pinbtn} />
         <img id="pin5" src={pinbtn} />
       </Mapimg>
-      <LocationBox></LocationBox>
+      <LocationBox>
+        <LocationImg />
+        <LocationInfo>
+          <p className="name">ff</p>
+          <p className="info">ee</p>
+        </LocationInfo>
+      </LocationBox>
 
       <Footer />
     </>
@@ -86,16 +92,46 @@ const Mapimg = styled.div`
     top: 417px;
     left: 260px;
   }
-
   #mapimg {
     display: block;
   }
 `;
 
 const LocationBox = styled.div`
-  margin: auto;
+  margin: 29px auto 36px;
   width: 335px;
   height: 120px;
   border-radius: 10px;
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.075);
+  display: flex;
+`;
+const LocationImg = styled.img`
+  background-color: #f6f6f6;
+  margin-right: 14px;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px 0 0 10px;
+  border: red;
+`;
+
+const LocationInfo = styled.div`
+  width: 176px;
+  padding: 30px 0 20px 0;
+
+  .name {
+    font-size: 15px;
+    font-style: "Pretendard-Regular";
+    font-weight: 700;
+    color: var(--green3);
+  }
+
+  .info {
+    letter-spacing: -2px;
+    font-size: 11px;
+    font-style: "Pretendard-Regular";
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--black);
+    margin-top: 15px;
+  }
 `;
