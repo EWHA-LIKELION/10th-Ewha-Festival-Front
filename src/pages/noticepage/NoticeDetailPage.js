@@ -45,7 +45,7 @@ export function NoticeDetailPage() {
           <span style={{ color: "var(--green3)" }}>사항</span>
         </TitleBar>
         <NoticeTitle>
-          <p class="title">{notice.title}</p>
+          <p class="title">{"[공지]" + " " + notice.title}</p>
         </NoticeTitle>
         <Line />
         <NoticeInfo>
@@ -68,10 +68,13 @@ export function NoticeDetailPage() {
         <ModifyButton onClick={Update}>수정</ModifyButton>
       </ButtonBox>
       {/* ~ */}
-      <Modal open={modalOpen} close={closeModal} header="공지 삭제">
-        <div className="warning">삭제 된 글은 다시 불러올 수 없습니다.</div>
-        <div className="asking">공지 글을 삭제하시겠습니까?</div>
-      </Modal>
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        header="공지 삭제"
+        subtext="작성 취소된 댓글은 저장되지 않습니다."
+        maintext="공지 글 작성을 취소하시겠습니까?"
+      ></Modal>
       <Footer />
     </>
   );

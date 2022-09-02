@@ -68,7 +68,7 @@ export function NoticePage() {
               style={{ textDecoration: "none" }}
             >
               <NoticeBox key={notice.id}>
-                <p class="title">{notice.title}</p>
+                <p class="title">{"[공지]" + " " + notice.title}</p>
                 <NoticeInfo>
                   <p class="writer">{notice.writer}</p>
                   <p class="date">{notice.date}</p>
