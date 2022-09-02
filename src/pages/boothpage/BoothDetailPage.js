@@ -76,8 +76,16 @@ const BoothDetailPage = () => {
     setNoticeString(booth.notice);
     setInfoString(booth.description);
     setImages(booth.images);
-    console.log(booth);
-    console.log(noticeString, infoString, images);
+    console.log(
+      "[부스]\n",
+      booth,
+      "\n\n[공지]\n",
+      noticeString,
+      "\n\n[소개]\n",
+      infoString,
+      "\n\n[이미지]\n",
+      images,
+    );
   }, [booth]);
 
   const [src, setSrc] = useState("");
