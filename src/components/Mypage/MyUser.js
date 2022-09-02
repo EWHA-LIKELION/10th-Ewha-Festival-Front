@@ -1,9 +1,11 @@
 import styled, { css } from "styled-components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
+
+import { useAppSelector } from "../../redux/store";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -14,17 +16,18 @@ import userbg from "../../images/mypage/userbg.svg";
 
 const UserMy = () => {
   const [booths, setBooths] = useState(boothData);
-  const [likebooths, setLikebooths] = useState(4);
-
+  const [likebooths, setLikebooths] = useState(0);
+  const { nickname } = useAppSelector(state => state.user);
+  const { username } = useAppSelector(state => state.user);
   return (
     <Wrapper>
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구닉네임</Pretendard>
+          <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
-          <Pretendard>likelion</Pretendard>
+          <Pretendard>{username}</Pretendard>
         </p>
       </Userbox>
 
@@ -41,7 +44,6 @@ const UserMy = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-
         {booths.map(b => {
           if (b.is_liked === true) {
             return (

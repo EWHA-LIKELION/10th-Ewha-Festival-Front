@@ -1,6 +1,5 @@
 import MyManager from "../../components/Mypage/MyManager";
 import MyUser from "../../components/Mypage/MyUser";
-import { useState, useEffect } from "react";
 
 import { useAppSelector } from "../../redux/store";
 

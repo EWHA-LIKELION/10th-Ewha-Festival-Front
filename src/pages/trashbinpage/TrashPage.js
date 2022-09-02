@@ -24,12 +24,11 @@ const TrashPage = () => {
         </PyeongChang_Peace>
       </Tbox>
       <Mapimg>
-        <img id="mapimg" src={Map} />
-        <img id="pin" src={pinbtn} />
-        <img id="pin" src={pinbtn} />
-        <img id="pin" src={pinbtn} />
-        <img id="pin" src={pinbtn} />
-        <img id="pin" src={pinbtn} />
+        <img id="pin1" src={pinbtn} />
+        <img id="pin2" src={pinbtn} />
+        <img id="pin3" src={pinbtn} />
+        <img id="pin4" src={pinbtn} />
+        <img id="pin5" src={pinbtn} />
       </Mapimg>
       <LocationBox></LocationBox>
 
@@ -56,21 +55,38 @@ const Tbox = styled.div`
 `;
 
 const Mapimg = styled.div`
-  width: fit-content;
-  height: fit-content;
+  width: 347px;
+  height: 350px;
   margin: auto;
+  background-image: url(${Map});
+  background-repeat: no-repeat;
+  background-size: 347px 350px;
+
   img {
-    width: 347px;
-    height: 350px;
-  }
-  #pin {
+    position: absolute;
     width: 17px;
-    z-index: 200;
-    top: 100px;
   }
-  #pin:active {
-    width: 30px;
+  #pin1 {
+    top: 325px;
+    left: 215px;
   }
+  #pin2 {
+    top: 345px;
+    left: 180px;
+  }
+  #pin3 {
+    top: 377px;
+    left: 160px;
+  }
+  #pin4 {
+    top: 400px;
+    left: 135px;
+  }
+  #pin5 {
+    top: 417px;
+    left: 260px;
+  }
+
   #mapimg {
     display: block;
   }

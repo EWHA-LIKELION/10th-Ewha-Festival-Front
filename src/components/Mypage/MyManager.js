@@ -46,8 +46,12 @@ const MyManager = () => {
         </p>
       </Userbox>
       <EditBooth>
-        <img src={edit1} onClick={goEditbooth}></img>
-        <img src={edit2} onClick={goEditMenu}></img>
+        <div id="edit1 edit" onClick={goEditbooth}>
+          <Pretendard>내 부스 정보 수정</Pretendard>
+        </div>
+        <div id="edit2 edit" onClick={goEditMenu}>
+          <Pretendard>메뉴 정보 수정</Pretendard>
+        </div>
       </EditBooth>
       <BoothBox>
         <Titlebox>
@@ -202,12 +206,23 @@ const Userbox = styled.div`
 const EditBooth = styled.div`
   width: fit-content;
   margin: 0 auto;
-  img {
+  div {
     display: block;
-    margin-top: 12px;
-    width: 80%;
+    margin: 12px auto 0;
+    width: 335px;
+    height: 43px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #004628;
   }
-  img:active {
+  #edit1 {
+    background-image: url(${edit1});
+  }
+  #edit2 {
+    background-image: url(${edit2});
+  }
+  div:active {
     box-shadow: inset 0px 2px 6px #bbc4c0;
     border-radius: 8px;
     cursor: pointer;
