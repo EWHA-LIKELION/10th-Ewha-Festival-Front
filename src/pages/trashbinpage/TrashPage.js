@@ -7,6 +7,11 @@ import Footer from "../../components/Footer/Footer";
 import Map from "../../images/map.svg";
 import TitleBar from "../../components/TitleBar";
 import pinbtn from "../../images/trash/pinbtn.svg";
+import posco from "../../images/trash/posco.svg";
+import life1 from "../../images/trash/life1.svg";
+import life2 from "../../images/trash/life2.svg";
+import student from "../../images/trash/student.svg";
+
 const TrashPage = () => {
   return (
     <>
@@ -33,11 +38,38 @@ const TrashPage = () => {
       <LocationBox>
         <LocationImg />
         <LocationInfo>
-          <p className="name">ff</p>
-          <p className="info">ee</p>
+          <p className="name">정문</p>
+          <p className="info">정문 24번 부스 옆</p>
         </LocationInfo>
       </LocationBox>
-
+      <LocationBox>
+        <LocationImg src={student} />
+        <LocationInfo>
+          <p className="name">학생문화관</p>
+          <p className="info">학생문화관 7~14번 부스 건너편 공간</p>
+        </LocationInfo>
+      </LocationBox>
+      <LocationBox>
+        <LocationImg src={life1} />
+        <LocationInfo>
+          <p className="name">생활환경관(1)</p>
+          <p className="info">생활환경관 입구</p>
+        </LocationInfo>
+      </LocationBox>
+      <LocationBox>
+        <LocationImg src={life2} />
+        <LocationInfo>
+          <p className="name">생활환경관(2)</p>
+          <p className="info">생활환경관 20번 부스 옆</p>
+        </LocationInfo>
+      </LocationBox>
+      <LocationBox>
+        <LocationImg src={posco} />
+        <LocationInfo>
+          <p className="name">포스코관</p>
+          <p className="info">포스코관 건물 옆</p>
+        </LocationInfo>
+      </LocationBox>
       <Footer />
     </>
   );
@@ -71,6 +103,10 @@ const Mapimg = styled.div`
   img {
     position: absolute;
     width: 17px;
+  }
+  img:active {
+    width: 34px;
+    transform: translate(-5px, -20px);
   }
   #pin1 {
     top: 325px;
@@ -117,18 +153,16 @@ const LocationImg = styled.img`
 const LocationInfo = styled.div`
   width: 176px;
   padding: 30px 0 20px 0;
-
   .name {
     font-size: 15px;
-    font-style: "Pretendard-Regular";
+    font-family: "Pretendard-Regular";
     font-weight: 700;
     color: var(--green3);
   }
 
   .info {
-    letter-spacing: -2px;
     font-size: 11px;
-    font-style: "Pretendard-Regular";
+    font-family: "Pretendard-Regular";
     font-weight: 400;
     line-height: 16px;
     color: var(--black);

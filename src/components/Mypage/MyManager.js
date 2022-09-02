@@ -17,6 +17,8 @@ import userbg from "../../images/mypage/userbg.svg";
 import edit1 from "../../images/mypage/edit1.svg";
 import edit2 from "../../images/mypage/edit2.svg";
 
+import { GetLikes } from "../../api/user";
+
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(4);
@@ -30,6 +32,17 @@ const MyManager = () => {
   const goEditMenu = () => {
     navigate("/editmenu");
   };
+
+  useEffect(() => {
+    GetLikes()
+      .then(res => {
+        console.log("좋아요한 부스 조회 성공", res);
+        setBooths(res.data.data);
+      })
+      .catch(err => {
+        console.log("좋아요한 부스 조회 실패", err);
+      });
+  });
 
   return (
     <Wrapper>
@@ -46,10 +59,10 @@ const MyManager = () => {
         </p>
       </Userbox>
       <EditBooth>
-        <div id="edit1 edit" onClick={goEditbooth}>
+        <div id="edit1" onClick={goEditbooth}>
           <Pretendard>내 부스 정보 수정</Pretendard>
         </div>
-        <div id="edit2 edit" onClick={goEditMenu}>
+        <div id="edit2" onClick={goEditMenu}>
           <Pretendard>메뉴 정보 수정</Pretendard>
         </div>
       </EditBooth>
@@ -149,10 +162,8 @@ const BoothBox = styled.div`
   margin: 0 auto 50px auto;
   width: 335px;
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   padding-top: 26px;
 `;
 
@@ -215,6 +226,8 @@ const EditBooth = styled.div`
     font-weight: 400;
     font-size: 16px;
     color: #004628;
+    padding-left: 50px;
+    padding-top: 12px;
   }
   #edit1 {
     background-image: url(${edit1});

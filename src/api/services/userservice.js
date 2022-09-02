@@ -24,6 +24,14 @@ const UserService = {
       password: password,
       nickname: name,
     }),
+
+  //회원가입 api
+  getLikes: token =>
+    http.get("https://api.rewha2022.com/accounts/likes/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export default UserService;

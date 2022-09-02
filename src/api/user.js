@@ -11,7 +11,6 @@ export const GetUser = async (id, password) => {
   }
 };
 
-
 // 프로필 조회
 export const GetProfile = async token => {
   try {
@@ -29,5 +28,15 @@ export const PostUser = async (id, password, name) => {
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "회원가입 실패");
+  }
+};
+
+// 좋아요한 부스 조회
+export const GetLikes = async () => {
+  try {
+    const response = await UserService.getLikes();
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "좋아요한 부스 조회 실패");
   }
 };

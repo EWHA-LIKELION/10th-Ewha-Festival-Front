@@ -62,3 +62,11 @@ export const DeleteCommentA = async (boothId, cId) => {
     return Promise.reject(error, "부스 댓글 삭제 실패");
   }
 };
+export const GetLikes = async boothId => {
+  try {
+    const response = await BoothService.getLikes();
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "좋아요한 부스 조회 실패");
+  }
+};
