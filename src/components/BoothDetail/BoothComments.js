@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { GetBooth } from "../../api/booth";
 import { SubmitComment } from "../../api/booth";
 import { useAppDispatch } from "../../redux/store";
 import { http } from "../../api/http";
+import { DeleteCommentA } from "../../api/booth";
 
 import { Pretendard } from "../Text";
 import PartTitle from "./PartTitle";
@@ -24,8 +25,10 @@ const BoothComments = () => {
     if (token !== null) {
       setIsLogin(true);
     }
-    console.log("로그인? ", isLogin);
   }, []);
+  useEffect(() => {
+    console.log("로그인? ", isLogin);
+  }, [isLogin]);
   useEffect(() => {
     if (isLogin === true) {
       document.getElementById("input").disabled = false;
@@ -37,12 +40,15 @@ const BoothComments = () => {
 
   const [thisUser, setThisUser] = useState({});
   const dispatch = useAppDispatch();
+  const [thisBoothUserId, setThisBoothUserId] = useState();
   const [thisComments, setThisComments] = useState([]);
   const getComments = () => {
     GetBooth(id)
       .then(res => {
         console.log("부스 상세 조회 성공", res);
-        console.log(res.data.data.comments);
+        console.log("[부스 관리자 ID] ", res.data.data.user);
+        setThisBoothUserId(res.data.data.user);
+        console.log("[댓글]\n", res.data.data.comments);
         setThisComments(res.data.data.comments);
       })
       .catch(err => {
@@ -56,11 +62,19 @@ const BoothComments = () => {
       .get("/accounts/")
       .then(res => {
         console.log(res.data);
+        console.log("[로그인 유저]\n", res.data.data);
         dispatch(setThisUser(res.data.data));
-        console.log(thisUser);
       })
       .catch(err => console.log(err));
   }, []);
+
+  const detBooth = cUserId => {
+    if (thisBoothUserId === cUserId) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const [deleteModal, setDeleteModal] = useState(false);
   const openDeleteModal = () => {
@@ -79,7 +93,7 @@ const BoothComments = () => {
 
   const DeleteComment = cId => {
     console.log(cId, "댓글 삭제");
-    DeleteComment(id, cId)
+    DeleteCommentA(id, cId)
       .then(res => {
         console.log(res.data);
         getComments();
@@ -109,6 +123,8 @@ const BoothComments = () => {
           getComments();
         })
         .catch(err => console.log(err.data));
+      //setTimeout(() => setIsAdd(isAdd + 1), 500);
+      setIsAdd(true);
       setNewComment("");
     }
   };
@@ -117,6 +133,21 @@ const BoothComments = () => {
     setDeleteModal(false);
     setInputModal(false);
   }, []);
+
+  const endRef = useRef(null);
+  const scrollToBottom = () => {
+    endRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  const [isAdd, setIsAdd] = useState(false);
+  useEffect(() => {
+    if (isAdd == true) {
+      console.log("==스크롤==");
+      scrollToBottom();
+      setIsAdd(false);
+    } else {
+      setIsAdd(false);
+    }
+  }, [thisComments]);
 
   return (
     <>
@@ -132,9 +163,13 @@ const BoothComments = () => {
                   <Pretendard
                     size="12px"
                     weight="600"
-                    color={comment.is_booth ? "var(--orange)" : "var(--green2)"}
+                    color={
+                      detBooth(comment.user.id)
+                        ? "var(--orange)"
+                        : "var(--green2)"
+                    }
                   >
-                    {comment.user}
+                    {comment.user.nickname}
                   </Pretendard>
                   <Pretendard
                     size="10px"
@@ -147,7 +182,7 @@ const BoothComments = () => {
                   >
                     {dotTime}
                   </Pretendard>
-                  {comment.user === thisUser.username ? (
+                  {comment.user.id === thisUser.id ? (
                     <Delete
                       src={commentdelete}
                       onClick={() => PreDeleteComment(comment.id)}
@@ -160,14 +195,7 @@ const BoothComments = () => {
                   color="var(--black)"
                   style={{ marginTop: "8px" }}
                 >
-                  {comment.content.split("\n").map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
+                  {comment.content}
                 </Pretendard>
               </CommentContainer>
             </>
@@ -175,8 +203,9 @@ const BoothComments = () => {
         })}
       </CommentsWrapper>
       <Bottom />
+      <div ref={endRef} />
       <CommentInputWrapper>
-        <CommentInputContainer onSubmit={e => onSubmit(e)}>
+        <CommentInputContainer>
           <CommentInput
             placeholder={
               isLogin ? "댓글을 입력하세요" : "로그인 후 댓글을 입력해보세요"
@@ -187,7 +216,7 @@ const BoothComments = () => {
             id="input"
           />
           {isLogin ? (
-            <WriteBtn type="submit">
+            <WriteBtn onClick={e => onSubmit(e)}>
               <Write src={commentwrite} />
             </WriteBtn>
           ) : null}
@@ -209,9 +238,9 @@ const BoothComments = () => {
           isOne={false}
           open={deleteModal}
           close={closeDeleteModal}
-          header="댓글 작성 취소"
-          subtext="작성 취소된 댓글은 저장되지 않습니다."
-          maintext="댓글 작성을 취소하시겠습니까?"
+          header="댓글 삭제"
+          subtext="삭제된 댓글은 되돌릴 수 없습니다."
+          maintext="댓글을 삭제하시겠습니까?"
           onClick={() => DeleteComment(currentId)}
         />
       ) : null}
@@ -263,7 +292,7 @@ const CommentInputWrapper = styled.div`
   border-top: 1px solid var(--gray);
 `;
 
-const CommentInputContainer = styled.form`
+const CommentInputContainer = styled.div`
   width: calc(100% - 40px);
   height: 40px;
   margin: 0 auto;
