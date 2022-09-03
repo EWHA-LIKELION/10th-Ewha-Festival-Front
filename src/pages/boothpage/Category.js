@@ -136,7 +136,7 @@ const Category = () => {
           <p style={{ color: "var(--green2)" }}>스&nbsp;</p>
           카테고리
         </PyeongChang_Peace>
-        <Link to="/">
+        <Link to="/search">
           <Search src={search} />
         </Link>
       </Navbar>
