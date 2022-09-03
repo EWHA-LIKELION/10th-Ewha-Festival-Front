@@ -45,7 +45,7 @@
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-      <td  align="center"><p>메인 페이지</p><p>카테고리 페이지</p><p>유저인증& 로그인유지</p></td>
+      <td  align="center"><p>메인 페이지</p><p>카테고리 페이지</p><p>검색 페이지</p><p>유저인증& 로그인유지</p></td>
       <td  align="center"><p>공지사항 작성</p><p>공지사항 수정</p></td>
       <td  align="center">마이페이지(유저/관리자)</td>
      <td  align="center">부스 상세 페이지</td>
