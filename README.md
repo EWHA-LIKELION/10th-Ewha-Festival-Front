@@ -5,6 +5,9 @@
 2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 TF팀과 협업하여 **부스 통합 안내 서비스**를 제작하였습니다. 
 <br/> **Re:wha**는 nnn개의 부스들을 한 번에 조회 가능한 유일한 플랫폼으로써, 대동제를 즐기는 벗들의 편의와 즐거움을 증진시키고
 부스를 운영하는 벗들에겐 부스 홍보 효과를 제공합니다.
+<br/>
+더불어 Re:wha는 [이화여대 총학생회 비상대책위원회]의 공식 소통 창구에도 홍보되어, <br/>
+많은 벗들에게 자신의 부스를 홍보 할 수 있는 기회가 되었습니다.
 
 ### 기능
 **Re:wha**가 제공하는 기능은 다음과 같습니다.
@@ -63,13 +66,14 @@
 
 ## 🎉 프로젝트 시작
 ```
+git clone https://github.com/EWHA-LIKELION/10th-Ewha-Festival-Front.git
 npm install
 npm start
 ```
 
 ## 🎉 기술 스택
 
-- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square?&logo=Axios&logoColor=white">
+- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - ETC :
@@ -90,6 +94,7 @@ npm start
 ```
 📂 src
 ├─ 📂 api  ▶️ api 모음
+├─ 📂 redux  ▶️ store와 Slice 파일 모음
 ├─ 📂 common  ▶️ 여러 페이지와 함수에서 사용되는 요소
 ├─ 📂 components  ▶️ 컴포넌트
 ├─ 📂 images  ▶️ svg 파일 모음
