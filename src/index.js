@@ -4,6 +4,7 @@ import App from "./App";
 import "./styles/style.css";
 import "./styles/common.scss";
 import "./styles/fadeIn.css";
+import "./styles/pin.css";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
