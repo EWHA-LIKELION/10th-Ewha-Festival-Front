@@ -9,6 +9,7 @@ import Footer from "../../components/Footer/Footer";
 import TimeLine from "../../components/MainPage/TimeLine";
 import Stars from "../../components/MainPage/Stars";
 import SideBar from "../../components/SideBar";
+import Map from "../../components/MainPage/Map";
 import {
   PyeongChang_Peace,
   PyeongChang,
@@ -27,6 +28,7 @@ import likelion from "../../images/main/likelion.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import person from "../../images/main/person.svg";
 import hamburger from "../../images/main/hamburger.svg";
+import boothMap from "../../images/main/boothMap.png";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
@@ -120,7 +122,7 @@ const MainPage = () => {
           </GreenButton>
         </Link>
 
-        <Map src={map} />
+        <Map/>
         <Link to="/category" style={{ textDecoration: "none" }}>
           <GreenButton margin="32px auto 0 auto">부스 보러가기</GreenButton>
         </Link>
@@ -220,10 +222,7 @@ const TopBar = styled.div`
   width: 100%;
 `;
 
-const Map = styled.img`
-  width: 297px;
-  height: 300px;
-`;
+
 
 const Wrapper = styled.div`
   //border: 1px red solid;
