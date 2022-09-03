@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles/style.css";
 import "./styles/common.scss";
-import "./styles/fadeIn.css";
 import "./styles/pin.css";
+import "./styles/button.css";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
