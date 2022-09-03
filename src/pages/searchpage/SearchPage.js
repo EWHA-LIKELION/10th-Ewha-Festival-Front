@@ -76,7 +76,7 @@ const SearchPage = () => {
                 <BootInfo>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.description}</p>
+                  <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
 
                 {b.is_liked ? (
