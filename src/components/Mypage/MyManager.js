@@ -57,7 +57,7 @@ const MyManager = () => {
           <Pretendard>{username}</Pretendard>
         </p>
         <p className="manager">
-          <Pretendard>부스이름관리자</Pretendard>
+          <Pretendard>부스관리자</Pretendard>
         </p>
       </Userbox>
       <EditBooth>
@@ -89,7 +89,7 @@ const MyManager = () => {
                 <BootInfo>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.description}</p>
+                  <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
               </Booth>
@@ -147,6 +147,7 @@ const BootInfo = styled.div`
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
+
   }
 `;
 

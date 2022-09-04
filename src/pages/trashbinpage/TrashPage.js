@@ -7,12 +7,31 @@ import Footer from "../../components/Footer/Footer";
 import Map from "../../images/map.svg";
 import TitleBar from "../../components/TitleBar";
 import pinbtn from "../../images/trash/pinbtn.svg";
-import posco from "../../images/trash/posco.svg";
-import life1 from "../../images/trash/life1.svg";
-import life2 from "../../images/trash/life2.svg";
-import student from "../../images/trash/student.svg";
+
+import { trashData } from "../../_mock/trashData";
+import { trashPhoto } from "../../_mock/trashPhoto";
 
 const TrashPage = () => {
+  const [trashs, setTrashs] = useState(trashData);
+  const [trashname,setTrashname]=useState("정문");
+  const [trashinfo, setTrashinfo]=useState("정문 24번 부스 옆");
+  const [pickedId, setId]=useState(0);
+
+const selectPla=(id)=>{
+  console.log(id);
+  setTrashs(
+    trashData.map(trash =>
+      id === trash.id
+        ? {...trash, selected:true}
+        : {...trash, selected:false},
+    ),
+    console.log(trashData)
+  );
+setTrashname(trashData[id-1].name);
+setTrashinfo(trashData[id-1].info);
+setId(id);
+}
+  
   return (
     <>
       <TitleBar>
@@ -20,6 +39,7 @@ const TrashPage = () => {
         <span style={{ color: "var(--green2)" }}>기통 </span>
         <span style={{ color: "var(--green3)" }}>지도</span>
       </TitleBar>
+      <MainBox>
       <Tbox>
         <div>
           <PyeongChang_Peace>다시쓰는</PyeongChang_Peace>
@@ -28,54 +48,52 @@ const TrashPage = () => {
           이화의 <span>초록</span>
         </PyeongChang_Peace>
       </Tbox>
+      <MapBox>
       <Mapimg>
-        <img id="pin1" src={pinbtn} />
-        <img id="pin2" src={pinbtn} />
-        <img id="pin3" src={pinbtn} />
-        <img id="pin4" src={pinbtn} />
-        <img id="pin5" src={pinbtn} />
+      {trashData.map(trash => {
+        if (trash.selected === true) {
+        return (
+          <Pin
+            key={trash.id}
+            top={trash.top}
+            left={trash.left}
+            src={pinbtn}
+            onClick={() => selectPla(trash.id-1)}
+            selected
+          />
+        );
+      } else {
+        return (
+        <Pin
+            key={trash.id}
+            top={trash.top}
+            left={trash.left}
+            src={pinbtn}
+            onClick={() => selectPla(trash.id)}
+          />
+          );
+        }
+      })}
       </Mapimg>
+      </MapBox>
       <LocationBox>
-        <LocationImg />
+        <LocationImg src={trashPhoto[pickedId]}/>
         <LocationInfo>
-          <p className="name">정문</p>
-          <p className="info">정문 24번 부스 옆</p>
+          <p className="name">{trashname}</p>
+          <p className="info">{trashinfo}</p>
         </LocationInfo>
       </LocationBox>
-      <LocationBox>
-        <LocationImg src={student} />
-        <LocationInfo>
-          <p className="name">학생문화관</p>
-          <p className="info">학생문화관 7~14번 부스 건너편 공간</p>
-        </LocationInfo>
-      </LocationBox>
-      <LocationBox>
-        <LocationImg src={life1} />
-        <LocationInfo>
-          <p className="name">생활환경관(1)</p>
-          <p className="info">생활환경관 입구</p>
-        </LocationInfo>
-      </LocationBox>
-      <LocationBox>
-        <LocationImg src={life2} />
-        <LocationInfo>
-          <p className="name">생활환경관(2)</p>
-          <p className="info">생활환경관 20번 부스 옆</p>
-        </LocationInfo>
-      </LocationBox>
-      <LocationBox>
-        <LocationImg src={posco} />
-        <LocationInfo>
-          <p className="name">포스코관</p>
-          <p className="info">포스코관 건물 옆</p>
-        </LocationInfo>
-      </LocationBox>
+      </MainBox>
       <Footer />
     </>
   );
 };
 
 export default TrashPage;
+
+const MainBox=styled.div`display: flex;
+flex-direction: column;
+align-items: center;`;
 
 const Tbox = styled.div`
   width: fit-content;
@@ -91,47 +109,43 @@ const Tbox = styled.div`
     margin: auto;
   }
 `;
-
+const MapBox=styled.div`
+  position: relative;
+  `;
 const Mapimg = styled.div`
   width: 347px;
   height: 350px;
-  margin: auto;
   background-image: url(${Map});
   background-repeat: no-repeat;
   background-size: 347px 350px;
 
-  img {
-    position: absolute;
-    width: 17px;
-  }
-  img:active {
-    width: 34px;
-    transform: translate(-5px, -20px);
-  }
-  #pin1 {
-    top: 325px;
-    left: 215px;
-  }
-  #pin2 {
-    top: 345px;
-    left: 180px;
-  }
-  #pin3 {
-    top: 377px;
-    left: 160px;
-  }
-  #pin4 {
-    top: 400px;
-    left: 135px;
-  }
-  #pin5 {
-    top: 417px;
-    left: 260px;
-  }
   #mapimg {
     display: block;
   }
 `;
+
+const Pin = styled.img`
+  position: absolute;
+  width: fit-content;
+  height: 24px;
+  top: ${({ top }) => top+"px"};
+  left: ${({ left }) => left};
+  ${props =>
+    props.selected
+      ? css`
+          top: ${({ top }) => top-25+"px"};
+          left: ${({ left }) => left-25};
+          height: 42px;
+          animation-duration: 1s;
+          animation-delay: 2s;
+          animation-name: bounce;
+          animation-iteration-count: infinite;
+        `
+      : css`
+          
+        `}
+`;
+
 
 const LocationBox = styled.div`
   margin: 29px auto 36px;

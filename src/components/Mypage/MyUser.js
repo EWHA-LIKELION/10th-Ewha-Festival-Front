@@ -14,11 +14,27 @@ import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
 
+import { GetLikes } from "../../api/user";
+
+
 const UserMy = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
   const { username } = useAppSelector(state => state.user);
+
+  useEffect(() => {
+    console.log(localStorage.getItem("token"));
+    GetLikes(localStorage.getItem("token").slice(1, -1))
+      .then(res => {
+        console.log("좋아요한 부스 조회 성공", res);
+        setBooths(res.data.data);
+        setLikebooths(res.data.data.length);
+      })
+      .catch(err => {
+        console.log("좋아요한 부스 조회 실패", err);
+      });
+  }, []);
   return (
     <Wrapper>
       <Navbar />
@@ -50,9 +66,9 @@ const UserMy = () => {
               <Booth key={b.id}>
                 <BoothImg />
                 <BootInfo>
-                  <p className="num">{b.num}</p>
+                  <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.info}</p>
+                  <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
               </Booth>
@@ -110,6 +126,7 @@ const BootInfo = styled.div`
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
+
   }
 `;
 
