@@ -148,6 +148,7 @@ const NoticeBox = styled.div`
     font-weight: 500;
     font-size: 14px;
     color: var(--black);
+    margin-bottom: 4px;
   }
 `;
 const NoticeInfo = styled.div`
