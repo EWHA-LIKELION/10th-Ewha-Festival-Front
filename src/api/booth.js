@@ -77,11 +77,26 @@ export const PatchBooth = async (boothId, name, notice, description) => {
   }
 };
 
-export const GetMenu = async boothId => {
+export const GetMenu = async menuId => {
   try {
-    const response = await BoothService.getMenu(boothId);
+    const response = await BoothService.getMenu(menuId);
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error, "메뉴 조회 실패");
+  }
+};
+
+export const PatchMenu = async (boothId, menuId, menu, price, is_soldout) => {
+  try {
+    const response = await BoothService.patchMenu(
+      boothId,
+      menuId,
+      menu,
+      price,
+      is_soldout,
+    );
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "메뉴 수정 실패");
   }
 };

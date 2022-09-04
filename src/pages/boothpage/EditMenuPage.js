@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import MenuItem from "../../components/EditMenu/MenuItem";
 import Footer from "../../components/Footer/Footer";
@@ -10,7 +10,11 @@ const EditMenuPage = () => {
   const [item, setItem] = useState(null);
 
   const onSubmit = () => {
-    navigate(`/editmenu/:${item}`);
+    if (item !== null) {
+      navigate(`/editmenu/${item}`);
+    } else {
+      alert("수정할 메뉴를 선택하세요");
+    }
   };
 
   const navigate = useNavigate();

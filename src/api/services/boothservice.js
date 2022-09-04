@@ -22,7 +22,13 @@ const BoothService = {
       notice: notice,
       description: description,
     }),
-  getMenu: boothId => http.get(`/booths/${boothId}/menus`),
+  getMenu: boothId => http.get(`/booths/${boothId}/menus/`),
+  patchMenu: (boothId, menuId, menu, price, is_soldout) =>
+    http.patch(`/booths/${boothId}/menus/${menuId}/`, {
+      menu: menu,
+      price: price,
+      is_soldout: is_soldout,
+    }),
 };
 
 export default BoothService;
