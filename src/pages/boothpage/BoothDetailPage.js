@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { PyeongChang_Peace } from "../../components/Text";
 import PartTitle from "../../components/BoothDetail/PartTitle";
@@ -9,38 +9,48 @@ import BoothInfo from "../../components/BoothDetail/BoothInfo";
 import BoothMenu from "../../components/BoothDetail/BoothMenu";
 import BoothComments from "../../components/BoothDetail/BoothComments";
 import ImgModal from "../../components/BoothDetail/ImgModal";
+import { GetBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
 
-import { boothDetailData } from "../../_mock/boothDetailData";
 import back from "../../images/navbar/back.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+import booththumnail from "../../images/detail/booththumnail.svg";
 
 const BoothDetailPage = () => {
-  const id = 1;
-  const index = id - 1;
-  const [booths, setBooths] = useState(boothDetailData);
+  let { id } = useParams();
+  const [booth, setBooth] = useState({});
   const nav = useNavigate();
 
+  useEffect(() => {
+    GetBooth(id)
+      .then(res => {
+        console.log("부스 상세 조회 성공", res);
+        setBooth(res.data.data);
+      })
+      .catch(err => {
+        console.log("부스 상세 조회 실패", err);
+      });
+  }, []);
+
   const Like = id => {
-    setBooths(
-      booths.map(booth =>
-        booth.id === id ? { ...booth, is_liked: true } : { ...booth },
-      ),
-    );
-    console.log("좋아요", id);
-    // 좋아요 요청 보내기
-    // 업데이트
+    const token = localStorage.getItem("token");
+    if (token) {
+      setBooth({ ...booth, is_liked: true });
+      console.log("좋아요", id);
+      LikeBooth(id)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err.data));
+    } else {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   const unLike = id => {
-    setBooths(
-      booths.map(booth =>
-        booth.id === id ? { ...booth, is_liked: false } : { ...booth },
-      ),
-    );
+    setBooth({ ...booth, is_liked: false });
     console.log("좋아요 삭제", id);
-    // 좋아요 삭제
-    // 업데이트
+    UnLikeBooth(id)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.data));
   };
 
   const [imgModal, setImgModal] = useState(false);
@@ -52,21 +62,32 @@ const BoothDetailPage = () => {
   const handleNotice = () => {
     setNotice(!notice);
   };
-  const noticeString = booths[index].notice;
+  const [noticeString, setNoticeString] = useState("");
 
   const [info, setInfo] = useState(false);
   const handleInfo = () => {
     setInfo(!info);
   };
-  const infoString = booths[index].info;
+  const [infoString, setInfoString] = useState("");
 
-  const [imgs, setImgs] = useState([]);
-  const getImgs = () => {
-    booths.map(booth => (booth.id === id ? setImgs(booth.img) : null));
-  };
+  const [images, setImages] = useState([]);
+
   useEffect(() => {
-    getImgs();
-  });
+    setNoticeString(booth.notice);
+    setInfoString(booth.description);
+    setImages(booth.images);
+    console.log(
+      "[부스]\n",
+      booth,
+      "\n\n[공지]\n",
+      noticeString,
+      "\n\n[소개]\n",
+      infoString,
+      "\n\n[이미지]\n",
+      images,
+    );
+  }, [booth]);
+
   const [src, setSrc] = useState("");
   const openModal = src => {
     setSrc(src);
@@ -82,50 +103,62 @@ const BoothDetailPage = () => {
   return (
     <>
       <Wrapper>
-        <MainImage onClick={() => openModal(booths[index].mainimg)}>
-          <MainImg src={booths[index].mainimg} />
+        <MainImage
+          onClick={() =>
+            openModal(booth.thumnail === "" ? booththumnail : booth.thumnail)
+          }
+        >
+          <MainImg
+            src={booth.thumnail === "" ? booththumnail : booth.thumnail}
+          />
         </MainImage>
         <BackBtn onClick={() => nav("/category")}>
           <Back src={back} />
         </BackBtn>
         <TitleWrapper>
           <PyeongChang_Peace size="22px" weight="700" color="var(--green3)">
-            {booths[index].name}
+            {booth.name}
           </PyeongChang_Peace>
-          {booths[index].is_liked ? (
+          {booth.is_liked ? (
             <Heart src={greenheart} onClick={() => unLike(id)} />
           ) : (
             <Heart src={heart} onClick={() => Like(id)} />
           )}
         </TitleWrapper>
         <BoothNotice
-          thisId={id}
           noticeString={noticeString}
           notice={notice}
           handleNotice={handleNotice}
         />
         <BoothInfo
-          thisId={id}
           infoString={infoString}
           info={info}
           handleInfo={handleInfo}
         />
-        <BoothMenu thisId={id} />
-        <ImageWrapper>
-          <PartTitle title="사진" />
-          <ImageContainer>
-            {imgs.map(img => {
-              return (
-                <>
-                  <ImgRect onClick={() => openModal(img)}>
-                    <Img src={img} />
-                  </ImgRect>
-                </>
-              );
-            })}
-          </ImageContainer>
-        </ImageWrapper>
-        <BoothComments thisId={id} />
+        <BoothMenu />
+        {images &&
+          (images.length === 0 ? (
+            <ImageWrapper>
+              <PartTitle title="사진" />
+              <ImageContainer style={{ height: "15px" }}></ImageContainer>
+            </ImageWrapper>
+          ) : (
+            <ImageWrapper>
+              <PartTitle title="사진" />
+              <ImageContainer>
+                {images.map(img => {
+                  return (
+                    <>
+                      <ImgRect onClick={() => openModal(img.image)}>
+                        <Img src={img.image} />
+                      </ImgRect>
+                    </>
+                  );
+                })}
+              </ImageContainer>
+            </ImageWrapper>
+          ))}
+        <BoothComments />
       </Wrapper>
       {imgModal ? <ImgModal src={src} closeModal={closeModal} /> : null}
     </>

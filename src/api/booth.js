@@ -1,5 +1,15 @@
 import BoothService from "./services/boothservice";
 
+export const GetSearchBooth = async (keyword) => {
+  try {
+    const response = await BoothService.getSearchBooth(keyword);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 검색 실패");
+  }
+};
+
+
 export const GetKeywordBooth = async (day, college) => {
   try {
     const response = await BoothService.getKeywordBooth(day, college);
@@ -27,7 +37,6 @@ export const UnLikeBooth = async boothId => {
   }
 };
 
-// 이 밑으로 작업 아직 안됨
 export const GetAllBooth = async () => {
   try {
     const response = await BoothService.getAllBooth();
@@ -37,11 +46,29 @@ export const GetAllBooth = async () => {
   }
 };
 
-export const GetBooth = async () => {
+export const GetBooth = async boothId => {
   try {
-    const response = await BoothService.getBooth();
+    const response = await BoothService.getBooth(boothId);
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error, "부스 상세 조회 실패");
+  }
+};
+
+export const SubmitComment = async (boothId, newComment) => {
+  try {
+    const response = await BoothService.submitComment(boothId, newComment);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 댓글 작성 실패");
+  }
+};
+
+export const DeleteCommentA = async (boothId, cId) => {
+  try {
+    const response = await BoothService.deleteComment(boothId, cId);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 댓글 삭제 실패");
   }
 };

@@ -3,12 +3,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 // components
 import CardSlider from "../../components/MainPage/CardSlider";
-import GreenButton from "../../components/MainPage/GreenButton";
+import NewButton from "../../components/MainPage/NewButton";
 import StarTitle from "../../components/MainPage/StarTitle";
 import Footer from "../../components/Footer/Footer";
 import TimeLine from "../../components/MainPage/TimeLine";
 import Stars from "../../components/MainPage/Stars";
 import SideBar from "../../components/SideBar";
+import Map from "../../components/MainPage/Map";
 import {
   PyeongChang_Peace,
   PyeongChang,
@@ -27,6 +28,7 @@ import likelion from "../../images/main/likelion.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import person from "../../images/main/person.svg";
 import hamburger from "../../images/main/hamburger.svg";
+import boothMap from "../../images/main/boothMap.png";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
@@ -101,24 +103,28 @@ const MainPage = () => {
             size="11px"
             height="18px"
           >
-            136년 전 이화는 단 한 명의 학생을 위해 <br />
-            이 땅에서 최초로 여성 교육의 문을 열었습니다. <br />
-            기독교 정신의 사랑과 헌신을 바탕으로 <br />
-            우리 사회의 금기를 깨뜨리며 끊임없이 도전해 온 <br />
-            이화의 하루 하루는 기적의 역사가 되었습니다. <br />
-            대동제 기획 소개........
+            2019년 이후, 3년 만에
+            <br />
+            대동제를 대면으로 맞이하게 되었습니다.
+            <br />
+            <br />
+            3일 간의 대동제를 통해
+            <br />
+            <span style={{ color: "green" }}>이화의 초록을</span>
+            <br />
+            새로이 써 나갈 수 있길 바랍니다.
           </Pretendard>
         </div>
 
         <Link to="/notice" style={{ textDecoration: "none" }}>
-          <GreenButton margin="36px auto 59px auto">
+          <NewButton margin="36px auto 59px auto">
             TF팀 공지 보러가기
-          </GreenButton>
+          </NewButton>
         </Link>
 
-        <Map src={map} />
+        <Map/>
         <Link to="/category" style={{ textDecoration: "none" }}>
-          <GreenButton margin="32px auto 0 auto">부스 보러가기</GreenButton>
+          <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
         </Link>
 
         <StarTitle margin="132px auto 0 auto" title="일정 소개" />
@@ -132,7 +138,7 @@ const MainPage = () => {
           time="3교시~7교시 쉬는 시간 학문관 광장"
         />
 
-        <TimeLine title="벗의 편지" time="11:00-11:30 포관20" />
+        <TimeLine title="벗의 편지" time="11:00 - 14:00 포관20" />
         <TimeLine title="이화인 한솥밥" time="11:30-14:30 학문관 1층" />
         <TimeLine
           title="동아리 스포츠 트랙 공연"
@@ -146,7 +152,7 @@ const MainPage = () => {
         <TimeLine title="동아리 메인 공연" time="12:00-16:00 잔디광장" />
         <TimeLine
           title="동아리 서브 공연"
-          time="3교시~7교시 쉬는 시간 학문관 광장"
+          time="6교시~7교시 쉬는 시간 학문관 광장"
         />
 
         <TimeLine title="랜덤 플레이화 댄스" time="17:00-18:00 박물관 앞" />
@@ -194,7 +200,7 @@ const MainPage = () => {
           href="https://www.instagram.com/likelion_ewha/"
           style={{ textDecoration: "none" }}
         >
-          <GreenButton margin="24px auto 203px auto">멋사 구경하기</GreenButton>
+          <NewButton margin="24px auto 203px auto">멋사 구경하기</NewButton>
         </a>
 
         <br />
@@ -216,10 +222,7 @@ const TopBar = styled.div`
   width: 100%;
 `;
 
-const Map = styled.img`
-  width: 297px;
-  height: 300px;
-`;
+
 
 const Wrapper = styled.div`
   //border: 1px red solid;
