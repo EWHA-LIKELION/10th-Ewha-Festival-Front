@@ -16,13 +16,16 @@ const BoothService = {
     http.post(`/booths/${boothId}/comments/`, { content: newComment }), //댓글 작성
   deleteComment: (boothId, cId) =>
     http.delete(`/booths/${boothId}/comments/${cId}/`), //댓글 삭제
+  // 부스 수정
   patchBooth: (boothId, name, notice, description) =>
     http.patch(`/booths/${boothId}/`, {
       name: name,
       notice: notice,
       description: description,
     }),
+  // 메뉴 조회
   getMenu: boothId => http.get(`/booths/${boothId}/menus/`),
+  // 메뉴 수정
   patchMenu: (boothId, menuId, menu, price, is_soldout) =>
     http.patch(`/booths/${boothId}/menus/${menuId}/`, {
       menu: menu,
