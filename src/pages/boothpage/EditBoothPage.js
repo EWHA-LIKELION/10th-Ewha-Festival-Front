@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
+import { useNavigate } from "react-router-dom";
 
 // import font
 import { Pretendard } from "../../components/Text";
+
+// import component
+import Footer from "../../components/Footer/Footer";
+import TitleBar from "../../components/TitleBar";
+
+// import api component
 import { GetBooth, PatchBooth } from "../../api/booth";
 import { http } from "../../api/http";
-import { useNavigate } from "react-router-dom";
 
 const EditBoothPage = () => {
   // navigate
@@ -22,8 +26,9 @@ const EditBoothPage = () => {
       .get("/accounts/")
       .then(response => {
         setId(response.data.data.booth_id);
+        console.log("[프로필 접근 성공] : " + response.data.message);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("[프로필 접근 실패]" + error));
   }, []);
 
   // 기존 부스 정보 불러오기
@@ -38,22 +43,28 @@ const EditBoothPage = () => {
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
+      console.log("[prevdata 조회 성공] : " + response.data.message);
     });
   };
 
   // 부스 정보 수정하기
   const onSubmit = () => {
     PatchBooth(id, name, notice, description)
-      .then(response => console.log(response))
-      .catch(response => {
-        console.log(response);
+      .then(
+        console.log(
+          "[부스 정보 수정 성공]\n\n" +
+            "부스이름: " +
+            name +
+            "\n부스공지: " +
+            notice +
+            "\n부스내용:" +
+            description,
+        ),
+      )
+      .catch(error => {
+        console.log(error);
       });
 
-    navigate(-1);
-  };
-
-  // 취소버튼 클릭시 뒤로가기
-  const onCancel = () => {
     navigate(-1);
   };
 
@@ -121,7 +132,7 @@ const EditBoothPage = () => {
       </ContentWrapper>
       <Pretendard weight="600" size="18x">
         <ButtonWrapper>
-          <Button onClick={onCancel} className="Cancel">
+          <Button onClick={() => navigate(-1)} className="Cancel">
             취소
           </Button>
           <Button onClick={onSubmit} className="Approve">
