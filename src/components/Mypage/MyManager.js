@@ -21,7 +21,7 @@ import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
-  const [likebooths, setLikebooths] = useState(4);
+  const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
   const { username } = useAppSelector(state => state.user);
   const navigate = useNavigate();
@@ -34,10 +34,12 @@ const MyManager = () => {
   };
 
   useEffect(() => {
+    console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
         console.log("좋아요한 부스 조회 성공", res);
         setBooths(res.data.data);
+        setLikebooths(res.data.data.length);
       })
       .catch(err => {
         console.log("좋아요한 부스 조회 실패", err);
@@ -85,9 +87,9 @@ const MyManager = () => {
               <Booth key={b.id}>
                 <BoothImg />
                 <BootInfo>
-                  <p className="num">{b.num}</p>
+                  <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.info}</p>
+                  <p className="info">{b.description}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
               </Booth>
