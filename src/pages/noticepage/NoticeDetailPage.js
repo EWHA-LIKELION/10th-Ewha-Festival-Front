@@ -67,8 +67,7 @@ function Update(e) {
             <p class="writer">TF 팀</p>
           </div>
           <div style={{ display: "flex", float: "right" }}>
-            <p class="date">{notice.created_at}</p>
-            {/* <p class="time">{notice.time}</p> */}
+            <p class="createdAt">{notice.created_at}</p>
           </div>
         </NoticeInfo>
         <NoticeContent>
@@ -109,9 +108,6 @@ const NoticeInfo = styled.div`
   color: var(--gray2);
   font-weight: 300;
   font-size: 12px;
-  p {
-    margin-right: 10px;
-  }
 `;
 const NoticeContent = styled.div`
   margin: 0 10% 5%;
