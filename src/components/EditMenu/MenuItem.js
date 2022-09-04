@@ -1,17 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+// import font
 import { Pretendard } from "../Text";
+
+// import image
 import emptycheck from "../../images/edit/emptycheck.svg";
 import fullcheck from "../../images/edit/fullcheck.svg";
-import axios from "axios";
+
+// import api component
 import { GetMenu } from "../../api/booth";
-import { useAppSelector } from "../../redux/store";
 import { http } from "../../api/http";
 
+// Menudata component
 const MenuData = ({ handleCheck, props, checked }) => {
   let price = props.price;
-  if (props.is_soldout == true) {
-  }
   let commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <>
@@ -43,10 +46,12 @@ const MenuData = ({ handleCheck, props, checked }) => {
 };
 
 const MenuItem = props => {
+  // useState
   const [checked, setChecked] = useState(null);
   const [menus, setMenus] = useState([]);
   const [id, setId] = useState(null);
 
+  // checked menu id parent에 보내기
   const handleCheck = e => {
     setChecked(e.target.id);
     props.setItem(e.target.id);
@@ -62,6 +67,7 @@ const MenuItem = props => {
       .catch(error => console.log(error));
   }, []);
 
+  // booth id에 따라 메뉴 불러오기
   useEffect(() => {
     if (id !== null) {
       GetMenu(id).then(response => {

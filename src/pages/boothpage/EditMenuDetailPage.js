@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
+import { useNavigate, useParams } from "react-router-dom";
+
+// import font
+import { Pretendard } from "../../components/Text";
+
+// import image
 import emptysoldout from "../../images/edit/emptysoldout.svg";
 import fullsoldout from "../../images/edit/fullsoldout.svg";
 
-import { Pretendard } from "../../components/Text";
-import { useNavigate, useParams } from "react-router-dom";
+// import component
+import Footer from "../../components/Footer/Footer";
+import TitleBar from "../../components/TitleBar";
+
+// import api component
 import { GetMenu, PatchMenu } from "../../api/booth";
 import { http } from "../../api/http";
 
 const EditMenuDetailPage = () => {
+  // navigate
+  const navigate = useNavigate();
+
+  // useParams로 menu id 받아오기
+  const { id } = useParams();
+
+  // useState
   const [isSoldout, setIsSoldout] = useState(false);
   const [menuName, setMenuName] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
   const [boothId, setBoothId] = useState(null);
   const [menu, setMenu] = useState([]);
 
-  const navigate = useNavigate();
-
-  const { id } = useParams();
-
+  // user account 불러오기
   useEffect(() => {
     http
       .get("/accounts/")
@@ -30,10 +41,22 @@ const EditMenuDetailPage = () => {
       .catch(error => console.log(error));
   }, []);
 
+  // prevdata 조회하기
   useEffect(() => {
     prevMenu();
   }, [menu]);
 
+  // prevdata 함수
+  const prevMenu = () => {
+    if (menu !== null) {
+      console.log("[prevdata 조회 성공]");
+      setMenuName(menu.menu);
+      setMenuPrice(menu.price);
+      setIsSoldout(menu.is_soldout);
+    }
+  };
+
+  // booth id, menu id에 따라 menu 불러오기
   useEffect(() => {
     if (boothId !== null) {
       GetMenu(boothId).then(response => {
@@ -44,15 +67,7 @@ const EditMenuDetailPage = () => {
     }
   }, [boothId]);
 
-  const prevMenu = () => {
-    if (menu !== null) {
-      console.log("[prevdata 조회 성공]");
-      setMenuName(menu.menu);
-      setMenuPrice(menu.price);
-      setIsSoldout(menu.is_soldout);
-    }
-  };
-
+  // filtering을 위한 boolean 함수
   const isMenu = element => {
     if (element.id == id) {
       return true;
