@@ -1,5 +1,15 @@
 import BoothService from "./services/boothservice";
 
+export const GetSearchBooth = async (keyword) => {
+  try {
+    const response = await BoothService.getSearchBooth(keyword);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "부스 검색 실패");
+  }
+};
+
+
 export const GetKeywordBooth = async (day, college) => {
   try {
     const response = await BoothService.getKeywordBooth(day, college);
