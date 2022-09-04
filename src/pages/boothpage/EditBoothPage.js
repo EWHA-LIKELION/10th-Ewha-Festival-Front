@@ -49,23 +49,27 @@ const EditBoothPage = () => {
 
   // 부스 정보 수정하기
   const onSubmit = () => {
-    PatchBooth(id, name, notice, description)
-      .then(
-        console.log(
-          "[부스 정보 수정 성공]\n\n" +
-            "부스이름: " +
-            name +
-            "\n부스공지: " +
-            notice +
-            "\n부스내용:" +
-            description,
-        ),
-      )
-      .catch(error => {
-        console.log(error);
-      });
+    if (name !== "") {
+      PatchBooth(id, name, notice, description)
+        .then(
+          console.log(
+            "[부스 정보 수정 성공]\n\n" +
+              "부스이름: " +
+              name +
+              "\n부스공지: " +
+              notice +
+              "\n부스내용:" +
+              description,
+          ),
+        )
+        .catch(error => {
+          console.log(error);
+        });
 
-    navigate(-1);
+      navigate(-1);
+    } else {
+      alert("부스 이름은 필수 정보입니다");
+    }
   };
 
   // 각각의 상태 관리
