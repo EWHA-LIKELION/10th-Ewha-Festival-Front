@@ -27,13 +27,10 @@ import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 import LoginPage from "./pages/authpage/LoginPage";
 //쓰레기통 페이지
 import TrashPage from "./pages/trashbinpage/TrashPage";
-<<<<<<< HEAD
 // 만든이들 페이지
 import MakersPage from "./pages/makerspage/MakersPage";
-=======
 // 검색 페이지
 import SearchPage from "./pages/searchpage/SearchPage";
->>>>>>> df41ef1a0b839ab8244e7fd27eed6cdb13f220e0
 
 function App() {
   return (
