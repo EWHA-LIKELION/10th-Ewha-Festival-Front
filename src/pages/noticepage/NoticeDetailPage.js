@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useNavigate } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GetNotice } from "../../api/tf";
-
-import App from "../../App";
+import { useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
@@ -14,28 +13,15 @@ import Footer from "../../components/Footer/Footer";
 import DeleteButton from "../../components/NoticePage/DeleteButton";
 import ModifyButton from "../../components/NoticePage/ModifyButton";
 import Modal from "../../components/Modal/Modal";
+import { Pretendard } from "../../components/Text";
 
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
 
-function Update(e) {
-  window.location.href = "/update";
-}
 
 export function NoticeDetailPage() {
-  // const location = useLocation();
-  // const notice = location.state.notice;
-
   const [notice, setNotice] = useState({});
-  const [isTf, setIsTf] = useState(false);
-
   let { id } = useParams();
-  // const navigate = useNavigate(); 
 
+// 공지 상세 조회 api
   useEffect(()=>{
     GetNotice(id)
     .then(res => {
@@ -47,8 +33,13 @@ export function NoticeDetailPage() {
     });
   },[])
 
+// 유저 tf 여부
+const isTf = useAppSelector(state => state.user.isTf)
 
-
+// 수정 페이지 이동
+function Update(e) {
+  window.location.href = "/update";
+}
 
 // 모달
   const [modalOpen, setModalOpen] = useState(false);
@@ -85,12 +76,11 @@ export function NoticeDetailPage() {
         </NoticeContent>
         <Line style={{ marginBottom: "5%" }} />
       </Pretendard>
-      {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
+      {isTf ? 
       <ButtonBox>
         <DeleteButton onClick={openModal}>삭제</DeleteButton>
         <ModifyButton onClick={Update}>수정</ModifyButton>
-      </ButtonBox>
-      {/* ~ */}
+      </ButtonBox> : null}
       <Modal
         open={modalOpen}
         close={closeModal}

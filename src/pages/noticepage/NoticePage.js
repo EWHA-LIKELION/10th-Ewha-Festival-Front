@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { GetAllNotice } from "../../api/tf";
-
+import { useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
@@ -11,7 +11,6 @@ import { noticeData } from "../../_mock/noticeData";
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
 import Pagination from "../../components/NoticePage/Pagination";
-
 import { PyeongChang } from "../../components/Text";
 
 // image
@@ -19,31 +18,37 @@ import star3 from "../../images/stars/star3.svg";
 import write from "../../images/write.svg";
 
 export function NoticePage() {
-// 페이지네이션
-  const [limit, setLimit] = useState(5);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
+const [notices, setNotices] = useState([]);
 
-  const [notices, setNotices] = useState([]);
-
+// 공지 조회 api 
 useEffect(()=>{
   GetAllNotice()
   .then(res =>{
     console.log("모든 공지 조회 성공", res.data.data);
     setNotices(res.data.data);
+    console.log(isTf)
   })
   .catch(err => {
       console.log("모든 공지 조회 실패")
     })
 },[])
 
+// 유저 tf 여부
+const isTf = useAppSelector(state => state.user.isTf)
+
+// 공지 작성 페이지 이동
 function Write(e) {
   window.location.href = "/create";
 }
 
+// 페이지네이션
+const [limit, setLimit] = useState(5);
+const [page, setPage] = useState(1);
+const offset = (page - 1) * limit;
+
   return (
     <>
-      <TitleBar>
+      <TitleBar> 
         <span style={{ color: "var(--green1)" }}>공</span>
         <span style={{ color: "var(--green2)" }}>지</span>
         <span style={{ color: "var(--green3)" }}>사항</span>
@@ -61,12 +66,11 @@ function Write(e) {
           </PyeongChang>
           <img src={star3} />
         </SubTitle>
-        {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
-        <NoticeWrite onClick={Write}>
+        {isTf ? <NoticeWrite onClick={Write}>
           <p>공지 작성하기 </p>
           <img src={write} />
         </NoticeWrite>
-        {/* ~ */}
+        : null}
       </SubTitleBox>
       <Line />
       <div>
