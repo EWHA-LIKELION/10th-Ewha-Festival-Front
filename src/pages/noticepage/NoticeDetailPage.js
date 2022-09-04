@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useNavigate } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useHistory, useParams, useLocation } from "react-router-dom";
+import { GetNotice } from "../../api/tf";
+
 import App from "../../App";
 
 //_mock 더미데이터
@@ -25,9 +27,30 @@ function Update(e) {
 }
 
 export function NoticeDetailPage() {
-  const location = useLocation();
-  const notice = location.state.notice;
+  // const location = useLocation();
+  // const notice = location.state.notice;
 
+  const [notice, setNotice] = useState({});
+  const [isTf, setIsTf] = useState(false);
+
+  let { id } = useParams();
+  // const navigate = useNavigate(); 
+
+  useEffect(()=>{
+    GetNotice(id)
+    .then(res => {
+      console.log("공지 상세 조회 성공", res);
+      setNotice(res.data.data);
+    })
+    .catch(err => {
+      console.log("공지 상세 조회 실패", err);
+    });
+  },[])
+
+
+
+
+// 모달
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -50,11 +73,11 @@ export function NoticeDetailPage() {
         <Line />
         <NoticeInfo>
           <div style={{ display: "flex", float: "left" }}>
-            <p class="writer">{notice.writer}</p>
+            <p class="writer">TF 팀</p>
           </div>
           <div style={{ display: "flex", float: "right" }}>
-            <p class="date">{notice.date}</p>
-            <p class="time">{notice.time}</p>
+            <p class="date">{notice.created_at}</p>
+            {/* <p class="time">{notice.time}</p> */}
           </div>
         </NoticeInfo>
         <NoticeContent>
@@ -72,8 +95,8 @@ export function NoticeDetailPage() {
         open={modalOpen}
         close={closeModal}
         header="공지 삭제"
-        subtext="작성 취소된 댓글은 저장되지 않습니다."
-        maintext="공지 글 작성을 취소하시겠습니까?"
+        subtext="삭제 된 글은 다시 불러올 수 없습니다."
+        maintext="공지 글을 삭제하시겠습니까?"
       ></Modal>
       <Footer />
     </>

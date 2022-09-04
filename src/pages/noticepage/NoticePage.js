@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { GetAllNotice } from "../../api/tf";
+
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
@@ -10,26 +12,34 @@ import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
 import Pagination from "../../components/NoticePage/Pagination";
 
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
+import { PyeongChang } from "../../components/Text";
 
 // image
 import star3 from "../../images/stars/star3.svg";
 import write from "../../images/write.svg";
 
-function Write(e) {
-  window.location.href = "/create";
-}
-
 export function NoticePage() {
-  const [notices, setNotices] = useState(noticeData);
+// 페이지네이션
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
+
+  const [notices, setNotices] = useState([]);
+
+useEffect(()=>{
+  GetAllNotice()
+  .then(res =>{
+    console.log("모든 공지 조회 성공", res.data.data);
+    setNotices(res.data.data);
+  })
+  .catch(err => {
+      console.log("모든 공지 조회 실패")
+    })
+},[])
+
+function Write(e) {
+  window.location.href = "/create";
+}
 
   return (
     <>
@@ -53,13 +63,14 @@ export function NoticePage() {
         </SubTitle>
         {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
         <NoticeWrite onClick={Write}>
-          <p>공지 작성하기</p>
+          <p>공지 작성하기 </p>
           <img src={write} />
         </NoticeWrite>
         {/* ~ */}
       </SubTitleBox>
       <Line />
-      {notices.slice(offset, offset + limit).map(notice => {
+      <div>
+      {notices && notices.slice(offset, offset + limit).map(notice => {
         return (
           <>
             <Link
@@ -68,11 +79,10 @@ export function NoticePage() {
               style={{ textDecoration: "none" }}
             >
               <NoticeBox key={notice.id}>
-                <p class="title">{"[공지]" + " " + notice.title}</p>
+              <p class="title">{"[공지]" + " " + notice.title}</p>
                 <NoticeInfo>
-                  <p class="writer">{notice.writer}</p>
-                  <p class="date">{notice.date}</p>
-                  <p class="time">{notice.time}</p>
+                  <p class="writer">TF 팀</p>
+                  <p class="createdAt">{notice.created_at}</p>
                 </NoticeInfo>
               </NoticeBox>
             </Link>
@@ -80,6 +90,7 @@ export function NoticePage() {
           </>
         );
       })}
+      </div>
       <Pagination
         total={notices.length}
         limit={limit}
