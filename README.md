@@ -42,7 +42,7 @@
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/ydn0yw.png" width="80px"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/cSVQ1D.jpg" width="80px"/></td>
     </tr>
     <tr width="100%">
       <td  align="center"><p>메인 페이지</p><p>카테고리 페이지</p><p>검색 페이지</p><p>유저인증& 로그인유지</p></td>
@@ -51,7 +51,7 @@
      <td  align="center">부스 상세 페이지</td>
       <td  align="center">공지게시판 페이지</td>
       <td  align="center"><p>로그인&회원가입</p><p>만든이들페이지</p></td>
-      <td  align="center">미정</td>
+      <td  align="center">부스 및 메뉴 수정 페이지</td>
    </tr>
 </table>
 
