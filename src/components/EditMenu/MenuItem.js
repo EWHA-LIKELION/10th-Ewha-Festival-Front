@@ -120,6 +120,7 @@ const TextContainer = styled.div`
 `;
 
 const MenuName = styled.div`
+  margin-right: 8px;
   margin-bottom: 2px;
   font-weight: 500;
 `;
