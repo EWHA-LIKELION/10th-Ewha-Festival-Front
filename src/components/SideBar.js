@@ -27,6 +27,10 @@ const SideBar = (props) =>{
                     <img src={linkDeco}/>
                     {<Link to="/notice">공지사항</Link>}
                 </p>
+                <p style={{ marginRight: "22px" }}>
+                     <img src={linkDeco} />
+                    {<Link to="/category">부스 보러가기</Link>}
+                </p>
                 <p style={{marginRight:"32px"}}>
                     <img src={linkDeco}/>
                     <Link to="/trashbin">쓰레기통 위치</Link>
