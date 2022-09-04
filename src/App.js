@@ -27,6 +27,8 @@ import NoticeDetailPage from "./pages/noticepage/NoticeDetailPage";
 import LoginPage from "./pages/authpage/LoginPage";
 //쓰레기통 페이지
 import TrashPage from "./pages/trashbinpage/TrashPage";
+// 만든이들 페이지
+import MakersPage from "./pages/makerspage/MakersPage";
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
         <Route exact path="/register" element={<RegisterPage />} />
         {/* 쓰레기통 */}
         <Route exact path="/trashbin" element={<TrashPage />} />
+        {/* 만든이들 페이지 */}
+        <Route exact path="/makers" element={<MakersPage />} />
       </Routes>
     </BrowserRouter>
   );
