@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Allow: /your-javascript-url
+Allow: /your-css-url

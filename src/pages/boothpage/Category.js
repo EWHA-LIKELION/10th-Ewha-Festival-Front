@@ -115,7 +115,7 @@ const Category = () => {
   const Detail = (ref, event, id) => {
     if (ref.current && !ref.current.contains(event.target)) {
       console.log("페이지 이동");
-      //navigate(`/category/detail/${id}`);
+      navigate(`/category/detail/${id}`);
     }
   };
 
@@ -136,7 +136,7 @@ const Category = () => {
           <p style={{ color: "var(--green2)" }}>스&nbsp;</p>
           카테고리
         </PyeongChang_Peace>
-        <Link to="/">
+        <Link to="/search">
           <Search src={search} />
         </Link>
       </Navbar>
@@ -202,7 +202,7 @@ const Category = () => {
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name}</p>
-                <p className="info">{b.description}</p>
+                <p className="info">{b.description?.substr(0, 25)}</p>
               </BootInfo>
 
               {b.is_liked ? (
