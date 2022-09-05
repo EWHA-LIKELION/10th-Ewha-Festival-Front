@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, isStyledComponent } from "styled-components";
 import axios from 'axios';
 //images
 import title from "../../images/main/title.svg";
@@ -167,6 +167,10 @@ const RegisterPage = () => {
           </InputWrapper>
           <RegisterBtn type="submit">회원가입</RegisterBtn>
         </RegisterForm>
+        <GoLogin>
+          <p style={{marginRight:"7px"}}>이미 계정이 있나요?</p>
+          <Link to="/login">로그인 하기</Link>
+        </GoLogin>
       </RegisterWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
     </>
@@ -277,6 +281,18 @@ const RegisterBtn = styled.button`
   font-size: 16px;
   color: #fffef5;
 `;
+const GoLogin = styled.div`
+   margin-top: 26px;
+   display: flex;
+
+  font-weight: 400;
+  font-size: 12px;
+  color: #979797;
+  a {
+    color: #979797;
+    text-decoration-line: underline;
+  }
+`
 const Footer = styled.div`
   width: 100%;
   height: 59px;

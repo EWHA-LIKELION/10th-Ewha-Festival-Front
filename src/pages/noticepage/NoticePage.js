@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { GetAllNotice } from "../../api/tf";
+import { useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
@@ -9,27 +11,44 @@ import { noticeData } from "../../_mock/noticeData";
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
 import Pagination from "../../components/NoticePage/Pagination";
-
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
+import { PyeongChang } from "../../components/Text";
 
 // image
 import star3 from "../../images/stars/star3.svg";
 import write from "../../images/write.svg";
 
 export function NoticePage() {
-  const [notices, setNotices] = useState(noticeData);
-  const [limit, setLimit] = useState(5);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
+const [notices, setNotices] = useState([]);
+
+// 공지 조회 api 
+useEffect(()=>{
+  GetAllNotice()
+  .then(res =>{
+    console.log("모든 공지 조회 성공", res.data.data);
+    setNotices(res.data.data);
+    console.log(isTf)
+  })
+  .catch(err => {
+      console.log("모든 공지 조회 실패")
+    })
+},[])
+
+// 유저 tf 여부
+const isTf = useAppSelector(state => state.user.isTf)
+
+// 공지 작성 페이지 이동
+function Write(e) {
+  window.location.href = "/create";
+}
+
+// 페이지네이션
+const [limit, setLimit] = useState(5);
+const [page, setPage] = useState(1);
+const offset = (page - 1) * limit;
 
   return (
     <>
-      <TitleBar>
+      <TitleBar> 
         <span style={{ color: "var(--green1)" }}>공</span>
         <span style={{ color: "var(--green2)" }}>지</span>
         <span style={{ color: "var(--green3)" }}>사항</span>
@@ -47,15 +66,15 @@ export function NoticePage() {
           </PyeongChang>
           <img src={star3} />
         </SubTitle>
-        {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
-        <NoticeWrite>
-          <p>공지 작성하기</p>
+        {isTf ? <NoticeWrite onClick={Write}>
+          <p>공지 작성하기 </p>
           <img src={write} />
         </NoticeWrite>
-        {/* ~ */}
+        : null}
       </SubTitleBox>
       <Line />
-      {notices.slice(offset, offset + limit).map(notice => {
+      <div>
+      {notices && notices.slice(offset, offset + limit).map(notice => {
         return (
           <>
             <Link
@@ -64,11 +83,10 @@ export function NoticePage() {
               style={{ textDecoration: "none" }}
             >
               <NoticeBox key={notice.id}>
-                <p class="title">{notice.title}</p>
+              <p class="title">{"[공지]" + " " + notice.title}</p>
                 <NoticeInfo>
-                  <p class="writer">{notice.writer}</p>
-                  <p class="date">{notice.date}</p>
-                  <p class="time">{notice.time}</p>
+                  <p class="writer">TF 팀</p>
+                  <p class="createdAt">{notice.created_at}</p>
                 </NoticeInfo>
               </NoticeBox>
             </Link>
@@ -76,6 +94,7 @@ export function NoticePage() {
           </>
         );
       })}
+      </div>
       <Pagination
         total={notices.length}
         limit={limit}
@@ -129,6 +148,7 @@ const NoticeBox = styled.div`
     font-weight: 500;
     font-size: 14px;
     color: var(--black);
+    margin-bottom: 4px;
   }
 `;
 const NoticeInfo = styled.div`

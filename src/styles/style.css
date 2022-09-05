@@ -64,3 +64,11 @@
     format("woff");
   font-style: normal;
 }
+
+@font-face {
+  font-family: PyeongChangPeaceBold;
+  
+  src: local("PyeongChangPeaceBold"),
+    url("../styles/font/PyeongChangPeaceBold.woff2") format("woff2");
+}
+  
