@@ -1,20 +1,38 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+// import font
 import { Pretendard } from "../Text";
+
+// import image
 import emptycheck from "../../images/edit/emptycheck.svg";
 import fullcheck from "../../images/edit/fullcheck.svg";
-import axios from "axios";
 
+// import api component
+import { GetMenu } from "../../api/booth";
+import { http } from "../../api/http";
+
+// Menudata component
 const MenuData = ({ handleCheck, props, checked }) => {
+  let price = props.price;
+  let commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <>
-      <Wrapper id={props.id} onClick={() => handleCheck}>
-        <TextContainer id={props.id}>
+      <Wrapper key={props.id} id={props.id} onClick={() => handleCheck}>
+        <TextContainer
+          key={props.id}
+          id={props.id}
+          className={props.is_soldout ? "soldout" : "selling"}
+        >
           <Pretendard weight="500" size="14px">
-            <MenuName id={props.id}>{props.menu}</MenuName>
+            <MenuName key={props.id} id={props.id}>
+              {props.menu}
+            </MenuName>
           </Pretendard>
           <Pretendard weight="300" size="13px">
-            <MenuPrice id={props.id}>{props.price}원</MenuPrice>
+            <MenuPrice key={props.id} id={props.id}>
+              {commaPrice}원
+            </MenuPrice>
           </Pretendard>
         </TextContainer>
         {checked == props.id ? (
@@ -28,33 +46,41 @@ const MenuData = ({ handleCheck, props, checked }) => {
 };
 
 const MenuItem = props => {
+  // useState
   const [checked, setChecked] = useState(null);
   const [menus, setMenus] = useState([]);
+  const [id, setId] = useState(null);
 
-  const id = 1;
-
+  // checked menu id parent에 보내기
   const handleCheck = e => {
     setChecked(e.target.id);
     props.setItem(e.target.id);
   };
 
-  const getMenu = async () => {
-    const response = await axios
-      .get(`https://api.rewha2022.com/booths/${id}/menus/`)
+  // user account 불러오기
+  useEffect(() => {
+    http
+      .get("/accounts/")
       .then(response => {
+        setId(response.data.data.booth_id);
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  // booth id에 따라 메뉴 불러오기
+  useEffect(() => {
+    if (id !== null) {
+      GetMenu(id).then(response => {
         setMenus(response.data.data);
       });
-  };
-
-  useEffect(() => {
-    getMenu();
-  }, []);
+    }
+  }, [id]);
 
   return (
     <>
       {menus.map(props => (
         <>
-          <div onClick={handleCheck}>
+          <div key={props.id} onClick={handleCheck}>
             <MenuData
               key={props.id}
               props={props}
@@ -81,14 +107,10 @@ const Wrapper = styled.li`
   border-radius: 10px;
   margin-top: 10px;
   padding: 30px;
-`;
 
-const Image = styled.div`
-  width: 70px;
-  height: 70px;
-  border: none;
-  background-color: #eaeaea;
-  border-radius: 10px;
+  .soldout {
+    color: var(--gray2);
+  }
 `;
 
 const TextContainer = styled.div`
@@ -98,6 +120,7 @@ const TextContainer = styled.div`
 `;
 
 const MenuName = styled.div`
+  margin-right: 8px;
   margin-bottom: 2px;
   font-weight: 500;
 `;
