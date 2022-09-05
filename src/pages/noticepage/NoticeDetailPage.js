@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useNavigate } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useParams } from "react-router-dom";
-import { GetNotice } from "../../api/tf";
+import { DeleteNotice, GetNotice } from "../../api/tf";
 import { useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
@@ -25,7 +25,7 @@ export function NoticeDetailPage() {
   useEffect(()=>{
     GetNotice(id)
     .then(res => {
-      console.log("공지 상세 조회 성공", res);
+      console.log("공지 상세 조회 성공", res, id);
       setNotice(res.data.data);
     })
     .catch(err => {
@@ -40,6 +40,10 @@ const isTf = useAppSelector(state => state.user.isTf)
 function Update(e) {
   window.location.href = "/update";
 }
+// 공지 메인 페이지 이동
+function NoticeMain(e) {
+  window.location.href = "/notice"
+}
 
 // 모달
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,6 +51,18 @@ function Update(e) {
     setModalOpen(true);
   };
   const closeModal = () => {
+    setModalOpen(false);
+  };
+
+// 공지 삭제 api
+  const Delete = id => {
+    console.log(id, "공지 삭제")
+    DeleteNotice(id)
+      .then(res => {
+        console.log(res.data.data, "공지 삭제 성공");
+        NoticeMain()
+      })
+      .catch(err => console.log(err.data,data, "공지 삭제 실패"));
     setModalOpen(false);
   };
 
@@ -86,6 +102,7 @@ function Update(e) {
         header="공지 삭제"
         subtext="삭제 된 글은 다시 불러올 수 없습니다."
         maintext="공지 글을 삭제하시겠습니까?"
+        onClick={()=>Delete(id)}
       ></Modal>
       <Footer />
     </>
