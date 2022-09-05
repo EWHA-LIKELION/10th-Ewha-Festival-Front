@@ -12,33 +12,21 @@ import TitleBar from "../../components/TitleBar";
 // import api component
 import { GetBooth, PatchBooth } from "../../api/booth";
 import { http } from "../../api/http";
+import { useAppSelector } from "../../redux/store";
 
 const EditBoothPage = () => {
   // navigate
   const navigate = useNavigate();
 
-  // user의 부스 ID
-  const [id, setId] = useState(null);
-
-  // user account 불러오기
-  useEffect(() => {
-    http
-      .get("/accounts/")
-      .then(response => {
-        setId(response.data.data.booth_id);
-        console.log("[프로필 접근 성공] : ", response);
-      })
-      .catch(error => console.log(error));
-  }, []);
+  // boothId 불러오기
+  const boothId = useAppSelector(state => state.user.boothId);
 
   // 기존 부스 정보 불러오기
   useEffect(() => {
-    if (id !== null) {
-      getPrev(id);
-    }
-  }, [id]);
+      getPrev(boothId);
+  }, [boothId]);
 
-  const getPrev = () => {
+  const getPrev = (id) => {
     GetBooth(id).then(response => {
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
@@ -50,17 +38,9 @@ const EditBoothPage = () => {
   // 부스 정보 수정하기
   const onSubmit = () => {
     if (name !== "") {
-      PatchBooth(id, name, notice, description)
+      PatchBooth(boothId, name, notice, description)
         .then(
-          console.log(
-            "[부스 정보 수정 성공]\n\n" +
-              "부스이름: " +
-              name +
-              "\n부스공지: " +
-              notice +
-              "\n부스내용:" +
-              description,
-          ),
+          console.log("[부스 정보 수정 성공]\n\n","부스 이름: ", name, "\n부스 공지: ", notice, "\n부스 소개: ", description),
         )
         .catch(error => {
           console.log(error);
