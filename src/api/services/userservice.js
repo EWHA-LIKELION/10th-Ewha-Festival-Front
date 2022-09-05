@@ -24,6 +24,14 @@ const UserService = {
       password: password,
       nickname: name,
     }),
+
+  //좋아요한 부스
+  getLikes: token =>
+    axios.get("https://api.rewha2022.com/accounts/likes/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export default UserService;
