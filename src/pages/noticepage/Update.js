@@ -18,7 +18,8 @@ import Modal from "../../components/Modal/Modal";
 import leftarrow from "../../images/notice/leftarrow.png";
 // import { text } from "body-parser";
 
-const Create = (props) => {
+const Update = (props) => {
+    // 모달 컴포넌트
     const [modalOpen, setModalOpen] = useState(false);
 
     const openModal = () => {
@@ -28,6 +29,41 @@ const Create = (props) => {
         setModalOpen(false);
     };
 
+    const getNotice = async () => {
+        const response = await axios.get(`http://43.200.53.202/notices/${id}`);
+        console.log(response.data);
+        console.log(response.data.data.title);
+        console.log(response.data.data.content);
+    };
+    
+    const editNotice = async () => {
+    const response = await axios
+        .patch(`http://43.200.53.202/notices/${id}`, {
+        title: title,
+        content: content,
+        })
+        .then(console.log(response.data.json))
+        .catch(console.log("실패"));
+    };
+
+    const [title, setTitle] = useState("기존 제목");
+    const [content, setContent] = useState("기존 내용");
+
+    var id = 1;
+
+    const handleTitle = e => {
+    setTitle(e.target.value);
+    console.log(title);
+    };
+
+    const handleContent = e => {
+    setContent(e.target.value);
+    console.log(content);
+    };
+
+    const onSubmit = () => {
+    editNotice();
+    };
     return (
         <>
             <TopBar>
@@ -54,10 +90,17 @@ const Create = (props) => {
                     <Input
                     type='text' 
                     placeholder="제목을 작성하세요."
+                    value={title}
+                    onChange={handleTitle}
                     />
                 </Title>
                 <Content>
-                    <Textarea placeholder="내용을 작성하세요."></Textarea>
+                    <Textarea 
+                    placeholder="내용을 작성하세요."
+                    value={content}
+                    onChange={handleContent}
+                    type='text'
+                    ></Textarea>
                 </Content>
             </CreateSpace>
             <Upload>
@@ -81,7 +124,7 @@ const Create = (props) => {
     );
 };
 
-export default Create;
+export default Update;
 
 const TopBar = styled.div`
     display: flex;

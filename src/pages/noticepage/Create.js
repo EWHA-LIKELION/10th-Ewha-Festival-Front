@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import {
     PyeongChang_Peace,
@@ -7,18 +7,26 @@ import {
     Pretendard,
 } from "../../components/Text";
 // import { defaultMaxListeners } from "events";
+import { Route, useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 // components
 import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
+import NoticePage from "./NoticePage";
+import noticeData from "../../_mock/noticeData"
 
 // images
 import leftarrow from "../../images/notice/leftarrow.png";
+import { Value } from "sass";
+import GrayButton from "../../components/Modal/GrayButton";
+import GreenButton from "../../components/MainPage/GreenButton";
 // import { text } from "body-parser";
 
-const Create = (props) => {
+function Create() {
+    // 모달 컴포넌트
     const [modalOpen, setModalOpen] = useState(false);
 
     const openModal = () => {
@@ -28,60 +36,105 @@ const Create = (props) => {
         setModalOpen(false);
     };
 
-    return (
-        <>
-            <TopBar>
-                <img 
-                src={ leftarrow } 
-                height="17px"
-                />
-                <PyeongChang_Peace 
-                size="22px"
-                weight="700"
-                height="29px"
-                letter-spacing="0em"
+    // 글 직성
+
+    const navigate = useNavigate();
+    
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    
+    // const postNotice = () => {
+    //     axios.post(`http://43.200.53.202/notices/`,
+    //     title,
+    //     content
+    //     )
+    // }
+    const postNotice = async (e) => {
+        e.preventDefault();
+        // console.log(title);
+        // console.log(content);
+        // const response = await axios
+        fetch(`https://api.rewha2022.com/notices/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title,
+                content,
+            }),
+        })
+    };
+
+
+    var id = 1;
+
+        return (
+            <>
+                <TopBar>
+                    {/* <Route path='/notices' component={ NoticePage }> */}
+                        <img 
+                        src={ leftarrow } 
+                        height="17px"
+                        />
+                    {/* </Route> */}
+                    <PyeongChang_Peace 
+                    size="22px"
+                    weight="700"
+                    height="29px"
+                    letter-spacing="0em"
+                    >
+                        <span style={{color: "#00A428"}}>공</span>
+                        <span style={{color: "#007A28"}}>지 </span>
+                        <span style={{color: "##004628"}}>작성하기</span>
+                    </PyeongChang_Peace>
+                    <div color="#ffffff">
+        
+                    </div>
+                </TopBar>
+                <CreateSpace>
+                    <Title>
+                        <Input
+                        type='text' 
+                        placeholder="제목을 작성하세요."
+                        name="title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        ></Input>
+                    </Title>
+                    <Content>
+                        <Textarea 
+                        placeholder="내용을 작성하세요." 
+                        name="content"
+                        onChange={(e) => setContent(e.target.value)}
+                        type='text'
+                        >
+                        </Textarea>
+                    </Content>
+                </CreateSpace>
+                <Upload>
+                    <CancelStyle>
+                        <CancelButton onClick={openModal}>취소</CancelButton>
+                    </CancelStyle>
+                    <UploadStyle>
+                        <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
+                    </UploadStyle>
+                </Upload>
+                <Modal 
+                open={modalOpen} 
+                close={closeModal} 
+                header="공지 작성 취소"
+                subtext="작성 취소된 글은 저장되지 않습니다."
+                maintext="공지 글 작성을 취소하겠습니까?"
                 >
-                    <span style={{color: "#00A428"}}>공</span>
-                    <span style={{color: "#007A28"}}>지 </span>
-                    <span style={{color: "##004628"}}>작성하기</span>
-                </PyeongChang_Peace>
-                <div color="#ffffff">
+                </Modal>
+                <Footer></Footer>
+            </>
+        );
+    }
 
-                </div>
-            </TopBar>
-            <CreateSpace>
-                <Title>
-                    <Input
-                    type='text' 
-                    placeholder="제목을 작성하세요."
-                    />
-                </Title>
-                <Content>
-                    <Textarea placeholder="내용을 작성하세요."></Textarea>
-                </Content>
-            </CreateSpace>
-            <Upload>
-                <CancelStyle>
-                    <CancelButton onClick={openModal}>취소</CancelButton>
-                </CancelStyle>
-                <UploadStyle>
-                    <UploadButton htmlType="submit">등록</UploadButton>
-                </UploadStyle>
-            </Upload>
-            <Modal open={modalOpen} close={closeModal} header="공지 작성 취소">
-                <div className="warning">
-                    작성 취소된 글은 저장되지 않습니다.
-                </div>
-                <div className="asking">
-                    공지 글 작성을 취소하시겠습니까?
-                </div>
-            </Modal>
-            <Footer></Footer>
-        </>
-    );
-};
 
-export default Create;
+
+export default Create
 
 const TopBar = styled.div`
     display: flex;
@@ -174,4 +227,4 @@ const CancelStyle = styled.button`
     border: 0;
     outline: 0;
     background-color: transparent;
-`
+`;

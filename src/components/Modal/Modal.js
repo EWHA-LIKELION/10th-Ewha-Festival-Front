@@ -6,7 +6,7 @@ import GreenButton from "../Modal/GreenButton";
 import "./Modal.css";
 
 const Modal = props => {
-  const { isOne, open, close, header, subtext, maintext, onClick } = props;
+  const { isOne, open, close, header, subtext, maintext, onClick, back } = props;
   useEffect(() => {
     document.body.style.cssText = `
           position: fixed;
@@ -85,7 +85,7 @@ const Modal = props => {
                     </GrayButton>
                   </Cancel>
                   <Upload>
-                    <GreenButton onClick={onClick}>
+                    <GreenButton onClick={back}>
                       <Pretendard size="14px" weight="500" color="var(--white)">
                         확인
                       </Pretendard>
