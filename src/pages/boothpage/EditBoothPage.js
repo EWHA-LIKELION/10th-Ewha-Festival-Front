@@ -1,61 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // import font
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
+import { Pretendard } from "../../components/Text";
+
+// import component
+import Footer from "../../components/Footer/Footer";
+import TitleBar from "../../components/TitleBar";
+
+// import api component
+import { GetBooth, PatchBooth } from "../../api/booth";
+import { http } from "../../api/http";
+import { useAppSelector } from "../../redux/store";
 
 const EditBoothPage = () => {
-  const getInfo = async () => {
-    const response = await axios.get(`http://43.200.53.202/booths/${id}`);
-    console.log(response.data);
-    console.log(response.data.data.name);
-    console.log(response.data.data.notice);
-    console.log(response.data.data.description);
+  // navigate
+  const navigate = useNavigate();
+
+  // boothId 불러오기
+  const boothId = useAppSelector(state => state.user.boothId);
+
+  // 기존 부스 정보 불러오기
+  useEffect(() => {
+      getPrev(boothId);
+  }, [boothId]);
+
+  const getPrev = (id) => {
+    GetBooth(id).then(response => {
+      setName(response.data.data.name);
+      setNotice(response.data.data.notice);
+      setDescription(response.data.data.description);
+      console.log("[prevdata 조회 성공] : ", response.data.message);
+    });
   };
 
-  const editInfo = async () => {
-    const response = await axios
-      .patch(`http://43.200.53.202/booths/${id}`, {
-        name: name,
-        notice: notice,
-        description: description,
-      })
-      .then(console.log(response.data.json))
-      .catch(console.log("실패"));
+  // 부스 정보 수정하기
+  const onSubmit = () => {
+    if (name !== "") {
+      PatchBooth(boothId, name, notice, description)
+        .then(
+          console.log("[부스 정보 수정 성공]\n\n","부스 이름: ", name, "\n부스 공지: ", notice, "\n부스 소개: ", description),
+        )
+        .catch(error => {
+          console.log(error);
+        });
+
+      navigate(-1);
+    } else {
+      alert("부스 이름은 필수 정보입니다");
+    }
   };
 
-  const [name, setName] = useState("기존 이름");
-  const [notice, setNotice] = useState("기존 공지사항");
-  const [description, setDescription] = useState("기존 소개");
-
-  var id = 1;
+  // 각각의 상태 관리
+  const [name, setName] = useState("");
+  const [notice, setNotice] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleName = e => {
     setName(e.target.value);
-    // console.log(name);
   };
 
   const handleNotice = e => {
     setNotice(e.target.value);
-    // console.log(notice);
   };
 
   const handleDescription = e => {
     setDescription(e.target.value);
-    // console.log(description);
   };
 
-  const onSubmit = () => {
-    editInfo();
-  };
   return (
     <>
       <TitleBar>
@@ -103,8 +116,12 @@ const EditBoothPage = () => {
       </ContentWrapper>
       <Pretendard weight="600" size="18x">
         <ButtonWrapper>
-          <Button className="Cancel">취소</Button>
-          <Button className="Approve">완료</Button>
+          <Button onClick={() => navigate(-1)} className="Cancel">
+            취소
+          </Button>
+          <Button onClick={onSubmit} className="Approve">
+            완료
+          </Button>
         </ButtonWrapper>
       </Pretendard>
       <Footer />

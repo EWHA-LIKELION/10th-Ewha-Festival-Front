@@ -1,9 +1,11 @@
 import styled, { css } from "styled-components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
+
+import { useAppSelector } from "../../redux/store";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -12,19 +14,39 @@ import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
 
+import { GetLikes } from "../../api/user";
+
+
 const UserMy = () => {
   const [booths, setBooths] = useState(boothData);
-  const [likebooths, setLikebooths] = useState(4);
-
+  const [likebooths, setLikebooths] = useState(0);
+  const { nickname } = useAppSelector(state => state.user);
+  const { username } = useAppSelector(state => state.user);
+  const Detail = (id) => {
+    console.log("페이지 이동");
+      navigate(`/category/detail/${id}`);
+  };
+  useEffect(() => {
+    console.log(localStorage.getItem("token"));
+    GetLikes(localStorage.getItem("token").slice(1, -1))
+      .then(res => {
+        console.log("좋아요한 부스 조회 성공", res);
+        setBooths(res.data.data);
+        setLikebooths(res.data.data.length);
+      })
+      .catch(err => {
+        console.log("좋아요한 부스 조회 실패", err);
+      });
+  }, []);
   return (
     <Wrapper>
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구닉네임</Pretendard>
+          <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
-          <Pretendard>likelion</Pretendard>
+          <Pretendard>{username}</Pretendard>
         </p>
       </Userbox>
 
@@ -41,23 +63,17 @@ const UserMy = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-
         {booths.map(b => {
-          if (b.is_liked === true) {
             return (
-              <Booth key={b.id}>
-                <BoothImg />
+              <Booth key={b.id} onClick={event => Detail(b.id)}>
+                <BoothImg src={b.thumnail}/>
                 <BootInfo>
-                  <p className="num">{b.num}</p>
+                  <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.info}</p>
+                  <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
-              </Booth>
-            );
-          } else {
-            return;
-          }
+              </Booth>)
         })}
       </BoothBox>
       <Logout />
@@ -108,6 +124,7 @@ const BootInfo = styled.div`
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
+
   }
 `;
 

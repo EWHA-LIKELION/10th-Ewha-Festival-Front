@@ -13,11 +13,11 @@
 **Re:wha**가 제공하는 기능은 다음과 같습니다.
 1. 부스 위치 조회 기능
 2. 부스 이름, 메뉴 검색 기능
-3. TF팀 공지 게시판 
+3. TF팀 공지 게시판
 4. 관심 부스 좋아요 기능
 5. 댓글을 통한 커뮤니티 기능
 6. 교내 쓰레기통 위치 안내 기능
-7. 대동제 행사 안내 
+7. 대동제 행사 안내
 
 <br>
 <hr>
@@ -32,7 +32,7 @@
         <td  align="center"><a href= "https://github.com/miinjoo">김민주</a></td>
         <td  align="center"><a href= "https://github.com/529539">이서진</a></td>
         <td  align="center"><a href= "">허윤</a></td>
-        <td  align="center"><a href= "">이채원</a></td>
+        <td  align="center"><a href= "https://github.com/gchaewon">이채원</a></td>
         <td  align="center"><a href= "">정연주</a></td>
     </tr>
     <tr width="100%">
@@ -42,16 +42,16 @@
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/ydn0yw.png" width="80px"/></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/cSVQ1D.jpg" width="80px"/></td>
     </tr>
     <tr width="100%">
       <td  align="center"><p>메인 페이지</p><p>카테고리 페이지</p><p>검색 페이지</p><p>유저인증& 로그인유지</p></td>
       <td  align="center"><p>공지사항 작성</p><p>공지사항 수정</p></td>
-      <td  align="center">마이페이지(유저/관리자)</td>
+      <td  align="center"><p>마이페이지(유저/관리자)</p><p>쓰레기통 페이지</p></td>
      <td  align="center">부스 상세 페이지</td>
       <td  align="center">공지게시판 페이지</td>
-      <td  align="center"><p>로그인&회원가입</p><p>만든이들페이지</p></td>
-      <td  align="center">미정</td>
+      <td  align="center"><p>로그인&회원가입</p><p>만든이들페이지</p><p>사이드바<p></td>
+      <td  align="center">부스 및 메뉴 수정 페이지</td>
    </tr>
 </table>
 

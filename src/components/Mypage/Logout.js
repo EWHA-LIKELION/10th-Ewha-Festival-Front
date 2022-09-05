@@ -1,31 +1,42 @@
-import styled, { css } from "styled-components";
-import { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Pretendard } from "../../components/Text";
 
-import logout from "../../images/mypage/logout.svg";
+import { useNavigate } from "react-router-dom";
+import { persistor } from "../../index";
 
 const Logout = () => {
+  const navigate = useNavigate();
+
+  // 로그아웃 함수
+  const Logout = async () => {
+    navigate("/");
+    window.location.reload();
+    await persistor.purge();
+    window.localStorage.removeItem("token");
+    console.log("마이페이지 로그아웃");
+
+  };
+
   return (
-    <LogoutBox>
-      <p>
-        <Pretendard weight="600" size="16px" color="white">
-          로그아웃
-        </Pretendard>
-      </p>
-    </LogoutBox>
+    <>
+    <Pretendard color="var(--white)" weight="600" size="16px">
+      <Button onClick={Logout} >로그아웃</Button>
+    </Pretendard>
+    </>
+
   );
 };
 
 export default Logout;
 
-const LogoutBox = styled.div`
-  background-image: url(${logout});
-  background-repeat: none;
-  width: 335px;
-  height: 41px;
-  margin: 0 auto 60px;
-  p {
-    margin: 11px auto;
-    width: fit-content;
-  }
+const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  background: linear-gradient(90deg, #004628 0%, #107047 100%);
+  width:335px;
+  margin:30px auto;
 `;

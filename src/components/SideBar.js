@@ -1,49 +1,56 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+//fonts
+import { PyeongChang_Peace } from "./Text";
 //images
 import toplogo from "../images/main/toplogo.svg";
 import deleteIcon from "../images/delete.svg";
 import linkDeco from "../images/linkDeco.svg";
-//fonts
-import { PyeongChang_Peace } from "../components/Text";
 
 const SideBar = props => {
   const isLogin = localStorage.getItem("token");
-
   // 사이드바 안보이게 하는 함수
   const DeleteSideBar = () => {
     props.setSideBar(false);
   };
+
   return (
     <BarWrapper onClick={DeleteSideBar}>
+      <link
+        rel="preload"
+        href="../styles/font/PyeongChangPeaceBold.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin="anonymous"
+      />
       <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
       <TopLogo src={toplogo} />
       <LinkWrapper>
-        <PyeongChang_Peace>
+        <p>
           <img src={linkDeco} />
           {<Link to="/notice">공지사항</Link>}
-        </PyeongChang_Peace>
-        <PyeongChang_Peace style={{ marginRight: "22px" }}>
+        </p>
+        <p style={{ marginRight: "22px" }}>
           <img src={linkDeco} />
           {<Link to="/category">부스 보러가기</Link>}
-        </PyeongChang_Peace>
-        <PyeongChang_Peace style={{ marginRight: "32px" }}>
+        </p>
+        <p style={{ marginRight: "32px" }}>
           <img src={linkDeco} />
           <Link to="/trashbin">쓰레기통 위치</Link>
-        </PyeongChang_Peace>
-        <PyeongChang_Peace style={{ marginRight: "16px" }}>
+        </p>
+        <p style={{ marginRight: "16px" }}>
           <img src={linkDeco} />
           {isLogin ? (
             <Link to="/mypage">마이페이지</Link>
           ) : (
             <Link to="/login">마이페이지</Link>
           )}
-        </PyeongChang_Peace>
-        <PyeongChang_Peace>
+        </p>
+        <p>
           <img src={linkDeco} />
           <Link to="/makers">만든이들</Link>
-        </PyeongChang_Peace>
+        </p>
       </LinkWrapper>
       <Footer>Copyright ⓒ Likelion Ewha 10th. All Rights Reserved.</Footer>
     </BarWrapper>
@@ -99,6 +106,8 @@ const LinkWrapper = styled.div`
   justify-content: center;
   justify-content: space-between;
 
+  font-family: "PyeongChangPeace";
+
   p {
     width: 100px;
     height: 50px;
@@ -114,6 +123,7 @@ const LinkWrapper = styled.div`
     z-index: 2;
     margin-left: 20px;
     color: #004628;
+
     text-decoration: none;
   }
   a:hover {

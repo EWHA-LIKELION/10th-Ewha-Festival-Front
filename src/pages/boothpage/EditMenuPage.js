@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+// import font
+import { Pretendard } from "../../components/Text";
+
+// import component
 import MenuItem from "../../components/EditMenu/MenuItem";
 import Footer from "../../components/Footer/Footer";
-import { Pretendard } from "../../components/Text";
 import TitleBar from "../../components/TitleBar";
 
 const EditMenuPage = () => {
+  // navigate
+  const navigate = useNavigate();
+
+  // chilren에서 받아올 menu id 상태관리
   const [item, setItem] = useState(null);
 
+  // 수정하기 버튼 클릭시 detailpage로 navigate
   const onSubmit = () => {
-    navigate(`/editmenu/:${item}`);
+    if (item !== null) {
+      navigate(`/editmenu/${item}`);
+    } else {
+      alert("수정할 메뉴를 선택하세요");
+    }
   };
-
-  const navigate = useNavigate();
 
   return (
     <>

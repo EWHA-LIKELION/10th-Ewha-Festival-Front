@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import {
-    PyeongChang_Peace,
-    PyeongChang,
-    NanumSquare,
-    Pretendard,
+  PyeongChang_Peace,
+  PyeongChang,
+  NanumSquare,
+  Pretendard,
 } from "../../components/Text";
 // import { defaultMaxListeners } from "events";
 import { Route, useNavigate } from 'react-router-dom';
@@ -23,9 +23,10 @@ import leftarrow from "../../images/notice/leftarrow.png";
 import { Value } from "sass";
 import GrayButton from "../../components/Modal/GrayButton";
 import GreenButton from "../../components/MainPage/GreenButton";
+import { http } from "../../api/http";
 // import { text } from "body-parser";
 
-function Create() {
+const Create = () => {
     // 모달 컴포넌트
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -38,33 +39,65 @@ function Create() {
 
     // 글 직성
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     
-    // const postNotice = () => {
-    //     axios.post(`http://43.200.53.202/notices/`,
-    //     title,
-    //     content
-    //     )
-    // }
-    const postNotice = async (e) => {
-        e.preventDefault();
-        // console.log(title);
-        // console.log(content);
-        // const response = await axios
-        fetch(`https://api.rewha2022.com/notices/`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title,
-                content,
-            }),
-        })
-    };
+    
+    
+    // 여기부터
+    const submitNotice = useEffect(() => {
+        const postNotice = async(e) => {
+            const data = {
+                title: title,
+                body: content,
+            };
+            const headers = { 'Content-Type': 'application/json' };
+            try {
+                const response = await axios.post(
+                    'https://api.rewha2022.com/notices/',
+                    data
+                );
+                console.log(response.status);
+                console.log(response.data);
+                } catch (e) {
+                    console.log("something went wrong!",e);
+                }
+            }
+        postNotice();
+    }, []);
+    // 여기까지
+
+    // const postNotice = async (e) => {
+    //     let data = {
+    //         title: title,
+    //         content: content
+    //     }
+    //     axios
+    //     .post(url,  JSON.stringify(data), {
+    //       headers: {
+    //         "Content-Type": `application/json`,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     });
+        // e.preventDefault();
+        // // console.log(title);
+        // // console.log(content);
+    //     const response = await axios
+    //     fetch(`https://api.rewha2022.com/notices/`, {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             title,
+    //             content,
+    //         }), 
+    //     })
+    // };
 
 
     var id = 1;
@@ -116,7 +149,7 @@ function Create() {
                         <CancelButton onClick={openModal}>취소</CancelButton>
                     </CancelStyle>
                     <UploadStyle>
-                        <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
+                        <UploadButton type="submit" onClick={submitNotice}>등록</UploadButton>
                     </UploadStyle>
                 </Upload>
                 <Modal 
@@ -134,7 +167,7 @@ function Create() {
 
 
 
-export default Create
+export default Create;
 
 const TopBar = styled.div`
     display: flex;
@@ -142,7 +175,7 @@ const TopBar = styled.div`
     width: 100%;
     margin-top: 24px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid #eaeaea;
 `;
 
 // const BackButton = styled.img`
@@ -151,9 +184,9 @@ const TopBar = styled.div`
 // `
 
 const CreateSpace = styled.div`
-    width: 335px;
-    margin: 0 auto;
-    border-bottom: 1px solid #EAEAEA;
+  width: 335px;
+  margin: 0 auto;
+  border-bottom: 1px solid #eaeaea;
 `;
 
 const Title = styled.div`
@@ -195,24 +228,24 @@ const Textarea = styled.textarea`
         font-family: var(--pre-font);
         font-weight: 400;
         color: var(--gray2);
-    };
+    }
     width: 87%;
     margin: 0 auto;
     border: none;
     width: 307px;
     font-family: var(--pre-font);
     font-weight: 400;
-`
-    
+`;
+
 const Upload = styled.div`
     justify-content: flex-end;
     width: fit-content;
     margin-top: 16px;
     margin-bottom: 50px;
-    margin-left: 10px
+    margin-left: 10px;
     position: relative;
     display: flex;
-`
+`;
 
 const UploadStyle = styled.button`
     position: absolute;
@@ -220,11 +253,11 @@ const UploadStyle = styled.button`
     border: 0;
     outline: 0;
     background-color: transparent;
-`
+`;
 const CancelStyle = styled.button`
     position: absolute;
     left: 234px;
     border: 0;
     outline: 0;
     background-color: transparent;
-`;
+`
