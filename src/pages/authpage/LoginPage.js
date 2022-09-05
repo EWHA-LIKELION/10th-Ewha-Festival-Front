@@ -86,7 +86,7 @@ const LoginPage = () => {
         <GoSignup>
           <Link to="/register">회원가입</Link>
         </GoSignup>
-        <button onClick={Logout}>로그아웃</button>
+        {/* <button onClick={Logout}>로그아웃</button> */}
       </LoginWrapper>
       <Footer>Copyright ⓒ RE:WHA. All Rights Reserved.</Footer>
     </>
