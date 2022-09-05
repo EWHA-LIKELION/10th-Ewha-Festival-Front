@@ -26,9 +26,9 @@ const EditBoothPage = () => {
       .get("/accounts/")
       .then(response => {
         setId(response.data.data.booth_id);
-        console.log("[프로필 접근 성공] : " + response.data.message);
+        console.log("[프로필 접근 성공] : ", response);
       })
-      .catch(error => console.log("[프로필 접근 실패]" + error));
+      .catch(error => console.log(error));
   }, []);
 
   // 기존 부스 정보 불러오기
