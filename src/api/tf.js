@@ -18,3 +18,11 @@ export const GetNotice = async noticeId => {
   }
 };
 
+export const DeleteNotice = async (noticeId) => {
+  try {
+    const response = await  TfService.deleteNotice(noticeId);
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error, "공지 삭제 실패");
+  }
+};
