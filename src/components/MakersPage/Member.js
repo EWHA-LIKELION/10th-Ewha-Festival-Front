@@ -25,11 +25,11 @@ const MemberWrapper = styled.div`
      font-family: "Pretendard";
 `
 const Name = styled.div`
-    width: 37px;
+    width: 70px;
     color: var(--green3);
     font-size: 14px;
     font-weight: 700;
-    margin-right: 40px;
+    margin-right: 20px;
 `
 const Dept = styled.div`
     color: var(--green1);
