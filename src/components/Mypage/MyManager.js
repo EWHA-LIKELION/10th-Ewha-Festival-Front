@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
@@ -20,6 +20,7 @@ import edit2 from "../../images/mypage/edit2.png";
 import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
+  const wrapperRef = useRef(null);
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
@@ -31,6 +32,12 @@ const MyManager = () => {
   };
   const goEditMenu = () => {
     navigate("/editmenu");
+  };  
+
+  const Detail = (id) => {
+    console.log("페이지 이동");
+      navigate(`/category/detail/${id}`);
+
   };
 
   useEffect(() => {
@@ -83,7 +90,8 @@ const MyManager = () => {
 
         {booths.map(b => {
             return (
-              <Booth key={b.id}>
+              <Booth key={b.id} onClick={event => Detail(
+                b.id)}>
                 <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
