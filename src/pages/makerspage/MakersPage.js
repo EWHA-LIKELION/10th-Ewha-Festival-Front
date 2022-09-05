@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { useNavigate } from "react-router-dom";
 // images
 import background from "../../images/makerspage/background.png";
+import { ReactComponent as Backbutton } from "../../images/navbar/back.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import likelion from "../../images/makerspage/likelionLogo.svg";
 import diaIcon from "../../images/makerspage/diaIcon.svg";
@@ -9,7 +11,6 @@ import diaIcon from "../../images/makerspage/diaIcon.svg";
 import {
     PyeongChang_Peace,
     PyeongChang,
-    NanumSquare,
     Pretendard,
   } from "../../components/Text";
 //components 
@@ -18,10 +19,18 @@ import Team from "../../components/MakersPage/Team";
 import TfTeam from "../../components/MakersPage/TfTeam";
 
 const MakersPage = () => {
+    const navigate = useNavigate();
+
+    const handleBackButton = () => {
+        navigate(-1);
+      };
     return (
     <Wrapper>
         <Title>
             <div className="top1">
+                <ButtonWrapper>
+                        <Backbutton onClick={handleBackButton}></Backbutton>
+                </ButtonWrapper>
                 <TopLogo src={toplogo}/>
                 <PyeongChang_Peace>를 만든이들</PyeongChang_Peace>
             </div>
@@ -44,7 +53,7 @@ const MakersPage = () => {
                <img src={likelion}/>
                <p>X</p>
                <p>136주년 대동제 TF</p>
-            </PyeongChang>
+            </ PyeongChang>
         </Title>
         <LikelionTeam>
             <PyeongChang_Peace className="lionTitle">
@@ -87,6 +96,11 @@ const Wrapper = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
 `;
+const ButtonWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 48px;
+`;
 
 const Title = styled.div`
     height: 143px;
@@ -95,11 +109,11 @@ const Title = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 99px;
-
     div{
         display: flex;
     }
     .top1{
+        width: 335px;
         font-weight: 300;
         font-size: 20px;
         p{margin: 2px 0 0 7.05px;}
@@ -119,10 +133,13 @@ const Title = styled.div`
         justify-content: space-between;
         margin-top: 18.75px;
 
-        font-weight: 400;
+        font-weight: 300;
         font-size: 16px;
+        font-weight: 400;
     }
 `
+
+
 const TopLogo = styled.img`
     width: 138px;
     height: 33px;
