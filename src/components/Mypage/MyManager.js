@@ -14,8 +14,8 @@ import Navbar from "./Navbar";
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
-import edit1 from "../../images/mypage/edit1.svg";
-import edit2 from "../../images/mypage/edit2.svg";
+import edit1 from "../../images/mypage/edit1.png";
+import edit2 from "../../images/mypage/edit2.png";
 
 import { GetLikes } from "../../api/user";
 
