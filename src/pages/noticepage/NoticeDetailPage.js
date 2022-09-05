@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useNavigate } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { useHistory, useParams, useLocation } from "react-router-dom";
-import App from "../../App";
+import { useParams } from "react-router-dom";
+import { GetNotice } from "../../api/tf";
+import { useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
@@ -9,18 +10,45 @@ import { noticeData } from "../../_mock/noticeData";
 // components
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
-import GreenButton from "../../components/MainPage/GreenButton";
+import DeleteButton from "../../components/NoticePage/DeleteButton";
+import ModifyButton from "../../components/NoticePage/ModifyButton";
+import Modal from "../../components/Modal/Modal";
+import { Pretendard } from "../../components/Text";
 
-import {
-  PyeongChang_Peace,
-  PyeongChang,
-  NanumSquare,
-  Pretendard,
-} from "../../components/Text";
+
 
 export function NoticeDetailPage() {
-  const location = useLocation();
-  const notice = location.state.notice;
+  const [notice, setNotice] = useState({});
+  let { id } = useParams();
+
+// 공지 상세 조회 api
+  useEffect(()=>{
+    GetNotice(id)
+    .then(res => {
+      console.log("공지 상세 조회 성공", res);
+      setNotice(res.data.data);
+    })
+    .catch(err => {
+      console.log("공지 상세 조회 실패", err);
+    });
+  },[])
+
+// 유저 tf 여부
+const isTf = useAppSelector(state => state.user.isTf)
+
+// 수정 페이지 이동
+function Update(e) {
+  window.location.href = "/update";
+}
+
+// 모달
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -31,16 +59,15 @@ export function NoticeDetailPage() {
           <span style={{ color: "var(--green3)" }}>사항</span>
         </TitleBar>
         <NoticeTitle>
-          <p class="title">{notice.title}</p>
+          <p class="title">{"[공지]" + " " + notice.title}</p>
         </NoticeTitle>
         <Line />
         <NoticeInfo>
           <div style={{ display: "flex", float: "left" }}>
-            <p class="writer">{notice.writer}</p>
+            <p class="writer">TF 팀</p>
           </div>
           <div style={{ display: "flex", float: "right" }}>
-            <p class="date">{notice.date}</p>
-            <p class="time">{notice.time}</p>
+            <p class="createdAt">{notice.created_at}</p>
           </div>
         </NoticeInfo>
         <NoticeContent>
@@ -48,12 +75,18 @@ export function NoticeDetailPage() {
         </NoticeContent>
         <Line style={{ marginBottom: "5%" }} />
       </Pretendard>
-      {/* 권한에 따라 나타났다 없어졌다 하는 부분 ~ */}
+      {isTf ? 
       <ButtonBox>
-        <GrayBtn>삭제</GrayBtn>
-        <GreenBtn>수정</GreenBtn>
-      </ButtonBox>
-      {/* ~ */}
+        <DeleteButton onClick={openModal}>삭제</DeleteButton>
+        <ModifyButton onClick={Update}>수정</ModifyButton>
+      </ButtonBox> : null}
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        header="공지 삭제"
+        subtext="삭제 된 글은 다시 불러올 수 없습니다."
+        maintext="공지 글을 삭제하시겠습니까?"
+      ></Modal>
       <Footer />
     </>
   );
@@ -75,9 +108,6 @@ const NoticeInfo = styled.div`
   color: var(--gray2);
   font-weight: 300;
   font-size: 12px;
-  p {
-    margin-right: 10px;
-  }
 `;
 const NoticeContent = styled.div`
   margin: 0 10% 5%;
@@ -97,46 +127,6 @@ const Line = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   margin-bottom: 10%;
-`;
-const GrayBtn = styled.button`
-  margin-right: 3%;
-  box-sizing: border-box;
-  margin-left: auto;
-  color: var(--green3);
-  font-family: "Pretendard";
-  font-size: 14px;
-  padding: 10px 22px;
-  width: 56px;
-  height: 28px;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  background: var(--gray);
-`;
-const GreenBtn = styled.button`
-  margin-right: 7%;
-  color: var(--white);
-  font-family: "Pretendard";
-  font-size: 14px;
-  padding: 10px 22px;
-  width: 56px;
-  height: 28px;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  background: linear-gradient(
-    to right,
-    rgba(0, 70, 40, 1),
-    rgba(16, 112, 71, 1)
-  );
 `;
 
 export default NoticeDetailPage;
