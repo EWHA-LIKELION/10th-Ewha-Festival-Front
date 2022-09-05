@@ -139,7 +139,8 @@ const EditMenuDetailPage = () => {
           </Pretendard>
           <PriceWrapper>
             <InputPrice
-              type="number"
+              type="text"
+              pattern="\d*"
               value={menuPrice || ""}
               onChange={handleMenuPrice}
               style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
@@ -148,7 +149,9 @@ const EditMenuDetailPage = () => {
               <div>원</div>
             </Pretendard>
             <Soldout>
+              <Pretendard>
               <Text>sold out</Text>
+              </Pretendard>
               {isSoldout ? (
                 <Icon src={fullsoldout} onClick={onClickSoldOut} />
               ) : (
@@ -245,7 +248,7 @@ const ButtonWrapper = styled.div`
 
   .Cancel {
     font-family: "Pretendard-Regular";
-    color: "var(--green3)";
+    color: var(--green3);
   }
 
   .Approve {
