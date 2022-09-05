@@ -44,7 +44,7 @@ const MainPage = () => {
               setSideBar(true);
             }}
           />
-          <img src={toplogo} />
+          <TopLogo src={toplogo} />
           {isLogin ? (
             <Link to="/mypage">
               <img src={person} />
@@ -210,6 +210,10 @@ const MainPage = () => {
 
 export default MainPage;
 
+const TopLogo = styled.img`
+  height: 33px;
+  width: 138px;
+`;
 const Rewha = styled.img`
   margin-top: 21px;
 `;
@@ -278,6 +282,9 @@ const Beige = styled.div`
 
 const Title = styled.img`
   margin-top: 80px;
+
+  width: 268px;
+  height: 74px;
 `;
 
 const DayBack = styled.div`
