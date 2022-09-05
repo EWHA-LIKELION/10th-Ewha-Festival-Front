@@ -18,11 +18,12 @@ const MenuData = ({ handleCheck, props, checked }) => {
   let commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <>
-      <Wrapper key={props.id} id={props.id} onClick={() => handleCheck}>
+      <Wrapper key={props.id} id={props.id}>
         <TextContainer
           key={props.id}
           id={props.id}
           className={props.is_soldout ? "soldout" : "selling"}
+          
         >
           <Pretendard weight="500" size="14px">
             <MenuName key={props.id} id={props.id}>
@@ -30,7 +31,7 @@ const MenuData = ({ handleCheck, props, checked }) => {
             </MenuName>
           </Pretendard>
           <Pretendard weight="300" size="13px">
-            <MenuPrice key={props.id} id={props.id}>
+            <MenuPrice key={props.id} id={props.id} >
               {commaPrice}원
             </MenuPrice>
           </Pretendard>
@@ -80,9 +81,10 @@ const MenuItem = props => {
     <>
       {menus.map(props => (
         <>
-          <div key={props.id} onClick={handleCheck}>
+          <div key={props.id} id={props.id} onClick={handleCheck}>
             <MenuData
               key={props.id}
+              id={props.id}
               props={props}
               checked={checked}
               onClick={handleCheck}
@@ -125,7 +127,7 @@ const MenuName = styled.div`
   font-weight: 500;
 `;
 
-const MenuPrice = styled.span`
+const MenuPrice = styled.div`
   font-size: 13px;
   font-weight: 300;
 `;
