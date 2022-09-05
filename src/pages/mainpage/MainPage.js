@@ -44,7 +44,11 @@ const MainPage = () => {
               setSideBar(true);
             }}
           />
-          <object type="image/svg+xml" data={toplogo}>
+          <object
+            type="image/svg+xml"
+            data={toplogo}
+            style={{ height: "33px", width: "138px" }}
+          >
             <TopLogo src={toplogo} />
           </object>
 

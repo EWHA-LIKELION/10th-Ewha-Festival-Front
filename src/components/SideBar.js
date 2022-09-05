@@ -25,7 +25,11 @@ const SideBar = props => {
         crossorigin="anonymous"
       />
       <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
-      <TopLogo src={toplogo} />
+
+      <object type="image/svg+xml" data={toplogo} style={{ marginTop: "99px" }}>
+        <TopLogo src={toplogo} />
+      </object>
+
       <LinkWrapper>
         <p>
           <img src={linkDeco} />
