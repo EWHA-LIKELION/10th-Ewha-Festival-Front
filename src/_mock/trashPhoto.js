@@ -5,5 +5,5 @@ import student from "../images/trash/student.svg";
 
 // 정문사진
 
-export const trashPhoto = [null, student, life1, life2, posco];
+export const trashPhoto = [posco, student, life1, life1, null];
 

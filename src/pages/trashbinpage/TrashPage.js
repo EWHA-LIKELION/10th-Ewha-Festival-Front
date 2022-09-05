@@ -18,14 +18,12 @@ const TrashPage = () => {
   const [pickedId, setId]=useState(0);
 
 const selectPla=(id)=>{
-  console.log(id);
   setTrashs(
-    trashData.map(trash =>
+    trashs.map(trash =>
       id === trash.id
         ? {...trash, selected:true}
         : {...trash, selected:false},
     ),
-    console.log(trashData)
   );
 setTrashname(trashData[id-1].name);
 setTrashinfo(trashData[id-1].info);
@@ -50,7 +48,7 @@ setId(id);
       </Tbox>
       <MapBox>
       <Mapimg>
-      {trashData.map(trash => {
+      {trashs.map(trash => {
         if (trash.selected === true) {
         return (
           <Pin
@@ -58,7 +56,7 @@ setId(id);
             top={trash.top}
             left={trash.left}
             src={pinbtn}
-            onClick={() => selectPla(trash.id-1)}
+            onClick={() => selectPla(trash.id)}
             selected
           />
         );
@@ -77,7 +75,7 @@ setId(id);
       </Mapimg>
       </MapBox>
       <LocationBox>
-        <LocationImg src={trashPhoto[pickedId]}/>
+        <LocationImg src={trashPhoto[pickedId-1]}/>
         <LocationInfo>
           <p className="name">{trashname}</p>
           <p className="info">{trashinfo}</p>
