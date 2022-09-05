@@ -188,7 +188,10 @@ const MainPage = () => {
 
         <StarTitle title="About" margin="130px auto 23px auto" />
 
-        <img src={likelion} />
+        <object type="image/svg+xml" data={likelion}>
+          <img src={likelion} />
+        </object>
+
         <Pretendard
           style={{ textAlign: "center" }}
           weight="500"
