@@ -61,21 +61,16 @@ const UserMy = () => {
           </PyeongChang_Peace>
         </Titlebox>
         {booths.map(b => {
-          if (b.is_liked === true) {
             return (
               <Booth key={b.id}>
-                <BoothImg />
+                <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
                   <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
-              </Booth>
-            );
-          } else {
-            return;
-          }
+              </Booth>)
         })}
       </BoothBox>
       <Logout />
