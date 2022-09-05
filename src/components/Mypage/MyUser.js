@@ -22,7 +22,10 @@ const UserMy = () => {
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
   const { username } = useAppSelector(state => state.user);
-
+  const Detail = (id) => {
+    console.log("페이지 이동");
+      navigate(`/category/detail/${id}`);
+  };
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
@@ -62,7 +65,7 @@ const UserMy = () => {
         </Titlebox>
         {booths.map(b => {
             return (
-              <Booth key={b.id}>
+              <Booth key={b.id} onClick={event => Detail(b.id)}>
                 <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
