@@ -78,8 +78,8 @@ const MainPage = () => {
           margin="24px 0 0 0 "
           style={{ display: "flex" }}
         >
-          <p style={{ color: "var(--green)" }}>9.14</p>(수) ~
-          <p style={{ color: "var(--green)" }}>9.16</p>(금)
+          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~
+          <span style={{ color: "var(--green)" }}>9.16</span>(금)
         </NanumSquare>
 
         <Paper />
@@ -188,7 +188,7 @@ const MainPage = () => {
           margin="16px auto 0 auto"
         >
           이화여자대학교 웹 개발 동아리
-          <p style={{ color: "#007A28" }}>" 멋쟁이사자처럼 10기 "</p>에서
+          <span style={{ color: "#007A28" }}>" 멋쟁이사자처럼 10기 "</span>에서
           제공하는 2022년 대동제 홈페이지입니다!
         </Pretendard>
 
