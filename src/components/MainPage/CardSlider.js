@@ -6,6 +6,11 @@ import card2 from "../../images/main/slider/card2.svg";
 import card3 from "../../images/main/slider/card3.svg";
 import card4 from "../../images/main/slider/card4.svg";
 
+import test1 from "../../images/main/slider/test1.png";
+import test2 from "../../images/main/slider/test2.png";
+import test3 from "../../images/main/slider/test3.png";
+import test4 from "../../images/main/slider/test4.png";
+
 const CardSlider = () => {
   const elementLength = 5;
   const [count, setCount] = useState(1);
@@ -35,11 +40,11 @@ const CardSlider = () => {
     <ViewWindow>
       <Shadow />
       <Elements count={count}>
-        <Element name="1" src={card1} />
-        <Element name="1" src={card1} />
-        <Element name="2" src={card2} />
-        <Element name="3" src={card3} />
-        <Element name="4" src={card4} />
+        <Element name="1" src={test1} />
+        <Element name="1" src={test1} />
+        <Element name="2" src={test2} />
+        <Element name="3" src={test3} />
+        <Element name="4" src={test4} />
       </Elements>
     </ViewWindow>
   );

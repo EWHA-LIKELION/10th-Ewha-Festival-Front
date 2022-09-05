@@ -78,108 +78,10 @@ const ReduxTest = () => {
       <p>부스 : {isBooth.toString()}</p>
       <p>tf : {isTf.toString()}</p>
 
-      <Box className="box">
-        <div className="text">
-          <p>블라</p>
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-          <br />
-          <br />
-          <p>블라</p>
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <p>블라</p>
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-          <br />
-          <br />
-          <p>블라</p>
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-
-          <p>블라</p>
-        </div>
-      </Box>
+      
     </div>
   );
 };
 
 export default ReduxTest;
 
-const Box = styled.div`
-  height: 500px;
-  width: 100px;
-  border: solid 1px red;
-
-  overflow: hidden;
-`;

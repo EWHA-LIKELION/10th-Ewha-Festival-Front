@@ -6,19 +6,24 @@ import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { useNavigate } from "react-router-dom";
 
+import { useAppSelector } from "../../redux/store";
+
 import Logout from "./Logout";
 import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
-import edit1 from "../../images/mypage/edit1.png";
-import edit2 from "../../images/mypage/edit2.png";
+import edit1 from "../../images/mypage/edit1.svg";
+import edit2 from "../../images/mypage/edit2.svg";
+
+import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
-  const [likebooths, setLikebooths] = useState(4);
-
+  const [likebooths, setLikebooths] = useState(0);
+  const { nickname } = useAppSelector(state => state.user);
+  const { username } = useAppSelector(state => state.user);
   const navigate = useNavigate();
 
   const goEditbooth = () => {
@@ -28,23 +33,40 @@ const MyManager = () => {
     navigate("/editmenu");
   };
 
+  useEffect(() => {
+    console.log(localStorage.getItem("token"));
+    GetLikes(localStorage.getItem("token").slice(1, -1))
+      .then(res => {
+        console.log("좋아요한 부스 조회 성공", res);
+        setBooths(res.data.data);
+        setLikebooths(res.data.data.length);
+      })
+      .catch(err => {
+        console.log("좋아요한 부스 조회 실패", err);
+      });
+  }, []);
+
   return (
     <Wrapper>
       <Navbar />
       <Userbox>
         <p className="nickname">
-          <Pretendard>어쩌구 닉네임</Pretendard>
+          <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
-          <Pretendard>likelion</Pretendard>
+          <Pretendard>{username}</Pretendard>
         </p>
         <p className="manager">
-          <Pretendard>부스이름관리자</Pretendard>
+          <Pretendard>부스관리자</Pretendard>
         </p>
       </Userbox>
       <EditBooth>
-        <img src={edit1} onClick={goEditbooth}></img>
-        <img src={edit2} onClick={goEditMenu}></img>
+        <div id="edit1" onClick={goEditbooth}>
+          <Pretendard>내 부스 정보 수정</Pretendard>
+        </div>
+        <div id="edit2" onClick={goEditMenu}>
+          <Pretendard>메뉴 정보 수정</Pretendard>
+        </div>
       </EditBooth>
       <BoothBox>
         <Titlebox>
@@ -65,9 +87,9 @@ const MyManager = () => {
               <Booth key={b.id}>
                 <BoothImg />
                 <BootInfo>
-                  <p className="num">{b.num}</p>
+                  <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
-                  <p className="info">{b.info}</p>
+                  <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
               </Booth>
@@ -125,6 +147,7 @@ const BootInfo = styled.div`
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
+
   }
 `;
 
@@ -142,10 +165,8 @@ const BoothBox = styled.div`
   margin: 0 auto 50px auto;
   width: 335px;
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   padding-top: 26px;
 `;
 
@@ -199,11 +220,25 @@ const Userbox = styled.div`
 const EditBooth = styled.div`
   width: fit-content;
   margin: 0 auto;
-  img {
+  div {
     display: block;
-    margin-top: 12px;
+    margin: 12px auto 0;
+    width: 335px;
+    height: 43px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #004628;
+    padding-left: 50px;
+    padding-top: 12px;
   }
-  img:active {
+  #edit1 {
+    background-image: url(${edit1});
+  }
+  #edit2 {
+    background-image: url(${edit2});
+  }
+  div:active {
     box-shadow: inset 0px 2px 6px #bbc4c0;
     border-radius: 8px;
     cursor: pointer;

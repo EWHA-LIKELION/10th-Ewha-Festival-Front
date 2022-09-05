@@ -1,19 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
+import { useNavigate, useParams } from "react-router-dom";
+
+// import font
+import { Pretendard } from "../../components/Text";
+
+// import image
 import emptysoldout from "../../images/edit/emptysoldout.svg";
 import fullsoldout from "../../images/edit/fullsoldout.svg";
 
-import { Pretendard } from "../../components/Text";
-import { useNavigate } from "react-router-dom";
+// import component
+import Footer from "../../components/Footer/Footer";
+import TitleBar from "../../components/TitleBar";
+
+// import api component
+import { GetMenu, PatchMenu } from "../../api/booth";
+import { http } from "../../api/http";
 
 const EditMenuDetailPage = () => {
-  const [isSoldout, setIsSoldout] = useState(false);
-  const [menuName, setMenuName] = useState("기존 메뉴 이름");
-  const [menuPrice, setMenuPrice] = useState(3000);
-
+  // navigate
   const navigate = useNavigate();
+
+  // useParams로 menu id 받아오기
+  const { id } = useParams();
+
+  // useState
+  const [isSoldout, setIsSoldout] = useState(false);
+  const [menuName, setMenuName] = useState("");
+  const [menuPrice, setMenuPrice] = useState("");
+  const [boothId, setBoothId] = useState(null);
+  const [menu, setMenu] = useState([]);
+
+  // user account 불러오기
+  useEffect(() => {
+    http
+      .get("/accounts/")
+      .then(response => {
+        setBoothId(response.data.data.booth_id);
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  // prevdata 조회하기
+  useEffect(() => {
+    prevMenu();
+  }, [menu]);
+
+  // prevdata 함수
+  const prevMenu = () => {
+    if (menu !== null) {
+      console.log("[prevdata 조회 성공]");
+      setMenuName(menu.menu);
+      setMenuPrice(menu.price);
+      setIsSoldout(menu.is_soldout);
+    }
+  };
+
+  // booth id, menu id에 따라 menu 불러오기
+  useEffect(() => {
+    if (boothId !== null) {
+      GetMenu(boothId).then(response => {
+        console.log("[메뉴 불러오기]");
+        console.log(response.data.data.filter(isMenu)[0]);
+        setMenu(response.data.data.filter(isMenu)[0]);
+      });
+    }
+  }, [boothId]);
+
+  // filtering을 위한 boolean 함수
+  const isMenu = element => {
+    if (element.id == id) {
+      return true;
+    }
+  };
+
+  const onSubmit = () => {
+    if (menuName !== "" && menuPrice !== "") {
+      if (menuPrice >= 100000000) {
+        alert("가격은 1억 이하로만 설정할 수 있습니다.");
+      } else {
+        PatchMenu(boothId, id, menuName, menuPrice, isSoldout)
+          .then(
+            console.log(
+              "[메뉴 정보 수정 성공]\n" +
+                "메뉴이름: " +
+                menuName +
+                "\n메뉴가격: " +
+                menuPrice +
+                "\n품절여부:" +
+                isSoldout,
+            ),
+          )
+          .catch(error => {
+            console.log(error);
+          });
+
+        navigate(-1);
+      }
+    } else {
+      alert("메뉴 이름과 가격을 모두 입력해주세요");
+    }
+  };
 
   const onClickSoldOut = () => {
     setIsSoldout(!isSoldout);
@@ -41,7 +128,7 @@ const EditMenuDetailPage = () => {
           </Pretendard>
           <Input
             type="text"
-            value={menuName}
+            value={menuName || ""}
             onChange={handleMenuName}
             style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
           />
@@ -53,7 +140,7 @@ const EditMenuDetailPage = () => {
           <PriceWrapper>
             <InputPrice
               type="number"
-              value={menuPrice}
+              value={menuPrice || ""}
               onChange={handleMenuPrice}
               style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
             />
@@ -74,7 +161,9 @@ const EditMenuDetailPage = () => {
           <Button className="Cancel" onClick={() => navigate(-1)}>
             취소
           </Button>
-          <Button className="Approve">완료</Button>
+          <Button className="Approve" onClick={() => onSubmit()}>
+            완료
+          </Button>
         </ButtonWrapper>
       </ContentWrapper>
       <Footer />

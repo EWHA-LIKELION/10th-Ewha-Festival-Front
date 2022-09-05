@@ -3,12 +3,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 // components
 import CardSlider from "../../components/MainPage/CardSlider";
-import GreenButton from "../../components/MainPage/GreenButton";
+import NewButton from "../../components/MainPage/NewButton";
 import StarTitle from "../../components/MainPage/StarTitle";
 import Footer from "../../components/Footer/Footer";
 import TimeLine from "../../components/MainPage/TimeLine";
 import Stars from "../../components/MainPage/Stars";
 import SideBar from "../../components/SideBar";
+import Map from "../../components/MainPage/Map";
 import {
   PyeongChang_Peace,
   PyeongChang,
@@ -27,6 +28,7 @@ import likelion from "../../images/main/likelion.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import person from "../../images/main/person.svg";
 import hamburger from "../../images/main/hamburger.svg";
+import boothMap from "../../images/main/boothMap.png";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
@@ -115,14 +117,14 @@ const MainPage = () => {
         </div>
 
         <Link to="/notice" style={{ textDecoration: "none" }}>
-          <GreenButton margin="36px auto 59px auto">
+          <NewButton margin="36px auto 59px auto">
             TF팀 공지 보러가기
-          </GreenButton>
+          </NewButton>
         </Link>
 
-        <Map src={map} />
+        <Map/>
         <Link to="/category" style={{ textDecoration: "none" }}>
-          <GreenButton margin="32px auto 0 auto">부스 보러가기</GreenButton>
+          <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
         </Link>
 
         <StarTitle margin="132px auto 0 auto" title="일정 소개" />
@@ -198,7 +200,7 @@ const MainPage = () => {
           href="https://www.instagram.com/likelion_ewha/"
           style={{ textDecoration: "none" }}
         >
-          <GreenButton margin="24px auto 203px auto">멋사 구경하기</GreenButton>
+          <NewButton margin="24px auto 203px auto">멋사 구경하기</NewButton>
         </a>
 
         <br />
@@ -220,10 +222,7 @@ const TopBar = styled.div`
   width: 100%;
 `;
 
-const Map = styled.img`
-  width: 297px;
-  height: 300px;
-`;
+
 
 const Wrapper = styled.div`
   //border: 1px red solid;
