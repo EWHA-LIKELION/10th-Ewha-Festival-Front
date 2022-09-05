@@ -29,7 +29,7 @@ const MemberWrapper = styled.div`
     font-family: 'Pretendard';
 `
 const Name = styled.div`
-    width: 37px;
+    width: 60px;
     color: var(--green3);
     font-size: 14px;
     font-weight: 700;

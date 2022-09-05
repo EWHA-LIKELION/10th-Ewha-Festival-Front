@@ -78,7 +78,7 @@ const MakersPage = () => {
 export default MakersPage;
 
 const Wrapper = styled.div`
-    height: 4121px;
+    height: 3941px;
     display: flex;
     flex-direction: column;
     align-items: center;
