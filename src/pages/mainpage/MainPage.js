@@ -44,7 +44,10 @@ const MainPage = () => {
               setSideBar(true);
             }}
           />
-          <TopLogo src={toplogo} />
+          <object type="image/svg+xml" data={toplogo}>
+            <TopLogo src={toplogo} />
+          </object>
+
           {isLogin ? (
             <Link to="/mypage">
               <img src={person} />
