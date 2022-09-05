@@ -19,7 +19,7 @@ export const PyeongChang_Peace = styled.p`
 `;
 
 export const NanumSquare = styled.p`
-  font-family: "NanumSquare";
+  font-family: "NanumSquare", sans-serif;
   font-weight: ${({ weight }) => weight};
   line-height: ${({ height }) => height};
   font-size: ${({ size }) => size};
@@ -28,7 +28,7 @@ export const NanumSquare = styled.p`
 `;
 
 export const Pretendard = styled.p`
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-weight: ${({ weight }) => weight};
   font-size: ${({ size }) => size};
   color: ${({ color }) => color};
