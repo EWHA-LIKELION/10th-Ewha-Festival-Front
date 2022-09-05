@@ -26,9 +26,9 @@ const EditBoothPage = () => {
       .get("/accounts/")
       .then(response => {
         setId(response.data.data.booth_id);
-        console.log("[프로필 접근 성공] : " + response.data.message);
+        console.log("[프로필 접근 성공] : " , response.data.message);
       })
-      .catch(error => console.log("[프로필 접근 실패]" + error));
+      .catch(error => console.log("[프로필 접근 실패]" , error));
   }, []);
 
   // 기존 부스 정보 불러오기
@@ -43,7 +43,7 @@ const EditBoothPage = () => {
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
-      console.log("[prevdata 조회 성공] : " + response.data.message);
+      console.log("[prevdata 조회 성공] : ", response.data.message);
     });
   };
 
