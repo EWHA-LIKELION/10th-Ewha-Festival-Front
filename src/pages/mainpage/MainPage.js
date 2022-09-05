@@ -23,12 +23,10 @@ import paper from "../../images/main/paper.svg";
 import title from "../../images/main/title.svg";
 import day from "../../images/main/day.svg";
 import circle from "../../images/main/circle.svg";
-import map from "../../images/map.svg";
 import likelion from "../../images/main/likelion.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import person from "../../images/main/person.svg";
 import hamburger from "../../images/main/hamburger.svg";
-import boothMap from "../../images/main/boothMap.png";
 
 const MainPage = () => {
   const isLogin = localStorage.getItem("token");
@@ -80,8 +78,8 @@ const MainPage = () => {
           margin="24px 0 0 0 "
           style={{ display: "flex" }}
         >
-          <p style={{ color: "var(--green)" }}>9.14</p>(수) ~
-          <p style={{ color: "var(--green)" }}>9.16</p>(금)
+          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~
+          <span style={{ color: "var(--green)" }}>9.16</span>(금)
         </NanumSquare>
 
         <Paper />
@@ -117,12 +115,10 @@ const MainPage = () => {
         </div>
 
         <Link to="/notice" style={{ textDecoration: "none" }}>
-          <NewButton margin="36px auto 59px auto">
-            TF팀 공지 보러가기
-          </NewButton>
+          <NewButton margin="36px auto 59px auto">TF팀 공지 보러가기</NewButton>
         </Link>
 
-        <Map/>
+        <Map />
         <Link to="/category" style={{ textDecoration: "none" }}>
           <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
         </Link>
@@ -192,8 +188,10 @@ const MainPage = () => {
           margin="16px auto 0 auto"
         >
           이화여자대학교 웹 개발 동아리
-          <p style={{ color: "#007A28" }}>" 멋쟁이사자처럼 10기 "</p>에서
-          제공하는 2022년 대동제 홈페이지입니다!
+          <span style={{ color: "#007A28", display: "block" }}>
+            " 멋쟁이사자처럼 10기 "
+          </span>
+          에서 제공하는 2022년 대동제 홈페이지입니다!
         </Pretendard>
 
         <a
@@ -221,8 +219,6 @@ const TopBar = styled.div`
   justify-content: space-around;
   width: 100%;
 `;
-
-
 
 const Wrapper = styled.div`
   //border: 1px red solid;

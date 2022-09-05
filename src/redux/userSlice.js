@@ -9,6 +9,7 @@ const initialState = {
   username: "", // 아이디
   isBooth: "", // 부스 여부
   isTf: "", // tf 여부
+  boothId: "", // 소유한 부스 아이디
 };
 
 export const userSlice = createSlice({
@@ -21,6 +22,7 @@ export const userSlice = createSlice({
       state.nickname = initialState.nickname;
       state.isBooth = initialState.isBooth;
       state.isTf = initialState.isTf;
+      state.boothId = initialState.boothId;
     },
     setUser: (state, action) => {
       state.username = action.payload.username;
@@ -28,6 +30,7 @@ export const userSlice = createSlice({
       state.nickname = action.payload.nickname;
       state.isBooth = action.payload.is_booth;
       state.isTf = action.payload.is_tf;
+      state.boothId = action.payload.booth_id;
     },
   },
   extraReducers: builder => {

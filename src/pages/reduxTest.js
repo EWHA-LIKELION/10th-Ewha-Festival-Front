@@ -7,7 +7,7 @@ import axios from "axios";
 
 const ReduxTest = () => {
   const dispatch = useAppDispatch();
-  const { username, id, nickname, isBooth, isTf } = useAppSelector(
+  const { username, id, nickname, isBooth, isTf, boothId } = useAppSelector(
     state => state.user,
   );
 
@@ -69,6 +69,7 @@ const ReduxTest = () => {
       <button onClick={() => Login()}>로그인 </button>
       <button onClick={() => Profile()}>프로필 조회 </button>
       <button onClick={() => Regi()}>회원가입 </button>
+
       <hr />
       <button onClick={async () => Logout()}>로그아웃</button>
       <p>id : {id}</p>
@@ -78,10 +79,9 @@ const ReduxTest = () => {
       <p>부스 : {isBooth.toString()}</p>
       <p>tf : {isTf.toString()}</p>
 
-      
+      <p>부스 아이디 : {boothId?.toString()}</p>
     </div>
   );
 };
 
 export default ReduxTest;
-

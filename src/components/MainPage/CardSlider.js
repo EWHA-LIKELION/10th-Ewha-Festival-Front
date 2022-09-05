@@ -11,6 +11,8 @@ import test2 from "../../images/main/slider/test2.png";
 import test3 from "../../images/main/slider/test3.png";
 import test4 from "../../images/main/slider/test4.png";
 
+import text from "../../images/main/slider/text.svg";
+
 const CardSlider = () => {
   const elementLength = 5;
   const [count, setCount] = useState(1);
@@ -40,11 +42,26 @@ const CardSlider = () => {
     <ViewWindow>
       <Shadow />
       <Elements count={count}>
-        <Element name="1" src={test1} />
-        <Element name="1" src={test1} />
-        <Element name="2" src={test2} />
-        <Element name="3" src={test3} />
-        <Element name="4" src={test4} />
+        <Element name="1">
+          <Img src={test1} />
+          <Text src={text} />
+        </Element>
+        <Element name="1">
+          <Img src={test1} />
+          <Text src={text} />
+        </Element>
+        <Element name="2">
+          <Img src={test2} />
+          <Text src={text} />
+        </Element>
+        <Element name="3">
+          <Img src={test3} />
+          <Text src={text} />
+        </Element>
+        <Element name="4">
+          <Img src={test4} />
+          <Text src={text} />
+        </Element>
       </Elements>
     </ViewWindow>
   );
@@ -93,9 +110,19 @@ const Elements = styled.div`
 
   transition: all 1000ms ease 0s;
 `;
-const Element = styled.img`
+const Element = styled.div`
+  position: relative;
   width: 221px;
   height: 362px;
+`;
 
-  background: ${props => "#" + props.color};
+const Img = styled.img`
+  width: 221px;
+  height: 362px;
+`;
+
+const Text = styled.img`
+  position: absolute;
+  top: 70px;
+  left: 70px;
 `;
