@@ -282,6 +282,9 @@ const Beige = styled.div`
 
 const Title = styled.img`
   margin-top: 80px;
+
+  width: 268px;
+  height: 74px;
 `;
 
 const DayBack = styled.div`
