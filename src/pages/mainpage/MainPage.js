@@ -188,8 +188,10 @@ const MainPage = () => {
           margin="16px auto 0 auto"
         >
           이화여자대학교 웹 개발 동아리
-          <span style={{ color: "#007A28" }}>" 멋쟁이사자처럼 10기 "</span>에서
-          제공하는 2022년 대동제 홈페이지입니다!
+          <span style={{ color: "#007A28", display: "block" }}>
+            " 멋쟁이사자처럼 10기 "
+          </span>
+          에서 제공하는 2022년 대동제 홈페이지입니다!
         </Pretendard>
 
         <a
