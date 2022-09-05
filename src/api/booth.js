@@ -78,7 +78,9 @@ export const GetLikes = async boothId => {
     const response = await BoothService.getLikes();
     return Promise.resolve(response);
   } catch (error) {
-    return Promise.reject(error, "좋아요한 부스 조회 실패");
+    return Promise.reject(error, "좋아요한 부스 조회 실패")
+  }
+  };
 
 export const PatchBooth = async (boothId, name, notice, description) => {
   try {
