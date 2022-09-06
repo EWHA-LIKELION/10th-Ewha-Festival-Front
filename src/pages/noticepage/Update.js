@@ -16,6 +16,8 @@ import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
 import http from "../../api/http";
+import TfService from "../../api/services/tfservice";
+import { noticeData } from "../../_mock/noticeData";
 
 
 const Update = () => {
@@ -29,34 +31,37 @@ const Update = () => {
     setModalOpen(false);
   };
 
-  // 공지 메인 페이지 이동
-  function NoticeMain(e) {
-    window.location.href = "/notice/"
-  }
-
+  const [notice, setNotice] = useState({});
   // 기존 공지사항 불러오기
+    useEffect(() => {
+      getNotice(id)
+      .then(res => {
+        setNotice(res.data.data);
+      })
+      .catch(error => console.log(error));
+    })
   
-    const getNotice = async () => {
-      const response = await axios.get(`https://api.rewha2022.com/notices/{$id}`);
-      console.log(response.data);
-      console.log(response.data.data.title);
-      console.log(response.data.data.content);
-    };
+  // 공지사항 수정
+  useEffect(() => {
+    putNotice()
+    .then(res => {
+      
+    })
+  })
+    
     
     const editNotice = async () => {
       const response = await axios
-          .patch(`https://api.rewha2022.com/notices/{$id}`, {
-          title: title,
-          content: content,
-          })
-          .then(console.log(response.data.json))
-          .catch(console.log("실패"));
+      .put(`https://api.rewha2022.com/notices/{$id}`, {
+        title: title,
+        content: content,
+      })
+      .then(console.log(response.data.json))
+      .catch(console.log("실패"));
     };
-
+    
     const [title, setTitle] = useState({});
     const [content, setContent] = useState({});
-
-    var id = 1;
 
     const handleTitle = e => {
     setTitle(e.target.value);
