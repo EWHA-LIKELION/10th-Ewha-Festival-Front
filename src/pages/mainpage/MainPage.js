@@ -44,7 +44,14 @@ const MainPage = () => {
               setSideBar(true);
             }}
           />
-          <TopLogo src={toplogo} />
+          <object
+            type="image/svg+xml"
+            data={toplogo}
+            style={{ height: "33px", width: "138px" }}
+          >
+            <TopLogo src={toplogo} />
+          </object>
+
           {isLogin ? (
             <Link to="/mypage">
               <img src={person} />
@@ -86,7 +93,10 @@ const MainPage = () => {
       </GrayBackground>
 
       <Beige>
-        <Title src={title} />
+        <object type="image/svg+xml" data={title} style={{ marginTop: "80px" }}>
+          <Title src={title} />
+        </object>
+
         <div
           style={{
             width: "268px",
@@ -178,7 +188,10 @@ const MainPage = () => {
 
         <StarTitle title="About" margin="130px auto 23px auto" />
 
-        <img src={likelion} />
+        <object type="image/svg+xml" data={likelion}>
+          <img src={likelion} />
+        </object>
+
         <Pretendard
           style={{ textAlign: "center" }}
           weight="500"

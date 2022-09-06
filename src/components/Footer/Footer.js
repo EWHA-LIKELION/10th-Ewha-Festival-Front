@@ -38,7 +38,9 @@ const Footer = () => {
           href="https://www.instagram.com/likelion_ewha/"
           style={{ textDecoration: "none" }}
         >
-          <img src={graylikelion} />
+          <object type="image/svg+xml" data={graylikelion}>
+            <img src={graylikelion} />
+          </object>
         </a>
         <a
           href="https://github.com/EWHA-LIKELION"

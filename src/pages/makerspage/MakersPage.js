@@ -81,20 +81,20 @@ const MakersPage = () => {
         </TF_Team>
         <Footer/>
     </Wrapper>
-    )
-}
+  );
+};
 
 export default MakersPage;
 
 const Wrapper = styled.div`
-    height: 3941px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  height: 3941px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    background-image: url(${background});
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const ButtonWrapper = styled.div`
     display: flex;
@@ -103,7 +103,24 @@ const ButtonWrapper = styled.div`
 `;
 
 const Title = styled.div`
-    height: 143px;
+  height: 143px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 99px;
+
+  div {
+    display: flex;
+  }
+  .top1 {
+    font-weight: 300;
+    font-size: 20px;
+    p {
+      margin: 2px 0 0 7.05px;
+    }
+  }
+  .top2 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,48 +155,46 @@ const Title = styled.div`
         font-weight: 400;
     }
 `
-
-
 const TopLogo = styled.img`
-    width: 138px;
-    height: 33px;
-`
+  width: 138px;
+  height: 33px;
+`;
 const LikelionTeam = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    .lionTitle{
-        width: 100%;
-        margin-top: 32.25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-        display: flex;
-        font-weight: 300;
-        font-size: 14px;
-    }
-    .line1{
-        width: 335px;
-        height: 0.3px;
-        background: var(--black);
-    }
-`
+  .lionTitle {
+    width: 100%;
+    margin-top: 32.25px;
+
+    display: flex;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  .line1 {
+    width: 335px;
+    height: 0.3px;
+    background: var(--black);
+  }
+`;
 const TF_Team = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+
+  .tfTitle {
+    width: 100%;
+    margin-top: 32.25px;
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 50px;
-
-    .tfTitle{
-        width: 100%;
-        margin-top: 32.25px;
-
-        display: flex;
-        font-weight: 300;
-        font-size: 14px;
-    }
-    .line1{
-        width: 335px;
-        height: 0.3px;
-        background: var(--black);
-    }
-`
+    font-weight: 300;
+    font-size: 14px;
+  }
+  .line1 {
+    width: 335px;
+    height: 0.3px;
+    background: var(--black);
+  }
+`;
