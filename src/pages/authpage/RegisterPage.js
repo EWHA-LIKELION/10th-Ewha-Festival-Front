@@ -86,11 +86,11 @@ const RegisterPage = () => {
       id !== " " &&
       password !== "" &&
       name !== "" &&
-      secreteWord === "비밀단어"
+      secreteWord === "솹긱옴뉴"
     )
       return 1;
     else {
-      if (secreteWord !== "비밀단어") return 2;
+      if (secreteWord !== "솹긱옴뉴") return 2;
       else return 3;
     }
   };
@@ -114,7 +114,9 @@ const RegisterPage = () => {
               />
             </IdWrapper>
             <PwWrapper>
-              <img src={lockIcon} />
+              <object type="image/svg+xml" data={lockIcon} className="lockIcon">
+                <img src={lockIcon} />
+              </object>
               <input
                 value={password}
                 className="PW"
@@ -125,7 +127,9 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <PwWrapper>
-              <img src={lockIcon} />
+              <object type="image/svg+xml" data={lockIcon} className="lockIcon">
+                <img src={lockIcon} />
+              </object>
               <input
                 value={password2}
                 className="PW2"
@@ -143,7 +147,9 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <NameWrapper>
-              <img src={flowerIcon} />
+              <object type="image/svg+xml" data={flowerIcon} className="flowerIcon">
+                <img src={flowerIcon} />
+              </object>
               <input
                 value={name}
                 placeholder="닉네임"
@@ -151,7 +157,9 @@ const RegisterPage = () => {
               />
             </NameWrapper>
             <SecreteWrapper>
-              <img src={keyIcon} />
+              <object type="image/svg+xml" data={keyIcon} className="keyIcon">
+                <img src={keyIcon} />
+              </object>
               <input
                 value={secreteWord}
                 placeholder="비밀단어"
@@ -233,7 +241,7 @@ const PwWrapper = styled.div`
   input {
     margin-top: 16px;
   }
-  img {
+  .lockIcon{
     width: 18px;
     position: absolute;
     z-index: 2;
@@ -252,7 +260,7 @@ const NameWrapper = styled.div`
   input {
     width: 294px;
   }
-  img {
+  .flowerIcon{
     width: 18px;
     position: absolute;
     z-index: 2;
@@ -265,7 +273,7 @@ const SecreteWrapper = styled.div`
   input {
     width: 262px;
   }
-  img {
+  .keyIcon{
     width: 18px;
     position: absolute;
     z-index: 2;
