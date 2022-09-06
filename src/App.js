@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthRoute from "./AuthRoute";
 // 메인
 import MainPage from "./pages/mainpage/MainPage";
 // 부스
@@ -53,9 +54,9 @@ function App() {
           element={<BoothDetailPage />}
         />
         {/* 수정 */}
-        <Route exact path="/editbooth" element={<EditBoothPage />} />
-        <Route exact path="/editmenu" element={<EditMenuPage />} />
-        <Route path="/editmenu/:id" element={<EditMenuDetailPage />} />
+        <Route exact path="/editbooth" element={<AuthRoute component={<EditBoothPage/>}/>} />
+        <Route exact path="/editmenu" element={<AuthRoute component={<EditMenuPage />}/>} />
+        <Route exact path="/editmenu/:id" element={<AuthRoute component={<EditMenuDetailPage />}/>}/>
         {/* {공지 게시판} */}
         <Route exact path="/notice" element={<NoticePage />} />
         {/* 공지 상세 보기 페이지 */}
