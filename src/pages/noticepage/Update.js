@@ -6,7 +6,7 @@ import {
   NanumSquare,
   Pretendard,
 } from "../../components/Text";
-// import { defaultMaxListeners } from "events";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // components
@@ -20,6 +20,7 @@ import TfService from "../../api/services/tfservice";
 import { noticeData } from "../../_mock/noticeData";
 
 
+
 const Update = () => {
     // 모달 컴포넌트
     const [modalOpen, setModalOpen] = useState(false);
@@ -29,6 +30,13 @@ const Update = () => {
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  // 모달 취소 버튼 누를 시 이동 
+  const navigate = useNavigate();
+
+  const handleBackButton = () => {
+      navigate(-1);
   };
 
   const [notice, setNotice] = useState({});
@@ -94,7 +102,6 @@ const Update = () => {
 
                 </div>
             </TitleBar>
-            <CreateSpace>
                 <Title>
                     <Input
                     type='text' 
@@ -103,6 +110,7 @@ const Update = () => {
                     onChange={handleTitle}
                     />
                 </Title>
+                <Line />
                 <Content>
                     <Textarea 
                     placeholder="내용을 작성하세요."
@@ -111,24 +119,18 @@ const Update = () => {
                     type='text'
                     ></Textarea>
                 </Content>
-            </CreateSpace>
             <Upload>
-                <CancelStyle>
-                    <CancelButton onClick={openModal}>취소</CancelButton>
-                </CancelStyle>
-                <UploadStyle>
+                <CancelButton onClick={openModal}>취소</CancelButton>
                 <UploadButton type="submit" onClick={editNotice}>등록</UploadButton>
-                </UploadStyle>
             </Upload>
             <Modal 
-                open={modalOpen} 
-                close={closeModal} 
-                header="공지 수정 취소"
-                subtext="작성 취소된 글은 저장되지 않습니다."
-                maintext="공지 글 수정을 취소하겠습니까?"
-                onClick={NoticeMain}
-                >
-                </Modal>
+            open={modalOpen} 
+            close={closeModal} 
+            header="공지 수정 취소"
+            subtext="작성 취소된 글은 저장되지 않습니다."
+            maintext="공지 글 수정을 취소하겠습니까?"
+            >
+            </Modal>
             <Footer></Footer>
         </>
     );
@@ -136,95 +138,59 @@ const Update = () => {
 
 export default Update;
 
-const TopBar = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #eaeaea;
-`;
-
-const BackButton = styled.div`
-    position: absolute;
-    padding-top: 50px;
-`
-
-const CreateSpace = styled.div`
-  width: 335px;
-  margin: 0 auto;
-  border-bottom: 1px solid #eaeaea;
-`;
-
 const Title = styled.div`
-  display: flex;
-  justify-content: left;
-  width: 335px;
-  height: 40px;
-  border: none;
-  font-size: 22px;
-  margin: 24px auto;
-  border-bottom: solid 1px #eaeaea;
+    margin: 8% 10% 0;
+    justify-content: left;
+    width: 80%;
+    height: 40px;
+    border: none;
+    font-size: 20px;
+`;
+
+const Line = styled.div`
+    border: 1px solid var(--gray);
+    width: 85%;
+    margin: 0 auto;
 `;
 
 const Input = styled.input`
-  ::placeholder {
+    ::placeholder {
+        font-family: var(--pre-font);
+        color: var(--gray2);
+    }
+    width: 100%;
+    border: none;
+    font-size: 20px;
     font-family: var(--pre-font);
-    color: var(--gray2);
-  }
-  width: 335px;
-  border: none;
-  font-size: 18px;
-  margin-left: 15px;
-  font-family: var(--pre-font);
-  font-weight: 400;
+    font-weight: 400;
 `;
 
 const Content = styled.div`
-  display: flex;
-  justify-content: left;
-  width: 340px;
-  height: 264px;
-  border: none;
-  font-size: 22px;
-  margin: 24px auto;
+    display: flex;
+    // justify-content: left;
+    width: 90%;
+    height: 264px;
+    border: none;
+    font-size: 22px;
+    margin: 24px auto;
 `;
 
 const Textarea = styled.textarea`
-  ::placeholder {
+    ::placeholder {
+        font-family: var(--pre-font);
+        font-weight: 400;
+        color: var(--gray2);
+    }
+    width: 90%;
+    justify-content: left;
+    margin: 0 auto;
+    border: none;
     font-family: var(--pre-font);
     font-weight: 400;
-    color: var(--gray2);
-  }
-  width: 87%;
-  margin: 0 auto;
-  border: none;
-  width: 307px;
-  font-family: var(--pre-font);
-  font-weight: 400;
 `;
 
 const Upload = styled.div`
-  justify-content: flex-end;
-  width: fit-content;
-  margin-top: 16px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  position: relative;
-  display: flex;
-`;
-
-const UploadStyle = styled.button`
-  position: absolute;
-  left: 300px;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-`;
-const CancelStyle = styled.button`
-  position: absolute;
-  left: 234px;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 10%;
 `;

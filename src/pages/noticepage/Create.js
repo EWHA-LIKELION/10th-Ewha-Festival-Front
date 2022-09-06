@@ -120,34 +120,28 @@ const Create = () => {
         
                     </div>
                 </TitleBar>
-                <CreateSpace>
-                    <Title>
-                        <Input
-                        type='text' 
-                        placeholder="제목을 작성하세요."
-                        name="title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        ></Input>
-                    </Title>
-                    <Content>
-                        <Textarea 
-                        placeholder="내용을 작성하세요." 
-                        name="content"
-                        onChange={(e) => setContent(e.target.value)}
-                        type='text'
-                        >
-                        </Textarea>
-                    </Content>
-                </CreateSpace>
+                <Title>
+                    <Input
+                    type='text' 
+                    placeholder="제목을 작성하세요."
+                    name="title"
+                    onChange={(e) => setTitle(e.target.value)}
+                    ></Input>
+                </Title>
+                <Line />
+                <Content>
+                    <Textarea 
+                    placeholder="내용을 작성하세요." 
+                    name="content"
+                    onChange={(e) => setContent(e.target.value)}
+                    type='text'
+                    >
+                    </Textarea>
+                </Content>
+                <Line />
                 <Upload>
-                    <div>
-                        <CancelStyle>
-                            <CancelButton onClick={openModal}>취소</CancelButton>
-                        </CancelStyle>
-                        <UploadStyle>
-                            <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
-                        </UploadStyle>
-                    </div>
+                    <CancelButton onClick={openModal}>취소</CancelButton>
+                    <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
                 </Upload>
                 <Modal 
                 open={modalOpen} 
@@ -166,26 +160,19 @@ const Create = () => {
 
 export default Create;
 
-// const BackButton = styled.img`
-//     position: relative;
-//     margin-top: 10px;
-// `
-
-const CreateSpace = styled.div`
-  width: 335px;
-  margin: 0 auto;
-  border-bottom: 1px solid #eaeaea;
-`;
-
 const Title = styled.div`
-    display: flex;
+    margin: 8% 10% 0;
     justify-content: left;
-    width: 335px;
+    width: 80%;
     height: 40px;
     border: none;
-    font-size: 22px;
-    margin: 24px auto;
-    border-bottom: solid 1px #eaeaea;
+    font-size: 20px;
+`;
+
+const Line = styled.div`
+    border: 1px solid var(--gray);
+    width: 85%;
+    margin: 0 auto;
 `;
 
 const Input = styled.input`
@@ -193,18 +180,17 @@ const Input = styled.input`
         font-family: var(--pre-font);
         color: var(--gray2);
     }
-    width: 335px;
+    width: 100%;
     border: none;
-    font-size: 18px;
-    margin-left: 15px;
+    font-size: 20px;
     font-family: var(--pre-font);
     font-weight: 400;
 `;
 
 const Content = styled.div`
     display: flex;
-    justify-content: left;
-    width: 340px;
+    // justify-content: left;
+    width: 90%;
     height: 264px;
     border: none;
     font-size: 22px;
@@ -217,36 +203,16 @@ const Textarea = styled.textarea`
         font-weight: 400;
         color: var(--gray2);
     }
-    width: 87%;
+    width: 90%;
+    justify-content: left;
     margin: 0 auto;
     border: none;
-    width: 307px;
     font-family: var(--pre-font);
     font-weight: 400;
 `;
 
 const Upload = styled.div`
-    width: 307px;
-    position: relative;
-    padding-top: 16px;
-    padding-bottom: 50px;
-    left: 250px;
-    // padding-left: 50px;
-    // display: flex;
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 10%;
 `;
-
-const UploadStyle = styled.button`
-    // position: absolute;
-    // left: 300px;
-    border: 0;
-    outline: 0;
-    background-color: transparent;
-`;
-const CancelStyle = styled.button`
-    // position: absolute;
-    // left: 234px;
-    right: 10px;
-    border: 0;
-    outline: 0;
-    background-color: transparent;
-`
