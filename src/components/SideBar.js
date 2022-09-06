@@ -30,53 +30,68 @@ const SideBar = props => {
 
   return (
     <BarWrapper onClick={DeleteSideBar}>
-      <link
-        rel="preload"
-        href="../styles/font/PyeongChangPeaceBold.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin="anonymous"
-      />
-      <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
+      <Bar>
+        <link
+          rel="preload"
+          href="../styles/font/PyeongChangPeaceBold.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+        <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
 
-      <object type="image/svg+xml" data={toplogo} style={{ marginTop: "99px" }}>
-        <TopLogo src={toplogo} />
-      </object>
+        <object type="image/svg+xml" data={toplogo} style={{ marginTop: "99px" }}>
+          <TopLogo src={toplogo} />
+        </object>
 
-      <LinkWrapper>
-        <p>
-          <img src={linkDeco} />
-          {<Link to="/notice">공지사항</Link>}
-        </p>
-        <p style={{ marginRight: "22px" }}>
-          <img src={linkDeco} />
-          {<Link to="/category">부스 보러가기</Link>}
-        </p>
-        <p style={{ marginRight: "32px" }}>
-          <img src={linkDeco} />
-          <Link to="/trashbin">쓰레기통 위치</Link>
-        </p>
-        <p style={{ marginRight: "16px" }}>
-          <img src={linkDeco} />
-          {isLogin ? (
-            <Link to="/mypage">마이페이지</Link>
-          ) : (
-            <Link to="/login">마이페이지</Link>
-          )}
-        </p>
-        <p>
-          <img src={linkDeco} />
-          <Link to="/makers">만든이들</Link>
-        </p>
-      </LinkWrapper>
-      <Footer>Copyright ⓒ Likelion Ewha 10th. All Rights Reserved.</Footer>
+        <LinkWrapper>
+          <p>
+            <img src={linkDeco} />
+            {<Link to="/notice">공지사항</Link>}
+          </p>
+          <p style={{ marginRight: "32px" }}>
+            <img src={linkDeco} />
+            {<Link to="/category">부스 둘러보기</Link>}
+          </p>
+          <p style={{ marginRight: "32px" }}>
+            <img src={linkDeco} />
+            <Link to="/search">부스 검색하기</Link>
+          </p>
+          <p style={{ marginRight: "32px" }}>
+            <img src={linkDeco} />
+            <Link to="/trashbin">쓰레기통 위치</Link>
+          </p>
+          <p style={{ marginRight: "16px" }}>
+            <img src={linkDeco} />
+            {isLogin ? (
+              <Link to="/mypage">마이페이지</Link>
+            ) : (
+              <Link to="/login">마이페이지</Link>
+            )}
+          </p>
+          <p>
+            <img src={linkDeco} />
+            <Link to="/makers">만든이들</Link>
+          </p>
+        </LinkWrapper>
+        <Footer>Copyright ⓒ Likelion Ewha 10th. All Rights Reserved.</Footer>
+      </Bar>
     </BarWrapper>
   );
 };
 
 export default SideBar;
 
-const BarWrapper = styled.div`
+const BarWrapper =styled.div`
+  width: 100%;
+  height: 812px;
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+`
+
+const Bar = styled.div`
   width: 302px;
   height: 812px;
   position: absolute;
