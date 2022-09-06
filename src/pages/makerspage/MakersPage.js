@@ -91,7 +91,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -109,7 +108,6 @@ const Title = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 99px;
-
   div {
     display: flex;
   }
@@ -130,7 +128,6 @@ const Title = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-
         font-weight: 300;
         font-size: 10px;
     }
@@ -140,7 +137,6 @@ const Title = styled.div`
         align-items: center;
         justify-content: space-between;
         margin-top: 18.75px;
-
         font-weight: 300;
         font-size: 16px;
         font-weight: 400;
@@ -154,11 +150,9 @@ const LikelionTeam = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .lionTitle {
     width: 100%;
     margin-top: 32.25px;
-
     display: flex;
     font-weight: 300;
     font-size: 14px;
@@ -174,11 +168,9 @@ const TF_Team = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-
   .tfTitle {
     width: 100%;
     margin-top: 32.25px;
-
     display: flex;
     font-weight: 300;
     font-size: 14px;
