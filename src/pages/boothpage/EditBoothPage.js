@@ -11,15 +11,17 @@ import TitleBar from "../../components/TitleBar";
 
 // import api component
 import { GetBooth, PatchBooth } from "../../api/booth";
-import { http } from "../../api/http";
 import { useAppSelector } from "../../redux/store";
+import { http } from "../../api/http";
 
 const EditBoothPage = () => {
   // navigate
   const navigate = useNavigate();
 
+
   // boothId 불러오기
   const boothId = useAppSelector(state => state.user.boothId);
+  console.log(boothId);
 
   // 기존 부스 정보 불러오기
   useEffect(() => {
@@ -28,10 +30,11 @@ const EditBoothPage = () => {
 
   const getPrev = (id) => {
     GetBooth(id).then(response => {
+      console.log(localStorage.getItem("token"));
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
-      console.log("[prevdata 조회 성공] : ", response.data.message);
+      console.log("[prevdata 조회 성공] : ", response.data);
     });
   };
 
@@ -39,8 +42,9 @@ const EditBoothPage = () => {
   const onSubmit = () => {
     if (name !== "") {
       PatchBooth(boothId, name, notice, description)
-        .then(
-          console.log("[부스 정보 수정 성공]\n\n","부스 이름: ", name, "\n부스 공지: ", notice, "\n부스 소개: ", description),
+        .then(response =>
+          // console.log("[부스 정보 수정 성공]\n\n","부스 이름: ", name, "\n부스 공지: ", notice, "\n부스 소개: ", description),
+          console.log(response),
         )
         .catch(error => {
           console.log(error);
@@ -52,7 +56,7 @@ const EditBoothPage = () => {
     }
   };
 
-  // 각각의 상태 관리
+  // 입력창(input) 관리
   const [name, setName] = useState("");
   const [notice, setNotice] = useState("");
   const [description, setDescription] = useState("");
@@ -176,7 +180,7 @@ const ButtonWrapper = styled.div`
 
   .Cancel {
     font-family: "Pretendard-Regular";
-    color: "var(--green3)";
+    color: var(--green3);
   }
 
   .Approve {

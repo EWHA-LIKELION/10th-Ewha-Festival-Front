@@ -16,6 +16,7 @@ import TitleBar from "../../components/TitleBar";
 // import api component
 import { GetMenu, PatchMenu } from "../../api/booth";
 import { http } from "../../api/http";
+import { useAppSelector } from "../../redux/store";
 
 const EditMenuDetailPage = () => {
   // navigate
@@ -28,28 +29,19 @@ const EditMenuDetailPage = () => {
   const [isSoldout, setIsSoldout] = useState(false);
   const [menuName, setMenuName] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
-  const [boothId, setBoothId] = useState(null);
   const [menu, setMenu] = useState([]);
 
-  // user account 불러오기
-  useEffect(() => {
-    http
-      .get("/accounts/")
-      .then(response => {
-        setBoothId(response.data.data.booth_id);
-      })
-      .catch(error => console.log(error));
-  }, []);
+  // boothId 불러오기
+  const boothId = useAppSelector(state=>state.user.boothId);
 
-  // prevdata 조회하기
+  // 기존 메뉴 조회하기
   useEffect(() => {
     prevMenu();
   }, [menu]);
 
-  // prevdata 함수
+  // 기존 메뉴 조회 함수
   const prevMenu = () => {
     if (menu !== null) {
-      console.log("[prevdata 조회 성공]");
       setMenuName(menu.menu);
       setMenuPrice(menu.price);
       setIsSoldout(menu.is_soldout);
@@ -67,7 +59,7 @@ const EditMenuDetailPage = () => {
     }
   }, [boothId]);
 
-  // filtering을 위한 boolean 함수
+  // 필터링을 위한 boolean 함수
   const isMenu = element => {
     if (element.id == id) {
       return true;
@@ -80,16 +72,8 @@ const EditMenuDetailPage = () => {
         alert("가격은 1억 이하로만 설정할 수 있습니다.");
       } else {
         PatchMenu(boothId, id, menuName, menuPrice, isSoldout)
-          .then(
-            console.log(
-              "[메뉴 정보 수정 성공]\n" +
-                "메뉴이름: " +
-                menuName +
-                "\n메뉴가격: " +
-                menuPrice +
-                "\n품절여부:" +
-                isSoldout,
-            ),
+          .then(response =>
+            console.log("[메뉴 정보 수정 성공]", response.data)
           )
           .catch(error => {
             console.log(error);
