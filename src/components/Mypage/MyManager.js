@@ -32,12 +32,12 @@ const MyManager = () => {
   const goEditMenu = () => {
     navigate("/editmenu");
   };  
-
-  const Detail = (id) => {
-    console.log("페이지 이동");
+  const Detail = (ref, event, id) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      console.log("페이지 이동");
       navigate(`/category/detail/${id}`);
+    }
   };
-
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
@@ -50,7 +50,7 @@ const MyManager = () => {
         console.log("좋아요한 부스 조회 실패", err);
       });
   }, []);
-
+  const wrapperRef = useRef(null);
   return (
     <Wrapper>
       <Navbar />
@@ -85,18 +85,32 @@ const MyManager = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-
         {booths.map(b => {
-            return (
-              <Booth key={b.id} onClick={event => Detail(b.id)}>
-                <BoothImg src={b.thumnail}/>
-                <BootInfo>
-                  <p className="num">{b.number}</p>
-                  <p className="name">{b.name}</p>
-                  <p className="info">{b.description?.substr(0, 25)}</p>
-                </BootInfo>
-                <Heart src={greenheart} />
-              </Booth>)
+          const description = b.description?.substr(0, 27);
+          if (description?.includes("\n")) {
+            var info = description.split("\n")[0];
+          } else {
+            var info = description;
+          }
+
+          return (
+            <Booth
+              key={b.id}
+              onClick={event => Detail(wrapperRef, event, b.id)}
+            >
+              <LikeImg src={b.thumnail} />
+              <BootInfo>
+                <p className="num">{b.number}</p>
+                <p className="name">{b.name.substr(0, 13)}</p>
+                <p className="info">{info}</p>
+              </BootInfo>
+              <Heart
+                  src={greenheart}
+                  onClick={() => unLike(b.id)}
+                  ref={wrapperRef}
+                />
+            </Booth>
+          );
         })}
       </BoothBox>
       <Logout />
@@ -113,7 +127,7 @@ const Heart = styled.img`
   right: 14px;
 `;
 
-const BoothImg = styled.img`
+const LikeImg = styled.img`
   background-color: #f6f6f6;
   margin-right: 12px;
   width: 89px;
@@ -121,7 +135,6 @@ const BoothImg = styled.img`
   border-radius: 10px 0 0 10px;
   border: none;
 `;
-
 
 const BootInfo = styled.div`
   width: 176px;
@@ -142,13 +155,11 @@ const BootInfo = styled.div`
   }
 
   .info {
-    letter-spacing: -2px;
     font-size: 11px;
     font-style: "Pretendard-Regular";
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
-
   }
 `;
 
@@ -166,11 +177,12 @@ const BoothBox = styled.div`
   margin: 0 auto 50px auto;
   width: 335px;
   height: 100%;
+
   display: flex;
   flex-direction: column;
+
   padding-top: 26px;
 `;
-
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -178,6 +190,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 
 const Likebooth = styled.img`
   width: 17px;
