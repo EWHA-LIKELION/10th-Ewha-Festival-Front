@@ -29,7 +29,7 @@ const BoothInfo = props => {
       return (
         <div style={{ position: "absolute", zIndex: "-100", width: "100%" }}>
           <InfoTextContainer>
-            <ShortInfo ref={ref => (this.span = ref)} style={{ color: "#000" }}>
+            <ShortInfo ref={ref => (this.span = ref)} style={{ color: "#fff" }}>
               {infoString &&
                 (infoString.includes("\n") ? (
                   <>
@@ -150,7 +150,7 @@ const InfoTextContainer = styled.div`
 `;
 
 const ShortInfo = styled.p`
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-size: 14px;
   font-weight: 300;
   color: var(--black);
@@ -166,7 +166,7 @@ const ShortInfo = styled.p`
 `;
 
 const LongInfo = styled.p`
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-size: 14px;
   font-weight: 300;
   color: var(--black);
