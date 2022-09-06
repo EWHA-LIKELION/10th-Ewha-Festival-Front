@@ -50,14 +50,18 @@ const MakersPage = () => {
                 </div>
             </Pretendard>
             <PyeongChang className="top3">
-               <img src={likelion}/>
+                <object type="image/svg+xml" data={likelion}>
+                  <img src={likelion}/>
+                </object>
                <p>X</p>
                <p>136주년 대동제 TF</p>
             </ PyeongChang>
         </Title>
         <LikelionTeam>
             <PyeongChang_Peace className="lionTitle">
-                <img src={diaIcon} style={{marginRight:"5px"}}/>
+                <object type="image/svg+xml" data={diaIcon} style={{marginRight:"5px"}}>
+                  <img src={diaIcon}/>
+                </object>
                 <p>이화여대 멋쟁이 사자처럼 10기</p>
             </PyeongChang_Peace>
             <div className="line1"/>
@@ -67,7 +71,9 @@ const MakersPage = () => {
         </LikelionTeam>
         <TF_Team>
             <PyeongChang_Peace className="tfTitle">
-                <img src={diaIcon} style={{marginRight:"5px"}}/>
+                <object type="image/svg+xml" data={diaIcon} style={{marginRight:"5px"}}>
+                  <img src={diaIcon}/>
+                </object>
                 <p>136주년 대동제 TF</p>
             </PyeongChang_Peace>
             <div className="line1"/>
