@@ -15,7 +15,7 @@ const UserService = {
   logout: () => {
     persistor.purge();
     window.localStorage.removeItem("token");
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://rewha2022.com/";
     console.log("로그아웃 되었습니다.");
   },
 
