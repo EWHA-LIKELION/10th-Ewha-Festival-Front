@@ -135,7 +135,6 @@ const Pin = styled.img`
           left: ${({ left }) => left-25};
           height: 42px;
           animation-duration: 1s;
-          animation-delay: 2s;
           animation-name: bounce;
           animation-iteration-count: infinite;
         `

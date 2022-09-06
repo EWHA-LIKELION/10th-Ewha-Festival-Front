@@ -123,7 +123,6 @@ const BoothComments = () => {
           getComments();
         })
         .catch(err => console.log(err.data));
-      //setTimeout(() => setIsAdd(isAdd + 1), 500);
       setIsAdd(true);
       setNewComment("");
     }
@@ -141,7 +140,6 @@ const BoothComments = () => {
   const [isAdd, setIsAdd] = useState(false);
   useEffect(() => {
     if (isAdd == true) {
-      console.log("==스크롤==");
       scrollToBottom();
       setIsAdd(false);
     } else {

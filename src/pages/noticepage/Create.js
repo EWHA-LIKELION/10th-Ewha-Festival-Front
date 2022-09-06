@@ -140,12 +140,14 @@ const Create = () => {
                     </Content>
                 </CreateSpace>
                 <Upload>
-                    <CancelStyle>
-                        <CancelButton onClick={openModal}>취소</CancelButton>
-                    </CancelStyle>
-                    <UploadStyle>
-                        <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
-                    </UploadStyle>
+                    <div>
+                        <CancelStyle>
+                            <CancelButton onClick={openModal}>취소</CancelButton>
+                        </CancelStyle>
+                        <UploadStyle>
+                            <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
+                        </UploadStyle>
+                    </div>
                 </Upload>
                 <Modal 
                 open={modalOpen} 
@@ -163,15 +165,6 @@ const Create = () => {
 
 
 export default Create;
-
-const TopBar = styled.div`
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #eaeaea;
-`;
 
 // const BackButton = styled.img`
 //     position: relative;
@@ -233,25 +226,26 @@ const Textarea = styled.textarea`
 `;
 
 const Upload = styled.div`
-    justify-content: flex-end;
-    width: fit-content;
-    margin-top: 16px;
-    margin-bottom: 50px;
-    margin-left: 10px;
+    width: 307px;
     position: relative;
-    display: flex;
+    padding-top: 16px;
+    padding-bottom: 50px;
+    left: 250px;
+    // padding-left: 50px;
+    // display: flex;
 `;
 
 const UploadStyle = styled.button`
-    position: absolute;
-    left: 300px;
+    // position: absolute;
+    // left: 300px;
     border: 0;
     outline: 0;
     background-color: transparent;
 `;
 const CancelStyle = styled.button`
-    position: absolute;
-    left: 234px;
+    // position: absolute;
+    // left: 234px;
+    right: 10px;
     border: 0;
     outline: 0;
     background-color: transparent;

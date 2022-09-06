@@ -173,8 +173,6 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  padding-top: 47px;
 `;
 
 const MainImage = styled.div`
@@ -214,12 +212,16 @@ const BackBtn = styled.div`
 
 const TitleWrapper = styled.div`
   width: 100%;
-  height: 65px;
-  padding: 0 20px;
+  min-height: 65px;
+  padding: 20px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  p {
+    margin-right: 10px;
+  }
 `;
 
 const Heart = styled.img`

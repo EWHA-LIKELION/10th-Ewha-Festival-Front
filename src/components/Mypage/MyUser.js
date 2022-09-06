@@ -1,5 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
@@ -22,10 +23,13 @@ const UserMy = () => {
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
   const { username } = useAppSelector(state => state.user);
+  const navigate = useNavigate();
+
   const Detail = (id) => {
     console.log("페이지 이동");
       navigate(`/category/detail/${id}`);
   };
+
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
