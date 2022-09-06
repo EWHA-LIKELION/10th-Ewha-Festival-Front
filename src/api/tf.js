@@ -1,4 +1,5 @@
 import TfService from "./services/tfservice";
+import { Logout } from "./user";
 
 export const GetAllNotice = async () => {
   try {
@@ -18,11 +19,17 @@ export const GetNotice = async noticeId => {
   }
 };
 
-export const DeleteNotice = async (noticeId) => {
+export const DeleteNotice = async noticeId => {
   try {
-    const response = await  TfService.deleteNotice(noticeId);
+    const response = await TfService.deleteNotice(noticeId);
     return Promise.resolve(response);
   } catch (error) {
+    if (
+      error.response.data.detail ==
+      "이 토큰은 모든 타입의 토큰에 대해 유효하지 않습니다"
+    ) {
+      Logout();
+    }
     return Promise.reject(error, "공지 삭제 실패");
   }
 };
