@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
@@ -25,11 +25,12 @@ const UserMy = () => {
   const { username } = useAppSelector(state => state.user);
   const navigate = useNavigate();
 
-  const Detail = (id) => {
-    console.log("페이지 이동");
+  const Detail = (ref, event, id) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      console.log("페이지 이동");
       navigate(`/category/detail/${id}`);
+    }
   };
-
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
@@ -41,7 +42,8 @@ const UserMy = () => {
       .catch(err => {
         console.log("좋아요한 부스 조회 실패", err);
       });
-  }, []);
+  }, []);  const wrapperRef = useRef(null);
+
   return (
     <Wrapper>
       <Navbar />
@@ -68,16 +70,31 @@ const UserMy = () => {
           </PyeongChang_Peace>
         </Titlebox>
         {booths.map(b => {
-            return (
-              <Booth key={b.id} onClick={event => Detail(b.id)}>
-                <BoothImg src={b.thumnail}/>
-                <BootInfo>
-                  <p className="num">{b.number}</p>
-                  <p className="name">{b.name}</p>
-                  <p className="info">{b.description?.substr(0, 25)}</p>
-                </BootInfo>
-                <Heart src={greenheart} />
-              </Booth>)
+          const description = b.description?.substr(0, 27);
+          if (description?.includes("\n")) {
+            var info = description.split("\n")[0];
+          } else {
+            var info = description;
+          }
+
+          return (
+            <Booth
+              key={b.id}
+              onClick={event => Detail(wrapperRef, event, b.id)}
+            >
+              <LikeImg src={b.thumnail} />
+              <BootInfo>
+                <p className="num">{b.number}</p>
+                <p className="name">{b.name.substr(0, 13)}</p>
+                <p className="info">{info}</p>
+              </BootInfo>
+              <Heart
+                  src={greenheart}
+                  onClick={() => unLike(b.id)}
+                  ref={wrapperRef}
+                />
+            </Booth>
+          );
         })}
       </BoothBox>
       <Logout />
@@ -94,7 +111,7 @@ const Heart = styled.img`
   right: 14px;
 `;
 
-const BoothImg = styled.div`
+const LikeImg = styled.img`
   background-color: #f6f6f6;
   margin-right: 12px;
   width: 89px;
@@ -122,13 +139,11 @@ const BootInfo = styled.div`
   }
 
   .info {
-    letter-spacing: -2px;
     font-size: 11px;
     font-style: "Pretendard-Regular";
     font-weight: 400;
     line-height: 16px;
     color: var(--black);
-
   }
 `;
 
@@ -152,7 +167,6 @@ const BoothBox = styled.div`
 
   padding-top: 26px;
 `;
-
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
