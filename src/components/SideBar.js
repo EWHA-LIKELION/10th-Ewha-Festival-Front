@@ -110,7 +110,7 @@ const LinkWrapper = styled.div`
   justify-content: center;
   justify-content: space-between;
 
-  font-family: "PyeongChangPeace";
+  font-family: "PyeongChangPeaceBold";
 
   p {
     width: 100px;

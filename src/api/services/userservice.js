@@ -1,5 +1,6 @@
 import { http } from "../http.js";
 import axios from "axios";
+import { persistor } from "../../index";
 
 const UserService = {
   //프로필 조회
@@ -9,6 +10,14 @@ const UserService = {
         Authorization: `Bearer ${token}`,
       },
     }),
+
+  // 로그아웃
+  logout: () => {
+    persistor.purge();
+    window.localStorage.removeItem("token");
+    window.location.href = "https://rewha2022.com/";
+    console.log("로그아웃 되었습니다.");
+  },
 
   //로그인
   getUser: (id, password) =>
