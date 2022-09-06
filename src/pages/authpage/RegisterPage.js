@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled, { createGlobalStyle, isStyledComponent } from "styled-components";
-import axios from 'axios';
+import styled, {
+  createGlobalStyle,
+  isStyledComponent,
+} from "styled-components";
+import axios from "axios";
 //images
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
@@ -13,7 +16,7 @@ import { AiFillInfoCircle } from "react-icons/ai";
 // 모달창
 import RegisterModal from "../../components/Register/RegisterModal";
 // 유저 정보 관련
-import { useAppDispatch} from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { GetUser, PostUser, GetProfile } from "../../api/user";
 import { setUser } from "../../redux/userSlice";
 
@@ -44,30 +47,29 @@ const RegisterPage = () => {
       e.preventDefault();
       // 회원가입
       PostUser(id, password, name)
-      .then(data => {
-        alert(data.message);
-        // 로그인
-        GetUser(id,password)
-        .then(data=>{
-          const token = data.data.access_token; 
-          window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
-          // 유저 프로필 가져오기 
-          GetProfile(token)
-          .then(res=>{
-            dispatch(setUser(res.data));
-            console.log(res.data);
-            navigate("/") //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
-          })
-          .catch(error => console.log(error));
-         })
-      })
-      .catch(error=>{
-        const message = error.response.data.data.username
-        message && alert(message);
-      })
+        .then(data => {
+          alert(data.message);
+          // 로그인
+          GetUser(id, password).then(data => {
+            const token = data.data.access_token;
+            window.localStorage.setItem("token", JSON.stringify(token)); // 로컬에 유저 토큰 저장
+            // 유저 프로필 가져오기
+            GetProfile(token)
+              .then(res => {
+                dispatch(setUser(res.data));
+                console.log(res.data);
+                navigate("/"); //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+              })
+              .catch(error => console.log(error));
+          });
+        })
+        .catch(error => {
+          const message = error.response.data.data.username;
+          message && alert(message);
+        });
     } else {
-        if(CheckInputs() === 2) alert("정확한 비밀단어를 입력해주세요.");
-        else alert("회원가입에 필요한 모든 정보를 입력해주세요.");
+      if (CheckInputs() === 2) alert("정확한 비밀단어를 입력해주세요.");
+      else alert("회원가입에 필요한 모든 정보를 입력해주세요.");
     }
   };
 
@@ -87,8 +89,8 @@ const RegisterPage = () => {
       secreteWord === "비밀단어"
     )
       return 1;
-    else{
-      if(secreteWord !== "비밀단어") return 2;
+    else {
+      if (secreteWord !== "비밀단어") return 2;
       else return 3;
     }
   };
@@ -97,7 +99,10 @@ const RegisterPage = () => {
     <>
       {modal ? <RegisterModal setModal={setModal} /> : null}
       <RegisterWrapper onSubmit={Register}>
-        <Title src={title} />
+        <object type="image/svg+xml" data={title} style={{ marginTop: "98px" }}>
+          <Title src={title} />
+        </object>
+
         <RegisterForm>
           <InputWrapper>
             <IdWrapper>
@@ -168,7 +173,7 @@ const RegisterPage = () => {
           <RegisterBtn type="submit">회원가입</RegisterBtn>
         </RegisterForm>
         <GoLogin>
-          <p style={{marginRight:"7px"}}>이미 계정이 있나요?</p>
+          <p style={{ marginRight: "7px" }}>이미 계정이 있나요?</p>
           <Link to="/login">로그인 하기</Link>
         </GoLogin>
       </RegisterWrapper>
@@ -282,8 +287,8 @@ const RegisterBtn = styled.button`
   color: #fffef5;
 `;
 const GoLogin = styled.div`
-   margin-top: 26px;
-   display: flex;
+  margin-top: 26px;
+  display: flex;
 
   font-weight: 400;
   font-size: 12px;
@@ -292,7 +297,7 @@ const GoLogin = styled.div`
     color: #979797;
     text-decoration-line: underline;
   }
-`
+`;
 const Footer = styled.div`
   width: 100%;
   height: 59px;
