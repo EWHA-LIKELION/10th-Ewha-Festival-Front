@@ -14,10 +14,8 @@ import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
-
-// images
-import leftarrow from "../../images/notice/leftarrow.png";
-// import { text } from "body-parser";
+import TitleBar from "../../components/TitleBar";
+import http from "../../api/http";
 
 
 const Update = () => {
@@ -31,10 +29,13 @@ const Update = () => {
     setModalOpen(false);
   };
 
+  // 공지 메인 페이지 이동
+  function NoticeMain(e) {
+    window.location.href = "/notice/"
+  }
+
   // 기존 공지사항 불러오기
-  const getPrev = useEffect(() => {
-    get
-  })
+  
     const getNotice = async () => {
       const response = await axios.get(`https://api.rewha2022.com/notices/{$id}`);
       console.log(response.data);
@@ -52,8 +53,8 @@ const Update = () => {
           .catch(console.log("실패"));
     };
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [title, setTitle] = useState({});
+    const [content, setContent] = useState({});
 
     var id = 1;
 
@@ -72,11 +73,8 @@ const Update = () => {
     };
     return (
         <>
-            <TopBar>
-                <img 
-                src={ leftarrow } 
-                height="17px"
-                />
+            <TitleBar>
+              
                 <PyeongChang_Peace 
                 size="22px"
                 weight="700"
@@ -90,7 +88,7 @@ const Update = () => {
                 <div color="#ffffff">
 
                 </div>
-            </TopBar>
+            </TitleBar>
             <CreateSpace>
                 <Title>
                     <Input
@@ -123,6 +121,7 @@ const Update = () => {
                 header="공지 수정 취소"
                 subtext="작성 취소된 글은 저장되지 않습니다."
                 maintext="공지 글 수정을 취소하겠습니까?"
+                onClick={NoticeMain}
                 >
                 </Modal>
             <Footer></Footer>
@@ -141,10 +140,10 @@ const TopBar = styled.div`
   border-bottom: 1px solid #eaeaea;
 `;
 
-// const BackButton = styled.img`
-//     position: relative;
-//     margin-top: 10px;
-// `
+const BackButton = styled.div`
+    position: absolute;
+    padding-top: 50px;
+`
 
 const CreateSpace = styled.div`
   width: 335px;

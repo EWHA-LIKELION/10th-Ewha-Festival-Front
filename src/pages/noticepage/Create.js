@@ -6,8 +6,7 @@ import {
   NanumSquare,
   Pretendard,
 } from "../../components/Text";
-// import { defaultMaxListeners } from "events";
-import { Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // components
@@ -15,8 +14,8 @@ import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
-import NoticePage from "./NoticePage";
-import noticeData from "../../_mock/noticeData"
+import TitleBar from "../../components/TitleBar";
+// import http from "../../api/http";
 
 // images
 import leftarrow from "../../images/notice/leftarrow.png";
@@ -37,80 +36,76 @@ const Create = () => {
         setModalOpen(false);
     };
 
-    // 글 직성
+    // 모달 취소 버튼 누를 시 이동 
+    const navigate = useNavigate();
 
-    // const navigate = useNavigate();
-    
+    const handleBackButton = () => {
+        navigate(-1);
+    };
+    // 글 직성
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     
     
     
-    // 여기부터
-    const submitNotice = useEffect(() => {
-        const postNotice = async(e) => {
-            const data = {
-                title: title,
-                body: content,
-            };
-            const headers = { 'Content-Type': 'application/json' };
-            try {
-                const response = await axios.post(
-                    'https://api.rewha2022.com/notices/',
-                    data
-                );
-                console.log(response.status);
-                console.log(response.data);
-                } catch (e) {
-                    console.log("something went wrong!",e);
-                }
-            }
-        postNotice();
-    }, []);
-    // 여기까지
+    // fetch
+    const postNotice = () => {
+        
+        const url = 'https://api.rewha2022.com/notices/'
+        const option = {
+            method:'POST',
+            header: {
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                title:title,
+                content:content
+            })
+            
+        }
+        fetch(url, option)
+        .then(response => console.log(response));
+    }
 
-    // const postNotice = async (e) => {
-    //     let data = {
+    // axios
+    // const postNotice = async(e) => {
+    //     const notice = {
     //         title: title,
-    //         content: content
+    //         body: content,
+    //     };
+    //     const headers = { 
+    //         'Content-Type': 'application/json'
+    //     };
+    //     try {
+    //         const response = await axios.post(
+    //             'https://api.rewha2022.com/notices/',
+    //             notice
+    //         );
+    //         console.log(response.notice);
+    //     } catch (e) {
+    //         console.log("something went wrong!",e);
+                
+    //         }
     //     }
-    //     axios
-    //     .post(url,  JSON.stringify(data), {
-    //       headers: {
-    //         "Content-Type": `application/json`,
-    //       },
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //     });
-        // e.preventDefault();
-        // // console.log(title);
-        // // console.log(content);
-    //     const response = await axios
-    //     fetch(`https://api.rewha2022.com/notices/`, {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             title,
-    //             content,
-    //         }), 
-    //     })
-    // };
+
+    useEffect(() => {
+        http
+        .post("/notices/")
+        .then(response => {
+            // console.log(response.noticeData);
+            postNotice();
+        })
+        .catch(error => console.log(error));
+
+    }, []);
 
 
-    var id = 1;
+    // var id = 1;
 
         return (
             <>
-                <TopBar>
-                    {/* <Route path='/notices' component={ NoticePage }> */}
-                        <img 
-                        src={ leftarrow } 
-                        height="17px"
-                        />
-                    {/* </Route> */}
+                <TitleBar>
                     <PyeongChang_Peace 
                     size="22px"
                     weight="700"
@@ -124,7 +119,7 @@ const Create = () => {
                     <div color="#ffffff">
         
                     </div>
-                </TopBar>
+                </TitleBar>
                 <CreateSpace>
                     <Title>
                         <Input
@@ -149,7 +144,7 @@ const Create = () => {
                         <CancelButton onClick={openModal}>취소</CancelButton>
                     </CancelStyle>
                     <UploadStyle>
-                        <UploadButton type="submit" onClick={submitNotice}>등록</UploadButton>
+                        <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
                     </UploadStyle>
                 </Upload>
                 <Modal 
