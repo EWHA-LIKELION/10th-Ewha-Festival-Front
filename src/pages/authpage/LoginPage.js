@@ -62,7 +62,10 @@ const LoginPage = () => {
   return (
     <>
       <LoginWrapper>
-        <Title src={title} />
+        <object type="image/svg+xml" data={title} style={{ marginTop: "98px" }}>
+          <Title src={title} />
+        </object>
+
         <LoginForm onSubmit={Login}>
           <IdWrapper>
             <FiUser className="idIcon" />
