@@ -20,7 +20,6 @@ import edit2 from "../../images/mypage/edit2.png";
 import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
-  const wrapperRef = useRef(null);
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
@@ -37,14 +36,13 @@ const MyManager = () => {
   const Detail = (id) => {
     console.log("페이지 이동");
       navigate(`/category/detail/${id}`);
-
   };
 
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
-        console.log("좋아요한 부스 조회 성공", res);
+        console.log("좋아요한 부스 조회 성공1212", res);
         setBooths(res.data.data);
         setLikebooths(res.data.data.length);
       })
@@ -90,8 +88,7 @@ const MyManager = () => {
 
         {booths.map(b => {
             return (
-              <Booth key={b.id} onClick={event => Detail(
-                b.id)}>
+              <Booth key={b.id} onClick={event => Detail(b.id)}>
                 <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
