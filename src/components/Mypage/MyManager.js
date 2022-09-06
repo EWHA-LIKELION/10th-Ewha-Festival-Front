@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
@@ -20,6 +20,7 @@ import edit2 from "../../images/mypage/edit2.png";
 import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
+  const wrapperRef = useRef(null);
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
@@ -31,6 +32,12 @@ const MyManager = () => {
   };
   const goEditMenu = () => {
     navigate("/editmenu");
+  };  
+
+  const Detail = (id) => {
+    console.log("페이지 이동");
+      navigate(`/category/detail/${id}`);
+
   };
 
   useEffect(() => {
@@ -82,21 +89,17 @@ const MyManager = () => {
         </Titlebox>
 
         {booths.map(b => {
-          if (b.is_liked === true) {
             return (
-              <Booth key={b.id}>
-                <BoothImg />
+              <Booth key={b.id} onClick={event => Detail(
+                b.id)}>
+                <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
                   <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
-              </Booth>
-            );
-          } else {
-            return;
-          }
+              </Booth>)
         })}
       </BoothBox>
       <Logout />
@@ -113,7 +116,7 @@ const Heart = styled.img`
   right: 14px;
 `;
 
-const BoothImg = styled.div`
+const BoothImg = styled.img`
   background-color: #f6f6f6;
   margin-right: 12px;
   width: 89px;
@@ -121,6 +124,7 @@ const BoothImg = styled.div`
   border-radius: 10px 0 0 10px;
   border: none;
 `;
+
 
 const BootInfo = styled.div`
   width: 176px;

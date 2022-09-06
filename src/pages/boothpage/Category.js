@@ -193,6 +193,14 @@ const Category = () => {
         </Pretendard>
 
         {booths.map(b => {
+          const description = b.description?.substr(0, 27);
+
+          if (description?.includes("\n")) {
+            var info = description.split("\n")[0];
+          } else {
+            var info = description;
+          }
+
           return (
             <Booth
               key={b.id}
@@ -201,8 +209,8 @@ const Category = () => {
               <BoothImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
-                <p className="name">{b.name}</p>
-                <p className="info">{b.description?.substr(0, 25)}</p>
+                <p className="name">{b.name.substr(0, 13)}</p>
+                <p className="info">{info}</p>
               </BootInfo>
 
               {b.is_liked ? (
@@ -264,7 +272,6 @@ const BootInfo = styled.div`
   }
 
   .info {
-    letter-spacing: -2px;
     font-size: 11px;
     font-style: "Pretendard-Regular";
     font-weight: 400;

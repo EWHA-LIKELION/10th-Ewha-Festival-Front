@@ -1,5 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
@@ -22,6 +23,12 @@ const UserMy = () => {
   const [likebooths, setLikebooths] = useState(0);
   const { nickname } = useAppSelector(state => state.user);
   const { username } = useAppSelector(state => state.user);
+  const navigate = useNavigate();
+
+  const Detail = (id) => {
+    console.log("페이지 이동");
+      navigate(`/category/detail/${id}`);
+  };
 
   useEffect(() => {
     console.log(localStorage.getItem("token"));
@@ -61,21 +68,16 @@ const UserMy = () => {
           </PyeongChang_Peace>
         </Titlebox>
         {booths.map(b => {
-          if (b.is_liked === true) {
             return (
-              <Booth key={b.id}>
-                <BoothImg />
+              <Booth key={b.id} onClick={event => Detail(b.id)}>
+                <BoothImg src={b.thumnail}/>
                 <BootInfo>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name}</p>
                   <p className="info">{b.description?.substr(0, 25)}</p>
                 </BootInfo>
                 <Heart src={greenheart} />
-              </Booth>
-            );
-          } else {
-            return;
-          }
+              </Booth>)
         })}
       </BoothBox>
       <Logout />

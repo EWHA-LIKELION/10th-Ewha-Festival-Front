@@ -21,7 +21,10 @@ const Map = () => {
 
   return (
     <Wrapper>
-      <CustomMap src={map} />
+      <object type="image/svg+xml" data={map}>
+        <CustomMap src={map} />
+      </object>
+
       {booth.map(map => {
         return (
           <Pin

@@ -6,11 +6,24 @@ import star3 from "../../images/stars/star3.svg";
 const StarTitle = ({ title, margin }) => {
   return (
     <SmallTitle margin={margin}>
-      <TitleStar src={star3} />
+      <object
+        type="image/svg+xml"
+        data={star3}
+        style={{ margin: "0 8px 0 8px" }}
+      >
+        <TitleStar src={star3} />
+      </object>
+
       <PyeongChang weight="700" color="#858585" size="15px" height="28px">
         {title}
       </PyeongChang>
-      <TitleStar src={star3} />
+      <object
+        type="image/svg+xml"
+        data={star3}
+        style={{ margin: "0 8px 0 8px" }}
+      >
+        <TitleStar src={star3} />
+      </object>
     </SmallTitle>
   );
 };
