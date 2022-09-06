@@ -86,11 +86,11 @@ const RegisterPage = () => {
       id !== " " &&
       password !== "" &&
       name !== "" &&
-      secreteWord === "비밀단어"
+      secreteWord === "솹긱옴뉴"
     )
       return 1;
     else {
-      if (secreteWord !== "비밀단어") return 2;
+      if (secreteWord !== "솹긱옴뉴") return 2;
       else return 3;
     }
   };
