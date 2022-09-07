@@ -177,9 +177,9 @@ const Category = () => {
 
   const navigate = useNavigate();
 
-  const Detail = (ref, event, id) => {
+  const Detail = id => {
     console.log("페이지 이동");
-    //navigate(`/category/detail/${id}`);
+    navigate(`/category/detail/${id}`);
   };
 
   return (
@@ -264,11 +264,8 @@ const Category = () => {
 
           return (
             <Booth key={b.id}>
-              <BoothImg
-                src={b.thumnail}
-                onClick={event => Detail(event, b.id)}
-              />
-              <BootInfo onClick={event => Detail(event, b.id)}>
+              <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+              <BootInfo onClick={event => Detail(b.id)}>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
                 <p className="info">{info}</p>
@@ -283,7 +280,7 @@ const Category = () => {
                   }}
                 >
                   <Heart src={greenheart} onClick={() => unLike(b.id)} />
-                  <HeartBox onClick={event => Detail(event, b.id)}></HeartBox>
+                  <HeartBox onClick={event => Detail(b.id)}></HeartBox>
                 </div>
               ) : (
                 <div
@@ -294,7 +291,7 @@ const Category = () => {
                   }}
                 >
                   <Heart src={heart} onClick={() => Like(b.id)} />
-                  <HeartBox onClick={event => Detail(event, b.id)}></HeartBox>
+                  <HeartBox onClick={event => Detail(b.id)}></HeartBox>
                 </div>
               )}
             </Booth>
