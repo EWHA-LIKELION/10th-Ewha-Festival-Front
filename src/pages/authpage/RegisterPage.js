@@ -94,7 +94,6 @@ const RegisterPage = () => {
       else return 3;
     }
   };
-
   return (
     <>
       {modal ? <RegisterModal setModal={setModal} /> : null}
@@ -192,17 +191,15 @@ const RegisterPage = () => {
 export default RegisterPage;
 
 const RegisterWrapper = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 47px;
+  padding-top: 27px; //47px;
 `;
 const Title = styled.img`
-  margin-top: 98px;
 `;
 const RegisterForm = styled.form`
-  margin-top: 58px;
+  margin-top: 38px; //58px
   div {
     width: 294px;
   }
