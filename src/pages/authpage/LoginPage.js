@@ -103,7 +103,6 @@ const LoginPage = () => {
 export default LoginPage;
 
 const LoginWrapper = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,7 +114,7 @@ const Title = styled.img`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 58px;
+  margin-top: 38px; //58px
   div {
     width: 294px;
   }

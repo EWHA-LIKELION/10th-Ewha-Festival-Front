@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 const RegisterModal = props => {
+   // 사이드바 배경 스크롤 방지
+   useEffect(() => {
+    document.body.style.cssText = `
+          position: fixed;
+          top: -${window.scrollY}px;
+          overflow-y: scroll;
+          width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = "";
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+    };
+  }, []);
+
   return (
     <ModalWrapper
       onClick={() => {
@@ -35,7 +49,7 @@ export default RegisterModal;
 
 const ModalWrapper = styled.div`
   width: 100%;
-  height: 120%;
+  height: 150%;
   padding-bottom: 30%;
   position: absolute;
   display: flex;
