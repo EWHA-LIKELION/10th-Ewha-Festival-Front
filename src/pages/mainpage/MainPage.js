@@ -68,11 +68,11 @@ const MainPage = () => {
 
           {isLogin ? (
             <Link to="/mypage">
-              <img src={person} />
+              <img src={person} style={{ paddingTop: "3px" }} />
             </Link>
           ) : (
             <Link to="/login">
-              <img src={person} />
+              <img src={person} style={{ paddingTop: "3px" }} />
             </Link>
           )}
         </TopBar>
@@ -113,14 +113,14 @@ const MainPage = () => {
 
         <Map />
         <Link to="/category" style={{ textDecoration: "none" }}>
-          <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
+          <NewButton margin="29px auto 0 auto">부스 보러가기</NewButton>
         </Link>
 
         <div
           style={{
             width: "268px",
-            height: "97px",
-            marginTop: "30px",
+
+            marginTop: "60px",
             textAlign: "center",
           }}
         >
@@ -130,7 +130,13 @@ const MainPage = () => {
             size="11px"
             height="18px"
           >
-            2019년 이후, 3년 만에
+            136년 전 이화는 단 한 명의 학생을 위해 <br />
+            이 땅에서 최초로 여성 교육의 문을 열었습니다. <br />
+            기독교 정신의 사랑과 헌신을 바탕으로 <br />
+            우리 사회의 금기를 깨뜨리며 끊임없이 도전해 온 <br />
+            이화의 하루 하루는 기적의 역사가 되었습니다. <br />
+            <br />
+            그리고 2022년 9월,
             <br />
             대동제를 대면으로 맞이하게 되었습니다.
             <br />
@@ -139,12 +145,12 @@ const MainPage = () => {
             <br />
             <span style={{ color: "green" }}>이화의 초록을</span>
             <br />
-            새로이 써 나갈 수 있길 바랍니다.
+            새로이 써 나갈 수 있길 바랍니다. <br /> <br />
           </Pretendard>
         </div>
 
         <Link to="/notice" style={{ textDecoration: "none" }}>
-          <NewButton margin="36px auto 59px auto">TF팀 공지 보러가기</NewButton>
+          <NewButton margin="40px auto 0px auto">TF팀 공지 보러가기</NewButton>
         </Link>
 
         <StarTitle margin="132px auto 0 auto" title="일정 소개" />
