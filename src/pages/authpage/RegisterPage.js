@@ -94,7 +94,6 @@ const RegisterPage = () => {
       else return 3;
     }
   };
-
   return (
     <>
       {modal ? <RegisterModal setModal={setModal} /> : null}
