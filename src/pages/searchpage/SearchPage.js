@@ -31,13 +31,17 @@ const SearchPage = () => {
     e.preventDefault();
     console.log("검색 시도");
 
-    GetSearchBooth(keyword)
-      .then(res => {
-        console.log(res);
-        setSearch(true);
-        setBooths(res.data.data);
-      })
-      .catch(err => console.log(err));
+    if (keyword === "") {
+      alert("검색어를 입력해주세요!");
+    } else {
+      GetSearchBooth("부스")
+        .then(res => {
+          console.log(res);
+          setSearch(true);
+          setBooths(res.data.data);
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   return (
