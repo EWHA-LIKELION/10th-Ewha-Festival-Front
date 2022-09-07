@@ -11,6 +11,8 @@ import { GetUser, GetProfile } from "../../api/user";
 
 import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/userSlice";
+import { initPage } from "../../redux/pageSlice";
+
 import { persistor } from "../../index";
 
 const LoginPage = () => {
@@ -43,6 +45,7 @@ const LoginPage = () => {
           .then(data => {
             console.log(data.data);
             dispatch(setUser(data.data));
+            dispatch(initPage());
           })
           .catch(error => {
             console.log(error);
