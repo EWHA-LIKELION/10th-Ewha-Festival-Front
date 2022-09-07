@@ -31,7 +31,9 @@ const MakersPage = () => {
                 <ButtonWrapper>
                         <Backbutton onClick={handleBackButton}></Backbutton>
                 </ButtonWrapper>
-                <TopLogo src={toplogo}/>
+                <object type="image/svg+xml" data={toplogo}>
+                  <img src={toplogo}/>
+                </object>
                 <PyeongChang_Peace>를 만든이들</PyeongChang_Peace>
             </div>
             <Pretendard className="top2">
@@ -93,7 +95,7 @@ const MakersPage = () => {
 export default MakersPage;
 
 const Wrapper = styled.div`
-  height: 3941px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

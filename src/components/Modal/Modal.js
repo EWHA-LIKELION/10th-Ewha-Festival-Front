@@ -4,15 +4,9 @@ import { Pretendard } from "../../components/Text";
 import GrayButton from "../Modal/GrayButton";
 import GreenButton from "../Modal/GreenButton";
 import "./Modal.css";
-import { useNavigate } from "react-router-dom";
 
 const Modal = props => {
   const { isOne, open, close, header, subtext, maintext, onClick } = props;
-  const navigate = useNavigate();
-
-    const handleBackButton = () => {
-        navigate(-1);
-    };
   useEffect(() => {
     document.body.style.cssText = `
           position: fixed;
@@ -91,7 +85,7 @@ const Modal = props => {
                     </GrayButton>
                   </Cancel>
                   <Upload>
-                    <GreenButton onClick={handleBackButton}>
+                    <GreenButton onClick={onClick}>
                       <Pretendard size="14px" weight="500" color="var(--white)">
                         확인
                       </Pretendard>
