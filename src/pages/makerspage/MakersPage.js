@@ -124,18 +124,6 @@ const Title = styled.div`
       margin: 2px 0 0 7.05px;
     }
   }
-<<<<<<< HEAD
-  /* .top2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 99px;
-    div{
-        display: flex;
-    } */
-=======
->>>>>>> a3a81d3d123567c0ca2de27146a1c0dadbaee77c
     .top1{
         width: 335px;
         font-weight: 300;
