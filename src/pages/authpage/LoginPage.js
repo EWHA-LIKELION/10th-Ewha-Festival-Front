@@ -8,6 +8,7 @@ import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
 //유저 정보 관련
 import { GetUser, GetProfile } from "../../api/user";
+
 import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/userSlice";
 import { persistor } from "../../index";

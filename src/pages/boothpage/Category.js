@@ -1,11 +1,15 @@
 import styled, { css } from "styled-components";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { setPage } from "../../redux/pageSlice";
 //컴포넌트
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
 import { GetKeywordBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
+import Pagination from "../../components/NoticePage/Pagination";
+
 // 데이터
 import { locationData } from "../../_mock/locations";
 import { dayData } from "../../_mock/dayData";
@@ -17,28 +21,88 @@ import search from "../../images/navbar/search.svg";
 import map from "../../images/map.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
-import { useEffect } from "react";
 
 const Category = () => {
+  const { day, location, page } = useAppSelector(state => state.page);
+
+  const dispatch = useAppDispatch();
+
   const [days, setDays] = useState(dayData); // 요일들
   const [locations, setLocations] = useState(locationData); // 장소들
-  const [pickedDay, setPickedDay] = useState(1); // 선택 된 요일
-  const [pickedLocation, setPickedLocation] = useState("정문"); // 선택된 장소 (한글)
-  const [pickedMap, setPickedMap] = useState(1); // 선택된 지도
+
+  const [pickedPage, setpickedPage] = useState(page); // 선택된 페이지 넘버
+  const [pickedDay, setPickedDay] = useState(day); // 선택 된 요일
+  const [pickedLocation, setPickedLocation] = useState(location); // 선택된 장소 (한글)
+  const [pickedMap, setPickedMap] = useState(location); // 선택된 지도
+
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
+  const [length, setLength] = useState(0);
+
+  console.log("테스트", day, location, page);
+
+  var selectLocationId = null;
+  locations.map(lo => {
+    if (location === lo.name) {
+      selectLocationId = lo.id;
+    }
+  });
+
+  //첫 get api
+  useEffect(() => {
+    console.log("첫 useEffect");
+
+    dispatch(
+      setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
+    );
+
+    selectLocation(selectLocationId); // 전에 눌렀던 장소 버튼
+    selectDay(day); // 전에 눌렀던 요일 버튼
+
+    GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
+      .then(res => {
+        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
+        console.log(pickedDay, pickedLocation);
+        setBooths(res.data.data);
+        setLength(res.data.total);
+      })
+      .catch(err => {
+        console.log(
+          "부스 조회 실패 =>",
+          pickedDay,
+          pickedLocation,
+          pickedPage,
+          err,
+        );
+
+        if (err.response.data.detail === "페이지가 유효하지 않습니다.") {
+          setpickedPage(1);
+        }
+      });
+  }, []);
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
   useEffect(() => {
-    GetKeywordBooth(pickedDay, pickedLocation)
+    console.log("매번 반복 useEffect");
+
+    dispatch(
+      setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
+    );
+
+    GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log("요일 장소 부스 조회 성공,", res);
+        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
         console.log(pickedDay, pickedLocation);
         setBooths(res.data.data);
+        setLength(res.data.total);
       })
       .catch(err => {
         console.log("부스 조회 실패", err, pickedDay, pickedLocation);
+
+        if (err.response.data.detail === "페이지가 유효하지 않습니다.") {
+          setpickedPage(1);
+        }
       });
-  }, [pickedDay, pickedLocation]);
+  }, [pickedDay, pickedLocation, pickedPage]);
 
   /**요일 선택 : 요일 버튼 ui 변경 + 선택된 요일 변경*/
   const selectDay = id => {
@@ -80,6 +144,7 @@ const Category = () => {
   /** 좋아요 클릭 : api 실행 -> 부스 목록 다시 get */
   const Like = id => {
     const token = localStorage.getItem("token");
+
     if (token) {
       // 하트 ui 수정
       setBooths(
@@ -113,13 +178,9 @@ const Category = () => {
   const navigate = useNavigate();
 
   const Detail = (ref, event, id) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      console.log("페이지 이동");
-      navigate(`/category/detail/${id}`);
-    }
+    console.log("페이지 이동");
+    //navigate(`/category/detail/${id}`);
   };
-
-  const wrapperRef = useRef(null);
 
   return (
     <Wrapper>
@@ -189,7 +250,7 @@ const Category = () => {
 
       <BoothBox>
         <Pretendard color="var(--gray3)" weight="500" size="12px">
-          총 {booths.length}개의 부스
+          총 {length}개의 부스
         </Pretendard>
 
         {booths.map(b => {
@@ -202,34 +263,51 @@ const Category = () => {
           }
 
           return (
-            <Booth
-              key={b.id}
-              onClick={event => Detail(wrapperRef, event, b.id)}
-            >
-              <BoothImg src={b.thumnail} />
-              <BootInfo>
+            <Booth key={b.id}>
+              <BoothImg
+                src={b.thumnail}
+                onClick={event => Detail(event, b.id)}
+              />
+              <BootInfo onClick={event => Detail(event, b.id)}>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
                 <p className="info">{info}</p>
               </BootInfo>
 
               {b.is_liked ? (
-                <Heart
-                  src={greenheart}
-                  onClick={() => unLike(b.id)}
-                  ref={wrapperRef}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Heart src={greenheart} onClick={() => unLike(b.id)} />
+                  <HeartBox onClick={event => Detail(event, b.id)}></HeartBox>
+                </div>
               ) : (
-                <Heart
-                  src={heart}
-                  onClick={() => Like(b.id)}
-                  ref={wrapperRef}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Heart src={heart} onClick={() => Like(b.id)} />
+                  <HeartBox onClick={event => Detail(event, b.id)}></HeartBox>
+                </div>
               )}
             </Booth>
           );
         })}
       </BoothBox>
+
+      <Pagination
+        total={length}
+        limit={10}
+        page={pickedPage}
+        setPage={setpickedPage}
+      />
 
       <Footer />
     </Wrapper>
@@ -237,6 +315,11 @@ const Category = () => {
 };
 
 export default Category;
+
+const HeartBox = styled.div`
+  width: 50px;
+  height: 54px;
+`;
 
 const Heart = styled.img`
   position: absolute;
