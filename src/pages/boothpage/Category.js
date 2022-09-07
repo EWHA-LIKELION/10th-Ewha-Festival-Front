@@ -56,7 +56,9 @@ const Category = () => {
     );
 
     selectLocation(selectLocationId); // 전에 눌렀던 장소 버튼
-    selectDay(day); // 전에 눌렀던 요일 버튼
+    selectDay(parseInt(day)); // 전에 눌렀던 요일 버튼
+
+    console.log("[day] :", day, " [days] : ", days);
 
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
