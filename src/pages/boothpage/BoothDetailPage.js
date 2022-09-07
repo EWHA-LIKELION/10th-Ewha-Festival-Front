@@ -11,7 +11,6 @@ import BoothComments from "../../components/BoothDetail/BoothComments";
 import ImgModal from "../../components/BoothDetail/ImgModal";
 import { GetBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
 
-import back from "../../images/navbar/back.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
 import booththumnail from "../../images/detail/booththumnail.svg";
@@ -112,9 +111,6 @@ const BoothDetailPage = () => {
             src={booth.thumnail === "" ? booththumnail : booth.thumnail}
           />
         </MainImage>
-        <BackBtn onClick={() => nav("/category")}>
-          <Back src={back} />
-        </BackBtn>
         <TitleWrapper>
           <PyeongChang_Peace size="22px" weight="700" color="var(--green3)">
             {booth.name}
@@ -177,7 +173,7 @@ const Wrapper = styled.div`
 
 const MainImage = styled.div`
   width: 100%;
-  height: 250px;
+  height: auto;
 `;
 
 const MainImg = styled.img`
@@ -185,29 +181,6 @@ const MainImg = styled.img`
   height: 100%;
   object-fit: cover;
   -webkit-user-drag: none;
-`;
-
-const Back = styled.img`
-  width: 10px;
-  height: 17px;
-  margin-right: 3px;
-`;
-
-const BackBtn = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: var(--white);
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: absolute;
-  margin-top: 20px;
-  margin-left: 20px;
-
-  cursor: pointer;
 `;
 
 const TitleWrapper = styled.div`

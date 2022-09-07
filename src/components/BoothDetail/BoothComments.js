@@ -280,7 +280,7 @@ const Delete = styled.img`
 
 const CommentInputWrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 70px;
   margin-top: 25px;
   position: fixed;
   bottom: 0;
@@ -292,7 +292,7 @@ const CommentInputWrapper = styled.div`
 
 const CommentInputContainer = styled.div`
   width: calc(100% - 40px);
-  height: 40px;
+  height: 35px;
   margin: 0 auto;
   background-color: var(--gray0);
   border-radius: 10px;
@@ -311,7 +311,7 @@ const CommentInput = styled.input`
     outline: none;
   }
 
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-weight: 300;
   font-size: 14px;
 `;

@@ -50,14 +50,18 @@ const MakersPage = () => {
                 </div>
             </Pretendard>
             <PyeongChang className="top3">
-               <img src={likelion}/>
+                <object type="image/svg+xml" data={likelion}>
+                  <img src={likelion}/>
+                </object>
                <p>X</p>
                <p>136주년 대동제 TF</p>
             </ PyeongChang>
         </Title>
         <LikelionTeam>
             <PyeongChang_Peace className="lionTitle">
-                <img src={diaIcon} style={{marginRight:"5px"}}/>
+                <object type="image/svg+xml" data={diaIcon} style={{marginRight:"5px"}}>
+                  <img src={diaIcon}/>
+                </object>
                 <p>이화여대 멋쟁이 사자처럼 10기</p>
             </PyeongChang_Peace>
             <div className="line1"/>
@@ -67,7 +71,9 @@ const MakersPage = () => {
         </LikelionTeam>
         <TF_Team>
             <PyeongChang_Peace className="tfTitle">
-                <img src={diaIcon} style={{marginRight:"5px"}}/>
+                <object type="image/svg+xml" data={diaIcon} style={{marginRight:"5px"}}>
+                  <img src={diaIcon}/>
+                </object>
                 <p>136주년 대동제 TF</p>
             </PyeongChang_Peace>
             <div className="line1"/>
@@ -91,7 +97,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -109,7 +114,6 @@ const Title = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 99px;
-
   div {
     display: flex;
   }
@@ -120,15 +124,6 @@ const Title = styled.div`
       margin: 2px 0 0 7.05px;
     }
   }
-  .top2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 99px;
-    div{
-        display: flex;
-    }
     .top1{
         width: 335px;
         font-weight: 300;
@@ -139,7 +134,6 @@ const Title = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-
         font-weight: 300;
         font-size: 10px;
     }
@@ -149,7 +143,6 @@ const Title = styled.div`
         align-items: center;
         justify-content: space-between;
         margin-top: 18.75px;
-
         font-weight: 300;
         font-size: 16px;
         font-weight: 400;
@@ -163,11 +156,9 @@ const LikelionTeam = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .lionTitle {
     width: 100%;
     margin-top: 32.25px;
-
     display: flex;
     font-weight: 300;
     font-size: 14px;
@@ -183,11 +174,9 @@ const TF_Team = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-
   .tfTitle {
     width: 100%;
     margin-top: 32.25px;
-
     display: flex;
     font-weight: 300;
     font-size: 14px;

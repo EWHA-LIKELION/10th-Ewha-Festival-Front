@@ -21,6 +21,7 @@ const EditMenuPage = () => {
   const onSubmit = () => {
     if (item !== null) {
       navigate(`/editmenu/${item}`);
+      setItem(null);
     } else {
       alert("수정할 메뉴를 선택하세요");
     }

@@ -122,7 +122,10 @@ const Mapimg = styled.div`
   }
 `;
 
-const Pin = styled.img`
+const Pin = styled.object`
+background-image:url(${pinbtn});
+background-repeat:no-repeat;
+background-size: 17px;
   position: absolute;
   width: fit-content;
   height: 24px;
@@ -131,9 +134,13 @@ const Pin = styled.img`
   ${props =>
     props.selected
       ? css`
+          background-image:url(${pinbtn});
+          background-repeat:no-repeat;
+          background-size:34px;
           top: ${({ top }) => top-25+"px"};
           left: ${({ left }) => left-25};
-          height: 42px;
+          height: 55px;
+          width: 34px;
           animation-duration: 1s;
           animation-name: bounce;
           animation-iteration-count: infinite;
