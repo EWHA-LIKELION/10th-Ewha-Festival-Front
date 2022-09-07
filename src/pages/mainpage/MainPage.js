@@ -34,6 +34,12 @@ const MainPage = () => {
   // 사이드바 관리
   const [sideBar, setSideBar] = useState(false);
 
+  // 뒤로가기 방지
+  history.pushState(null, null, location.href);
+  window.onpopstate = function (event) {
+    history.go(1);
+  };
+
   return (
     <div>
       <GrayBackground>
@@ -97,6 +103,11 @@ const MainPage = () => {
           <Title src={title} />
         </object>
 
+        <Map />
+        <Link to="/category" style={{ textDecoration: "none" }}>
+          <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
+        </Link>
+
         <div
           style={{
             width: "268px",
@@ -126,11 +137,6 @@ const MainPage = () => {
 
         <Link to="/notice" style={{ textDecoration: "none" }}>
           <NewButton margin="36px auto 59px auto">TF팀 공지 보러가기</NewButton>
-        </Link>
-
-        <Map />
-        <Link to="/category" style={{ textDecoration: "none" }}>
-          <NewButton margin="32px auto 0 auto">부스 보러가기</NewButton>
         </Link>
 
         <StarTitle margin="132px auto 0 auto" title="일정 소개" />
