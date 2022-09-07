@@ -7,7 +7,7 @@ import {
   Pretendard,
 } from "../../components/Text";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 // components
 import Footer from "../../components/Footer/Footer";
@@ -15,14 +15,14 @@ import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
-// import http from "../../api/http";
 
 // images
 import leftarrow from "../../images/notice/leftarrow.png";
 import { Value } from "sass";
 import GrayButton from "../../components/Modal/GrayButton";
 import GreenButton from "../../components/MainPage/GreenButton";
-import { http } from "../../api/http";
+import {http} from "../../api/http";
+import Axios from "axios";
 // import { text } from "body-parser";
 
 const Create = () => {
@@ -38,67 +38,83 @@ const Create = () => {
 
     // 모달 취소 버튼 누를 시 이동 
     const navigate = useNavigate();
-
     const handleBackButton = () => {
         navigate(-1);
     };
+
     // 글 직성
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     
+    const handleTitle = e => {
+        setTitle(e.target.value);
+        console.log(title);
+        };
     
+        const handleContent = e => {
+        setContent(e.target.value);
+        console.log(content);
+    };
     
     // fetch
-    const postNotice = () => {
-        
-        const url = 'https://api.rewha2022.com/notices/'
-        const option = {
-            method:'POST',
-            header: {
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                title:title,
-                content:content
-            })
-            
-        }
-        fetch(url, option)
-        .then(response => console.log(response));
+    const url = 'https://api.rewha2022.com/notices';
+    const [notice, setNotice] = useState({
+        title: "",
+        body: ""
+    })
+
+    function postNotices(e) { 
+        e.preventDefault();
+        postNotice(title, content);
+        // .post('/notices/', {
+        //     title:notice.title,
+        //     content:notice.content
+        // })
+        // .then(res => {
+        //     console.log(res.notice)
+        // })
     }
+    // const option = {
+    //     method:'post',
+    //     header: {
+    //         'Accept':'application/json',
+    //         'Content-Type':'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         title:{title},
+    //         content:{content}
+    //     })
+        
+    // };
 
-    // axios
-    // const postNotice = async(e) => {
-    //     const notice = {
-    //         title: title,
-    //         body: content,
-    //     };
-    //     const headers = { 
-    //         'Content-Type': 'application/json'
-    //     };
-    //     try {
-    //         const response = await axios.post(
-    //             'https://api.rewha2022.com/notices/',
-    //             notice
-    //         );
-    //         console.log(response.notice);
-    //     } catch (e) {
-    //         console.log("something went wrong!",e);
-                
-    //         }
-    //     }
-
-    useEffect(() => {
-        http
-        .post("/notices/")
-        .then(response => {
-            // console.log(response.noticeData);
-            postNotice();
-        })
-        .catch(error => console.log(error));
-
-    }, []);
+    // const postNotice = (e) => {
+    //     e.preventDefault();
+    //     const notice = {title, content};
+    //     fetch(url, {
+    //         method: 'POST',
+    //         headers: {"Content-Type":"application/json"},
+    //         body: JSON.stringify(notice)
+    //     }).then(() => {
+    //         console.log('new post added');
+    //         console.log(notice);
+    //     })
+        // http
+        // .post(url, option)
+        // .then(response => {console.log(response)})
+        // .catch(error => console.log(error)
+        // );
+    // };
+        
+    // useEffect(() => {
+    //     postNotice()
+        // http
+        // .post('/notices/')
+        // .then(response => {
+        //     console.log(response.noticeData);
+        // })
+        // .catch(error => console.log(error));
+        
+    // }, []);
 
 
     // var id = 1;
@@ -116,16 +132,13 @@ const Create = () => {
                         <span style={{color: "#007A28"}}>지 </span>
                         <span style={{color: "##004628"}}>작성하기</span>
                     </PyeongChang_Peace>
-                    <div color="#ffffff">
-        
-                    </div>
                 </TitleBar>
                 <Title>
                     <Input
                     type='text' 
                     placeholder="제목을 작성하세요."
                     name="title"
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={handleTitle}
                     ></Input>
                 </Title>
                 <Line />
@@ -133,7 +146,7 @@ const Create = () => {
                     <Textarea 
                     placeholder="내용을 작성하세요." 
                     name="content"
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={handleContent}
                     type='text'
                     >
                     </Textarea>
@@ -149,6 +162,7 @@ const Create = () => {
                 header="공지 작성 취소"
                 subtext="작성 취소된 글은 저장되지 않습니다."
                 maintext="공지 글 작성을 취소하겠습니까?"
+                onClick={handleBackButton}
                 >
                 </Modal>
                 <Footer></Footer>

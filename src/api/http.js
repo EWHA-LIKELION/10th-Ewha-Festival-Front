@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import TfService from "./services/tfservice";
 
 export const http = axios.create({
   baseURL: "https://api.rewha2022.com",
