@@ -15,7 +15,6 @@ import TitleBar from "../../components/TitleBar";
 
 // import api component
 import { GetMenu, PatchMenu } from "../../api/booth";
-import { http } from "../../api/http";
 import { useAppSelector } from "../../redux/store";
 
 const EditMenuDetailPage = () => {
@@ -114,7 +113,7 @@ const EditMenuDetailPage = () => {
             type="text"
             value={menuName || ""}
             onChange={handleMenuName}
-            style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
+            style={{ fontFamily: "Pretendard", height: "45px" }}
           />
         </BoxWrapper>
         <BoxWrapper>
@@ -127,7 +126,7 @@ const EditMenuDetailPage = () => {
               pattern="\d*"
               value={menuPrice || ""}
               onChange={handleMenuPrice}
-              style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
+              style={{ fontFamily: "Pretendard", height: "45px" }}
             />
             <Pretendard weight="500" size="16px">
               <div>원</div>
@@ -231,12 +230,12 @@ const ButtonWrapper = styled.div`
   margin-top: 50px;
 
   .Cancel {
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     color: var(--green3);
   }
 
   .Approve {
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     color: var(--white);
     background: linear-gradient(90deg, #004628 0%, #107047 100%);
   }
