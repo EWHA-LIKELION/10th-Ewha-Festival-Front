@@ -27,8 +27,6 @@ const SearchPage = () => {
     navigate(`/category/detail/${id}`);
   };
 
-  const GetSearch = () => {};
-
   const onSubmit = e => {
     e.preventDefault();
     console.log("검색 시도");
@@ -45,7 +43,7 @@ const SearchPage = () => {
   return (
     <Wrapper>
       <Navbar>
-        <Back src={back} onClick={() => navigate("/")} />
+        <Back src={back} onClick={() => navigate("/category")} />
 
         <InputBox onSubmit={onSubmit}>
           <Input
