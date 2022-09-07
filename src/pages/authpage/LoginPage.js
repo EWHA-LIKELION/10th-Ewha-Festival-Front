@@ -46,7 +46,8 @@ const LoginPage = () => {
           .catch(error => {
             console.log(error);
           });
-        navigate("/"); // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+        navigate("/");
+        window.location.reload(); // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
       })
       .catch(error => {
         // 에러에 따라 다른 경고 문구 출력
