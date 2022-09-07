@@ -49,7 +49,7 @@ export default RegisterModal;
 
 const ModalWrapper = styled.div`
   width: 100%;
-  height: 120%;
+  height: 150%;
   padding-bottom: 30%;
   position: absolute;
   display: flex;
