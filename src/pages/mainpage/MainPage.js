@@ -34,11 +34,19 @@ const MainPage = () => {
   // 사이드바 관리
   const [sideBar, setSideBar] = useState(false);
 
-  // 뒤로가기 방지
-  history.pushState(null, null, location.href);
-  window.onpopstate = function (event) {
-    history.go(1);
-  };
+  useEffect(() => {
+    const preventGoBack = () => {
+      // change start
+      history.pushState(null, "", location.href);
+      // change end
+      console.log("prevent go back!");
+    };
+
+    history.pushState(null, "", location.href);
+    window.addEventListener("popstate", preventGoBack);
+
+    return () => window.removeEventListener("popstate", preventGoBack);
+  }, []);
 
   return (
     <div>
