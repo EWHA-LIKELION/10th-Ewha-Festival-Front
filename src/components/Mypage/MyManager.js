@@ -31,18 +31,15 @@ const MyManager = () => {
   };
   const goEditMenu = () => {
     navigate("/editmenu");
-  };  
-  const Detail = (ref, event, id) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      console.log("페이지 이동");
-      navigate(`/category/detail/${id}`);
-    }
+  };
+  const Detail = id => {
+    navigate(`/category/detail/${id}`);
   };
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
-        console.log("좋아요한 부스 조회 성공1212", res);
+        console.log("좋아요한 부스 조회 성공", res);
         setBooths(res.data.data);
         setLikebooths(res.data.data.length);
       })
@@ -94,10 +91,7 @@ const MyManager = () => {
           }
 
           return (
-            <Booth
-              key={b.id}
-              onClick={event => Detail(wrapperRef, event, b.id)}
-            >
+            <Booth key={b.id} onClick={event => Detail(b.id)}>
               <LikeImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
@@ -105,10 +99,10 @@ const MyManager = () => {
                 <p className="info">{info}</p>
               </BootInfo>
               <Heart
-                  src={greenheart}
-                  onClick={() => unLike(b.id)}
-                  ref={wrapperRef}
-                />
+                src={greenheart}
+                onClick={() => unLike(b.id)}
+                ref={wrapperRef}
+              />
             </Booth>
           );
         })}
@@ -190,7 +184,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 
 const Likebooth = styled.img`
   width: 17px;

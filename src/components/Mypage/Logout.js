@@ -14,16 +14,14 @@ const Logout = () => {
     await persistor.purge();
     window.localStorage.removeItem("token");
     console.log("마이페이지 로그아웃");
-
   };
 
   return (
     <>
-    <Pretendard color="var(--white)" weight="600" size="16px">
-      <Button onClick={Logout} >로그아웃</Button>
-    </Pretendard>
+      <Pretendard color="var(--white)" weight="600" size="16px">
+        <Button onClick={Logout}>로그아웃</Button>
+      </Pretendard>
     </>
-
   );
 };
 
@@ -37,6 +35,6 @@ const Button = styled.div`
   border-radius: 10px;
   padding: 12px;
   background: linear-gradient(90deg, #004628 0%, #107047 100%);
-  width:335px;
-  margin:30px auto;
+  width: 335px;
+  margin: 30px auto;
 `;

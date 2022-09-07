@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useEffect, useRef  } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
@@ -17,7 +17,6 @@ import userbg from "../../images/mypage/userbg.svg";
 
 import { GetLikes } from "../../api/user";
 
-
 const UserMy = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
@@ -25,11 +24,9 @@ const UserMy = () => {
   const { username } = useAppSelector(state => state.user);
   const navigate = useNavigate();
 
-  const Detail = (ref, event, id) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      console.log("페이지 이동");
-      navigate(`/category/detail/${id}`);
-    }
+  const Detail = id => {
+    console.log("페이지 이동");
+    navigate(`/category/detail/${id}`);
   };
   useEffect(() => {
     console.log(localStorage.getItem("token"));
@@ -42,7 +39,8 @@ const UserMy = () => {
       .catch(err => {
         console.log("좋아요한 부스 조회 실패", err);
       });
-  }, []);  const wrapperRef = useRef(null);
+  }, []);
+  const wrapperRef = useRef(null);
 
   return (
     <Wrapper>
@@ -78,10 +76,7 @@ const UserMy = () => {
           }
 
           return (
-            <Booth
-              key={b.id}
-              onClick={event => Detail(wrapperRef, event, b.id)}
-            >
+            <Booth key={b.id} onClick={event => Detail(b.id)}>
               <LikeImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
@@ -89,10 +84,10 @@ const UserMy = () => {
                 <p className="info">{info}</p>
               </BootInfo>
               <Heart
-                  src={greenheart}
-                  onClick={() => unLike(b.id)}
-                  ref={wrapperRef}
-                />
+                src={greenheart}
+                onClick={() => unLike(b.id)}
+                ref={wrapperRef}
+              />
             </Booth>
           );
         })}
