@@ -4,12 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 //컴포넌트
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import Footer from "../../components/Footer/Footer";
-import { GetSearchBooth } from "../../api/booth";
-// 데이터
-import { locationData } from "../../_mock/locations";
-import { dayData } from "../../_mock/dayData";
-import { categoryData } from "../../_mock/categoryData";
-import { boothMaps } from "../../_mock/boothMap";
+import { GetSearchBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
+
 // 이미지
 import back from "../../images/navbar/back.svg";
 import searchImg from "../../images/search/search.svg";
@@ -23,10 +19,6 @@ const SearchPage = () => {
 
   const navigate = useNavigate();
 
-  const Detail = id => {
-    navigate(`/category/detail/${id}`);
-  };
-
   const onSubmit = e => {
     e.preventDefault();
     console.log("검색 시도");
@@ -34,7 +26,7 @@ const SearchPage = () => {
     if (keyword === "") {
       alert("검색어를 입력해주세요!");
     } else {
-      GetSearchBooth("부스")
+      GetSearchBooth(keyword)
         .then(res => {
           console.log(res);
           setSearch(true);
@@ -42,6 +34,45 @@ const SearchPage = () => {
         })
         .catch(err => console.log(err));
     }
+  };
+
+  /** 좋아요 클릭 : api 실행 -> 부스 목록 다시 get */
+  const Like = id => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      // 하트 ui 수정
+      setBooths(
+        booths.map(booth =>
+          booth.id === id ? { ...booth, is_liked: true } : { ...booth },
+        ),
+      );
+      // 좋아요 api 요청 보내기
+      LikeBooth(id)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    } else {
+      alert("로그인이 필요합니다.");
+    }
+  };
+
+  /**좋아요 취소 : api 실행 -> 부스 목록 다시 get*/
+  const unLike = id => {
+    // 하트 ui 수정
+    setBooths(
+      booths.map(booth =>
+        booth.id === id ? { ...booth, is_liked: false } : { ...booth },
+      ),
+    );
+    // 좋아요 삭제 api
+    UnLikeBooth(id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+  const Detail = id => {
+    console.log("페이지 이동");
+    navigate(`/category/detail/${id}`);
   };
 
   return (
@@ -72,19 +103,45 @@ const SearchPage = () => {
           </div>
 
           {booths.map(b => {
+            const description = b.description?.substr(0, 27);
+
+            if (description?.includes("\n")) {
+              var info = description.split("\n")[0];
+            } else {
+              var info = description;
+            }
+
             return (
-              <Booth key={b.id} onClick={event => Detail(b.id)}>
-                <BoothImg src={b.thumnail} />
-                <BootInfo>
+              <Booth key={b.id}>
+                <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+                <BootInfo onClick={event => Detail(b.id)}>
                   <p className="num">{b.number}</p>
-                  <p className="name">{b.name}</p>
-                  <p className="info">{b.description?.substr(0, 25)}</p>
+                  <p className="name">{b.name.substr(0, 13)}</p>
+                  <p className="info">{info}</p>
                 </BootInfo>
 
                 {b.is_liked ? (
-                  <Heart src={greenheart} />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <Heart src={greenheart} onClick={() => unLike(b.id)} />
+                    <HeartBox onClick={event => Detail(b.id)}></HeartBox>
+                  </div>
                 ) : (
-                  <Heart src={heart} />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <Heart src={heart} onClick={() => Like(b.id)} />
+                    <HeartBox onClick={event => Detail(b.id)}></HeartBox>
+                  </div>
                 )}
               </Booth>
             );
@@ -154,12 +211,16 @@ const Input = styled.input`
   background-color: transparent;
 `;
 
+const HeartBox = styled.div`
+  width: 50px;
+  height: 54px;
+`;
+
 const Heart = styled.img`
   position: absolute;
   top: 16px;
   right: 14px;
 `;
-
 const BoothImg = styled.img`
   background-color: #f6f6f6;
   margin-right: 12px;
@@ -188,7 +249,6 @@ const BootInfo = styled.div`
   }
 
   .info {
-    letter-spacing: -2px;
     font-size: 11px;
     font-style: "Pretendard-Regular";
     font-weight: 400;
