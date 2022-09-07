@@ -6,7 +6,7 @@ import {
   NanumSquare,
   Pretendard,
 } from "../../components/Text";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 // components
@@ -15,9 +15,11 @@ import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
-import http from "../../api/http";
+import {http} from "../../api/http";
 import TfService from "../../api/services/tfservice";
 import { noticeData } from "../../_mock/noticeData";
+import { GetNotice, submitNotice } from "../../api/tf";
+import { useAppSelector } from "../../redux/store";
 
 
 
@@ -38,159 +40,156 @@ const Update = () => {
   const handleBackButton = () => {
       navigate(-1);
   };
-
-  const [notice, setNotice] = useState({});
-  // 기존 공지사항 불러오기
-    useEffect(() => {
-      getNotice(id)
-      .then(res => {
-        setNotice(res.data.data);
-      })
-      .catch(error => console.log(error));
-    })
   
-  // 공지사항 수정
-  useEffect(() => {
-    putNotice()
+  const [notice, setNotice] = useState({});
+  let { id } = useParams();
+  
+  const handleTitle = e => {
+    setNotice(e.target.value);
+    console.log(res.data.data);
+  };
+  
+  const handleContent = e => {
+    setNotice(e.target.value);
+    console.log(res.data.data);
+  };
+
+  // 공지 가져오기 api
+  const noticeId = useAppSelector(state => state.noticeId)
+  console.log(noticeId);
+  useEffect(()=>{
+    getPrev(noticeId)
+  },[noticeId]);
+
+  const getPrev = (id) => {
+    GetNotice(id)
     .then(res => {
-      
+      console.log("공지 상세 조회 성공", res, id);
+      setNotice(res.data.data);
     })
-  })
-    
-    
-    const editNotice = async () => {
-      const response = await axios
-      .put(`https://api.rewha2022.com/notices/{$id}`, {
-        title: title,
-        content: content,
+    .catch(err => {
+      console.log("공지 상세 조회 실패", err);
+    });
+  }
+
+
+  // 공지사항 수정 요청
+  const [newNotice, setNewNotice] = useState("");
+  const editNotice = e => {
+    e.preventDefault();
+    console.log("공지 수정", newNotice);
+    PatchNotice(id, newNotice)
+      .then(res => {
+        console.log(res.data);
+        GetNotice();
       })
-      .then(console.log(response.data.json))
-      .catch(console.log("실패"));
-    };
-    
-    const [title, setTitle] = useState({});
-    const [content, setContent] = useState({});
+      .catch(err => console.log(err.data));
+    setNewNotice("");
+  }
 
-    const handleTitle = e => {
-    setTitle(e.target.value);
-    console.log(title);
-    };
-
-    const handleContent = e => {
-    setContent(e.target.value);
-    console.log(content);
-    };
-
-    const onSubmit = () => {
-    editNotice();
-    };
-    return (
-        <>
-            <TitleBar>
-              
-                <PyeongChang_Peace 
-                size="22px"
-                weight="700"
-                height="29px"
-                letter-spacing="0em"
-                >
-                    <span style={{color: "#00A428"}}>공</span>
-                    <span style={{color: "#007A28"}}>지 </span>
-                    <span style={{color: "##004628"}}>수정하기</span>
-                </PyeongChang_Peace>
-                <div color="#ffffff">
-
-                </div>
-            </TitleBar>
-                <Title>
-                    <Input
-                    type='text' 
-                    placeholder="제목을 작성하세요."
-                    value={title}
-                    onChange={handleTitle}
-                    />
-                </Title>
-                <Line />
-                <Content>
-                    <Textarea 
-                    placeholder="내용을 작성하세요."
-                    value={content}
-                    onChange={handleContent}
-                    type='text'
-                    ></Textarea>
-                </Content>
-            <Upload>
-                <CancelButton onClick={openModal}>취소</CancelButton>
-                <UploadButton type="submit" onClick={editNotice}>등록</UploadButton>
-            </Upload>
-            <Modal 
-            open={modalOpen} 
-            close={closeModal} 
-            header="공지 수정 취소"
-            subtext="작성 취소된 글은 저장되지 않습니다."
-            maintext="공지 글 수정을 취소하겠습니까?"
-            >
-            </Modal>
-            <Footer></Footer>
-        </>
-    );
+  return (
+      <>
+        <TitleBar>
+          <PyeongChang_Peace 
+          size="22px"
+          weight="700"
+          height="29px"
+          letter-spacing="0em"
+          >
+              <span style={{color: "#00A428"}}>공</span>
+              <span style={{color: "#007A28"}}>지 </span>
+              <span style={{color: "##004628"}}>수정하기</span>
+          </PyeongChang_Peace>
+        </TitleBar>
+        <Title>
+            <Input
+            type='text' 
+            placeholder="제목을 작성하세요."
+            value={newNotice}
+            onChange={setNewNotice}
+            />
+        </Title>
+        <Line />
+        <Content>
+            <Textarea 
+            placeholder="내용을 작성하세요."
+            value={newNotice}
+            onChange={setNewNotice}
+            type='text'
+            ></Textarea>
+        </Content>
+        <Upload>
+            <CancelButton onClick={openModal}>취소</CancelButton>
+            <UploadButton type="submit" onClick={editNotice}>등록</UploadButton>
+        </Upload>
+        <Modal 
+        open={modalOpen} 
+        close={closeModal} 
+        header="공지 수정 취소"
+        subtext="작성 취소된 글은 저장되지 않습니다."
+        maintext="공지 글 수정을 취소하겠습니까?"
+        >
+        </Modal>
+        <Footer></Footer>
+    </>
+  );
 };
 
 export default Update;
 
 const Title = styled.div`
-    margin: 8% 10% 0;
-    justify-content: left;
-    width: 80%;
-    height: 40px;
-    border: none;
-    font-size: 20px;
+  margin: 8% 10% 0;
+  justify-content: left;
+  width: 80%;
+  height: 40px;
+  border: none;
+  font-size: 20px;
 `;
 
 const Line = styled.div`
-    border: 1px solid var(--gray);
-    width: 85%;
-    margin: 0 auto;
+  border: 1px solid var(--gray);
+  width: 85%;
+  margin: 0 auto;
 `;
 
 const Input = styled.input`
-    ::placeholder {
-        font-family: var(--pre-font);
-        color: var(--gray2);
-    }
-    width: 100%;
-    border: none;
-    font-size: 20px;
-    font-family: var(--pre-font);
-    font-weight: 400;
+  ::placeholder {
+      font-family: var(--pre-font);
+      color: var(--gray2);
+  }
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-family: var(--pre-font);
+  font-weight: 400;
 `;
 
 const Content = styled.div`
-    display: flex;
-    // justify-content: left;
-    width: 90%;
-    height: 264px;
-    border: none;
-    font-size: 22px;
-    margin: 24px auto;
+  display: flex;
+  // justify-content: left;
+  width: 90%;
+  height: 264px;
+  border: none;
+  font-size: 22px;
+  margin: 24px auto;
 `;
 
 const Textarea = styled.textarea`
-    ::placeholder {
-        font-family: var(--pre-font);
-        font-weight: 400;
-        color: var(--gray2);
-    }
-    width: 90%;
-    justify-content: left;
-    margin: 0 auto;
-    border: none;
-    font-family: var(--pre-font);
-    font-weight: 400;
+  ::placeholder {
+      font-family: var(--pre-font);
+      font-weight: 400;
+      color: var(--gray2);
+  }
+  width: 90%;
+  justify-content: left;
+  margin: 0 auto;
+  border: none;
+  font-family: var(--pre-font);
+  font-weight: 400;
 `;
 
 const Upload = styled.div`
-    display: flex;
-    margin-top: 16px;
-    margin-bottom: 10%;
+  display: flex;
+  margin-top: 16px;
+  margin-bottom: 10%;
 `;
