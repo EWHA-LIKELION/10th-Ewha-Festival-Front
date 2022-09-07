@@ -279,7 +279,7 @@ const GrayBackground = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding-top: 47px;
+  padding-top: 33px;
 
   width: 100%;
   height: 774px;

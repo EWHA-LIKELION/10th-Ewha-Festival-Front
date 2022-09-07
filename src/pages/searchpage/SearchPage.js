@@ -162,6 +162,7 @@ const Blank = styled.div`
   height: calc(100vh - 256px);
 `;
 const Navbar = styled.div`
+  padding-top: 20px;
   display: flex;
 
   align-items: center;
