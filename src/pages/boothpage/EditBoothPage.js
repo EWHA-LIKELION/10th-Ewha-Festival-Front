@@ -12,7 +12,6 @@ import TitleBar from "../../components/TitleBar";
 // import api component
 import { GetBooth, PatchBooth } from "../../api/booth";
 import { useAppSelector } from "../../redux/store";
-import { http } from "../../api/http";
 
 const EditBoothPage = () => {
   // navigate
@@ -90,7 +89,7 @@ const EditBoothPage = () => {
             value={name}
             onChange={handleName}
             placeholder="부스 이름"
-            style={{ fontFamily: "Pretendard-Regular", height: "45px" }}
+            style={{ fontFamily: "Pretendard", height: "45px" }}
           />
         </BoxWrapper>
         <BoxWrapper>
@@ -102,7 +101,7 @@ const EditBoothPage = () => {
             value={notice}
             onChange={handleNotice}
             placeholder="공지사항"
-            style={{ fontFamily: "Pretendard-Regular" }}
+            style={{ fontFamily: "Pretendard" }}
           />
         </BoxWrapper>
         <BoxWrapper>
@@ -114,7 +113,7 @@ const EditBoothPage = () => {
             value={description}
             onChange={handleDescription}
             placeholder="부스 소개"
-            style={{ fontFamily: "Pretendard-Regular", color: "var(--black)" }}
+            style={{ fontFamily: "Pretendard", color: "var(--black)" }}
           />
         </BoxWrapper>
       </ContentWrapper>
@@ -179,12 +178,12 @@ const ButtonWrapper = styled.div`
   margin: 10px 20px 20px 30px;
 
   .Cancel {
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     color: var(--green3);
   }
 
   .Approve {
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     color: var(--white);
     background: linear-gradient(90deg, #004628 0%, #107047 100%);
   }

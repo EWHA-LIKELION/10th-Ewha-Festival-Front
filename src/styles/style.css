@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+img:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 @font-face {
   font-family: "Wargika";
   src: url("./Wargika-vmVYA.woff") format("woff");
@@ -34,6 +39,5 @@
 
 @font-face {
   font-family: "PyeongChangPeaceBold";
-  src: url("../styles/font/PyeongChangPeaceBold.woff2")
-    format("woff2");
+  src: url("../styles/font/PyeongChangPeaceBold.woff2") format("woff2");
 }

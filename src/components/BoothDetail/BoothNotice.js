@@ -8,60 +8,145 @@ const BoothNotice = props => {
   return (
     <>
       <NoticeWrapper>
-        <NoticeContainer
-          onClick={() => props.handleNotice()}
-          style={{ height: props.notice ? "auto" : "35px" }}
-        >
-          <Notice src={noticeicon} />
-          <NoticeTextContainer>
-            <Pretendard size="14px" weight="500" color="var(--black)">
-              부스 공지사항
-            </Pretendard>
-            {props.notice ? (
-              <div style={{ margin: "10px 0 10px 0", wordBreak: "keep-all" }}>
+        {noticeString === "" ? (
+          <>
+            <NoticeContainer
+              onClick={() => props.handleNotice()}
+              style={{
+                height: "35px",
+              }}
+            >
+              <Notice src={noticeicon} />
+              <NoticeTextContainer>
                 <Pretendard
                   size="14px"
-                  weight="300"
+                  weight="500"
                   color="var(--black)"
-                  style={{ lineHeight: "17px" }}
+                  style={{ marginTop: "9px" }}
                 >
-                  {noticeString &&
-                    (noticeString.includes("\n") ? (
-                      <>
-                        {noticeString.split("\n").map(line => {
-                          return (
-                            <span>
-                              {line}
-                              <br />
-                            </span>
-                          );
-                        })}
-                      </>
-                    ) : (
-                      <>
-                        <span>{noticeString}</span>
-                      </>
-                    ))}
+                  부스 공지사항
                 </Pretendard>
-              </div>
-            ) : null}
-          </NoticeTextContainer>
-          {props.notice ? (
-            <Up
-              src={back}
+                {props.notice ? (
+                  <div
+                    style={{
+                      margin: noticeString === "" ? "0" : "10px 0 10px 0",
+                      wordBreak: "keep-all",
+                    }}
+                  >
+                    <Pretendard
+                      size="14px"
+                      weight="300"
+                      color="var(--black)"
+                      style={{ lineHeight: "17px" }}
+                    >
+                      {noticeString &&
+                        (noticeString.includes("\n") ? (
+                          <>
+                            {noticeString.split("\n").map(line => {
+                              return (
+                                <span>
+                                  {line}
+                                  <br />
+                                </span>
+                              );
+                            })}
+                          </>
+                        ) : (
+                          <>
+                            <span>{noticeString}</span>
+                          </>
+                        ))}
+                    </Pretendard>
+                  </div>
+                ) : null}
+              </NoticeTextContainer>
+              {props.notice ? (
+                <Up
+                  src={back}
+                  style={{
+                    margin: "11px 0 0 5px",
+                  }}
+                />
+              ) : (
+                <Down
+                  src={back}
+                  style={{
+                    margin: "11px 0 0 5px",
+                  }}
+                />
+              )}
+            </NoticeContainer>
+          </>
+        ) : (
+          <>
+            <NoticeContainer
+              onClick={() => props.handleNotice()}
               style={{
-                margin: "11px 0 0 5px",
+                height: props.notice ? "auto" : "35px",
               }}
-            />
-          ) : (
-            <Down
-              src={back}
-              style={{
-                margin: "11px 0 0 5px",
-              }}
-            />
-          )}
-        </NoticeContainer>
+            >
+              <Notice src={noticeicon} />
+              <NoticeTextContainer>
+                <Pretendard
+                  size="14px"
+                  weight="500"
+                  color="var(--black)"
+                  style={{ marginTop: "9px" }}
+                >
+                  부스 공지사항
+                </Pretendard>
+                {props.notice ? (
+                  <div
+                    style={{
+                      margin: noticeString === "" ? "0" : "10px 0 10px 0",
+                      wordBreak: "keep-all",
+                    }}
+                  >
+                    <Pretendard
+                      size="14px"
+                      weight="300"
+                      color="var(--black)"
+                      style={{ lineHeight: "17px" }}
+                    >
+                      {noticeString &&
+                        (noticeString.includes("\n") ? (
+                          <>
+                            {noticeString.split("\n").map(line => {
+                              return (
+                                <span>
+                                  {line}
+                                  <br />
+                                </span>
+                              );
+                            })}
+                          </>
+                        ) : (
+                          <>
+                            <span>{noticeString}</span>
+                          </>
+                        ))}
+                    </Pretendard>
+                  </div>
+                ) : null}
+              </NoticeTextContainer>
+              {props.notice ? (
+                <Up
+                  src={back}
+                  style={{
+                    margin: "11px 0 0 5px",
+                  }}
+                />
+              ) : (
+                <Down
+                  src={back}
+                  style={{
+                    margin: "11px 0 0 5px",
+                  }}
+                />
+              )}
+            </NoticeContainer>
+          </>
+        )}
       </NoticeWrapper>
     </>
   );
@@ -79,6 +164,7 @@ const NoticeWrapper = styled.div`
 
 const NoticeContainer = styled.div`
   width: calc(100% - 40px);
+  height: 35px;
   margin-top: 7.5px;
   display: flex;
 
@@ -93,7 +179,6 @@ const Notice = styled.img`
 `;
 
 const NoticeTextContainer = styled.div`
-  margin-top: 9px;
   width: calc(100% - 60px);
   height: auto;
 `;
