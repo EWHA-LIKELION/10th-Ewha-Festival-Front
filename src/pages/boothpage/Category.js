@@ -8,7 +8,7 @@ import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
 import { GetKeywordBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
-import Pagination from "../../components/NoticePage/Pagination";
+import Pagination from "../../components/Category/Pagination";
 
 // 데이터
 import { locationData } from "../../_mock/locations";
