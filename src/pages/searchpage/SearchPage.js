@@ -148,7 +148,7 @@ const SearchPage = () => {
           })}
         </BoothBox>
       ) : (
-        <div style={{ height: "538px" }}></div>
+        <Blank></Blank>
       )}
 
       <Footer />
@@ -158,6 +158,9 @@ const SearchPage = () => {
 
 export default SearchPage;
 
+const Blank = styled.div`
+  height: calc(100vh - 256px);
+`;
 const Navbar = styled.div`
   display: flex;
 
