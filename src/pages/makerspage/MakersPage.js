@@ -120,7 +120,7 @@ const Title = styled.div`
       margin: 2px 0 0 7.05px;
     }
   }
-  .top2 {
+  /* .top2 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +128,7 @@ const Title = styled.div`
     margin-top: 99px;
     div{
         display: flex;
-    }
+    } */
     .top1{
         width: 335px;
         font-weight: 300;
