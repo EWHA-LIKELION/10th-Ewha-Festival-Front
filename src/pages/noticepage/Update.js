@@ -24,8 +24,8 @@ import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 
 const Update = () => {
-    // 모달 컴포넌트
-    const [modalOpen, setModalOpen] = useState(false);
+  // 모달 컴포넌트
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -41,64 +41,53 @@ const Update = () => {
       navigate(-1);
   };
   
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  // let { id } = useParams();
   
-  const handleTitle = e => {
-    setTitle(e.target.title);
-    console.log(title);
-  };
-  
-  const handleContent = e => {
-    setContent(e.target.value);
-    console.log(content);
-  };
-
   // noticeId 불러오기
-  
-  const {id} = useAppSelector(state => state.notice);
-  console.log({id});
+  // const dispatch = useAppDispatch()
+  // const {id} = useAppSelector(state => state.notice);
+  let { id } = useParams();
+  const [title, setTitle] = useState({})
+  const [content, setContent] = useState({})
+  console.log(title, content, {id});
 
   // 기존 부스 정보 불러오기
-  
-  const noticeDispatch = (dispatch) => {
-    return {
-      getNotice: () => {
-        dispatch(getNotice());
-      }
-    }
-  }
-
-  useEffect(() => {
-      noticeDispatch(id);
-  }, [id]);
-//   noticeDispatch(TfService.getNotice());
-// }, [useAppDispatch]);
-
-  const getNotice = (id) => {
-    GetNotice(id).then(response => {
-      console.log(localStorage.getItem("token"));
-      console.log(response.data)
-      setTitle(response.data.title);
-      setContent(response.data.content);
-      console.log("[prevdata 조회 성공] : ", response.data);
+  useEffect(()=>{
+    GetNotice(id)
+    .then(res => {
+      console.log("공지 상세 조회 성공", res, id);
+      setTitle(res.data.title);
+      setContent(res.data.content);
+    })
+    .catch(err => {
+      console.log("공지 상세 조회 실패", err);
     });
-  };
+  },[])
   
   // 공지사항 수정 요청
-  const editNotice = e => {
+  const editNotice = () => {
     e.preventDefault();
-    console.log("공지 수정", setTitle, setContent);
+    // console.log("공지 수정", setTitle, setContent);
     PatchNotice(noticeId, title, content)
     .then(res => {
       console.log(res.data);
-      PatchNotice();
     })
     .catch(err => console.log(err.data));
   }
 
+  const [newtitle, setNewTitle] = useState("");
+  const [newcontent, setNewContent] = useState("");
+  // let { id } = useParams();
   
+  const handleTitle = e => {
+    setNewTitle(e.target.value);
+    console.log(newtitle);
+  };
+  
+  const handleContent = e => {
+    setNewContent(e.target.value);
+    console.log(newcontent);
+  };
+
 
   return (
       <>

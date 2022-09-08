@@ -24,9 +24,9 @@ export const noticeSlice = createSlice({
         state.content = action.payload.content;
     },
   },
-//   extraReducers: builder => {
-//     builder.addCase(PURGE, () => initialState);
-//   },
+  extraReducers: builder => {
+    builder.addCase(PURGE, () => initialState);
+  },
 });
 
 export const { setNotice, id } = noticeSlice.actions;

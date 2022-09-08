@@ -43,10 +43,9 @@ export const submitNotice = async (noticeId, title, content) => {
   }
 };
 
-export const PatchNotice = async (noticeId, title, content) => {
+export const PatchNotice = async (title, content) => {
   try {
     const response = await TfService.putNotice(
-      noticeId,
       title,
       content,
     );

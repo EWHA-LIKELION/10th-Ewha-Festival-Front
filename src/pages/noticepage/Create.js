@@ -18,7 +18,6 @@ import TitleBar from "../../components/TitleBar";
 import {submitNotice} from "../../api/tf"
 
 // images
-import leftarrow from "../../images/notice/leftarrow.png";
 import { Value } from "sass";
 import GrayButton from "../../components/Modal/GrayButton";
 import GreenButton from "../../components/MainPage/GreenButton";
