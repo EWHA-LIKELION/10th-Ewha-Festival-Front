@@ -216,7 +216,7 @@ const MainPage = () => {
           style={{ textAlign: "center" }}
           weight="500"
           size="10px"
-          height="12px"
+          height="18px"
           color="#585858"
           margin="16px auto 0 auto"
         >
