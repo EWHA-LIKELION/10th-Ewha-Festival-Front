@@ -18,8 +18,9 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
-    "sass": "^1.54.4",
+    "sass": "^1.54.9",
     "styled-components": "^5.3.5",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,5 +43,10 @@
   },
   "devDependencies": {
     "prettier": "^2.7.1"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
