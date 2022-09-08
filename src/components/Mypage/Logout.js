@@ -9,11 +9,11 @@ const Logout = () => {
 
   // 로그아웃 함수
   const Logout = async () => {
-    navigate("/");
-    window.location.reload();
     await persistor.purge();
     window.localStorage.removeItem("token");
     console.log("마이페이지 로그아웃");
+    navigate("/");
+    window.location.reload();
   };
 
   return (
