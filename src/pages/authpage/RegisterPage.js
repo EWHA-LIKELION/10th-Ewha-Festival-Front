@@ -8,10 +8,10 @@ import axios from "axios";
 //images
 import title from "../../images/main/title.svg";
 import { FiUser } from "react-icons/fi";
-import lockIcon from "../../images/signup/lockIcon.svg";
+import { MdOutlineLockOpen } from "react-icons/md";
 import { IoMdCheckmarkCircle } from "react-icons/io";
-import flowerIcon from "../../images/signup/flowerIcon.svg";
-import keyIcon from "../../images/signup/keyIcon.svg";
+import { BsFlower2 } from "react-icons/bs";
+import {MdOutlineVpnKey} from "react-icons/md";
 import { AiFillInfoCircle } from "react-icons/ai";
 // 모달창
 import RegisterModal from "../../components/Register/RegisterModal";
@@ -58,6 +58,7 @@ const RegisterPage = () => {
               .then(res => {
                 dispatch(setUser(res.data));
                 console.log(res.data);
+                window.location.reload();
                 navigate("/"); //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
               })
               .catch(error => console.log(error));
@@ -113,9 +114,7 @@ const RegisterPage = () => {
               />
             </IdWrapper>
             <PwWrapper>
-              <object type="image/svg+xml" data={lockIcon} className="lockIcon">
-                <img src={lockIcon} />
-              </object>
+              <MdOutlineLockOpen className="lockIcon"/>
               <input
                 value={password}
                 className="PW"
@@ -126,9 +125,7 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <PwWrapper>
-              <object type="image/svg+xml" data={lockIcon} className="lockIcon">
-                <img src={lockIcon} />
-              </object>
+                <MdOutlineLockOpen className="lockIcon"/>
               <input
                 value={password2}
                 className="PW2"
@@ -146,9 +143,7 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <NameWrapper>
-              <object type="image/svg+xml" data={flowerIcon} className="flowerIcon">
-                <img src={flowerIcon} />
-              </object>
+              <BsFlower2 className="flowerIcon"/>
               <input
                 value={name}
                 placeholder="닉네임"
@@ -156,9 +151,7 @@ const RegisterPage = () => {
               />
             </NameWrapper>
             <SecreteWrapper>
-              <object type="image/svg+xml" data={keyIcon} className="keyIcon">
-                <img src={keyIcon} />
-              </object>
+              <MdOutlineVpnKey className="keyIcon"/>
               <input
                 value={secreteWord}
                 placeholder="비밀단어"
@@ -227,7 +220,8 @@ const IdWrapper = styled.div`
     width: 294px;
   }
   .idIcon {
-    width: 22px;
+    width: 18px;
+    height: 18px;
     position: absolute;
     z-index: 2;
     margin: 11px 0 0 12px;
@@ -238,8 +232,9 @@ const PwWrapper = styled.div`
   input {
     margin-top: 16px;
   }
-  .lockIcon{
+  .lockIcon {
     width: 18px;
+    height: 18px;
     position: absolute;
     z-index: 2;
     margin: 27px 0 0 12px;
@@ -257,8 +252,10 @@ const NameWrapper = styled.div`
   input {
     width: 294px;
   }
-  .flowerIcon{
+  .flowerIcon {
     width: 18px;
+    height: 18px;
+    color: #797878;
     position: absolute;
     z-index: 2;
     margin: 11px 0 0 12px;
@@ -270,8 +267,10 @@ const SecreteWrapper = styled.div`
   input {
     width: 262px;
   }
-  .keyIcon{
+  .keyIcon {
     width: 18px;
+    height: 18px;
+    color: #797878;
     position: absolute;
     z-index: 2;
     margin: 11px 0 0 12px;

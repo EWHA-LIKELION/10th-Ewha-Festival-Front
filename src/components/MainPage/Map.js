@@ -43,6 +43,7 @@ const Map = () => {
 export default Map;
 
 const Wrapper = styled.div`
+  margin-top: 10px;
   position: relative;
   width: 297px;
   height: 300px;

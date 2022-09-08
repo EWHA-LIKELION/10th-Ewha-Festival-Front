@@ -2,11 +2,11 @@ import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { http } from "../http";
 
 const BoothService = {
-// 부스 검색
-  getSearchBooth: (keyword) =>  http.get(`/booths/search/?keyword=${keyword}`),
-  // 요일, 장소에 따른 부스 조회 
-  getKeywordBooth: (day, college) =>
-    http.get(`/booths?day=${day}&college=${college}`),
+  // 부스 검색
+  getSearchBooth: keyword => http.get(`/booths/search/?keyword=${keyword}`),
+  // 요일, 장소에 따른 부스 조회
+  getKeywordBooth: (day, college, page) =>
+    http.get(`/booths?day=${day}&college=${college}&page=${page}`),
   likeBooth: boothId =>
     http.post(`/booths/${boothId}/likes/
 `),

@@ -16,9 +16,9 @@ export const GetSearchBooth = async keyword => {
   }
 };
 
-export const GetKeywordBooth = async (day, college) => {
+export const GetKeywordBooth = async (day, college, page) => {
   try {
-    const response = await BoothService.getKeywordBooth(day, college);
+    const response = await BoothService.getKeywordBooth(day, college, page);
     return Promise.resolve(response);
   } catch (error) {
     if (
