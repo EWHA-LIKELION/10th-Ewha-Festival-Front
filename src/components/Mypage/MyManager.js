@@ -200,8 +200,10 @@ const Titlebox = styled.div`
 const Userbox = styled.div`
   background-image: url(${userbg});
   width: 268px;
-  height: 82px;
+  height: 105px;
   margin: 33px auto;
+  background-repeat: no-repeat;
+  text-align: center;
   .nickname {
     margin: 23px auto 2px;
     color: #686868;

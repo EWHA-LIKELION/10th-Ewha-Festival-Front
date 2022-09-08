@@ -53,7 +53,6 @@ const UserMy = () => {
           <Pretendard>{username}</Pretendard>
         </p>
       </Userbox>
-
       <BoothBox>
         <Titlebox>
           <Likebooth src={likebooth} />
