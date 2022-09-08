@@ -36,7 +36,7 @@ export const DeleteNotice = async noticeId => {
 
 export const submitNotice = async (noticeId, title, content) => {
   try {
-    const response = await TfService.submitPost(noticeId, title, content);
+    const response = await TfService.postNotice(noticeId, title, content);
     return Promise.resolve(response);
   } catch (error) {
     // if (

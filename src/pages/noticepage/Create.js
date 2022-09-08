@@ -15,6 +15,7 @@ import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
+import {submitNotice} from "../../api/tf"
 
 // images
 import leftarrow from "../../images/notice/leftarrow.png";
@@ -65,7 +66,7 @@ const Create = () => {
 
     function postNotices(e) { 
         e.preventDefault();
-        postNotice(title, content);
+        submitNotice(title, content);
         // .post('/notices/', {
         //     title:notice.title,
         //     content:notice.content
@@ -154,7 +155,7 @@ const Create = () => {
                 <Line />
                 <Upload>
                     <CancelButton onClick={openModal}>취소</CancelButton>
-                    <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
+                    <UploadButton type="submit" onClick={postNotices}>등록</UploadButton>
                 </Upload>
                 <Modal 
                 open={modalOpen} 
