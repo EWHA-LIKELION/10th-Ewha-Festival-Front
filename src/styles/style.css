@@ -2,6 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* -webkit-touch-callout: none; */
+}
+
+img:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @font-face {
@@ -34,6 +40,5 @@
 
 @font-face {
   font-family: "PyeongChangPeaceBold";
-  src: url("../styles/font/PyeongChangPeaceBold.woff2")
-    format("woff2");
+  src: url("../styles/font/PyeongChangPeaceBold.woff2") format("woff2");
 }

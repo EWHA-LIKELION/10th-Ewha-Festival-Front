@@ -55,7 +55,9 @@ const offset = (page - 1) * limit;
       </TitleBar>
       <SubTitleBox>
         <SubTitle>
+        <object type="image/svg+xml" data={star3}>
           <img src={star3} />
+        </object>
           <PyeongChang
             color="var(--orange)"
             weight="700"
@@ -64,11 +66,15 @@ const offset = (page - 1) * limit;
           >
             NOTICE
           </PyeongChang>
+          <object type="image/svg+xml" data={star3}>
           <img src={star3} />
+        </object>
         </SubTitle>
         {isTf ? <NoticeWrite onClick={Write}>
           <p>공지 작성하기 </p>
+          <object type="image/svg+xml" data={write}>
           <img src={write} />
+        </object>
         </NoticeWrite>
         : null}
       </SubTitleBox>

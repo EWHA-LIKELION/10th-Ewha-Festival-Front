@@ -1,5 +1,5 @@
 export const locationData = [
-  { id: 1, name: "정문", selected: true },
+  { id: 1, name: "정문", selected: false },
   { id: 2, name: "교육관", selected: false },
   { id: 3, name: "대강당", selected: false },
   { id: 4, name: "후윳길", selected: false },

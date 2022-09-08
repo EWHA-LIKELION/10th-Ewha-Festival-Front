@@ -6,20 +6,26 @@ import {
   NanumSquare,
   Pretendard,
 } from "../../components/Text";
-// import { defaultMaxListeners } from "events";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 // components
 import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
+import TitleBar from "../../components/TitleBar";
+import {http} from "../../api/http";
+import TfService from "../../api/services/tfservice";
+import { noticeData } from "../../_mock/noticeData";
+import { GetNotice, submitNotice } from "../../api/tf";
+import { useAppSelector } from "../../redux/store";
 
-// images
-import leftarrow from "../../images/notice/leftarrow.png";
-// import { text } from "body-parser";
 
-const Create = props => {
-  const [modalOpen, setModalOpen] = useState(false);
+
+const Update = () => {
+    // 모달 컴포넌트
+    const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -28,97 +34,140 @@ const Create = props => {
     setModalOpen(false);
   };
 
+  // 모달 취소 버튼 누를 시 이동 
+  const navigate = useNavigate();
+
+  const handleBackButton = () => {
+      navigate(-1);
+  };
+  
+  const [notice, setNotice] = useState({});
+  let { id } = useParams();
+  
+  const handleTitle = e => {
+    setNotice(e.target.value);
+    console.log(res.data.data);
+  };
+  
+  const handleContent = e => {
+    setNotice(e.target.value);
+    console.log(res.data.data);
+  };
+
+  // 공지 가져오기 api
+  const noticeId = useAppSelector(state => state.noticeId)
+  console.log(noticeId);
+  useEffect(()=>{
+    getPrev(noticeId)
+  },[noticeId]);
+
+  const getPrev = (id) => {
+    GetNotice(id)
+    .then(res => {
+      console.log("공지 상세 조회 성공", res, id);
+      setNotice(res.data.data);
+    })
+    .catch(err => {
+      console.log("공지 상세 조회 실패", err);
+    });
+  }
+
+
+  // 공지사항 수정 요청
+  const [newNotice, setNewNotice] = useState("");
+  const editNotice = e => {
+    e.preventDefault();
+    console.log("공지 수정", newNotice);
+    PatchNotice(id, newNotice)
+      .then(res => {
+        console.log(res.data);
+        GetNotice();
+      })
+      .catch(err => console.log(err.data));
+    setNewNotice("");
+  }
+
   return (
-    <>
-      <TopBar>
-        <img src={leftarrow} height="17px" />
-        <PyeongChang_Peace
+      <>
+        <TitleBar>
+          <PyeongChang_Peace 
           size="22px"
           weight="700"
           height="29px"
           letter-spacing="0em"
-        >
-          <span style={{ color: "#00A428" }}>공</span>
-          <span style={{ color: "#007A28" }}>지 </span>
-          <span style={{ color: "##004628" }}>수정하기</span>
-        </PyeongChang_Peace>
-        <div color="#ffffff"></div>
-      </TopBar>
-      <CreateSpace>
+          >
+              <span style={{color: "#00A428"}}>공</span>
+              <span style={{color: "#007A28"}}>지 </span>
+              <span style={{color: "##004628"}}>수정하기</span>
+          </PyeongChang_Peace>
+        </TitleBar>
         <Title>
-          <Input type="text" placeholder="제목을 작성하세요." />
+            <Input
+            type='text' 
+            placeholder="제목을 작성하세요."
+            value={newNotice}
+            onChange={setNewNotice}
+            />
         </Title>
+        <Line />
         <Content>
-          <Textarea placeholder="내용을 작성하세요."></Textarea>
+            <Textarea 
+            placeholder="내용을 작성하세요."
+            value={newNotice}
+            onChange={setNewNotice}
+            type='text'
+            ></Textarea>
         </Content>
-      </CreateSpace>
-      <Upload>
-        <CancelStyle>
-          <CancelButton onClick={openModal}>취소</CancelButton>
-        </CancelStyle>
-        <UploadStyle>
-          <UploadButton>등록</UploadButton>
-        </UploadStyle>
-      </Upload>
-      <Modal open={modalOpen} close={closeModal} header="공지 작성 취소">
-        <div className="warning">작성 취소된 글은 저장되지 않습니다.</div>
-        <div className="asking">공지 글 수정을 취소하시겠습니까?</div>
-      </Modal>
-      <Footer></Footer>
+        <Upload>
+            <CancelButton onClick={openModal}>취소</CancelButton>
+            <UploadButton type="submit" onClick={editNotice}>등록</UploadButton>
+        </Upload>
+        <Modal 
+        open={modalOpen} 
+        close={closeModal} 
+        header="공지 수정 취소"
+        subtext="작성 취소된 글은 저장되지 않습니다."
+        maintext="공지 글 수정을 취소하겠습니까?"
+        >
+        </Modal>
+        <Footer></Footer>
     </>
   );
 };
 
-export default Create;
-
-const TopBar = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #eaeaea;
-`;
-
-// const BackButton = styled.img`
-//     position: relative;
-//     margin-top: 10px;
-// `
-
-const CreateSpace = styled.div`
-  width: 335px;
-  margin: 0 auto;
-  border-bottom: 1px solid #eaeaea;
-`;
+export default Update;
 
 const Title = styled.div`
-  display: flex;
+  margin: 8% 10% 0;
   justify-content: left;
-  width: 335px;
+  width: 80%;
   height: 40px;
   border: none;
-  font-size: 22px;
-  margin: 24px auto;
-  border-bottom: solid 1px #eaeaea;
+  font-size: 20px;
+`;
+
+const Line = styled.div`
+  border: 1px solid var(--gray);
+  width: 85%;
+  margin: 0 auto;
 `;
 
 const Input = styled.input`
   ::placeholder {
-    font-family: var(--pre-font);
-    color: var(--gray2);
+      font-family: var(--pre-font);
+      color: var(--gray2);
   }
-  width: 335px;
+  width: 100%;
   border: none;
-  font-size: 18px;
-  margin-left: 15px;
+  font-size: 20px;
   font-family: var(--pre-font);
   font-weight: 400;
 `;
 
 const Content = styled.div`
   display: flex;
-  justify-content: left;
-  width: 340px;
+  // justify-content: left;
+  width: 90%;
   height: 264px;
   border: none;
   font-size: 22px;
@@ -127,39 +176,20 @@ const Content = styled.div`
 
 const Textarea = styled.textarea`
   ::placeholder {
-    font-family: var(--pre-font);
-    font-weight: 400;
-    color: var(--gray2);
+      font-family: var(--pre-font);
+      font-weight: 400;
+      color: var(--gray2);
   }
-  width: 87%;
+  width: 90%;
+  justify-content: left;
   margin: 0 auto;
   border: none;
-  width: 307px;
   font-family: var(--pre-font);
   font-weight: 400;
 `;
 
 const Upload = styled.div`
-  justify-content: flex-end;
-  width: fit-content;
-  margin-top: 16px;
-  margin-bottom: 50px;
-  margin-left: 10px;
-  position: relative;
   display: flex;
-`;
-
-const UploadStyle = styled.button`
-  position: absolute;
-  left: 300px;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-`;
-const CancelStyle = styled.button`
-  position: absolute;
-  left: 234px;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
+  margin-top: 16px;
+  margin-bottom: 10%;
 `;

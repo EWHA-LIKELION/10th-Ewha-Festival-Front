@@ -1,18 +1,70 @@
+import React, { Component, useState, useEffect } from "react";
 import styled from "styled-components";
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
-import React from "react";
 
 const BoothInfo = props => {
   const infoString = props.infoString;
+
+  const [isOverflow, setIsOverflow] = useState(false);
+  useEffect(() => {
+    console.log("[Overflow]", isOverflow);
+  });
+
+  class OverflowText extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        overflowActive: false,
+      };
+    }
+    isEllipsisActive(e) {
+      return e.offsetHeight < e.scrollHeight - 5;
+    }
+    componentDidMount() {
+      this.setState({ overflowActive: this.isEllipsisActive(this.span) });
+      setIsOverflow(this.isEllipsisActive(this.span));
+    }
+    render() {
+      return (
+        <div style={{ position: "absolute", zIndex: "-100", width: "100%" }}>
+          <InfoTextContainer>
+            <ShortInfo ref={ref => (this.span = ref)} style={{ color: "#fff" }}>
+              {infoString &&
+                (infoString.includes("\n") ? (
+                  <>
+                    {infoString.split("\n").map(line => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    <span>{infoString}</span>
+                  </>
+                ))}
+            </ShortInfo>
+          </InfoTextContainer>
+        </div>
+      );
+    }
+  }
+
   return (
     <>
       <InfoWrapper>
-        <div onClick={() => props.handleInfo()}>
+        <OverflowText />
+        <div onClick={() => (isOverflow ? props.handleInfo() : null)}>
           <PartTitle title="부스 소개" />
-          <InfoUpDown>
-            {props.info ? <Up src={back} /> : <Down src={back} />}
-          </InfoUpDown>
+          {isOverflow ? (
+            <InfoUpDown>
+              {props.info ? <Up src={back} /> : <Down src={back} />}
+            </InfoUpDown>
+          ) : null}
         </div>
         <InfoTextContainer>
           {props.info ? (
@@ -78,6 +130,7 @@ const Down = styled.img`
 
 const InfoWrapper = styled.div`
   position: relative;
+  background-color: #fff;
 `;
 
 const InfoUpDown = styled.div`
@@ -97,7 +150,7 @@ const InfoTextContainer = styled.div`
 `;
 
 const ShortInfo = styled.p`
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-size: 14px;
   font-weight: 300;
   color: var(--black);
@@ -113,7 +166,7 @@ const ShortInfo = styled.p`
 `;
 
 const LongInfo = styled.p`
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard";
   font-size: 14px;
   font-weight: 300;
   color: var(--black);
