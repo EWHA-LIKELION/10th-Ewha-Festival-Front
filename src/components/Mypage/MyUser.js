@@ -64,8 +64,7 @@ const UserMy = () => {
       </Userbox>
       <BoothBox>
         <Titlebox>
-          <Likebooth src={likebooth} />
-
+          <Likebooth type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -172,7 +171,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.img`
+const Likebooth = styled.object`
+  background-image: url(${likebooth});
   width: 17px;
   height: 28px;
   margin-bottom: 7px;

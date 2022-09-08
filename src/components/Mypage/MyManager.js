@@ -83,7 +83,7 @@ const MyManager = () => {
       </EditBooth>
       <BoothBox>
         <Titlebox>
-          <Likebooth src={likebooth} />
+          <Likebooth type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -196,11 +196,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.img`
+const Likebooth = styled.object`
   width: 17px;
   height: 28px;
   margin-right: 7px;
   margin-bottom: 7px;
+  background-image: url(${likebooth});
 `;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
