@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
-
-import { useAppSelector } from "../../redux/store";
+import { http } from "../../api/http";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -20,16 +19,26 @@ import { GetLikes } from "../../api/user";
 const UserMy = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
-  const { nickname } = useAppSelector(state => state.user);
-  const { username } = useAppSelector(state => state.user);
+  const [nickname, setnickname] = useState();
+  const [username, setusername] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    http
+      .get("/accounts/")
+      .then(res => {
+        console.log("[로그인 유저]\n", res.data.data);
+        setnickname(res.data.data.nickname);
+        setusername(res.data.data.username);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const Detail = id => {
     console.log("페이지 이동");
     navigate(`/category/detail/${id}`);
   };
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
         console.log("좋아요한 부스 조회 성공", res);
@@ -116,7 +125,6 @@ const LikeImg = styled.img`
 
 const BootInfo = styled.div`
   width: 176px;
-
   padding: 12px 0 12px 0;
   .num {
     font-size: 10px;
@@ -124,14 +132,12 @@ const BootInfo = styled.div`
     font-weight: 400;
     color: var(--orange);
   }
-
   .name {
     font-size: 15px;
     font-style: "Pretendard-Regular";
     font-weight: 700;
     color: var(--green3);
   }
-
   .info {
     font-size: 11px;
     font-style: "Pretendard-Regular";
@@ -155,16 +161,13 @@ const BoothBox = styled.div`
   margin: 0 auto 50px auto;
   width: 335px;
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   padding-top: 26px;
 `;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
 `;
@@ -180,11 +183,12 @@ const Titlebox = styled.div`
   display: flex;
 `;
 
-const Userbox = styled.div`
+const Userbox = styled.object`
   background-image: url(${userbg});
+  background-repeat: no-repeat;
   width: 268px;
-  height: 82px;
   margin: 33px auto;
+  text-align: center;
   .nickname {
     margin: 23px auto 2px;
     color: #686868;

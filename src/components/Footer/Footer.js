@@ -10,19 +10,19 @@ const Footer = () => {
     <Wrapper>
       <hr style={{ marginBottom: "36px", backgroundColor: "#A5A5A5" }} />
       <a
-        href="https://open.kakao.com/o/sUzTxYue"
+        href="https://open.kakao.com/o/sgTvYBZd"
         style={{ textDecoration: "none" }}
       >
         <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
-          멋쟁이 사자처럼 10기 | https://open.kakao.com/o/sUzTxYue
+          멋쟁이 사자처럼 10기 | https://open.kakao.com/o/sgTvYBZd
         </Pretendard>
       </a>
       <a
-        href="https://open.kakao.com/o/sUzTxYue"
+        href="https://open.kakao.com/o/sgTvYBZd"
         style={{ textDecoration: "none" }}
       >
         <Pretendard color="#6C6C6C" weight="500" size="11px" height="18px">
-          Likelion Ewha - 10th | https://open.kakao.com/o/sUzTxYue
+          Likelion Ewha - 10th | https://open.kakao.com/o/sgTvYBZd
         </Pretendard>
       </a>
 

@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { useNavigate } from "react-router-dom";
 
-import { useAppSelector } from "../../redux/store";
+import { http } from "../../api/http";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -22,8 +22,8 @@ import { GetLikes } from "../../api/user";
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
-  const { nickname } = useAppSelector(state => state.user);
-  const { username } = useAppSelector(state => state.user);
+  const [nickname, setnickname] = useState();
+  const [username, setusername] = useState();
   const navigate = useNavigate();
 
   const goEditbooth = () => {
@@ -35,6 +35,17 @@ const MyManager = () => {
   const Detail = id => {
     navigate(`/category/detail/${id}`);
   };
+  useEffect(() => {
+    http
+      .get("/accounts/")
+      .then(res => {
+        console.log("[로그인 유저]\n", res.data.data);
+        setnickname(res.data.data.nickname);
+        setusername(res.data.data.username);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
@@ -208,8 +219,7 @@ const Userbox = styled.object`
     margin: 23px auto 2px;
     color: #686868;
     font-weight: 700;
-    font-size: 30px;
-    width: fit-content;
+    font-size: 25px;
   }
   .user {
     font-weight: 500;

@@ -58,6 +58,7 @@ const RegisterPage = () => {
               .then(res => {
                 dispatch(setUser(res.data));
                 console.log(res.data);
+                window.location.reload();
                 navigate("/"); //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
               })
               .catch(error => console.log(error));
@@ -146,7 +147,11 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <NameWrapper>
-              <object type="image/svg+xml" data={flowerIcon} className="flowerIcon">
+              <object
+                type="image/svg+xml"
+                data={flowerIcon}
+                className="flowerIcon"
+              >
                 <img src={flowerIcon} />
               </object>
               <input
@@ -238,7 +243,7 @@ const PwWrapper = styled.div`
   input {
     margin-top: 16px;
   }
-  .lockIcon{
+  .lockIcon {
     width: 18px;
     position: absolute;
     z-index: 2;
@@ -257,7 +262,7 @@ const NameWrapper = styled.div`
   input {
     width: 294px;
   }
-  .flowerIcon{
+  .flowerIcon {
     width: 18px;
     position: absolute;
     z-index: 2;
@@ -270,7 +275,7 @@ const SecreteWrapper = styled.div`
   input {
     width: 262px;
   }
-  .keyIcon{
+  .keyIcon {
     width: 18px;
     position: absolute;
     z-index: 2;
