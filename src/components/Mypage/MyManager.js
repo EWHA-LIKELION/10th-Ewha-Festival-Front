@@ -197,7 +197,7 @@ const Titlebox = styled.div`
   margin-top: 22px;
 `;
 
-const Userbox = styled.div`
+const Userbox = styled.object`
   background-image: url(${userbg});
   width: 268px;
   height: 105px;
