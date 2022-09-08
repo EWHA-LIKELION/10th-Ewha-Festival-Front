@@ -489,4 +489,6 @@ const Back = styled.img`
 const Search = styled.img`
   width: 17px;
   height: 17px;
+
+  margin-top: 3px;
 `;
