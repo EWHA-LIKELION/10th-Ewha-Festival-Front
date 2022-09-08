@@ -1,11 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
-import card1 from "../../images/main/slider/card1.svg";
-import card2 from "../../images/main/slider/card2.svg";
-import card3 from "../../images/main/slider/card3.svg";
-import card4 from "../../images/main/slider/card4.svg";
-
 import test1 from "../../images/main/slider/test1.png";
 import test2 from "../../images/main/slider/test2.png";
 import test3 from "../../images/main/slider/test3.png";
