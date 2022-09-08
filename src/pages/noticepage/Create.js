@@ -67,6 +67,8 @@ const Create = () => {
     function postNotices(e) { 
         e.preventDefault();
         submitNotice(title, content);
+        navigate("/notice");
+        window.location.reload();
         // .post('/notices/', {
         //     title:notice.title,
         //     content:notice.content
