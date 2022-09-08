@@ -8,6 +8,7 @@ import {
 } from "../../components/Text";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 // components
 import Footer from "../../components/Footer/Footer";
@@ -17,9 +18,8 @@ import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
 import {http} from "../../api/http";
 import TfService from "../../api/services/tfservice";
-import { noticeData } from "../../_mock/noticeData";
-import { GetNotice, submitNotice } from "../../api/tf";
-import { useAppSelector } from "../../redux/store";
+import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 
 
@@ -41,51 +41,64 @@ const Update = () => {
       navigate(-1);
   };
   
-  const [notice, setNotice] = useState({});
-  let { id } = useParams();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // let { id } = useParams();
   
   const handleTitle = e => {
-    setNotice(e.target.value);
-    console.log(res.data.data);
+    setTitle(e.target.title);
+    console.log(title);
   };
   
   const handleContent = e => {
-    setNotice(e.target.value);
-    console.log(res.data.data);
+    setContent(e.target.value);
+    console.log(content);
   };
 
-  // 공지 가져오기 api
-  const noticeId = useAppSelector(state => state.noticeId)
-  console.log(noticeId);
-  useEffect(()=>{
-    getPrev(noticeId)
-  },[noticeId]);
+  // noticeId 불러오기
+  
+  const {id} = useAppSelector(state => state.notice);
+  console.log({id});
 
-  const getPrev = (id) => {
-    GetNotice(id)
-    .then(res => {
-      console.log("공지 상세 조회 성공", res, id);
-      setNotice(res.data.data);
-    })
-    .catch(err => {
-      console.log("공지 상세 조회 실패", err);
-    });
+  // 기존 부스 정보 불러오기
+  
+  const noticeDispatch = (dispatch) => {
+    return {
+      getNotice: () => {
+        dispatch(getNotice());
+      }
+    }
   }
 
+  useEffect(() => {
+      noticeDispatch(id);
+  }, [id]);
+//   noticeDispatch(TfService.getNotice());
+// }, [useAppDispatch]);
 
+  const getNotice = (id) => {
+    GetNotice(id).then(response => {
+      console.log(localStorage.getItem("token"));
+      console.log(response.data)
+      setTitle(response.data.title);
+      setContent(response.data.content);
+      console.log("[prevdata 조회 성공] : ", response.data);
+    });
+  };
+  
   // 공지사항 수정 요청
-  const [newNotice, setNewNotice] = useState("");
   const editNotice = e => {
     e.preventDefault();
-    console.log("공지 수정", newNotice);
-    PatchNotice(id, newNotice)
-      .then(res => {
-        console.log(res.data);
-        GetNotice();
-      })
-      .catch(err => console.log(err.data));
-    setNewNotice("");
+    console.log("공지 수정", setTitle, setContent);
+    PatchNotice(noticeId, title, content)
+    .then(res => {
+      console.log(res.data);
+      PatchNotice();
+    })
+    .catch(err => console.log(err.data));
   }
+
+  
 
   return (
       <>
@@ -105,16 +118,16 @@ const Update = () => {
             <Input
             type='text' 
             placeholder="제목을 작성하세요."
-            value={newNotice}
-            onChange={setNewNotice}
+            value='title'
+            onChange={handleTitle}
             />
         </Title>
         <Line />
         <Content>
             <Textarea 
             placeholder="내용을 작성하세요."
-            value={newNotice}
-            onChange={setNewNotice}
+            value='content'
+            onChange={handleContent}
             type='text'
             ></Textarea>
         </Content>
