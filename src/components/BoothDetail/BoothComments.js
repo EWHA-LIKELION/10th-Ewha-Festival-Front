@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import { GetBooth } from "../../api/booth";
 import { SubmitComment } from "../../api/booth";
-import { useAppDispatch } from "../../redux/store";
 import { http } from "../../api/http";
 import { DeleteCommentA } from "../../api/booth";
 
@@ -27,9 +26,6 @@ const BoothComments = () => {
     }
   }, []);
   useEffect(() => {
-    console.log("로그인? ", isLogin);
-  }, [isLogin]);
-  useEffect(() => {
     if (isLogin === true) {
       document.getElementById("input").disabled = false;
     }
@@ -39,20 +35,17 @@ const BoothComments = () => {
   });
 
   const [thisUser, setThisUser] = useState({});
-  const dispatch = useAppDispatch();
   const [thisBoothUserId, setThisBoothUserId] = useState();
   const [thisComments, setThisComments] = useState([]);
+
   const getComments = () => {
     GetBooth(id)
       .then(res => {
-        console.log("부스 상세 조회 성공", res);
-        console.log("[부스 관리자 ID] ", res.data.data.user);
         setThisBoothUserId(res.data.data.user);
-        console.log("[댓글]\n", res.data.data.comments);
         setThisComments(res.data.data.comments);
       })
       .catch(err => {
-        console.log("부스 상세 조회 실패", err);
+        alert("부스 상세 조회 실패", err);
       });
   };
 
@@ -61,11 +54,11 @@ const BoothComments = () => {
     http
       .get("/accounts/")
       .then(res => {
-        console.log(res.data);
-        console.log("[로그인 유저]\n", res.data.data);
-        dispatch(setThisUser(res.data.data));
+        setThisUser(res.data.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => alert(err));
+    setDeleteModal(false);
+    setInputModal(false);
   }, []);
 
   const detBooth = cUserId => {
@@ -85,20 +78,17 @@ const BoothComments = () => {
   };
 
   const [currentId, setCurrentId] = useState("");
-
   const PreDeleteComment = cId => {
     openDeleteModal();
     setCurrentId(cId);
   };
 
   const DeleteComment = cId => {
-    console.log(cId, "댓글 삭제");
     DeleteCommentA(id, cId)
       .then(res => {
-        console.log(res.data);
         getComments();
       })
-      .catch(err => console.log(err.data));
+      .catch(err => alert(err.data));
     closeDeleteModal();
   };
 
@@ -116,22 +106,15 @@ const BoothComments = () => {
     if (newComment === "") {
       setInputModal(true);
     } else {
-      console.log("댓글 작성", newComment);
       SubmitComment(id, newComment)
         .then(res => {
-          console.log(res.data);
           getComments();
         })
-        .catch(err => console.log(err.data));
+        .catch(err => alert(err.data));
       setIsAdd(true);
       setNewComment("");
     }
   };
-
-  useEffect(() => {
-    setDeleteModal(false);
-    setInputModal(false);
-  }, []);
 
   const endRef = useRef(null);
   const scrollToBottom = () => {
@@ -263,7 +246,6 @@ const CommentContainer = styled.div`
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 15px;
-
   background-color: var(--gray0);
   border-radius: 10px;
 `;
@@ -271,8 +253,9 @@ const CommentContainer = styled.div`
 const Delete = styled.img`
   position: absolute;
   right: 5px;
-  width: 8px;
-  height: 10px;
+  width: 10px;
+  height: 12.5px;
+  -webkit-user-drag: none;
   &:hover {
     cursor: pointer;
   }
@@ -310,7 +293,6 @@ const CommentInput = styled.input`
   &:focus {
     outline: none;
   }
-
   font-family: "Pretendard";
   font-weight: 300;
   font-size: 14px;
@@ -328,4 +310,5 @@ const WriteBtn = styled.button`
 const Write = styled.img`
   width: 14px;
   height: 13.5px;
+  -webkit-user-drag: none;
 `;

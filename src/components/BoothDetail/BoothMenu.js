@@ -13,12 +13,10 @@ const BoothMenu = () => {
   useEffect(() => {
     GetBooth(id)
       .then(res => {
-        console.log("부스 상세 조회 성공", res);
-        console.log("[메뉴]\n", res.data.data.menus);
         setThisMenus(res.data.data.menus);
       })
       .catch(err => {
-        console.log("부스 상세 조회 실패", err);
+        alert("부스 상세 조회 실패", err);
       });
   }, []);
 
