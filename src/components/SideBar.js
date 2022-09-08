@@ -129,7 +129,7 @@ const TopLogo = styled.img`
 `;
 const LinkWrapper = styled.div`
   width: 165px;
-  height: 280px;
+  height: 330px;
   margin-top: 40px;
 
   display: flex;

@@ -37,6 +37,7 @@ const Star = styled.img`
   width: 18px;
   height: 30px;
   margin-right: 10px;
+  -webkit-user-drag: none;
 `;
 
 const Border = styled.div`
