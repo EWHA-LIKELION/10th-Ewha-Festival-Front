@@ -22,7 +22,7 @@ import booththumnail from "../../images/default.png";
 import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
-  const [booths, setBooths] = useState();
+  const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const [nickname, setnickname] = useState();
   const [username, setusername] = useState();
