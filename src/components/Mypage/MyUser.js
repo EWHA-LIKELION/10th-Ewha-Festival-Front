@@ -77,7 +77,7 @@ const UserMy = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-        {booths.map(b => {
+        {booths?.map(b => {
           const description = b.description?.substr(0, 27);
           if (description?.includes("\n")) {
             var info = description.split("\n")[0];
