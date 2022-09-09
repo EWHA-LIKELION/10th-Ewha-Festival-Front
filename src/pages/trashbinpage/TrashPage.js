@@ -47,32 +47,31 @@ const TrashPage = () => {
           </PyeongChang_Peace>
         </Tbox>
         <MapBox>
-          <Mapimg>
-            {trashs.map(trash => {
-              if (trash.selected === true) {
-                return (
-                  <Pin
-                    key={trash.id}
-                    top={trash.top}
-                    left={trash.left}
-                    src={pinbtn}
-                    onClick={() => selectPla(trash.id)}
-                    selected
-                  />
-                );
-              } else {
-                return (
-                  <Pin
-                    key={trash.id}
-                    top={trash.top}
-                    left={trash.left}
-                    src={pinbtn}
-                    onClick={() => selectPla(trash.id)}
-                  />
-                );
-              }
-            })}
-          </Mapimg>
+          <object data={Map} type="image/svg+xml" />
+          {trashs.map(trash => {
+            if (trash.selected === true) {
+              return (
+                <Pin
+                  key={trash.id}
+                  top={trash.top}
+                  left={trash.left}
+                  src={pinbtn}
+                  onClick={() => selectPla(trash.id)}
+                  selected
+                />
+              );
+            } else {
+              return (
+                <Pin
+                  key={trash.id}
+                  top={trash.top}
+                  left={trash.left}
+                  src={pinbtn}
+                  onClick={() => selectPla(trash.id)}
+                />
+              );
+            }
+          })}
         </MapBox>
         <LocationBox>
           <LocationImg src={trashPhoto[pickedId - 1]} />
@@ -109,20 +108,8 @@ const Tbox = styled.div`
     margin: auto;
   }
 `;
-const MapBox = styled.div`
+const MapBox = styled.object`
   position: relative;
-`;
-
-const Mapimg = styled.div`
-  width: 347px;
-  height: 350px;
-  background-image: url(${Map});
-  background-repeat: no-repeat;
-  background-size: 347px 350px;
-
-  #mapimg {
-    display: block;
-  }
 `;
 
 const Pin = styled.object`
@@ -133,7 +120,7 @@ const Pin = styled.object`
   width: 17px;
   height: 24px;
   top: ${({ top }) => top + "px"};
-  left: ${({ left }) => left};
+  left: ${({ left }) => left + "px"};
   ${props =>
     props.selected
       ? css`
@@ -141,7 +128,7 @@ const Pin = styled.object`
           background-repeat: no-repeat;
           background-size: 34px;
           top: ${({ top }) => top - 25 + "px"};
-          left: ${({ left }) => left - 25};
+          left: ${({ left }) => left - 8 + "px"};
           height: 55px;
           width: 34px;
           animation-duration: 1s;
@@ -152,7 +139,7 @@ const Pin = styled.object`
 `;
 
 const LocationBox = styled.div`
-  margin: 29px auto 36px;
+  margin: 33px auto 36px;
   width: 335px;
   height: 120px;
   border-radius: 10px;
