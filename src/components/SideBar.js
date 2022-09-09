@@ -30,6 +30,7 @@ const SideBar = props => {
 
   return (
     <BarWrapper onClick={DeleteSideBar}>
+      <link rel="preload" href={"../images/main/toplogo.svg"} as="image" />
       <Bar>
         <link
           rel="preload"
@@ -171,7 +172,7 @@ const LinkWrapper = styled.div`
 
 const Footer = styled.div`
   vertical-align: baseline;
-  margin-top: 308px;
+  margin-top: 260px;
   font-weight: 300;
   font-size: 8px;
   color: #a5a5a5;
