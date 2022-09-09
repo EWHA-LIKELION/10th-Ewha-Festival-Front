@@ -8,6 +8,7 @@ import {
 } from "../../components/Text";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 // components
 import Footer from "../../components/Footer/Footer";
@@ -17,15 +18,14 @@ import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
 import {http} from "../../api/http";
 import TfService from "../../api/services/tfservice";
-import { noticeData } from "../../_mock/noticeData";
-import { GetNotice, submitNotice } from "../../api/tf";
-import { useAppSelector } from "../../redux/store";
+import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 
 
 const Update = () => {
-    // 모달 컴포넌트
-    const [modalOpen, setModalOpen] = useState(false);
+  // 모달 컴포넌트
+  const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -41,51 +41,53 @@ const Update = () => {
       navigate(-1);
   };
   
-  const [notice, setNotice] = useState({});
+  
+  // noticeId 불러오기
+  // const dispatch = useAppDispatch()
+  // const {id} = useAppSelector(state => state.notice);
   let { id } = useParams();
-  
-  const handleTitle = e => {
-    setNotice(e.target.value);
-    console.log(res.data.data);
-  };
-  
-  const handleContent = e => {
-    setNotice(e.target.value);
-    console.log(res.data.data);
-  };
+  const [title, setTitle] = useState({})
+  const [content, setContent] = useState({})
+  console.log(title, content, {id});
 
-  // 공지 가져오기 api
-  const noticeId = useAppSelector(state => state.noticeId)
-  console.log(noticeId);
+  // 기존 부스 정보 불러오기
   useEffect(()=>{
-    getPrev(noticeId)
-  },[noticeId]);
-
-  const getPrev = (id) => {
     GetNotice(id)
     .then(res => {
       console.log("공지 상세 조회 성공", res, id);
-      setNotice(res.data.data);
+      setTitle(res.data.title);
+      setContent(res.data.content);
     })
     .catch(err => {
       console.log("공지 상세 조회 실패", err);
     });
-  }
-
-
+  },[])
+  
   // 공지사항 수정 요청
-  const [newNotice, setNewNotice] = useState("");
-  const editNotice = e => {
+  const editNotice = () => {
     e.preventDefault();
-    console.log("공지 수정", newNotice);
-    PatchNotice(id, newNotice)
-      .then(res => {
-        console.log(res.data);
-        GetNotice();
-      })
-      .catch(err => console.log(err.data));
-    setNewNotice("");
+    // console.log("공지 수정", setTitle, setContent);
+    PatchNotice(noticeId, title, content)
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => console.log(err.data));
   }
+
+  const [newtitle, setNewTitle] = useState("");
+  const [newcontent, setNewContent] = useState("");
+  // let { id } = useParams();
+  
+  const handleTitle = e => {
+    setNewTitle(e.target.value);
+    console.log(newtitle);
+  };
+  
+  const handleContent = e => {
+    setNewContent(e.target.value);
+    console.log(newcontent);
+  };
+
 
   return (
       <>
@@ -105,16 +107,16 @@ const Update = () => {
             <Input
             type='text' 
             placeholder="제목을 작성하세요."
-            value={newNotice}
-            onChange={setNewNotice}
+            value='title'
+            onChange={handleTitle}
             />
         </Title>
         <Line />
         <Content>
             <Textarea 
             placeholder="내용을 작성하세요."
-            value={newNotice}
-            onChange={setNewNotice}
+            value='content'
+            onChange={handleContent}
             type='text'
             ></Textarea>
         </Content>
