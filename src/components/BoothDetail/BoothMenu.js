@@ -15,9 +15,7 @@ const BoothMenu = () => {
       .then(res => {
         setThisMenus(res.data.data.menus);
       })
-      .catch(err => {
-        alert("부스 상세 조회 실패", err);
-      });
+      .catch();
   }, []);
 
   return (
@@ -35,14 +33,16 @@ const BoothMenu = () => {
                 <>
                   <MenuContainer>
                     <MenuTextWrapper>
-                      <Pretendard
-                        size="14px"
-                        weight="500"
-                        color="var(--black)"
-                        style={{ marginBottom: "5px", opacity: "0.4" }}
-                      >
-                        {menu.menu}
-                      </Pretendard>
+                      <div style={{ width: "72%", wordBreak: "keep-all" }}>
+                        <Pretendard
+                          size="14px"
+                          weight="500"
+                          color="var(--black)"
+                          style={{ marginBottom: "5px", opacity: "0.4" }}
+                        >
+                          {menu.menu}
+                        </Pretendard>
+                      </div>
                       <Pretendard
                         size="13px"
                         weight="300"
@@ -57,14 +57,16 @@ const BoothMenu = () => {
                 <>
                   <MenuContainer>
                     <MenuTextWrapper>
-                      <Pretendard
-                        size="14px"
-                        weight="500"
-                        color="var(--black)"
-                        style={{ marginBottom: "5px" }}
-                      >
-                        {menu.menu}
-                      </Pretendard>
+                      <div style={{ width: "72%", wordBreak: "keep-all" }}>
+                        <Pretendard
+                          size="14px"
+                          weight="500"
+                          color="var(--black)"
+                          style={{ marginBottom: "5px" }}
+                        >
+                          {menu.menu}
+                        </Pretendard>
+                      </div>
                       <Pretendard size="13px" weight="300" color="var(--black)">
                         {commaMoney}원
                       </Pretendard>
@@ -95,7 +97,8 @@ const MenuContainer = styled.div`
 
 const MenuTextWrapper = styled.div`
   width: 100%;
-  height: 35px;
+  min-height: 35px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
