@@ -20,6 +20,7 @@ import {http} from "../../api/http";
 import TfService from "../../api/services/tfservice";
 import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
+import { setPage } from "../../redux/pageSlice";
 
 
 
@@ -43,15 +44,19 @@ const Update = () => {
   
   
   // noticeId 불러오기
-  // const dispatch = useAppDispatch()
-  // const {id} = useAppSelector(state => state.notice);
-  let { id } = useParams();
+  const dispatch = useAppDispatch()
+  const { id } = useAppSelector(state => state.notice);
+  // let { id } = useParams();
   const [title, setTitle] = useState({})
   const [content, setContent] = useState({})
   console.log(title, content, {id});
-
+  
   // 기존 부스 정보 불러오기
   useEffect(()=>{
+    dispatch(
+      setPage({ title:title, content:content }),
+    )
+    console.log("title: ", title, " content: ", content);
     GetNotice(id)
     .then(res => {
       console.log("공지 상세 조회 성공", res, id);
@@ -61,13 +66,13 @@ const Update = () => {
     .catch(err => {
       console.log("공지 상세 조회 실패", err);
     });
-  },[])
+  },[id])
   
   // 공지사항 수정 요청
   const editNotice = () => {
     e.preventDefault();
     // console.log("공지 수정", setTitle, setContent);
-    PatchNotice(noticeId, title, content)
+    PatchNotice(id, title, content)
     .then(res => {
       console.log(res.data);
     })
