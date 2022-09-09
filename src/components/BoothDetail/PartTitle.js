@@ -7,7 +7,13 @@ const PartTitle = ({ title }) => {
     <>
       <PartTitleContainer>
         <PartTitleTextContainer>
-          <Star src={star} />
+          <object
+            type="image/svg+xml"
+            data={star}
+            style={{ marginRight: "10px" }}
+          >
+            <Star src={star} />
+          </object>
           <PyeongChang_Peace size="16px" weight="300" color="var(--green3)">
             {title}
           </PyeongChang_Peace>
@@ -36,7 +42,6 @@ const PartTitleTextContainer = styled.div`
 const Star = styled.img`
   width: 18px;
   height: 30px;
-  margin-right: 10px;
   -webkit-user-drag: none;
 `;
 
