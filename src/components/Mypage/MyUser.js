@@ -6,6 +6,7 @@ import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { http } from "../../api/http";
+import Mstar from "../../images/mypage/Mstar.svg";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -55,12 +56,14 @@ const UserMy = () => {
     <Wrapper>
       <Navbar />
       <Userbox>
+        <object className="Mstar" data={Mstar} type="image/svg+xml" />
         <p className="nickname">
           <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
           <Pretendard>{username}</Pretendard>
         </p>
+        <object className="star" data={likebooth} type="image/svg+xml" />
       </Userbox>
       <BoothBox>
         <Titlebox>
@@ -179,16 +182,28 @@ const Titlebox = styled.div`
     height: 28px;
     margin-bottom: 7px;
     margin-right: 7px;
+    display: block;
   }
 `;
 
-const Userbox = styled.object`
+const Userbox = styled.div`
   background-image: url(${userbg});
   background-repeat: no-repeat;
   width: 268px;
-  height: 100px;
+  height: 105px;
   margin: 33px auto;
   text-align: center;
+  position: relative;
+  .star {
+    position: absolute;
+    top: 55px;
+    left: 250px;
+  }
+  .Mstar {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+  }
   .nickname {
     margin: 23px auto 2px;
     color: #686868;
