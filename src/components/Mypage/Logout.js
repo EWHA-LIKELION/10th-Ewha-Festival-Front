@@ -10,9 +10,7 @@ const Logout = () => {
   // 로그아웃 함수
   const Logout = async () => {
     await persistor.purge();
-
     window.localStorage.removeItem("token");
-
     console.log("마이페이지 로그아웃");
     navigate("/");
     window.location.reload();

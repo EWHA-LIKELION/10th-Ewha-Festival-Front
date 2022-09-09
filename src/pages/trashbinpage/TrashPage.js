@@ -13,23 +13,23 @@ import { trashPhoto } from "../../_mock/trashPhoto";
 
 const TrashPage = () => {
   const [trashs, setTrashs] = useState(trashData);
-  const [trashname,setTrashname]=useState("정문");
-  const [trashinfo, setTrashinfo]=useState("정문 24번 부스 옆");
-  const [pickedId, setId]=useState(0);
+  const [trashname, setTrashname] = useState("정문");
+  const [trashinfo, setTrashinfo] = useState("정문 24번 부스 옆");
+  const [pickedId, setId] = useState(0);
 
-const selectPla=(id)=>{
-  setTrashs(
-    trashs.map(trash =>
-      id === trash.id
-        ? {...trash, selected:true}
-        : {...trash, selected:false},
-    ),
-  );
-setTrashname(trashData[id-1].name);
-setTrashinfo(trashData[id-1].info);
-setId(id);
-}
-  
+  const selectPla = id => {
+    setTrashs(
+      trashs.map(trash =>
+        id === trash.id
+          ? { ...trash, selected: true }
+          : { ...trash, selected: false },
+      ),
+    );
+    setTrashname(trashData[id - 1].name);
+    setTrashinfo(trashData[id - 1].info);
+    setId(id);
+  };
+
   return (
     <>
       <TitleBar>
@@ -38,49 +38,49 @@ setId(id);
         <span style={{ color: "var(--green3)" }}>지도</span>
       </TitleBar>
       <MainBox>
-      <Tbox>
-        <div>
-          <PyeongChang_Peace>다시쓰는</PyeongChang_Peace>
-        </div>
-        <PyeongChang_Peace>
-          이화의 <span>초록</span>
-        </PyeongChang_Peace>
-      </Tbox>
-      <MapBox>
-      <Mapimg>
-      {trashs.map(trash => {
-        if (trash.selected === true) {
-        return (
-          <Pin
-            key={trash.id}
-            top={trash.top}
-            left={trash.left}
-            src={pinbtn}
-            onClick={() => selectPla(trash.id)}
-            selected
-          />
-        );
-      } else {
-        return (
-        <Pin
-            key={trash.id}
-            top={trash.top}
-            left={trash.left}
-            src={pinbtn}
-            onClick={() => selectPla(trash.id)}
-          />
-          );
-        }
-      })}
-      </Mapimg>
-      </MapBox>
-      <LocationBox>
-        <LocationImg src={trashPhoto[pickedId-1]}/>
-        <LocationInfo>
-          <p className="name">{trashname}</p>
-          <p className="info">{trashinfo}</p>
-        </LocationInfo>
-      </LocationBox>
+        <Tbox>
+          <div>
+            <PyeongChang_Peace>다시쓰는</PyeongChang_Peace>
+          </div>
+          <PyeongChang_Peace>
+            이화의 <span>초록</span>
+          </PyeongChang_Peace>
+        </Tbox>
+        <MapBox>
+          <Mapimg>
+            {trashs.map(trash => {
+              if (trash.selected === true) {
+                return (
+                  <Pin
+                    key={trash.id}
+                    top={trash.top}
+                    left={trash.left}
+                    src={pinbtn}
+                    onClick={() => selectPla(trash.id)}
+                    selected
+                  />
+                );
+              } else {
+                return (
+                  <Pin
+                    key={trash.id}
+                    top={trash.top}
+                    left={trash.left}
+                    src={pinbtn}
+                    onClick={() => selectPla(trash.id)}
+                  />
+                );
+              }
+            })}
+          </Mapimg>
+        </MapBox>
+        <LocationBox>
+          <LocationImg src={trashPhoto[pickedId - 1]} />
+          <LocationInfo>
+            <p className="name">{trashname}</p>
+            <p className="info">{trashinfo}</p>
+          </LocationInfo>
+        </LocationBox>
       </MainBox>
       <Footer />
     </>
@@ -89,9 +89,11 @@ setId(id);
 
 export default TrashPage;
 
-const MainBox=styled.div`display: flex;
-flex-direction: column;
-align-items: center;`;
+const MainBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Tbox = styled.div`
   width: fit-content;
@@ -107,9 +109,10 @@ const Tbox = styled.div`
     margin: auto;
   }
 `;
-const MapBox=styled.div`
+const MapBox = styled.div`
   position: relative;
-  `;
+`;
+
 const Mapimg = styled.div`
   width: 347px;
   height: 350px;
@@ -123,33 +126,30 @@ const Mapimg = styled.div`
 `;
 
 const Pin = styled.object`
-background-image:url(${pinbtn});
-background-repeat:no-repeat;
-background-size: 17px;
+  background-image: url(${pinbtn});
+  background-repeat: no-repeat;
+  background-size: 17px;
   position: absolute;
-  width: fit-content;
+  width: 17px;
   height: 24px;
-  top: ${({ top }) => top+"px"};
+  top: ${({ top }) => top + "px"};
   left: ${({ left }) => left};
   ${props =>
     props.selected
       ? css`
-          background-image:url(${pinbtn});
-          background-repeat:no-repeat;
-          background-size:34px;
-          top: ${({ top }) => top-25+"px"};
-          left: ${({ left }) => left-25};
+          background-image: url(${pinbtn});
+          background-repeat: no-repeat;
+          background-size: 34px;
+          top: ${({ top }) => top - 25 + "px"};
+          left: ${({ left }) => left - 25};
           height: 55px;
           width: 34px;
           animation-duration: 1s;
           animation-name: bounce;
           animation-iteration-count: infinite;
         `
-      : css`
-          
-        `}
+      : css``}
 `;
-
 
 const LocationBox = styled.div`
   margin: 29px auto 36px;

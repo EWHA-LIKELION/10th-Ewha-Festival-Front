@@ -9,6 +9,9 @@ import {
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
+// api
+import { initNotice } from "../../redux/noticeSlice"
+
 // components
 import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
@@ -16,6 +19,7 @@ import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
 import {submitNotice} from "../../api/tf"
+import { useAppDispatch } from "../../redux/store";
 
 // images
 import { Value } from "sass";
@@ -45,15 +49,15 @@ const Create = () => {
     // 글 직성
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    
+
     const handleTitle = e => {
         setTitle(e.target.value);
-        console.log(title);
-        };
+        // console.log(title);
+    };
     
-        const handleContent = e => {
+    const handleContent = e => {
         setContent(e.target.value);
-        console.log(content);
+        // console.log(content);
     };
     
     // fetch
@@ -65,7 +69,15 @@ const Create = () => {
 
     function postNotices(e) { 
         e.preventDefault();
+        // 여기부터
+        // dispatch(setNotice)
+        // .then(data => {
+        //     setTitle,
+        //     setContent
+        // })
+        // 여기까지
         submitNotice(title, content);
+        // console.log("공지 업로드 성공: ", res.data.setNotice)
         navigate(`/notice`);
         window.location.reload();
     }

@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { useNavigate } from "react-router-dom";
 
-import { useAppSelector } from "../../redux/store";
+import { http } from "../../api/http";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -22,8 +22,8 @@ import { GetLikes } from "../../api/user";
 const MyManager = () => {
   const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
-  const { nickname } = useAppSelector(state => state.user);
-  const { username } = useAppSelector(state => state.user);
+  const [nickname, setnickname] = useState();
+  const [username, setusername] = useState();
   const navigate = useNavigate();
 
   const goEditbooth = () => {
@@ -31,18 +31,26 @@ const MyManager = () => {
   };
   const goEditMenu = () => {
     navigate("/editmenu");
-  };  
-  const Detail = (ref, event, id) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      console.log("페이지 이동");
-      navigate(`/category/detail/${id}`);
-    }
   };
+  const Detail = id => {
+    navigate(`/category/detail/${id}`);
+  };
+  useEffect(() => {
+    http
+      .get("/accounts/")
+      .then(res => {
+        console.log("[로그인 유저]", res.data.data);
+        setnickname(res.data.data.nickname);
+        setusername(res.data.data.username);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   useEffect(() => {
     console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
-        console.log("좋아요한 부스 조회 성공1212", res);
+        console.log("좋아요한 부스 조회 성공", res);
         setBooths(res.data.data);
         setLikebooths(res.data.data.length);
       })
@@ -75,7 +83,7 @@ const MyManager = () => {
       </EditBooth>
       <BoothBox>
         <Titlebox>
-          <Likebooth src={likebooth} />
+          <Likebooth type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -94,10 +102,7 @@ const MyManager = () => {
           }
 
           return (
-            <Booth
-              key={b.id}
-              onClick={event => Detail(wrapperRef, event, b.id)}
-            >
+            <Booth key={b.id} onClick={event => Detail(b.id)}>
               <LikeImg src={b.thumnail} />
               <BootInfo>
                 <p className="num">{b.number}</p>
@@ -105,10 +110,10 @@ const MyManager = () => {
                 <p className="info">{info}</p>
               </BootInfo>
               <Heart
-                  src={greenheart}
-                  onClick={() => unLike(b.id)}
-                  ref={wrapperRef}
-                />
+                src={greenheart}
+                onClick={() => unLike(b.id)}
+                ref={wrapperRef}
+              />
             </Booth>
           );
         })}
@@ -191,12 +196,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-
-const Likebooth = styled.img`
+const Likebooth = styled.object`
   width: 17px;
   height: 28px;
   margin-right: 7px;
   margin-bottom: 7px;
+  background-image: url(${likebooth});
 `;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
@@ -204,17 +209,18 @@ const Titlebox = styled.div`
   margin-top: 22px;
 `;
 
-const Userbox = styled.div`
+const Userbox = styled.object`
   background-image: url(${userbg});
   width: 268px;
-  height: 82px;
+  height: 105px;
   margin: 33px auto;
+  background-repeat: no-repeat;
+  text-align: center;
   .nickname {
     margin: 23px auto 2px;
     color: #686868;
     font-weight: 700;
-    font-size: 30px;
-    width: fit-content;
+    font-size: 25px;
   }
   .user {
     font-weight: 500;

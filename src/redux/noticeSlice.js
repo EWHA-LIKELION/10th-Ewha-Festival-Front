@@ -29,7 +29,7 @@ export const noticeSlice = createSlice({
   },
 });
 
-export const { setNotice, id } = noticeSlice.actions;
+export const { initNotice, setNotice } = noticeSlice.actions;
 // export const { id } = state.notice.id
 
 export default noticeSlice.reducer;
