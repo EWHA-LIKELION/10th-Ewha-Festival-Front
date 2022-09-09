@@ -29,6 +29,7 @@ export const noticeSlice = createSlice({
   },
 });
 
+
 export const { setNoticeReducer, id } = noticeSlice.actions;
 // export const { id } = state.notice.id
 

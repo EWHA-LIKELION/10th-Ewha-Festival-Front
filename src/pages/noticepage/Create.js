@@ -9,12 +9,16 @@ import {
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
+// api
+import { initNotice } from "../../redux/noticeSlice"
+
 // components
 import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
+
 import { submitNotice } from "../../api/tf";
 
 // images
@@ -26,6 +30,7 @@ import Axios from "axios";
 // import { text } from "body-parser";
 
 const Create = () => {
+
   // 모달 컴포넌트
   const [modalOpen, setModalOpen] = useState(false);
 
