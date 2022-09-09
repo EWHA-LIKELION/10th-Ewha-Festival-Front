@@ -20,6 +20,8 @@ import { http } from "../../api/http";
 import TfService from "../../api/services/tfservice";
 import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
+import { setPage } from "../../redux/pageSlice";
+import {noticeReducer, setNotice} from "../../redux/noticeSlice";
 
 const Update = () => {
   const preTitle = useAppSelector(state => state.notice.title);
@@ -43,6 +45,7 @@ const Update = () => {
     navigate(-1);
   };
 
+
   const [title, setTitle] = useState(preTitle);
   const [content, setContent] = useState(preContent);
 
@@ -51,21 +54,17 @@ const Update = () => {
     GetNotice(id)
       .then(res => {
         console.log("공지 상세 조회 성공", res, id);
-        setTitle(res.data.title);
-        setContent(res.data.content);
       })
       .catch(err => {
         console.log("공지 상세 조회 실패", err);
       });
   }, []);
 
-  const [newtitle, setNewTitle] = useState("");
-  const [newcontent, setNewContent] = useState("");
-
   // 공지사항 수정 요청
   const editNotice = e => {
     e.preventDefault();
-    PatchNotice(id, newtitle, newcontent)
+
+    PatchNotice(id, title, content)
       .then(res => {
         console.log(res);
         navigate(`/notice/${id}`);
@@ -75,12 +74,13 @@ const Update = () => {
       });
   };
 
+
   const handleTitle = e => {
-    setNewTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   const handleContent = e => {
-    setNewContent(e.target.value);
+    setContent(e.target.value);
   };
 
   return (
@@ -126,6 +126,7 @@ const Update = () => {
         header="공지 수정 취소"
         subtext="작성 취소된 글은 저장되지 않습니다."
         maintext="공지 글 수정을 취소하겠습니까?"
+        onClick={handleBackButton}
       ></Modal>
       <Footer></Footer>
     </>
