@@ -1,15 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState } from "react";
 import styled from "styled-components";
 import PartTitle from "./PartTitle";
 import back from "../../images/navbar/back.svg";
 
 const BoothInfo = props => {
   const infoString = props.infoString;
-
   const [isOverflow, setIsOverflow] = useState(false);
-  useEffect(() => {
-    console.log("[Overflow]", isOverflow);
-  });
 
   class OverflowText extends Component {
     constructor(props) {
@@ -135,7 +131,7 @@ const InfoWrapper = styled.div`
 
 const InfoUpDown = styled.div`
   position: absolute;
-  top: 35px;
+  top: 5px;
   right: 30px;
   width: 12px;
   height: 12px;

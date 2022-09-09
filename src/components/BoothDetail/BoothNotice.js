@@ -176,6 +176,7 @@ const Notice = styled.img`
   width: 16px;
   height: 16px;
   margin: 9px 7px 0 10px;
+  -webkit-user-drag: none;
 `;
 
 const NoticeTextContainer = styled.div`

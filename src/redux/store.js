@@ -8,10 +8,12 @@ import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import userReducer from "./userSlice";
 import pageReducer from "./pageSlice";
+import noticeReducer from "./noticeSlice";
 
 const reducers = combineReducers({
   user: userReducer,
   page: pageReducer,
+  notice: noticeReducer,
 });
 
 const persistConfig = {

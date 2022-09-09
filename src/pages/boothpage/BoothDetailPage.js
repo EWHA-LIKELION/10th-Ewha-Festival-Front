@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { PyeongChang_Peace } from "../../components/Text";
 import PartTitle from "../../components/BoothDetail/PartTitle";
@@ -18,38 +18,36 @@ import booththumnail from "../../images/detail/booththumnail.svg";
 const BoothDetailPage = () => {
   let { id } = useParams();
   const [booth, setBooth] = useState({});
-  const nav = useNavigate();
 
   useEffect(() => {
     GetBooth(id)
       .then(res => {
-        console.log("부스 상세 조회 성공", res);
         setBooth(res.data.data);
       })
       .catch(err => {
-        console.log("부스 상세 조회 실패", err);
+        alert("부스 상세 조회 실패", err);
       });
+    setImgModal(false);
+    setNotice(false);
+    setInfo(false);
   }, []);
 
   const Like = id => {
     const token = localStorage.getItem("token");
     if (token) {
       setBooth({ ...booth, is_liked: true });
-      console.log("좋아요", id);
       LikeBooth(id)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.data));
+        .then()
+        .catch(err => alert("부스 좋아요 실패", err.data));
     } else {
       alert("로그인이 필요합니다.");
     }
   };
-
   const unLike = id => {
     setBooth({ ...booth, is_liked: false });
-    console.log("좋아요 삭제", id);
     UnLikeBooth(id)
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err.data));
+      .then()
+      .catch(err => alert("부스 좋아요 취소 실패", err.data));
   };
 
   const [imgModal, setImgModal] = useState(false);
@@ -70,23 +68,6 @@ const BoothDetailPage = () => {
   const [infoString, setInfoString] = useState("");
 
   const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    setNoticeString(booth.notice);
-    setInfoString(booth.description);
-    setImages(booth.images);
-    console.log(
-      "[부스]\n",
-      booth,
-      "\n\n[공지]\n",
-      noticeString,
-      "\n\n[소개]\n",
-      infoString,
-      "\n\n[이미지]\n",
-      images,
-    );
-  }, [booth]);
-
   const [src, setSrc] = useState("");
   const openModal = src => {
     setSrc(src);
@@ -94,10 +75,10 @@ const BoothDetailPage = () => {
   };
 
   useEffect(() => {
-    setImgModal(false);
-    setNotice(false);
-    setInfo(false);
-  }, []);
+    setNoticeString(booth.notice);
+    setInfoString(booth.description);
+    setImages(booth.images);
+  }, [booth]);
 
   return (
     <>
@@ -111,50 +92,54 @@ const BoothDetailPage = () => {
             src={booth.thumnail === "" ? booththumnail : booth.thumnail}
           />
         </MainImage>
-        <TitleWrapper>
-          <PyeongChang_Peace size="22px" weight="700" color="var(--green3)">
-            {booth.name}
-          </PyeongChang_Peace>
-          {booth.is_liked ? (
-            <Heart src={greenheart} onClick={() => unLike(id)} />
-          ) : (
-            <Heart src={heart} onClick={() => Like(id)} />
-          )}
-        </TitleWrapper>
-        <BoothNotice
-          noticeString={noticeString}
-          notice={notice}
-          handleNotice={handleNotice}
-        />
-        <BoothInfo
-          infoString={infoString}
-          info={info}
-          handleInfo={handleInfo}
-        />
-        <BoothMenu />
-        {images &&
-          (images.length === 0 ? (
-            <ImageWrapper>
-              <PartTitle title="사진" />
-              <ImageContainer style={{ height: "15px" }}></ImageContainer>
-            </ImageWrapper>
-          ) : (
-            <ImageWrapper>
-              <PartTitle title="사진" />
-              <ImageContainer>
-                {images.map(img => {
-                  return (
-                    <>
-                      <ImgRect onClick={() => openModal(img.image)}>
-                        <Img src={img.image} />
-                      </ImgRect>
-                    </>
-                  );
-                })}
-              </ImageContainer>
-            </ImageWrapper>
-          ))}
-        <BoothComments />
+        <WhiteWrapper>
+          <TitleWrapper>
+            <TitleContainer>
+              <PyeongChang_Peace size="22px" weight="700" color="var(--green3)">
+                {booth.name}
+              </PyeongChang_Peace>
+            </TitleContainer>
+            {booth.is_liked ? (
+              <Heart src={greenheart} onClick={() => unLike(id)} />
+            ) : (
+              <Heart src={heart} onClick={() => Like(id)} />
+            )}
+          </TitleWrapper>
+          <BoothNotice
+            noticeString={noticeString}
+            notice={notice}
+            handleNotice={handleNotice}
+          />
+          <BoothInfo
+            infoString={infoString}
+            info={info}
+            handleInfo={handleInfo}
+          />
+          <BoothMenu />
+          {images &&
+            (images.length === 0 ? (
+              <ImageWrapper>
+                <PartTitle title="사진" />
+                <ImageContainer style={{ height: "15px" }}></ImageContainer>
+              </ImageWrapper>
+            ) : (
+              <ImageWrapper>
+                <PartTitle title="사진" />
+                <ImageContainer>
+                  {images.map(img => {
+                    return (
+                      <>
+                        <ImgRect onClick={() => openModal(img.image)}>
+                          <Img src={img.image} />
+                        </ImgRect>
+                      </>
+                    );
+                  })}
+                </ImageContainer>
+              </ImageWrapper>
+            ))}
+          <BoothComments />
+        </WhiteWrapper>
       </Wrapper>
       {imgModal ? <ImgModal src={src} closeModal={closeModal} /> : null}
     </>
@@ -166,7 +151,6 @@ export default BoothDetailPage;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
 `;
@@ -174,6 +158,14 @@ const Wrapper = styled.div`
 const MainImage = styled.div`
   width: 100%;
   height: auto;
+  @media all and (min-width: 600px) {
+    height: 400px;
+  }
+  @media (orientation: landscape) {
+    height: 400px;
+  }
+  position: relative;
+  top: 0;
 `;
 
 const MainImg = styled.img`
@@ -183,22 +175,30 @@ const MainImg = styled.img`
   -webkit-user-drag: none;
 `;
 
+const WhiteWrapper = styled.div`
+  width: 100%;
+  height: auto;
+  position: relative;
+  background-color: #fff;
+`;
+
 const TitleWrapper = styled.div`
   width: 100%;
   min-height: 65px;
   padding: 20px;
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
+`;
 
-  p {
-    margin-right: 10px;
-  }
+const TitleContainer = styled.div`
+  margin-right: 10px;
+  width: calc(100% - 20px);
 `;
 
 const Heart = styled.img`
   width: 20px;
+  height: auto;
+  -webkit-user-drag: none;
 `;
 
 const ImageWrapper = styled.div`
@@ -209,7 +209,6 @@ const ImageContainer = styled.div`
   width: calc(100% - 40px);
   height: 140px;
   margin: 0 auto;
-
   display: flex;
   overflow-x: scroll;
   -ms-overflow-style: none;
