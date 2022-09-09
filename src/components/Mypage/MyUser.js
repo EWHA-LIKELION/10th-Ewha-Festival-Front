@@ -14,6 +14,7 @@ import Navbar from "./Navbar";
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
+import booththumnail from "../../images/default.png";
 
 import { GetLikes } from "../../api/user";
 
@@ -87,7 +88,12 @@ const UserMy = () => {
 
           return (
             <Booth key={b.id} onClick={event => Detail(b.id)}>
-              <LikeImg src={b.thumnail} />
+              {b.thumnail == "" ? (
+                <LikeImg src={booththumnail} />
+              ) : (
+                <LikeImg src={b.thumnail} />
+              )}
+
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>

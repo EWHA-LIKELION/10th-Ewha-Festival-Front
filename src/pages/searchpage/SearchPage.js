@@ -11,6 +11,7 @@ import back from "../../images/navbar/back.svg";
 import searchImg from "../../images/search/search.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+import booththumnail from "../../images/default.png";
 
 const SearchPage = () => {
   const [booths, setBooths] = useState(); // 부스 목록
@@ -113,7 +114,15 @@ const SearchPage = () => {
 
             return (
               <Booth key={b.id}>
-                <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+                {b.thumnail == "" ? (
+                  <BoothImg
+                    src={booththumnail}
+                    onClick={event => Detail(b.id)}
+                  />
+                ) : (
+                  <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+                )}
+
                 <BootInfo onClick={event => Detail(b.id)}>
                   <p className="num">{b.number}</p>
                   <p className="name">{b.name.substr(0, 13)}</p>

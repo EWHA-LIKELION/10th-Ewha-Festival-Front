@@ -22,6 +22,7 @@ import search from "../../images/navbar/search.svg";
 import hamburger from "../../images/main/hamburger.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+import booththumnail from "../../images/default.png";
 
 const Category = () => {
   const { day, location, page } = useAppSelector(state => state.page);
@@ -276,13 +277,16 @@ const Category = () => {
 
           return (
             <Booth key={b.id}>
-              <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+              {b.thumnail == "" ? (
+                <BoothImg src={booththumnail} onClick={() => Detail(b.id)} />
+              ) : (
+                <BoothImg src={b.thumnail} onClick={() => Detail(b.id)} />
+              )}
               <BootInfo onClick={event => Detail(b.id)}>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
                 <p className="info">{info}</p>
               </BootInfo>
-
               {b.is_liked ? (
                 <div
                   style={{

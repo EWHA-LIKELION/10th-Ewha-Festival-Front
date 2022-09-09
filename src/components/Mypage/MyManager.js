@@ -17,6 +17,7 @@ import Mstar from "../../images/mypage/Mstar.svg";
 import userbg from "../../images/mypage/userbg.svg";
 import edit1 from "../../images/mypage/edit1.png";
 import edit2 from "../../images/mypage/edit2.png";
+import booththumnail from "../../images/default.png";
 
 import { GetLikes } from "../../api/user";
 
@@ -106,7 +107,11 @@ const MyManager = () => {
 
           return (
             <Booth key={b.id} onClick={event => Detail(b.id)}>
-              <LikeImg src={b.thumnail} />
+              {b.thumnail == "" ? (
+                <LikeImg src={booththumnail} />
+              ) : (
+                <LikeImg src={b.thumnail} />
+              )}
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
