@@ -13,6 +13,7 @@ import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
+import Mstar from "../../images/mypage/Mstar.svg";
 import userbg from "../../images/mypage/userbg.svg";
 import edit1 from "../../images/mypage/edit1.png";
 import edit2 from "../../images/mypage/edit2.png";
@@ -20,7 +21,7 @@ import edit2 from "../../images/mypage/edit2.png";
 import { GetLikes } from "../../api/user";
 
 const MyManager = () => {
-  const [booths, setBooths] = useState(boothData);
+  const [booths, setBooths] = useState();
   const [likebooths, setLikebooths] = useState(0);
   const [nickname, setnickname] = useState();
   const [username, setusername] = useState();
@@ -39,7 +40,7 @@ const MyManager = () => {
     http
       .get("/accounts/")
       .then(res => {
-        console.log("[로그인 유저]", res.data.data);
+        console.log("[로그인 유저]\n", res.data.data);
         setnickname(res.data.data.nickname);
         setusername(res.data.data.username);
       })
@@ -63,6 +64,7 @@ const MyManager = () => {
     <Wrapper>
       <Navbar />
       <Userbox>
+        <object className="Mstar" data={Mstar} type="image/svg+xml" />
         <p className="nickname">
           <Pretendard>{nickname}</Pretendard>
         </p>
@@ -72,6 +74,7 @@ const MyManager = () => {
         <p className="manager">
           <Pretendard>부스관리자</Pretendard>
         </p>
+        <object className="star" data={likebooth} type="image/svg+xml" />
       </Userbox>
       <EditBooth>
         <div id="edit1" onClick={goEditbooth}>
@@ -83,7 +86,7 @@ const MyManager = () => {
       </EditBooth>
       <BoothBox>
         <Titlebox>
-          <Likebooth type="image/svg+xml" />
+          <object data={likebooth} type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -196,17 +199,16 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.object`
-  width: 17px;
-  height: 28px;
-  margin-right: 7px;
-  margin-bottom: 7px;
-  background-image: url(${likebooth});
-`;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
-  margin-top: 22px;
+  object {
+    width: 17px;
+    height: 28px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    display: block;
+  }
 `;
 
 const Userbox = styled.object`
@@ -216,6 +218,17 @@ const Userbox = styled.object`
   margin: 33px auto;
   background-repeat: no-repeat;
   text-align: center;
+  position: relative;
+  .star {
+    position: absolute;
+    top: 55px;
+    left: 250px;
+  }
+  .Mstar {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+  }
   .nickname {
     margin: 23px auto 2px;
     color: #686868;
