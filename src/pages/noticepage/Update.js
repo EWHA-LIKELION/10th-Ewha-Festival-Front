@@ -54,23 +54,17 @@ const Update = () => {
     GetNotice(id)
       .then(res => {
         console.log("공지 상세 조회 성공", res, id);
-        setSelectedTitle(res.data.title);
-        setSelectedContent(res.data.content);
       })
       .catch(err => {
         console.log("공지 상세 조회 실패", err);
       });
   }, []);
 
-
-  const [newtitle, setNewTitle] = useState("");
-  const [newcontent, setNewContent] = useState("");
-
   // 공지사항 수정 요청
   const editNotice = e => {
     e.preventDefault();
 
-    PatchNotice(id, newtitle, newcontent)
+    PatchNotice(id, title, content)
       .then(res => {
         console.log(res);
         navigate(`/notice/${id}`);
@@ -82,11 +76,11 @@ const Update = () => {
 
 
   const handleTitle = e => {
-    setNewTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   const handleContent = e => {
-    setNewContent(e.target.value);
+    setContent(e.target.value);
   };
 
   return (
