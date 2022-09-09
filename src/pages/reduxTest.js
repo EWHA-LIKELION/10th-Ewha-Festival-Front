@@ -37,7 +37,7 @@ const ReduxTest = () => {
       .get("/accounts/")
       .then(res => {
         console.log(res);
-        dispatch(setUser(res.data.data));
+        dispatch(setNotice(res.data.data));
       })
       .catch(err => console.log(err));
   };

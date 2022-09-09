@@ -22,6 +22,10 @@ import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 
 const Update = () => {
+  const preTitle = useAppSelector(state => state.notice.title);
+  const id = useAppSelector(state => state.notice.id);
+  const preContent = useAppSelector(state => state.notice.content);
+
   // 모달 컴포넌트
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -39,14 +43,12 @@ const Update = () => {
     navigate(-1);
   };
 
-  let { id } = useParams();
-  const [title, setTitle] = useState({});
-  const [content, setContent] = useState({});
-  // console.log(title, content, { id });
+  const [title, setTitle] = useState(preTitle);
+  const [content, setContent] = useState(preContent);
 
   // 기존 부스 정보 불러오기
   useEffect(() => {
-    GetNotice(17)
+    GetNotice(id)
       .then(res => {
         console.log("공지 상세 조회 성공", res, id);
         setTitle(res.data.title);
@@ -57,28 +59,28 @@ const Update = () => {
       });
   }, []);
 
-  // 공지사항 수정 요청
-  const editNotice = () => {
-    e.preventDefault();
-    // console.log("공지 수정", setTitle, setContent);
-    PatchNotice(title, content)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
-  };
-
   const [newtitle, setNewTitle] = useState("");
   const [newcontent, setNewContent] = useState("");
 
+  // 공지사항 수정 요청
+  const editNotice = e => {
+    e.preventDefault();
+    PatchNotice(id, newtitle, newcontent)
+      .then(res => {
+        console.log(res);
+        navigate(`/notice/${id}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const handleTitle = e => {
     setNewTitle(e.target.value);
-    console.log(newtitle);
   };
 
   const handleContent = e => {
     setNewContent(e.target.value);
-    console.log(newcontent);
   };
 
   return (
@@ -99,7 +101,7 @@ const Update = () => {
         <Input
           type="text"
           placeholder="제목을 작성하세요."
-          value="title"
+          value={title}
           onChange={handleTitle}
         />
       </Title>
@@ -107,7 +109,7 @@ const Update = () => {
       <Content>
         <Textarea
           placeholder="내용을 작성하세요."
-          value="content"
+          value={content}
           onChange={handleContent}
           type="text"
         ></Textarea>
