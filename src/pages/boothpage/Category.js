@@ -459,7 +459,7 @@ const Day = styled.div`
 `;
 
 const Map = styled.img`
-  margin: 8px 30px 23px 30px;
+  margin: 8px 10px 23px 10px;
 `;
 
 const Wrapper = styled.div`
