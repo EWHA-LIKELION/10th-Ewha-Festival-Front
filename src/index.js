@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // 구글 애널리틱스
 import ReactGA from "react-ga";
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
-ReactGA.initialize("UA-240670592-2");
+ReactGA.initialize(TRACKING_ID);
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
