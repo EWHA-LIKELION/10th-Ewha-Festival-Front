@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,7 +8,13 @@ import { PyeongChang_Peace } from "../components/Text";
 // import image
 import { ReactComponent as Backbutton } from "../images/navbar/back.svg";
 
+import hamburger from "../images/main/hamburger.svg";
+import SideBar from "../components/SideBar";
+
 const TitleBar = ({ children }) => {
+  // 사이드바 관리
+  const [sideBar, setSideBar] = useState(false);
+
   const navigate = useNavigate();
 
   const handleBackButton = () => {
@@ -19,7 +25,12 @@ const TitleBar = ({ children }) => {
       <Background>
         <TopBar>
           <ButtonWrapper>
-            <Backbutton onClick={handleBackButton}></Backbutton>
+            <img
+              src={hamburger}
+              onClick={() => {
+                setSideBar(true);
+              }}
+            />
           </ButtonWrapper>
           <TextWrapper>
             <PyeongChang_Peace weight="700" size="22px">
@@ -27,9 +38,14 @@ const TitleBar = ({ children }) => {
             </PyeongChang_Peace>
           </TextWrapper>
         </TopBar>
+        {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
       </Background>
       <hr
-        style={{ marginTop: "16px", backgroundColor: "var(--gray)", width: "100%" }}
+        style={{
+          marginTop: "16px",
+          backgroundColor: "var(--gray)",
+          width: "100%",
+        }}
       />
     </>
   );
@@ -54,7 +70,7 @@ const TextWrapper = styled.div`
   display: inline;
   width: fit-content;
   margin: 0 auto;
-  padding-right:30px;
+  padding-right: 30px;
 `;
 
 const Background = styled.div`
