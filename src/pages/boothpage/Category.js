@@ -9,6 +9,7 @@ import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
 import { GetKeywordBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
 import Pagination from "../../components/Category/Pagination";
+import SideBar from "../../components/SideBar";
 
 // 데이터
 import { locationData } from "../../_mock/locations";
@@ -18,7 +19,7 @@ import { boothMaps } from "../../_mock/boothMap";
 // 이미지
 import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
-import map from "../../images/map.svg";
+import hamburger from "../../images/main/hamburger.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
 
@@ -184,10 +185,17 @@ const Category = () => {
     navigate(`/category/detail/${id}`);
   };
 
+  const [sideBar, setSideBar] = useState(false);
+
   return (
     <Wrapper>
       <Navbar>
-        <Back src={back} onClick={() => navigate("/")} />
+        <img
+          src={hamburger}
+          onClick={() => {
+            setSideBar(true);
+          }}
+        />
 
         <PyeongChang_Peace
           size="22px"
@@ -203,6 +211,8 @@ const Category = () => {
           <Search src={search} />
         </Link>
       </Navbar>
+
+      {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
 
       <Map src={boothMaps[pickedMap]} />
 
