@@ -7,7 +7,7 @@ import { Pretendard } from "../../components/Text";
 
 // import component
 import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
+import EditTitleBar from "../../components/EditMenu/EditTitleBar";
 
 // import api component
 import { GetBooth, PatchBooth } from "../../api/booth";
@@ -17,17 +17,14 @@ const EditBoothPage = () => {
   // navigate
   const navigate = useNavigate();
 
-
   // boothId 불러오기
   const boothId = useAppSelector(state => state.user.boothId);
-  console.log(boothId);
-
   // 기존 부스 정보 불러오기
   useEffect(() => {
-      getPrev(boothId);
+    getPrev(boothId);
   }, [boothId]);
 
-  const getPrev = (id) => {
+  const getPrev = id => {
     GetBooth(id).then(response => {
       console.log(localStorage.getItem("token"));
       setName(response.data.data.name);
@@ -74,11 +71,11 @@ const EditBoothPage = () => {
 
   return (
     <>
-      <TitleBar>
+      <EditTitleBar>
         <span style={{ color: "var(--green1)" }}>내 </span>
         <span style={{ color: "var(--green2)" }}>부스 </span>
         <span style={{ color: "var(--green3)" }}>정보수정</span>
-      </TitleBar>
+      </EditTitleBar>
       <ContentWrapper>
         <BoxWrapper>
           <Pretendard weight="500" size="16px">
@@ -89,7 +86,11 @@ const EditBoothPage = () => {
             value={name}
             onChange={handleName}
             placeholder="부스 이름"
-            style={{ fontFamily: "Pretendard", height: "45px" }}
+            style={{
+              fontFamily: "Pretendard",
+              height: "45px",
+              fontSize: "14px",
+            }}
           />
         </BoxWrapper>
         <BoxWrapper>
