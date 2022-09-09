@@ -11,7 +11,7 @@ import { FiUser } from "react-icons/fi";
 import { MdOutlineLockOpen } from "react-icons/md";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { BsFlower2 } from "react-icons/bs";
-import {MdOutlineVpnKey} from "react-icons/md";
+import { MdOutlineVpnKey } from "react-icons/md";
 import { AiFillInfoCircle } from "react-icons/ai";
 // 모달창
 import RegisterModal from "../../components/Register/RegisterModal";
@@ -59,7 +59,7 @@ const RegisterPage = () => {
                 dispatch(setUser(res.data));
                 console.log(res.data);
                 window.location.reload();
-                navigate("/"); //메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+                window.location.href = "https://rewha2022.com/";
               })
               .catch(error => console.log(error));
           });
@@ -114,7 +114,7 @@ const RegisterPage = () => {
               />
             </IdWrapper>
             <PwWrapper>
-              <MdOutlineLockOpen className="lockIcon"/>
+              <MdOutlineLockOpen className="lockIcon" />
               <input
                 value={password}
                 className="PW"
@@ -125,7 +125,7 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <PwWrapper>
-                <MdOutlineLockOpen className="lockIcon"/>
+              <MdOutlineLockOpen className="lockIcon" />
               <input
                 value={password2}
                 className="PW2"
@@ -143,7 +143,7 @@ const RegisterPage = () => {
               />
             </PwWrapper>
             <NameWrapper>
-              <BsFlower2 className="flowerIcon"/>
+              <BsFlower2 className="flowerIcon" />
               <input
                 value={name}
                 placeholder="닉네임"
@@ -151,7 +151,7 @@ const RegisterPage = () => {
               />
             </NameWrapper>
             <SecreteWrapper>
-              <MdOutlineVpnKey className="keyIcon"/>
+              <MdOutlineVpnKey className="keyIcon" />
               <input
                 value={secreteWord}
                 placeholder="비밀단어"
@@ -189,8 +189,7 @@ const RegisterWrapper = styled.div`
   align-items: center;
   padding-top: 27px; //47px;
 `;
-const Title = styled.img`
-`;
+const Title = styled.img``;
 const RegisterForm = styled.form`
   margin-top: 38px; //58px
   div {
