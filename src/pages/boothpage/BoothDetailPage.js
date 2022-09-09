@@ -24,9 +24,7 @@ const BoothDetailPage = () => {
       .then(res => {
         setBooth(res.data.data);
       })
-      .catch(err => {
-        alert("부스 상세 조회 실패", err);
-      });
+      .catch();
     setImgModal(false);
     setNotice(false);
     setInfo(false);

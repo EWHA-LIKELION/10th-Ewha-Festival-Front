@@ -43,12 +43,9 @@ export const submitNotice = async (noticeId, title, content) => {
   }
 };
 
-export const PatchNotice = async (title, content) => {
+export const PatchNotice = async (id, title, content) => {
   try {
-    const response = await TfService.putNotice(
-      title,
-      content,
-    );
+    const response = await TfService.putNotice(id, title, content);
     return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error, "공지 수정 실패");

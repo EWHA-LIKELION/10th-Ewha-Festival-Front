@@ -24,6 +24,10 @@ import { setPage } from "../../redux/pageSlice";
 import {noticeReducer, setNotice} from "../../redux/noticeSlice";
 
 const Update = () => {
+  const preTitle = useAppSelector(state => state.notice.title);
+  const id = useAppSelector(state => state.notice.id);
+  const preContent = useAppSelector(state => state.notice.content);
+
   // 모달 컴포넌트
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -41,47 +45,12 @@ const Update = () => {
     navigate(-1);
   };
 
-  
-  
-  // noticeId 불러오기
-  // const dispatch = useAppDispatch()
-  // const { id } = useAppSelector(state => state.notice);
-  // // let { id } = useParams();
-  // const [title, setTitle] = useState({})
-  // const [content, setContent] = useState({})
-  // console.log(title, content, {id});
-  
-  // // 기존 부스 정보 불러오기
-  // useEffect(()=>{
-  //   dispatch(
-  //     setPage({ title:title, content:content }),
-  //   )
-  //   console.log("title: ", title, " content: ", content);
-  //   GetNotice(id)
-  //   .then(res => {
-  //     console.log("공지 상세 조회 성공", res, id);
-  //     setTitle(res.data.title);
-  //     setContent(res.data.content);
-  //   })
-  //   .catch(err => {
-  //     console.log("공지 상세 조회 실패", err);
-  //   });
-  // },[id])
-  
-// =======
-  const { id, title, content } = useAppSelector(state => state.notice);
-  const dispatch = useAppDispatch();
-  
-  const [selectedTitle, setSelectedTitle] = useState({title});
-  const [selectedContent, setSelectedContent] = useState({content});
-  // console.log(title, content, { id });
+
+  const [title, setTitle] = useState(preTitle);
+  const [content, setContent] = useState(preContent);
 
   // 기존 부스 정보 불러오기
   useEffect(() => {
-    dispatch(
-      setNotice({ title:selectedTitle, content:selectedContent }),
-    );
-
     GetNotice(id)
       .then(res => {
         console.log("공지 상세 조회 성공", res, id);
@@ -93,38 +62,31 @@ const Update = () => {
       });
   }, []);
 
-// >>>>>>> 4c4efa6ca42543e3a67a0a86ad3969fcfe150e5e
-  // 공지사항 수정 요청
-  const editNotice = () => {
-    e.preventDefault();
-    // console.log("공지 수정", setTitle, setContent);
-// <<<<<<< HEAD
-    PatchNotice(id, title, content)
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => console.log(err.data));
-  }
-// =======
-  //   PatchNotice(title, content)
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-// >>>>>>> 4c4efa6ca42543e3a67a0a86ad3969fcfe150e5e
 
   const [newtitle, setNewTitle] = useState("");
   const [newcontent, setNewContent] = useState("");
 
+  // 공지사항 수정 요청
+  const editNotice = e => {
+    e.preventDefault();
+
+    PatchNotice(id, newtitle, newcontent)
+      .then(res => {
+        console.log(res);
+        navigate(`/notice/${id}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
   const handleTitle = e => {
     setNewTitle(e.target.value);
-    console.log(newtitle);
   };
 
   const handleContent = e => {
     setNewContent(e.target.value);
-    console.log(newcontent);
   };
 
   return (
@@ -145,7 +107,7 @@ const Update = () => {
         <Input
           type="text"
           placeholder="제목을 작성하세요."
-          value="title"
+          value={title}
           onChange={handleTitle}
         />
       </Title>
@@ -153,7 +115,7 @@ const Update = () => {
       <Content>
         <Textarea
           placeholder="내용을 작성하세요."
-          value="content"
+          value={content}
           onChange={handleContent}
           type="text"
         ></Textarea>
@@ -170,6 +132,7 @@ const Update = () => {
         header="공지 수정 취소"
         subtext="작성 취소된 글은 저장되지 않습니다."
         maintext="공지 글 수정을 취소하겠습니까?"
+        onClick={handleBackButton}
       ></Modal>
       <Footer></Footer>
     </>

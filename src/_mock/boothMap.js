@@ -1,6 +1,3 @@
-import map from "../images/map.svg";
-import heart from "../images/heart.svg";
-
 import frontDoor from "../images/category/frontDoor.svg";
 import edu from "../images/category/edu.svg";
 import auditorium from "../images/category/auditorium.svg";
