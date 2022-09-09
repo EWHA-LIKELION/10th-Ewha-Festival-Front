@@ -8,7 +8,7 @@ import { Pretendard } from "../../components/Text";
 // import component
 import MenuItem from "../../components/EditMenu/MenuItem";
 import Footer from "../../components/Footer/Footer";
-import TitleBar from "../../components/TitleBar";
+import EditTitleBar from "../../components/EditMenu/EditTitleBar";
 
 const EditMenuPage = () => {
   // navigate
@@ -29,11 +29,11 @@ const EditMenuPage = () => {
 
   return (
     <>
-      <TitleBar>
+      <EditTitleBar>
         <span style={{ color: "var(--green1)" }}>메뉴 </span>
         <span style={{ color: "var(--green2)" }}>정보 </span>
         <span style={{ color: "var(--green3)" }}>수정</span>
-      </TitleBar>
+      </EditTitleBar>
       <br />
       <ContentWrapper>
         <Pretendard color="var(--green3)" weight="400" size="14px">
