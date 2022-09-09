@@ -44,9 +44,7 @@ const BoothComments = () => {
         setThisBoothUserId(res.data.data.user);
         setThisComments(res.data.data.comments);
       })
-      .catch(err => {
-        alert("부스 상세 조회 실패", err);
-      });
+      .catch();
   };
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const BoothComments = () => {
       .then(res => {
         setThisUser(res.data.data);
       })
-      .catch(err => alert(err));
+      .catch();
     setDeleteModal(false);
     setInputModal(false);
   }, []);
@@ -88,7 +86,7 @@ const BoothComments = () => {
       .then(res => {
         getComments();
       })
-      .catch(err => alert(err.data));
+      .catch();
     closeDeleteModal();
   };
 
@@ -110,7 +108,7 @@ const BoothComments = () => {
         .then(res => {
           getComments();
         })
-        .catch(err => alert(err.data));
+        .catch();
       setIsAdd(true);
       setNewComment("");
     }
