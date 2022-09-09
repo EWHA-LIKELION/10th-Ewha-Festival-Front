@@ -17,7 +17,7 @@ const Mypage = () => {
       .catch(err => console.log(err));
   }, []);
 
-  if (JSON.stringify(isBooth) == "true") {
+  if (isBooth == "true") {
     console.log("부스관리자입니당");
     return <MyManager />;
   } else {
