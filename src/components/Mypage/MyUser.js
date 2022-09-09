@@ -18,7 +18,7 @@ import userbg from "../../images/mypage/userbg.svg";
 import { GetLikes } from "../../api/user";
 
 const UserMy = () => {
-  const [booths, setBooths] = useState();
+  const [booths, setBooths] = useState(boothData);
   const [likebooths, setLikebooths] = useState(0);
   const [nickname, setnickname] = useState();
   const [username, setusername] = useState();
