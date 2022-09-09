@@ -5,8 +5,8 @@ const TfService = {
   getNotice: noticeId => http.get(`/notices/${noticeId}/`), // 공지 상세
   deleteNotice: noticeId => http.delete(`/notices/${noticeId}/`), //댓글 삭제
   // 공지사항 수정
-  putNotice: (noticeId, title, content) =>
-    http.patch(`/notices/1`, {
+  putNotice: (title, content) =>
+    http.patch(`/notices/17`, {
       title: title,
       content: content,
     }),
