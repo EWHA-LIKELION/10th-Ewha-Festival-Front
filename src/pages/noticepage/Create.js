@@ -15,9 +15,9 @@ import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
+import {submitNotice} from "../../api/tf"
 
 // images
-import leftarrow from "../../images/notice/leftarrow.png";
 import { Value } from "sass";
 import GrayButton from "../../components/Modal/GrayButton";
 import GreenButton from "../../components/MainPage/GreenButton";
@@ -65,110 +65,62 @@ const Create = () => {
 
     function postNotices(e) { 
         e.preventDefault();
-        postNotice(title, content);
-        // .post('/notices/', {
-        //     title:notice.title,
-        //     content:notice.content
-        // })
-        // .then(res => {
-        //     console.log(res.notice)
-        // })
+        submitNotice(title, content);
+        navigate(`/notice`);
+        window.location.reload();
     }
-    // const option = {
-    //     method:'post',
-    //     header: {
-    //         'Accept':'application/json',
-    //         'Content-Type':'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         title:{title},
-    //         content:{content}
-    //     })
-        
-    // };
+    
 
-    // const postNotice = (e) => {
-    //     e.preventDefault();
-    //     const notice = {title, content};
-    //     fetch(url, {
-    //         method: 'POST',
-    //         headers: {"Content-Type":"application/json"},
-    //         body: JSON.stringify(notice)
-    //     }).then(() => {
-    //         console.log('new post added');
-    //         console.log(notice);
-    //     })
-        // http
-        // .post(url, option)
-        // .then(response => {console.log(response)})
-        // .catch(error => console.log(error)
-        // );
-    // };
-        
-    // useEffect(() => {
-    //     postNotice()
-        // http
-        // .post('/notices/')
-        // .then(response => {
-        //     console.log(response.noticeData);
-        // })
-        // .catch(error => console.log(error));
-        
-    // }, []);
-
-
-    // var id = 1;
-
-        return (
-            <>
-                <TitleBar>
-                    <PyeongChang_Peace 
-                    size="22px"
-                    weight="700"
-                    height="29px"
-                    letter-spacing="0em"
-                    >
-                        <span style={{color: "#00A428"}}>공</span>
-                        <span style={{color: "#007A28"}}>지 </span>
-                        <span style={{color: "##004628"}}>작성하기</span>
-                    </PyeongChang_Peace>
-                </TitleBar>
-                <Title>
-                    <Input
-                    type='text' 
-                    placeholder="제목을 작성하세요."
-                    name="title"
-                    onChange={handleTitle}
-                    ></Input>
-                </Title>
-                <Line />
-                <Content>
-                    <Textarea 
-                    placeholder="내용을 작성하세요." 
-                    name="content"
-                    onChange={handleContent}
-                    type='text'
-                    >
-                    </Textarea>
-                </Content>
-                <Line />
-                <Upload>
-                    <CancelButton onClick={openModal}>취소</CancelButton>
-                    <UploadButton type="submit" onClick={postNotice}>등록</UploadButton>
-                </Upload>
-                <Modal 
-                open={modalOpen} 
-                close={closeModal} 
-                header="공지 작성 취소"
-                subtext="작성 취소된 글은 저장되지 않습니다."
-                maintext="공지 글 작성을 취소하겠습니까?"
-                onClick={handleBackButton}
+    return (
+        <>
+            <TitleBar>
+                <PyeongChang_Peace 
+                size="22px"
+                weight="700"
+                height="29px"
+                letter-spacing="0em"
                 >
-                </Modal>
-                <Footer></Footer>
-            </>
-        );
-    }
+                    <span style={{color: "#00A428"}}>공</span>
+                    <span style={{color: "#007A28"}}>지 </span>
+                    <span style={{color: "##004628"}}>작성하기</span>
+                </PyeongChang_Peace>
+            </TitleBar>
+            <Title>
+                <Input
+                type='text' 
+                placeholder="제목을 작성하세요."
+                name="title"
+                onChange={handleTitle}
+                ></Input>
+            </Title>
+            <Line />
+            <Content>
+                <Textarea 
+                placeholder="내용을 작성하세요." 
+                name="content"
+                onChange={handleContent}
+                type='text'
+                >
+                </Textarea>
+            </Content>
+            <Line />
+            <Upload>
+                <CancelButton onClick={openModal}>취소</CancelButton>
+                <UploadButton type="submit" onClick={postNotices}>등록</UploadButton>
+            </Upload>
+            <Modal 
+            open={modalOpen} 
+            close={closeModal} 
+            header="공지 작성 취소"
+            subtext="작성 취소된 글은 저장되지 않습니다."
+            maintext="공지 글 작성을 취소하겠습니까?"
+            onClick={handleBackButton}
+            >
+            </Modal>
+            <Footer></Footer>
+        </>
+    );
+}
 
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useNavigate } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useParams } from "react-router-dom";
 import { DeleteNotice, GetNotice } from "../../api/tf";
-import { useAppSelector } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 //_mock 더미데이터
 import { noticeData } from "../../_mock/noticeData";
