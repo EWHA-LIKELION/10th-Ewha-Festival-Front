@@ -6,6 +6,8 @@ import "./styles/common.scss";
 import "./styles/pin.css";
 import "./styles/button.css";
 import { BrowserRouter as Router } from "react-router-dom";
+
+// 구글 애널리틱스
 import ReactGA from "react-ga";
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
 ReactGA.initialize(TRACKING_ID);
