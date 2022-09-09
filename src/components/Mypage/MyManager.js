@@ -39,7 +39,7 @@ const MyManager = () => {
     http
       .get("/accounts/")
       .then(res => {
-        console.log("[로그인 유저]", res.data.data);
+        console.log("[로그인 유저]\n", res.data.data);
         setnickname(res.data.data.nickname);
         setusername(res.data.data.username);
       })
@@ -83,7 +83,7 @@ const MyManager = () => {
       </EditBooth>
       <BoothBox>
         <Titlebox>
-          <Likebooth type="image/svg+xml" />
+          <object data={likebooth} type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -206,7 +206,13 @@ const Likebooth = styled.object`
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
-  margin-top: 22px;
+  object {
+    width: 17px;
+    height: 28px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    display: block;
+  }
 `;
 
 const Userbox = styled.object`

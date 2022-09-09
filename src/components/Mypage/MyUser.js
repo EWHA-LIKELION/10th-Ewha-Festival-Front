@@ -64,7 +64,7 @@ const UserMy = () => {
       </Userbox>
       <BoothBox>
         <Titlebox>
-          <Likebooth type="image/svg+xml" />
+          <object data={likebooth} type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -171,22 +171,22 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.object`
-  background-image: url(${likebooth});
-  width: 17px;
-  height: 28px;
-  margin-bottom: 7px;
-  margin-right: 7px;
-`;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
+  object {
+    width: 17px;
+    height: 28px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+  }
 `;
 
 const Userbox = styled.object`
   background-image: url(${userbg});
   background-repeat: no-repeat;
   width: 268px;
+  height: 100px;
   margin: 33px auto;
   text-align: center;
   .nickname {
