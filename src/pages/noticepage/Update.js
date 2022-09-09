@@ -42,7 +42,7 @@ const Update = () => {
   let { id } = useParams();
   const [title, setTitle] = useState({});
   const [content, setContent] = useState({});
-  console.log(title, content, { id });
+  // console.log(title, content, { id });
 
   // 기존 부스 정보 불러오기
   useEffect(() => {
@@ -63,14 +63,13 @@ const Update = () => {
     // console.log("공지 수정", setTitle, setContent);
     PatchNotice(title, content)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
       })
-      .catch(err => console.log(err.data));
+      .catch(err => console.log(err));
   };
 
   const [newtitle, setNewTitle] = useState("");
   const [newcontent, setNewContent] = useState("");
-  // let { id } = useParams();
 
   const handleTitle = e => {
     setNewTitle(e.target.value);
