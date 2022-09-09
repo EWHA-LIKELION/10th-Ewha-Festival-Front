@@ -1,6 +1,4 @@
-import map from "../images/map.svg";
-import heart from "../images/heart.svg";
-
+import full from "../images/category/full.svg";
 import frontDoor from "../images/category/frontDoor.svg";
 import edu from "../images/category/edu.svg";
 import auditorium from "../images/category/auditorium.svg";
@@ -11,7 +9,7 @@ import life from "../images/category/life.svg";
 import sin from "../images/category/sin.svg";
 
 export const boothMaps = [
-  null,
+  full,
   frontDoor,
   edu,
   auditorium,
