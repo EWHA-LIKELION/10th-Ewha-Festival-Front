@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 // images
@@ -24,8 +24,10 @@ const MakersPage = () => {
     const handleBackButton = () => {
         navigate(-1);
       };
+
     return (
-    <Wrapper>
+      <Wrapper>
+        <link rel="preload" href={"../../images/makerspage/likelionLogo.svg"} as="image" />
         <Title>
             <div className="top1">
                 <ButtonWrapper>
@@ -88,7 +90,7 @@ const MakersPage = () => {
             <TfTeam teamName="꼬우미"/>
         </TF_Team>
         <Footer/>
-    </Wrapper>
+      </Wrapper>
   );
 };
 
