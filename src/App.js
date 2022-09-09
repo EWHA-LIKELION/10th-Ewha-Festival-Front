@@ -35,8 +35,6 @@ import SearchPage from "./pages/searchpage/SearchPage";
 // 트래킹
 import RouteChangeTracker from "./components/RouteChangeTracker";
 function App() {
-  //const location = useLocation();
-
   RouteChangeTracker();
 
   return (
