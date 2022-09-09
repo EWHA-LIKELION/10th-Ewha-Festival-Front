@@ -15,7 +15,7 @@ const TrashPage = () => {
   const [trashs, setTrashs] = useState(trashData);
   const [trashname, setTrashname] = useState("정문");
   const [trashinfo, setTrashinfo] = useState("정문 24번 부스 옆");
-  const [pickedId, setId] = useState(0);
+  const [pickedId, setId] = useState(5);
 
   const selectPla = id => {
     setTrashs(
