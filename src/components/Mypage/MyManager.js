@@ -39,7 +39,7 @@ const MyManager = () => {
     http
       .get("/accounts/")
       .then(res => {
-        console.log("[로그인 유저]\n", res.data.data);
+        console.log("[로그인 유저]", res.data.data);
         setnickname(res.data.data.nickname);
         setusername(res.data.data.username);
       })
