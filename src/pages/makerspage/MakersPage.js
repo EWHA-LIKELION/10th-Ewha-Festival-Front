@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  React, { useEffect, useState, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // images
 import background from "../../images/makerspage/background.png";
-import { ReactComponent as Backbutton } from "../../images/navbar/back.svg";
+import { ReactComponent as SideBarBtn } from "../../images/main/hamburger.svg";
 import toplogo from "../../images/main/toplogo.svg";
 import likelion from "../../images/makerspage/likelionLogo.svg";
 import diaIcon from "../../images/makerspage/diaIcon.svg";
@@ -14,16 +14,15 @@ import {
     Pretendard,
   } from "../../components/Text";
 //components 
-import Footer from "../../components/Footer/Footer";
+import SideBar from "../../components/SideBar";
 import Team from "../../components/MakersPage/Team";
 import TfTeam from "../../components/MakersPage/TfTeam";
+import Footer from "../../components/Footer/Footer";
+import { Navigate } from "react-router-dom";
 
 const MakersPage = () => {
-    const navigate = useNavigate();
-
-    const handleBackButton = () => {
-        navigate(-1);
-      };
+    // 사이드바 관리
+    const [sideBar, setSideBar] = useState(false);
 
     return (
       <Wrapper>
@@ -31,7 +30,7 @@ const MakersPage = () => {
         <Title>
             <div className="top1">
                 <ButtonWrapper>
-                        <Backbutton onClick={handleBackButton}></Backbutton>
+                  <SideBarBtn onClick={()=>{setSideBar(true);}}></SideBarBtn>
                 </ButtonWrapper>
                 <object type="image/svg+xml" data={toplogo}>
                   <img src={toplogo}/>
@@ -61,6 +60,7 @@ const MakersPage = () => {
                <p>136주년 대동제 TF</p>
             </ PyeongChang>
         </Title>
+        {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
         <LikelionTeam>
             <PyeongChang_Peace className="lionTitle">
                 <object type="image/svg+xml" data={diaIcon} style={{marginRight:"5px"}}>
@@ -106,6 +106,7 @@ const Wrapper = styled.div`
   background-size: cover;
 `;
 const ButtonWrapper = styled.div`
+    cursor: pointer;
     display: flex;
     align-items: center;
     margin-right: 48px;
