@@ -31,7 +31,7 @@ const EditMenuDetailPage = () => {
   const [menu, setMenu] = useState([]);
 
   // boothId 불러오기
-  const boothId = useAppSelector(state=>state.user.boothId);
+  const boothId = useAppSelector(state => state.user.boothId);
 
   // 기존 메뉴 조회하기
   useEffect(() => {
@@ -51,7 +51,6 @@ const EditMenuDetailPage = () => {
   useEffect(() => {
     if (boothId !== null) {
       GetMenu(boothId).then(response => {
-        console.log("[메뉴 불러오기]");
         console.log(response.data.data.filter(isMenu)[0]);
         setMenu(response.data.data.filter(isMenu)[0]);
       });
@@ -71,9 +70,7 @@ const EditMenuDetailPage = () => {
         alert("가격은 1억 이하로만 설정할 수 있습니다.");
       } else {
         PatchMenu(boothId, id, menuName, menuPrice, isSoldout)
-          .then(response =>
-            console.log("[메뉴 정보 수정 성공]", response.data)
-          )
+          .then(response => console.log("[메뉴 정보 수정 성공]", response.data))
           .catch(error => {
             console.log(error);
           });
@@ -133,7 +130,7 @@ const EditMenuDetailPage = () => {
             </Pretendard>
             <Soldout>
               <Pretendard>
-              <Text>sold out</Text>
+                <Text>sold out</Text>
               </Pretendard>
               {isSoldout ? (
                 <Icon src={fullsoldout} onClick={onClickSoldOut} />

@@ -18,10 +18,10 @@ const Mypage = () => {
   }, []);
 
   if (isBooth == true) {
-    console.log("부스관리자입니당");
+    console.log("부스관리자");
     return <MyManager />;
   } else {
-    console.log("일반유저입니당");
+    console.log("일반유저");
     return <MyUser />;
   }
 };

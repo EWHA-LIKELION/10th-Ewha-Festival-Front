@@ -1,49 +1,43 @@
-import React, { useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-//fonts
-import {
-    PyeongChang,
-    Pretendard,
-  } from "../Text";
+import React from "react";
+import styled from "styled-components";
 
-const TfMember = (props) =>{
-
-    return(
-        <MemberWrapper style={{marginTop:"16px"}}>
-            <Name>{props.memberName}</Name>
-            <div>
-            <Dept>{props.dept}</Dept>
-            </div> 
-        </MemberWrapper>
-    )
-}
+const TfMember = props => {
+  return (
+    <MemberWrapper style={{ marginTop: "16px" }}>
+      <Name>{props.memberName}</Name>
+      <div>
+        <Dept>{props.dept}</Dept>
+      </div>
+    </MemberWrapper>
+  );
+};
 export default TfMember;
 
 const MemberWrapper = styled.div`
-    width: 111px;
-    height: 31px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 111px;
+  height: 31px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    font-family: 'Pretendard';
-`
+  font-family: "Pretendard";
+`;
 const Name = styled.div`
-    width: 60px;
-    color: var(--green3);
-    font-size: 14px;
-    font-weight: 700;
-`
+  width: 60px;
+  color: var(--green3);
+  font-size: 14px;
+  font-weight: 700;
+`;
 const Dept = styled.div`
-    color: var(--green1);
-    font-weight: 300;
-    font-size: 10px;
-`
+  color: var(--green1);
+  font-weight: 300;
+  font-size: 10px;
+`;
 const Task = styled.div`
-    width: 230px;
-    white-space: pre-wrap;
+  width: 230px;
+  white-space: pre-wrap;
 
-    color: var(--green3);
-    font-weight: 500;
-    font-size: 12px;
-`
+  color: var(--green3);
+  font-weight: 500;
+  font-size: 12px;
+`;

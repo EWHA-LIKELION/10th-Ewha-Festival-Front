@@ -71,7 +71,6 @@ const SearchPage = () => {
   };
 
   const Detail = id => {
-    console.log("페이지 이동");
     navigate(`/category/detail/${id}`);
   };
 

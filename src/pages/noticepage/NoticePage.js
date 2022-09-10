@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import { GetAllNotice } from "../../api/tf";
 import { useAppSelector } from "../../redux/store";
 
-//_mock 더미데이터
-import { noticeData } from "../../_mock/noticeData";
-
 // components
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
@@ -24,12 +21,11 @@ export function NoticePage() {
   useEffect(() => {
     GetAllNotice()
       .then(res => {
-        console.log("모든 공지 조회 성공", res.data.data);
+        console.log("모든 공지 조회 성공", res);
         setNotices(res.data.data);
-        console.log(isTf);
       })
       .catch(err => {
-        console.log("모든 공지 조회 실패");
+        console.log("모든 공지 조회 실패", err);
       });
   }, []);
 

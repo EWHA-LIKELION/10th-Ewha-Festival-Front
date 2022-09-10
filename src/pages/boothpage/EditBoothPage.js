@@ -26,7 +26,6 @@ const EditBoothPage = () => {
 
   const getPrev = id => {
     GetBooth(id).then(response => {
-      console.log(localStorage.getItem("token"));
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
@@ -38,10 +37,7 @@ const EditBoothPage = () => {
   const onSubmit = () => {
     if (name !== "") {
       PatchBooth(boothId, name, notice, description)
-        .then(response =>
-          // console.log("[부스 정보 수정 성공]\n\n","부스 이름: ", name, "\n부스 공지: ", notice, "\n부스 소개: ", description),
-          console.log(response),
-        )
+        .then(response => console.log(response))
         .catch(error => {
           console.log(error);
         });

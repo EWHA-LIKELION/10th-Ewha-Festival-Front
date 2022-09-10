@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { setPage } from "../../redux/pageSlice";
@@ -17,7 +17,6 @@ import { dayData } from "../../_mock/dayData";
 import { categoryData } from "../../_mock/categoryData";
 import { boothMaps } from "../../_mock/boothMap";
 // 이미지
-import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
 import hamburger from "../../images/main/hamburger.svg";
 import greenheart from "../../images/greenheart.svg";
@@ -85,7 +84,6 @@ const Category = () => {
 
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log("조회 결과", res);
         setBooths(res.data.data);
         setLength(res.data.total);
       })

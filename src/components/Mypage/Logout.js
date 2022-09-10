@@ -11,7 +11,7 @@ const Logout = () => {
   const Logout = async () => {
     await persistor.purge();
     window.localStorage.removeItem("token");
-    console.log("마이페이지 로그아웃");
+    console.log("로그아웃");
     navigate("/");
     window.location.reload();
   };

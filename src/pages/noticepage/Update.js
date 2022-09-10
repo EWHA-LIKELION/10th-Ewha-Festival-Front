@@ -21,7 +21,7 @@ import TfService from "../../api/services/tfservice";
 import { GetNotice, submitNotice, PatchNotice } from "../../api/tf";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { setPage } from "../../redux/pageSlice";
-import {noticeReducer, setNotice} from "../../redux/noticeSlice";
+import { noticeReducer, setNotice } from "../../redux/noticeSlice";
 
 const Update = () => {
   const preTitle = useAppSelector(state => state.notice.title);
@@ -45,7 +45,6 @@ const Update = () => {
     navigate(-1);
   };
 
-
   const [title, setTitle] = useState(preTitle);
   const [content, setContent] = useState(preContent);
 
@@ -53,7 +52,7 @@ const Update = () => {
   useEffect(() => {
     GetNotice(id)
       .then(res => {
-        console.log("공지 상세 조회 성공", res, id);
+        console.log("공지 상세 조회 성공", res);
       })
       .catch(err => {
         console.log("공지 상세 조회 실패", err);
@@ -73,7 +72,6 @@ const Update = () => {
         console.log(err);
       });
   };
-
 
   const handleTitle = e => {
     setTitle(e.target.value);

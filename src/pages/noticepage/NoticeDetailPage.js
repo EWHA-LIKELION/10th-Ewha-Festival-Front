@@ -5,9 +5,6 @@ import { DeleteNotice, GetNotice } from "../../api/tf";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { setNoticeReducer } from "../../redux/noticeSlice";
 
-//_mock 더미데이터
-import { noticeData } from "../../_mock/noticeData";
-
 // components
 import TitleBar from "../../components/TitleBar";
 import Footer from "../../components/Footer/Footer";
@@ -26,10 +23,9 @@ export function NoticeDetailPage() {
   useEffect(() => {
     GetNotice(id)
       .then(res => {
-        console.log("공지 상세 조회 성공", res.data.data, id);
+        console.log("공지 상세 조회 성공", res);
         setNotice(res.data.data);
         dispatch(setNoticeReducer(res.data.data));
-        console.log("완료오오오");
       })
       .catch(err => {
         console.log("공지 상세 조회 실패", err);
@@ -59,13 +55,12 @@ export function NoticeDetailPage() {
 
   // 공지 삭제 api
   const Delete = id => {
-    console.log(id, "공지 삭제");
     DeleteNotice(id)
       .then(res => {
-        console.log(res.data.data, "공지 삭제 성공");
+        console.log(res, "공지 삭제 성공");
         NoticeMain();
       })
-      .catch(err => console.log(err.data, data, "공지 삭제 실패"));
+      .catch(err => console.log(err, "공지 삭제 실패"));
     setModalOpen(false);
   };
 

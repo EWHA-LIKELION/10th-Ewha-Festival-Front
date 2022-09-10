@@ -47,8 +47,6 @@ function App() {
       <Route exact path="/category" element={<Category />} />
       {/* 마이페이지 */}
       <Route exact path="/mypage" element={<Mypage />} />
-      {/* 로그인 테스트 */}
-      <Route exact path="/test" element={<ReduxTest />} />
       {/* 디테일 */}
       <Route exact path="/category/detail/:id" element={<BoothDetailPage />} />
       {/* 수정 */}

@@ -5,9 +5,6 @@ import styled from "styled-components";
 // import font
 import { PyeongChang_Peace } from "../components/Text";
 
-// import image
-import { ReactComponent as Backbutton } from "../images/navbar/back.svg";
-
 import hamburger from "../images/main/hamburger.svg";
 import SideBar from "../components/SideBar";
 

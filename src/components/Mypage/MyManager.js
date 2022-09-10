@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
@@ -49,7 +49,6 @@ const MyManager = () => {
   }, []);
 
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
         console.log("좋아요한 부스 조회 성공", res);
