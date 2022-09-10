@@ -40,8 +40,6 @@ const Category = () => {
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
   const [length, setLength] = useState(0);
 
-  console.log("선택된 페이지 : ", pickedPage);
-
   var selectLocationId = null;
   locations.map(lo => {
     if (location === lo.name) {
@@ -51,8 +49,6 @@ const Category = () => {
 
   //첫 get api
   useEffect(() => {
-    console.log("첫 useEffect");
-
     dispatch(
       setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
     );
@@ -60,12 +56,9 @@ const Category = () => {
     selectLocation(selectLocationId); // 전에 눌렀던 장소 버튼
     selectDay(parseInt(day)); // 전에 눌렀던 요일 버튼
 
-    console.log("[day] :", day, " [days] : ", days);
-
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
-        console.log(pickedDay, pickedLocation);
+        console.log("조회 결과", res);
         setBooths(res.data.data);
         setLength(res.data.total);
       })
@@ -86,16 +79,13 @@ const Category = () => {
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
   useEffect(() => {
-    console.log("매번 반복 useEffect");
-
     dispatch(
       setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
     );
 
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
-        console.log(pickedDay, pickedLocation);
+        console.log("조회 결과", res);
         setBooths(res.data.data);
         setLength(res.data.total);
       })
@@ -182,7 +172,6 @@ const Category = () => {
   const navigate = useNavigate();
 
   const Detail = id => {
-    console.log("페이지 이동");
     navigate(`/category/detail/${id}`);
   };
 

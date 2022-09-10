@@ -22,7 +22,6 @@ const SearchPage = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log("검색 시도");
 
     if (keyword === "") {
       alert("검색어를 입력해주세요!");
