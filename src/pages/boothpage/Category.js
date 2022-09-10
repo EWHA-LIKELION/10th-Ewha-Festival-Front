@@ -32,7 +32,7 @@ const Category = () => {
   const [days, setDays] = useState(dayData); // 요일들
   const [locations, setLocations] = useState(locationData); // 장소들
 
-  const [pickedPage, setpickedPage] = useState(page); // 선택된 페이지 넘버
+  const [pickedPage, setpickedPage] = useState(parseInt(page)); // 선택된 페이지 넘버
   const [pickedDay, setPickedDay] = useState(day); // 선택 된 요일
   const [pickedLocation, setPickedLocation] = useState(location); // 선택된 장소 (한글)
   const [pickedMap, setPickedMap] = useState(location); // 선택된 지도
@@ -40,7 +40,7 @@ const Category = () => {
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
   const [length, setLength] = useState(0);
 
-  console.log("테스트", day, location, page);
+  console.log("선택된 페이지 : ", pickedPage);
 
   var selectLocationId = null;
   locations.map(lo => {
