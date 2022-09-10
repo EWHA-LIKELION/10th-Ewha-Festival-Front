@@ -26,7 +26,6 @@ const EditBoothPage = () => {
 
   const getPrev = id => {
     GetBooth(id).then(response => {
-      console.log(localStorage.getItem("token"));
       setName(response.data.data.name);
       setNotice(response.data.data.notice);
       setDescription(response.data.data.description);
@@ -102,7 +101,7 @@ const EditBoothPage = () => {
             value={notice}
             onChange={handleNotice}
             placeholder="공지사항"
-            style={{ fontFamily: "Pretendard" }}
+            style={{ fontFamily: "Pretendard", fontSize: "14px" }}
           />
         </BoxWrapper>
         <BoxWrapper>
@@ -114,7 +113,11 @@ const EditBoothPage = () => {
             value={description}
             onChange={handleDescription}
             placeholder="부스 소개"
-            style={{ fontFamily: "Pretendard", color: "var(--black)" }}
+            style={{
+              fontFamily: "Pretendard",
+              color: "var(--black)",
+              fontSize: "14px",
+            }}
           />
         </BoxWrapper>
       </ContentWrapper>
