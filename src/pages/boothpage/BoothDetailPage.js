@@ -13,7 +13,7 @@ import { GetBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
 
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
-import booththumnail from "../../images/detail/booththumnail.svg";
+import booththumnail from "../../images/detail/booththumnail.png";
 
 const BoothDetailPage = () => {
   let { id } = useParams();
