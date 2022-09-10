@@ -7,8 +7,10 @@ import { PyeongChang_Peace } from "./Text";
 import toplogo from "../images/main/toplogo.svg";
 import deleteIcon from "../images/delete.svg";
 import linkDeco from "../images/linkDeco.svg";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = props => {
+  const navigate = useNavigate;
   const isLogin = localStorage.getItem("token");
   // 사이드바 안보이게 하는 함수
   const DeleteSideBar = () => {
@@ -27,7 +29,11 @@ const SideBar = props => {
       window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     };
   }, []);
-
+  // 메인으로 이동
+  const Gomain = () =>{
+    console.log("클릭");
+    navigate("/");
+  }
   return (
     <BarWrapper onClick={DeleteSideBar}>
       <link rel="preload" href={"../images/main/toplogo.svg"} as="image" />
@@ -40,11 +46,9 @@ const SideBar = props => {
           crossorigin="anonymous"
         />
         <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
-
-        <object type="image/svg+xml" data={toplogo} style={{ marginTop: "99px" }}>
-          <TopLogo src={toplogo} />
-        </object>
-
+          <object type="image/svg+xml" data={toplogo} style={{marginTop: "99px"}}>
+              <TopLogo src={toplogo}/>
+          </object>
         <LinkWrapper>
           <p>
             <img src={linkDeco} />
@@ -99,7 +103,7 @@ const Bar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 10;
+  z-index: 15;
   top: 0;
   left: 0;
 
@@ -127,6 +131,8 @@ const TopLogo = styled.img`
   width: 138px;
   height: 33px;
   margin-top: 99px;
+
+  cursor: pointer;
 `;
 const LinkWrapper = styled.div`
   width: 165px;
