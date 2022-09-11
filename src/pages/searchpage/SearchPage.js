@@ -5,7 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import Footer from "../../components/Footer/Footer";
 import { GetSearchBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
-
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { setSearchRedux } from "../../redux/pageSlice";
 // 이미지
 import back from "../../images/navbar/back.svg";
 import searchImg from "../../images/search/search.svg";
@@ -14,8 +15,11 @@ import heart from "../../images/heart.svg";
 import booththumnail from "../../images/default.png";
 
 const SearchPage = () => {
+  const preKeyWord = useAppSelector(state => state.page.search);
+  const dispatch = useAppDispatch();
+
   const [booths, setBooths] = useState(); // 부스 목록
-  const [keyword, setkeyword] = useState("");
+  const [keyword, setkeyword] = useState(preKeyWord);
   const [search, setSearch] = useState(false);
 
   const navigate = useNavigate();
@@ -31,6 +35,7 @@ const SearchPage = () => {
           console.log(res);
           setSearch(true);
           setBooths(res.data.data);
+          dispatch(setSearchRedux({ search: keyword }));
         })
         .catch(err => console.log(err));
     }
@@ -73,6 +78,19 @@ const SearchPage = () => {
   const Detail = id => {
     navigate(`/category/detail/${id}`);
   };
+
+  useEffect(() => {
+    if (keyword !== "") {
+      GetSearchBooth(keyword)
+        .then(res => {
+          console.log(res);
+          setSearch(true);
+          setBooths(res.data.data);
+          dispatch(setSearchRedux({ search: keyword }));
+        })
+        .catch(err => console.log(err));
+    }
+  }, []);
 
   return (
     <Wrapper>
