@@ -66,62 +66,64 @@ export function NoticeDetailPage() {
 
   return (
     <>
-      <Pretendard>
-        <TitleBar>
-          <span style={{ color: "var(--green1)" }}>공</span>
-          <span style={{ color: "var(--green2)" }}>지</span>
-          <span style={{ color: "var(--green3)" }}>사항</span>
-        </TitleBar>
-        <NoticeTitle>
-          <p class="title">{"[공지]" + " " + notice.title}</p>
-        </NoticeTitle>
-        <Line />
-        <NoticeInfo>
-          <div style={{ display: "flex", float: "left" }}>
-            <p class="writer">TF 팀</p>
-          </div>
-          <div style={{ display: "flex", float: "right" }}>
-            <p class="createdAt">{notice.created_at}</p>
-          </div>
-        </NoticeInfo>
-        <NoticeContent>
-          <p class="content">
-            {notice?.content &&
-              (notice?.content.includes("\n") ? (
-                <>
-                  {notice?.content.split("\n").map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
-                </>
-              ) : (
-                <>
-                  <span>{notice?.content}</span>
-                </>
-              ))}
-          </p>
-        </NoticeContent>
-        <Line style={{ marginBottom: "5%" }} />
-      </Pretendard>
-      {isTf ? (
-        <ButtonBox>
-          <DeleteButton onClick={openModal}>삭제</DeleteButton>
-          <ModifyButton onClick={Update}>수정</ModifyButton>
-        </ButtonBox>
-      ) : null}
-      <Modal
-        open={modalOpen}
-        close={closeModal}
-        header="공지 삭제"
-        subtext="삭제 된 글은 다시 불러올 수 없습니다."
-        maintext="공지 글을 삭제하시겠습니까?"
-        onClick={() => Delete(id)}
-      ></Modal>
-      <Footer />
+      <Box>
+        <Pretendard>
+          <TitleBar>
+            <span style={{ color: "var(--green1)" }}>공</span>
+            <span style={{ color: "var(--green2)" }}>지</span>
+            <span style={{ color: "var(--green3)" }}>사항</span>
+          </TitleBar>
+          <NoticeTitle>
+            <p class="title">{"[공지]" + " " + notice.title}</p>
+          </NoticeTitle>
+          <Line />
+          <NoticeInfo>
+            <div style={{ display: "flex", float: "left" }}>
+              <p class="writer">TF 팀</p>
+            </div>
+            <div style={{ display: "flex", float: "right" }}>
+              <p class="createdAt">{notice.created_at}</p>
+            </div>
+          </NoticeInfo>
+          <NoticeContent style={{}}>
+            <p class="content">
+              {notice?.content &&
+                (notice?.content.includes("\n") ? (
+                  <>
+                    {notice?.content.split("\n").map(line => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    <span>{notice?.content}</span>
+                  </>
+                ))}
+            </p>
+          </NoticeContent>
+          <Line style={{ marginBottom: "5%" }} />
+        </Pretendard>
+        {isTf ? (
+          <ButtonBox>
+            <DeleteButton onClick={openModal}>삭제</DeleteButton>
+            <ModifyButton onClick={Update}>수정</ModifyButton>
+          </ButtonBox>
+        ) : null}
+        <Modal
+          open={modalOpen}
+          close={closeModal}
+          header="공지 삭제"
+          subtext="삭제 된 글은 다시 불러올 수 없습니다."
+          maintext="공지 글을 삭제하시겠습니까?"
+          onClick={() => Delete(id)}
+        ></Modal>
+        <Footer />
+      </Box>
     </>
   );
 }
@@ -133,6 +135,7 @@ const NoticeTitle = styled.div`
   font-weight: 600;
   font-size: 18px;
   text-align: justify;
+  height: 100%;
 `;
 const NoticeInfo = styled.div`
   box-sizing: border-box;
@@ -151,7 +154,15 @@ const NoticeContent = styled.div`
   font-size: 14px;
   text-align: justify;
   line-height: 22px;
+  height: 100%;
 `;
+
+const Box = styled.div`
+  height: 100%;
+  position: fixed;
+  overflow: auto !important;
+`;
+
 const Line = styled.div`
   border: 1px solid var(--gray);
   width: 85%;
