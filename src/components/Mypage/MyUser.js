@@ -6,6 +6,7 @@ import { PyeongChang_Peace, Pretendard } from "../Text";
 import Footer from "../Footer/Footer";
 import { boothData } from "../../_mock/boothData";
 import { http } from "../../api/http";
+import Mstar from "../../images/mypage/Mstar.svg";
 
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -13,6 +14,7 @@ import Navbar from "./Navbar";
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
 import userbg from "../../images/mypage/userbg.svg";
+import booththumnail from "../../images/default.png";
 
 import { GetLikes } from "../../api/user";
 
@@ -35,7 +37,6 @@ const UserMy = () => {
   }, []);
 
   const Detail = id => {
-    console.log("페이지 이동");
     navigate(`/category/detail/${id}`);
   };
   useEffect(() => {
@@ -55,16 +56,18 @@ const UserMy = () => {
     <Wrapper>
       <Navbar />
       <Userbox>
+        <object className="Mstar" data={Mstar} type="image/svg+xml" />
         <p className="nickname">
           <Pretendard>{nickname}</Pretendard>
         </p>
         <p className="user">
           <Pretendard>{username}</Pretendard>
         </p>
+        <object className="star" data={likebooth} type="image/svg+xml" />
       </Userbox>
       <BoothBox>
         <Titlebox>
-          <Likebooth type="image/svg+xml" />
+          <object data={likebooth} type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -74,7 +77,7 @@ const UserMy = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-        {booths.map(b => {
+        {booths?.map(b => {
           const description = b.description?.substr(0, 27);
           if (description?.includes("\n")) {
             var info = description.split("\n")[0];
@@ -84,7 +87,12 @@ const UserMy = () => {
 
           return (
             <Booth key={b.id} onClick={event => Detail(b.id)}>
-              <LikeImg src={b.thumnail} />
+              {b.thumnail == "" ? (
+                <LikeImg src={booththumnail} />
+              ) : (
+                <LikeImg src={b.thumnail} />
+              )}
+
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
@@ -171,24 +179,36 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.object`
-  background-image: url(${likebooth});
-  width: 17px;
-  height: 28px;
-  margin-bottom: 7px;
-  margin-right: 7px;
-`;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
+  object {
+    width: 17px;
+    height: 28px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    display: block;
+  }
 `;
 
-const Userbox = styled.object`
+const Userbox = styled.div`
   background-image: url(${userbg});
   background-repeat: no-repeat;
   width: 268px;
+  height: 105px;
   margin: 33px auto;
   text-align: center;
+  position: relative;
+  .star {
+    position: absolute;
+    top: 55px;
+    left: 250px;
+  }
+  .Mstar {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+  }
   .nickname {
     margin: 23px auto 2px;
     color: #686868;

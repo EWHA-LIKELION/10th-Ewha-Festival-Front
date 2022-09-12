@@ -13,10 +13,10 @@ const UserService = {
 
   // 로그아웃
   logout: () => {
+    console.log("로그아웃 되었습니다.");
     persistor.purge();
     window.localStorage.removeItem("token");
     window.location.href = "https://rewha2022.com/";
-    console.log("로그아웃 되었습니다.");
   },
 
   //로그인

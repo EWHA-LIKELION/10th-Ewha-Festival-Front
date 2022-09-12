@@ -78,14 +78,16 @@ const BoothNotice = props => {
             </NoticeContainer>
           </>
         ) : (
+          // 공지가 있을 때
           <>
             <NoticeContainer
               onClick={() => props.handleNotice()}
               style={{
-                height: props.notice ? "auto" : "35px",
+                height: props.notice ? "auto" : "auto",
               }}
             >
               <Notice src={noticeicon} />
+
               <NoticeTextContainer>
                 <Pretendard
                   size="14px"
@@ -95,6 +97,8 @@ const BoothNotice = props => {
                 >
                   부스 공지사항
                 </Pretendard>
+
+                {/* 내용 */}
                 {props.notice ? (
                   <div
                     style={{
@@ -127,7 +131,33 @@ const BoothNotice = props => {
                         ))}
                     </Pretendard>
                   </div>
-                ) : null}
+                ) : (
+                  <div
+                    style={{
+                      margin: noticeString === "" ? "0" : "10px 0 10px 0",
+                      wordBreak: "keep-all",
+                    }}
+                  >
+                    <Pretendard
+                      size="14px"
+                      weight="300"
+                      color="var(--black)"
+                      style={{ lineHeight: "17px" }}
+                    >
+                      {noticeString &&
+                        (noticeString.includes("\n") ? (
+                          <span>
+                            {noticeString.split("\n")[0]}
+                            <br />
+                          </span>
+                        ) : (
+                          <>
+                            <span>{noticeString}</span>
+                          </>
+                        ))}
+                    </Pretendard>
+                  </div>
+                )}
               </NoticeTextContainer>
               {props.notice ? (
                 <Up

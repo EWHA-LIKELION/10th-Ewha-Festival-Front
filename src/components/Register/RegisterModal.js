@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import React, { useEffect } from "react";
+import styled from "styled-components";
 
 const RegisterModal = props => {
-   // 사이드바 배경 스크롤 방지
-   useEffect(() => {
+  // 사이드바 배경 스크롤 방지
+  useEffect(() => {
     document.body.style.cssText = `
           position: fixed;
           top: -${window.scrollY}px;

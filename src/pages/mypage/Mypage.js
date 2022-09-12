@@ -17,11 +17,11 @@ const Mypage = () => {
       .catch(err => console.log(err));
   }, []);
 
-  if (JSON.stringify(isBooth) == "true") {
-    console.log("부스관리자입니당");
+  if (isBooth == true) {
+    console.log("부스관리자");
     return <MyManager />;
   } else {
-    console.log("일반유저입니당");
+    console.log("일반유저");
     return <MyUser />;
   }
 };

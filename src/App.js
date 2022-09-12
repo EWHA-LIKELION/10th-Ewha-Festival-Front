@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import AuthRoute from "./AuthRoute";
 // 메인
 import MainPage from "./pages/mainpage/MainPage";
@@ -32,49 +32,56 @@ import TrashPage from "./pages/trashbinpage/TrashPage";
 import MakersPage from "./pages/makerspage/MakersPage";
 // 검색 페이지
 import SearchPage from "./pages/searchpage/SearchPage";
-
+// 트래킹
+import RouteChangeTracker from "./components/RouteChangeTracker";
 function App() {
+  RouteChangeTracker();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* 메인 */}
-        <Route exact path="/" element={<MainPage />} />
-        {/*검색*/}
-        <Route exact path="/search" element={<SearchPage />} />
-        {/* 부스 */}
-        <Route exact path="/category" element={<Category />} />
-        {/* 마이페이지 */}
-        <Route exact path="/mypage" element={<Mypage />} />
-        {/* 로그인 테스트 */}
-        <Route exact path="/test" element={<ReduxTest />} />
-        {/* 디테일 */}
-        <Route
-          exact
-          path="/category/detail/:id"
-          element={<BoothDetailPage />}
-        />
-        {/* 수정 */}
-        <Route exact path="/editbooth" element={<AuthRoute component={<EditBoothPage/>}/>} />
-        <Route exact path="/editmenu" element={<AuthRoute component={<EditMenuPage />}/>} />
-        <Route exact path="/editmenu/:id" element={<AuthRoute component={<EditMenuDetailPage />}/>}/>
-        {/* {공지 게시판} */}
-        <Route exact path="/notice" element={<NoticePage />} />
-        {/* 공지 상세 보기 페이지 */}
-        <Route path="/notice/:id" element={<NoticeDetailPage />} />
-        {/* 공지 게시판 작성 */}
-        <Route exact path="/create" element={<Create />} />
-        {/* 공지  게시판 수정 */}
-        <Route exact path="/update" element={<Update />} />
-        {/*로그인*/}
-        <Route exact path="/login" element={<LoginPage />} />
-        {/* 회원 가입 */}
-        <Route exact path="/register" element={<RegisterPage />} />
-        {/* 쓰레기통 */}
-        <Route exact path="/trashbin" element={<TrashPage />} />
-        {/* 만든이들 페이지 */}
-        <Route exact path="/makers" element={<MakersPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      {/* 메인 */}
+      <Route exact path="/" element={<MainPage />} />
+      {/*검색*/}
+      <Route exact path="/search" element={<SearchPage />} />
+      {/* 부스 */}
+      <Route exact path="/category" element={<Category />} />
+      {/* 마이페이지 */}
+      <Route exact path="/mypage" element={<Mypage />} />
+      {/* 디테일 */}
+      <Route exact path="/category/detail/:id" element={<BoothDetailPage />} />
+      {/* 수정 */}
+      <Route
+        exact
+        path="/editbooth"
+        element={<AuthRoute component={<EditBoothPage />} />}
+      />
+      <Route
+        exact
+        path="/editmenu"
+        element={<AuthRoute component={<EditMenuPage />} />}
+      />
+      <Route
+        exact
+        path="/editmenu/:id"
+        element={<AuthRoute component={<EditMenuDetailPage />} />}
+      />
+      {/* {공지 게시판} */}
+      <Route exact path="/notice" element={<NoticePage />} />
+      {/* 공지 상세 보기 페이지 */}
+      <Route path="/notice/:id" element={<NoticeDetailPage />} />
+      {/* 공지 게시판 작성 */}
+      <Route exact path="/create" element={<Create />} />
+      {/* 공지  게시판 수정 */}
+      <Route exact path="/update" element={<Update />} />
+      {/*로그인*/}
+      <Route exact path="/login" element={<LoginPage />} />
+      {/* 회원 가입 */}
+      <Route exact path="/register" element={<RegisterPage />} />
+      {/* 쓰레기통 */}
+      <Route exact path="/trashbin" element={<TrashPage />} />
+      {/* 만든이들 페이지 */}
+      <Route exact path="/makers" element={<MakersPage />} />
+    </Routes>
   );
 }
 

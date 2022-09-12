@@ -51,7 +51,7 @@ const LoginPage = () => {
             console.log(error);
           });
         navigate("/");
-        window.location.reload(); // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
+        setTimeout(() => window.location.reload(), 100); // 메인페이지로 이동, 로그인 후 이동할 페이지로 수정 필요
       })
       .catch(error => {
         // 에러에 따라 다른 경고 문구 출력

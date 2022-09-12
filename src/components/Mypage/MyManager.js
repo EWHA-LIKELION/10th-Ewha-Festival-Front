@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 
 import { PyeongChang_Peace, Pretendard } from "../Text";
@@ -13,9 +13,11 @@ import Navbar from "./Navbar";
 
 import greenheart from "../../images/greenheart.svg";
 import likebooth from "../../images/mypage/likebooth.svg";
+import Mstar from "../../images/mypage/Mstar.svg";
 import userbg from "../../images/mypage/userbg.svg";
 import edit1 from "../../images/mypage/edit1.png";
 import edit2 from "../../images/mypage/edit2.png";
+import booththumnail from "../../images/default.png";
 
 import { GetLikes } from "../../api/user";
 
@@ -47,7 +49,6 @@ const MyManager = () => {
   }, []);
 
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
     GetLikes(localStorage.getItem("token").slice(1, -1))
       .then(res => {
         console.log("좋아요한 부스 조회 성공", res);
@@ -63,6 +64,7 @@ const MyManager = () => {
     <Wrapper>
       <Navbar />
       <Userbox>
+        <object className="Mstar" data={Mstar} type="image/svg+xml" />
         <p className="nickname">
           <Pretendard>{nickname}</Pretendard>
         </p>
@@ -72,6 +74,7 @@ const MyManager = () => {
         <p className="manager">
           <Pretendard>부스관리자</Pretendard>
         </p>
+        <object className="star" data={likebooth} type="image/svg+xml" />
       </Userbox>
       <EditBooth>
         <div id="edit1" onClick={goEditbooth}>
@@ -83,7 +86,7 @@ const MyManager = () => {
       </EditBooth>
       <BoothBox>
         <Titlebox>
-          <Likebooth type="image/svg+xml" />
+          <object data={likebooth} type="image/svg+xml" />
           <PyeongChang_Peace
             color="var(--green3)"
             weight="300"
@@ -93,7 +96,7 @@ const MyManager = () => {
             좋아요한 부스 ({likebooths})
           </PyeongChang_Peace>
         </Titlebox>
-        {booths.map(b => {
+        {booths?.map(b => {
           const description = b.description?.substr(0, 27);
           if (description?.includes("\n")) {
             var info = description.split("\n")[0];
@@ -103,7 +106,11 @@ const MyManager = () => {
 
           return (
             <Booth key={b.id} onClick={event => Detail(b.id)}>
-              <LikeImg src={b.thumnail} />
+              {b.thumnail == "" ? (
+                <LikeImg src={booththumnail} />
+              ) : (
+                <LikeImg src={b.thumnail} />
+              )}
               <BootInfo>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
@@ -196,17 +203,16 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Likebooth = styled.object`
-  width: 17px;
-  height: 28px;
-  margin-right: 7px;
-  margin-bottom: 7px;
-  background-image: url(${likebooth});
-`;
 const Titlebox = styled.div`
   border-bottom: 1px solid var(--gray);
   display: flex;
-  margin-top: 22px;
+  object {
+    width: 17px;
+    height: 28px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    display: block;
+  }
 `;
 
 const Userbox = styled.object`
@@ -216,6 +222,17 @@ const Userbox = styled.object`
   margin: 33px auto;
   background-repeat: no-repeat;
   text-align: center;
+  position: relative;
+  .star {
+    position: absolute;
+    top: 55px;
+    left: 250px;
+  }
+  .Mstar {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+  }
   .nickname {
     margin: 23px auto 2px;
     color: #686868;

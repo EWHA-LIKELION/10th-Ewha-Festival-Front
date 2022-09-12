@@ -9,176 +9,176 @@ import {
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
+// api
+import { initNotice } from "../../redux/noticeSlice"
+
 // components
 import Footer from "../../components/Footer/Footer";
 import UploadButton from "../../components/NoticePage/UploadButton";
 import CancelButton from "../../components/NoticePage/CancelButton";
 import Modal from "../../components/Modal/Modal";
 import TitleBar from "../../components/TitleBar";
-import {submitNotice} from "../../api/tf"
+
+import { submitNotice } from "../../api/tf";
 
 // images
 import { Value } from "sass";
 import GrayButton from "../../components/Modal/GrayButton";
 import GreenButton from "../../components/MainPage/GreenButton";
-import {http} from "../../api/http";
+import { http } from "../../api/http";
 import Axios from "axios";
 // import { text } from "body-parser";
 
 const Create = () => {
-    // 모달 컴포넌트
-    const [modalOpen, setModalOpen] = useState(false);
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
-    const closeModal = () => {
-        setModalOpen(false);
-    };
+  // 모달 컴포넌트
+  const [modalOpen, setModalOpen] = useState(false);
 
-    // 모달 취소 버튼 누를 시 이동 
-    const navigate = useNavigate();
-    const handleBackButton = () => {
-        navigate(-1);
-    };
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
-    // 글 직성
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    
-    const handleTitle = e => {
-        setTitle(e.target.value);
-        console.log(title);
-        };
-    
-        const handleContent = e => {
-        setContent(e.target.value);
-        console.log(content);
-    };
-    
-    // fetch
-    const url = 'https://api.rewha2022.com/notices';
-    const [notice, setNotice] = useState({
-        title: "",
-        body: ""
-    })
+  // 모달 취소 버튼 누를 시 이동
+  const navigate = useNavigate();
+  const handleBackButton = () => {
+    navigate(-1);
+  };
 
-    function postNotices(e) { 
-        e.preventDefault();
-        submitNotice(title, content);
-        navigate(`/notice`);
-        window.location.reload();
-    }
-    
+  // 글 직성
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-    return (
-        <>
-            <TitleBar>
-                <PyeongChang_Peace 
-                size="22px"
-                weight="700"
-                height="29px"
-                letter-spacing="0em"
-                >
-                    <span style={{color: "#00A428"}}>공</span>
-                    <span style={{color: "#007A28"}}>지 </span>
-                    <span style={{color: "##004628"}}>작성하기</span>
-                </PyeongChang_Peace>
-            </TitleBar>
-            <Title>
-                <Input
-                type='text' 
-                placeholder="제목을 작성하세요."
-                name="title"
-                onChange={handleTitle}
-                ></Input>
-            </Title>
-            <Line />
-            <Content>
-                <Textarea 
-                placeholder="내용을 작성하세요." 
-                name="content"
-                onChange={handleContent}
-                type='text'
-                >
-                </Textarea>
-            </Content>
-            <Line />
-            <Upload>
-                <CancelButton onClick={openModal}>취소</CancelButton>
-                <UploadButton type="submit" onClick={postNotices}>등록</UploadButton>
-            </Upload>
-            <Modal 
-            open={modalOpen} 
-            close={closeModal} 
-            header="공지 작성 취소"
-            subtext="작성 취소된 글은 저장되지 않습니다."
-            maintext="공지 글 작성을 취소하겠습니까?"
-            onClick={handleBackButton}
-            >
-            </Modal>
-            <Footer></Footer>
-        </>
-    );
-}
+  const handleTitle = e => {
+    setTitle(e.target.value);
+  };
 
+  const handleContent = e => {
+    setContent(e.target.value);
+  };
 
+  // fetch
+  const url = "https://api.rewha2022.com/notices";
+  const [notice, setNotice] = useState({
+    title: "",
+    body: "",
+  });
+
+  function postNotices(e) {
+    e.preventDefault();
+    submitNotice(title, content);
+    navigate(`/notice`);
+    window.location.reload();
+  }
+
+  return (
+    <>
+      <TitleBar>
+        <PyeongChang_Peace
+          size="22px"
+          weight="700"
+          height="29px"
+          letter-spacing="0em"
+        >
+          <span style={{ color: "#00A428" }}>공</span>
+          <span style={{ color: "#007A28" }}>지 </span>
+          <span style={{ color: "##004628" }}>작성하기</span>
+        </PyeongChang_Peace>
+      </TitleBar>
+      <Title>
+        <Input
+          type="text"
+          placeholder="제목을 작성하세요."
+          name="title"
+          onChange={handleTitle}
+        ></Input>
+      </Title>
+      <Line />
+      <Content>
+        <Textarea
+          placeholder="내용을 작성하세요."
+          name="content"
+          onChange={handleContent}
+          type="text"
+        ></Textarea>
+      </Content>
+      <Line />
+      <Upload>
+        <CancelButton onClick={openModal}>취소</CancelButton>
+        <UploadButton type="submit" onClick={postNotices}>
+          등록
+        </UploadButton>
+      </Upload>
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        header="공지 작성 취소"
+        subtext="작성 취소된 글은 저장되지 않습니다."
+        maintext="공지 글 작성을 취소하겠습니까?"
+        onClick={handleBackButton}
+      ></Modal>
+      <Footer></Footer>
+    </>
+  );
+};
 
 export default Create;
 
 const Title = styled.div`
-    margin: 8% 10% 0;
-    justify-content: left;
-    width: 80%;
-    height: 40px;
-    border: none;
-    font-size: 20px;
+  margin: 8% 10% 0;
+  justify-content: left;
+  width: 80%;
+  height: 40px;
+  border: none;
+  font-size: 20px;
 `;
 
 const Line = styled.div`
-    border: 1px solid var(--gray);
-    width: 85%;
-    margin: 0 auto;
+  border: 1px solid var(--gray);
+  width: 85%;
+  margin: 0 auto;
 `;
 
 const Input = styled.input`
-    ::placeholder {
-        font-family: var(--pre-font);
-        color: var(--gray2);
-    }
-    width: 100%;
-    border: none;
-    font-size: 20px;
+  ::placeholder {
     font-family: var(--pre-font);
-    font-weight: 400;
+    color: var(--gray2);
+  }
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  font-family: var(--pre-font);
+  font-weight: 400;
 `;
 
 const Content = styled.div`
-    display: flex;
-    // justify-content: left;
-    width: 90%;
-    height: 264px;
-    border: none;
-    font-size: 22px;
-    margin: 24px auto;
+  display: flex;
+  // justify-content: left;
+  width: 90%;
+  height: 264px;
+  border: none;
+  font-size: 22px;
+  margin: 24px auto;
 `;
 
 const Textarea = styled.textarea`
-    ::placeholder {
-        font-family: var(--pre-font);
-        font-weight: 400;
-        color: var(--gray2);
-    }
-    width: 90%;
-    justify-content: left;
-    margin: 0 auto;
-    border: none;
+  ::placeholder {
     font-family: var(--pre-font);
     font-weight: 400;
+    color: var(--gray2);
+  }
+  width: 90%;
+  justify-content: left;
+  margin: 0 auto;
+  border: none;
+  font-family: var(--pre-font);
+  font-weight: 400;
 `;
 
 const Upload = styled.div`
-    display: flex;
-    margin-top: 16px;
-    margin-bottom: 10%;
+  display: flex;
+  margin-top: 16px;
+  margin-bottom: 10%;
 `;

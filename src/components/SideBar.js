@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-//fonts
-import { PyeongChang_Peace } from "./Text";
 //images
 import toplogo from "../images/main/toplogo.svg";
 import deleteIcon from "../images/delete.svg";
@@ -30,6 +28,7 @@ const SideBar = props => {
 
   return (
     <BarWrapper onClick={DeleteSideBar}>
+      <link rel="preload" href={"../images/main/toplogo.svg"} as="image" />
       <Bar>
         <link
           rel="preload"
@@ -40,7 +39,11 @@ const SideBar = props => {
         />
         <DeleteBtn src={deleteIcon} onClick={DeleteSideBar} />
 
-        <object type="image/svg+xml" data={toplogo} style={{ marginTop: "99px" }}>
+        <object
+          type="image/svg+xml"
+          data={toplogo}
+          style={{ marginTop: "99px" }}
+        >
           <TopLogo src={toplogo} />
         </object>
 
@@ -82,14 +85,14 @@ const SideBar = props => {
 
 export default SideBar;
 
-const BarWrapper =styled.div`
+const BarWrapper = styled.div`
   width: 100%;
   height: 812px;
   position: absolute;
   z-index: 9;
   top: 0;
   left: 0;
-`
+`;
 
 const Bar = styled.div`
   width: 302px;
@@ -171,7 +174,7 @@ const LinkWrapper = styled.div`
 
 const Footer = styled.div`
   vertical-align: baseline;
-  margin-top: 308px;
+  margin-top: 260px;
   font-weight: 300;
   font-size: 8px;
   color: #a5a5a5;

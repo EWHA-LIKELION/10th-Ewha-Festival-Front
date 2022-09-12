@@ -99,7 +99,7 @@ const MainPage = () => {
           margin="24px 0 0 0 "
           style={{ display: "flex" }}
         >
-          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~
+          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~&nbsp;
           <span style={{ color: "var(--green)" }}>9.16</span>(금)
         </NanumSquare>
 
@@ -130,22 +130,33 @@ const MainPage = () => {
             size="11px"
             height="18px"
           >
-            136년 전 이화는 단 한 명의 학생을 위해 <br />
-            이 땅에서 최초로 여성 교육의 문을 열었습니다. <br />
-            기독교 정신의 사랑과 헌신을 바탕으로 <br />
-            우리 사회의 금기를 깨뜨리며 끊임없이 도전해 온 <br />
-            이화의 하루 하루는 기적의 역사가 되었습니다. <br />
+            2020년 1월,
             <br />
-            그리고 2022년 9월,
-            <br />
-            대동제를 대면으로 맞이하게 되었습니다.
+            갑작스러운 코로나 19 확산이 시작되었습니다.
             <br />
             <br />
-            3일 간의 대동제를 통해
+            ‘잠깐뿐이겠지’라고 생각했던
+            <br /> 비대면 대학생활은 점점 길어졌고,
             <br />
-            <span style={{ color: "green" }}>이화의 초록을</span>
+            2022년 1학기를 다섯번째
             <br />
-            새로이 써 나갈 수 있길 바랍니다. <br /> <br />
+            비대면(혼합) 학기로 보내게 되었습니다.
+            <br />
+            <br />
+            2022년 9월, 전면 대면수업이 재개되었고,
+            <br />
+            드디어 오프라인 대동제를 개최할 수 있게 되었습니다.
+            <br />
+            <br />
+            3일간의 대동제를 통해 다시 한번
+            <br />
+            <span style={{ color: "green" }}>이화의 초록</span>을
+            <br />써 내려갈 수 있길 바랍니다.
+            <br />
+            <br />
+            2022년 9월
+            <br />
+            해방이화 136주년 대동제 TF 팀장단 씀
           </Pretendard>
         </div>
 
@@ -168,7 +179,7 @@ const MainPage = () => {
         <TimeLine title="이화인 한솥밥" time="11:30-14:30 학문관 1층" />
         <TimeLine
           title="동아리 스포츠 트랙 공연"
-          time="17:00 정문 스포츠 트랙"
+          time="18:30 정문 스포츠 트랙"
         />
 
         <DayBack>

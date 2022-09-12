@@ -3,31 +3,24 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // import font
-import { PyeongChang_Peace } from "../components/Text";
+import { PyeongChang_Peace } from "../../components/Text";
 
-import hamburger from "../images/main/hamburger.svg";
-import SideBar from "../components/SideBar";
+// import image
+import { ReactComponent as Backbutton } from "../../images/navbar/back.svg";
 
-const TitleBar = ({ children }) => {
-  // 사이드바 관리
-  const [sideBar, setSideBar] = useState(false);
-
+const EditTitleBar = ({ children }) => {
   const navigate = useNavigate();
 
-  const handleBackButton = () => {
-    navigate(-1);
-  };
   return (
     <>
       <Background>
         <TopBar>
           <ButtonWrapper>
-            <img
-              src={hamburger}
+            <Backbutton
               onClick={() => {
-                setSideBar(true);
+                navigate(-1);
               }}
-            />
+            ></Backbutton>
           </ButtonWrapper>
           <TextWrapper>
             <PyeongChang_Peace weight="700" size="22px">
@@ -35,7 +28,6 @@ const TitleBar = ({ children }) => {
             </PyeongChang_Peace>
           </TextWrapper>
         </TopBar>
-        {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
       </Background>
       <hr
         style={{
@@ -48,7 +40,7 @@ const TitleBar = ({ children }) => {
   );
 };
 
-export default TitleBar;
+export default EditTitleBar;
 
 const TopBar = styled.div`
   display: flex;

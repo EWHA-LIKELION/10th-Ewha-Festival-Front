@@ -1,14 +1,16 @@
 import styled, { css } from "styled-components";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { setPage } from "../../redux/pageSlice";
+
 //컴포넌트
 import { PyeongChang_Peace, Pretendard } from "../../components/Text";
 import LocationBtn from "../../components/Category/LocationBtn";
 import Footer from "../../components/Footer/Footer";
 import { GetKeywordBooth, LikeBooth, UnLikeBooth } from "../../api/booth";
 import Pagination from "../../components/Category/Pagination";
+import SideBar from "../../components/SideBar";
 
 // 데이터
 import { locationData } from "../../_mock/locations";
@@ -16,11 +18,11 @@ import { dayData } from "../../_mock/dayData";
 import { categoryData } from "../../_mock/categoryData";
 import { boothMaps } from "../../_mock/boothMap";
 // 이미지
-import back from "../../images/navbar/back.svg";
 import search from "../../images/navbar/search.svg";
-import map from "../../images/map.svg";
+import hamburger from "../../images/main/hamburger.svg";
 import greenheart from "../../images/greenheart.svg";
 import heart from "../../images/heart.svg";
+import booththumnail from "../../images/default.png";
 
 const Category = () => {
   const { day, location, page } = useAppSelector(state => state.page);
@@ -30,15 +32,13 @@ const Category = () => {
   const [days, setDays] = useState(dayData); // 요일들
   const [locations, setLocations] = useState(locationData); // 장소들
 
-  const [pickedPage, setpickedPage] = useState(page); // 선택된 페이지 넘버
+  const [pickedPage, setpickedPage] = useState(parseInt(page)); // 선택된 페이지 넘버
   const [pickedDay, setPickedDay] = useState(day); // 선택 된 요일
   const [pickedLocation, setPickedLocation] = useState(location); // 선택된 장소 (한글)
   const [pickedMap, setPickedMap] = useState(location); // 선택된 지도
 
   const [booths, setBooths] = useState(categoryData.data); // 부스 목록
   const [length, setLength] = useState(0);
-
-  console.log("테스트", day, location, page);
 
   var selectLocationId = null;
   locations.map(lo => {
@@ -49,8 +49,6 @@ const Category = () => {
 
   //첫 get api
   useEffect(() => {
-    console.log("첫 useEffect");
-
     dispatch(
       setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
     );
@@ -58,12 +56,9 @@ const Category = () => {
     selectLocation(selectLocationId); // 전에 눌렀던 장소 버튼
     selectDay(parseInt(day)); // 전에 눌렀던 요일 버튼
 
-    console.log("[day] :", day, " [days] : ", days);
-
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
-        console.log(pickedDay, pickedLocation);
+        console.log("조회 결과", res);
         setBooths(res.data.data);
         setLength(res.data.total);
       })
@@ -84,16 +79,12 @@ const Category = () => {
 
   //날짜 또는 장소 선택 바뀌면 get api 실행
   useEffect(() => {
-    console.log("매번 반복 useEffect");
-
     dispatch(
       setPage({ day: pickedDay, location: pickedLocation, page: pickedPage }),
     );
 
     GetKeywordBooth(pickedDay, pickedLocation, pickedPage)
       .then(res => {
-        console.log(pickedDay, pickedLocation, pickedPage, " 조회 결과", res);
-        console.log(pickedDay, pickedLocation);
         setBooths(res.data.data);
         setLength(res.data.total);
       })
@@ -180,14 +171,20 @@ const Category = () => {
   const navigate = useNavigate();
 
   const Detail = id => {
-    console.log("페이지 이동");
     navigate(`/category/detail/${id}`);
   };
+
+  const [sideBar, setSideBar] = useState(false);
 
   return (
     <Wrapper>
       <Navbar>
-        <Back src={back} onClick={() => navigate("/")} />
+        <img
+          src={hamburger}
+          onClick={() => {
+            setSideBar(true);
+          }}
+        />
 
         <PyeongChang_Peace
           size="22px"
@@ -203,6 +200,8 @@ const Category = () => {
           <Search src={search} />
         </Link>
       </Navbar>
+
+      {sideBar ? <SideBar setSideBar={setSideBar} /> : null}
 
       <Map src={boothMaps[pickedMap]} />
 
@@ -266,13 +265,16 @@ const Category = () => {
 
           return (
             <Booth key={b.id}>
-              <BoothImg src={b.thumnail} onClick={event => Detail(b.id)} />
+              {b.thumnail == "" ? (
+                <BoothImg src={booththumnail} onClick={() => Detail(b.id)} />
+              ) : (
+                <BoothImg src={b.thumnail} onClick={() => Detail(b.id)} />
+              )}
               <BootInfo onClick={event => Detail(b.id)}>
                 <p className="num">{b.number}</p>
                 <p className="name">{b.name.substr(0, 13)}</p>
                 <p className="info">{info}</p>
               </BootInfo>
-
               {b.is_liked ? (
                 <div
                   style={{
@@ -459,7 +461,7 @@ const Day = styled.div`
 `;
 
 const Map = styled.img`
-  margin: 8px 39px 23px 30px;
+  margin: 8px 10px 23px 10px;
 `;
 
 const Wrapper = styled.div`

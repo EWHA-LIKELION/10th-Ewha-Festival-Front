@@ -1,6 +1,4 @@
 import { Star } from "../../images/stars/star";
-import styled from "styled-components";
-
 import main from "../../images/background.svg";
 import "../../styles/star.css";
 import { createGlobalStyle } from "styled-components";
