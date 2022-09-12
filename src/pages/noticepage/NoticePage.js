@@ -18,46 +18,46 @@ import star3 from "../../images/stars/star3.svg";
 import write from "../../images/write.svg";
 
 export function NoticePage() {
-const [notices, setNotices] = useState([]);
+  const [notices, setNotices] = useState([]);
 
-// 공지 조회 api 
-useEffect(()=>{
-  GetAllNotice()
-  .then(res =>{
-    console.log("모든 공지 조회 성공", res.data.data);
-    setNotices(res.data.data);
-    console.log(isTf)
-  })
-  .catch(err => {
-      console.log("모든 공지 조회 실패")
-    })
-},[])
+  // 공지 조회 api
+  useEffect(() => {
+    GetAllNotice()
+      .then(res => {
+        console.log("모든 공지 조회 성공", res.data.data);
+        setNotices(res.data.data);
+        console.log(isTf);
+      })
+      .catch(err => {
+        console.log("모든 공지 조회 실패");
+      });
+  }, []);
 
-// 유저 tf 여부
-const isTf = useAppSelector(state => state.user.isTf)
+  // 유저 tf 여부
+  const isTf = useAppSelector(state => state.user.isTf);
 
-// 공지 작성 페이지 이동
-function Write(e) {
-  window.location.href = "/create";
-}
+  // 공지 작성 페이지 이동
+  function Write(e) {
+    window.location.href = "/create";
+  }
 
-// 페이지네이션
-const [limit, setLimit] = useState(5);
-const [page, setPage] = useState(1);
-const offset = (page - 1) * limit;
+  // 페이지네이션
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   return (
     <>
-      <TitleBar> 
+      <TitleBar>
         <span style={{ color: "var(--green1)" }}>공</span>
         <span style={{ color: "var(--green2)" }}>지</span>
         <span style={{ color: "var(--green3)" }}>사항</span>
       </TitleBar>
       <SubTitleBox>
         <SubTitle>
-        <object type="image/svg+xml" data={star3}>
-          <img src={star3} />
-        </object>
+          <object type="image/svg+xml" data={star3}>
+            <img src={star3} />
+          </object>
           <PyeongChang
             color="var(--orange)"
             weight="700"
@@ -67,39 +67,41 @@ const offset = (page - 1) * limit;
             NOTICE
           </PyeongChang>
           <object type="image/svg+xml" data={star3}>
-          <img src={star3} />
-        </object>
+            <img src={star3} />
+          </object>
         </SubTitle>
-        {isTf ? <NoticeWrite onClick={Write}>
-          <p>공지 작성하기 </p>
-          <object type="image/svg+xml" data={write}>
-          <img src={write} />
-        </object>
-        </NoticeWrite>
-        : null}
+        {isTf ? (
+          <NoticeWrite onClick={Write}>
+            <p>공지 작성하기 </p>
+            <object type="image/svg+xml" data={write}>
+              <img src={write} />
+            </object>
+          </NoticeWrite>
+        ) : null}
       </SubTitleBox>
       <Line />
       <div>
-      {notices && notices.slice(offset, offset + limit).map(notice => {
-        return (
-          <>
-            <Link
-              to={`/notice/${notice.id}`}
-              state={{ notice: notice }}
-              style={{ textDecoration: "none" }}
-            >
-              <NoticeBox key={notice.id}>
-              <p class="title">{"[공지]" + " " + notice.title}</p>
-                <NoticeInfo>
-                  <p class="writer">TF 팀</p>
-                  <p class="createdAt">{notice.created_at}</p>
-                </NoticeInfo>
-              </NoticeBox>
-            </Link>
-            <Line />
-          </>
-        );
-      })}
+        {notices &&
+          notices.slice(offset, offset + limit).map(notice => {
+            return (
+              <>
+                <Link
+                  to={`/notice/${notice.id}`}
+                  state={{ notice: notice }}
+                  style={{ textDecoration: "none" }}
+                >
+                  <NoticeBox key={notice.id}>
+                    <p class="title">{"[공지]" + " " + notice.title}</p>
+                    <NoticeInfo>
+                      <p class="writer">TF 팀</p>
+                      <p class="createdAt">{notice.created_at}</p>
+                    </NoticeInfo>
+                  </NoticeBox>
+                </Link>
+                <Line />
+              </>
+            );
+          })}
       </div>
       <Pagination
         total={notices.length}
