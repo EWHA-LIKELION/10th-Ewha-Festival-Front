@@ -99,7 +99,7 @@ const MainPage = () => {
           margin="24px 0 0 0 "
           style={{ display: "flex" }}
         >
-          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~
+          <span style={{ color: "var(--green)" }}>9.14</span>(수) ~&nbsp;
           <span style={{ color: "var(--green)" }}>9.16</span>(금)
         </NanumSquare>
 
@@ -130,26 +130,33 @@ const MainPage = () => {
             size="11px"
             height="18px"
           >
-            안녕하세요 이화의 벗들!
+            2020년 1월,
             <br />
-            저희 사이트에 방문해주셔서 정말 감사합니다.
-            <br />
-            <br />
-            2022년 9월 14일,
-            <br />
-            3년 만에 대면으로 맞이하게 된 대동제!
+            갑작스러운 코로나 19 확산이 시작되었습니다.
             <br />
             <br />
-            3일 간의 대동제를 통해
+            ‘잠깐뿐이겠지’라고 생각했던
+            <br /> 비대면 대학생활은 점점 길어졌고,
             <br />
-            <span style={{ color: "green" }}>이화의 초록을</span>
+            2022년 1학기를 다섯번째
             <br />
-            새로이 써 나갈 수 있길 바랍니다.
+            비대면(혼합) 학기로 보내게 되었습니다.
             <br />
             <br />
-            모든 벗들이 최고의 대동제를 즐길 수 있도록
+            2022년 9월, 전면 대면수업이 재개되었고,
             <br />
-            TF팀과 멋쟁이사자처럼이 노력하겠습니다.
+            드디어 오프라인 대동제를 개최할 수 있게 되었습니다.
+            <br />
+            <br />
+            3일간의 대동제를 통해 다시 한번
+            <br />
+            <span style={{ color: "green" }}>이화의 초록</span>을
+            <br />써 내려갈 수 있길 바랍니다.
+            <br />
+            <br />
+            2022년 9월
+            <br />
+            해방이화 136주년 대동제 TF 팀장단 씀
           </Pretendard>
         </div>
 
@@ -172,7 +179,7 @@ const MainPage = () => {
         <TimeLine title="이화인 한솥밥" time="11:30-14:30 학문관 1층" />
         <TimeLine
           title="동아리 스포츠 트랙 공연"
-          time="17:00 정문 스포츠 트랙"
+          time="18:30 정문 스포츠 트랙"
         />
 
         <DayBack>
