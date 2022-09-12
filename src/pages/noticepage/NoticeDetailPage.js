@@ -159,6 +159,7 @@ const NoticeContent = styled.div`
 
 const Box = styled.div`
   height: 100%;
+  width: 100%;
   position: fixed;
   overflow: auto !important;
 `;
