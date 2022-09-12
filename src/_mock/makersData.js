@@ -188,7 +188,7 @@ export const makersData = [
   {
     team: "무대",
     name: "이재윤",
-    dept: "디자인학부 20",
+    dept: "디자인학부 22",
   },
   {
     team: "무대",
