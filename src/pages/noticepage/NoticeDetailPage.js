@@ -162,6 +162,7 @@ const Box = styled.div`
   width: 100%;
   position: fixed;
   overflow: auto !important;
+  background-color: #ffffff;
 `;
 
 const Line = styled.div`
