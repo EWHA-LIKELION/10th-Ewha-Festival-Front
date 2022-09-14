@@ -44,67 +44,69 @@ export function NoticePage() {
 
   return (
     <>
-      <TitleBar>
-        <span style={{ color: "var(--green1)" }}>공</span>
-        <span style={{ color: "var(--green2)" }}>지</span>
-        <span style={{ color: "var(--green3)" }}>사항</span>
-      </TitleBar>
-      <SubTitleBox>
-        <SubTitle>
-          <object type="image/svg+xml" data={star3}>
-            <img src={star3} />
-          </object>
-          <PyeongChang
-            color="var(--orange)"
-            weight="700"
-            size="15px"
-            style={{ margin: "4px 8px" }}
-          >
-            NOTICE
-          </PyeongChang>
-          <object type="image/svg+xml" data={star3}>
-            <img src={star3} />
-          </object>
-        </SubTitle>
-        {isTf ? (
-          <NoticeWrite onClick={Write}>
-            <p>공지 작성하기 </p>
-            <object type="image/svg+xml" data={write}>
-              <img src={write} />
+      <div style={{ backgroundColor: "#ffffff" }}>
+        <TitleBar>
+          <span style={{ color: "var(--green1)" }}>공</span>
+          <span style={{ color: "var(--green2)" }}>지</span>
+          <span style={{ color: "var(--green3)" }}>사항</span>
+        </TitleBar>
+        <SubTitleBox>
+          <SubTitle>
+            <object type="image/svg+xml" data={star3}>
+              <img src={star3} />
             </object>
-          </NoticeWrite>
-        ) : null}
-      </SubTitleBox>
-      <Line />
-      <div>
-        {notices &&
-          notices.slice(offset, offset + limit).map(notice => {
-            return (
-              <>
-                <Link
-                  to={`/notice/${notice.id}`}
-                  state={{ notice: notice }}
-                  style={{ textDecoration: "none" }}
-                >
-                  <NoticeBox key={notice.id}>
-                    <p class="title">{"[공지]" + " " + notice.title}</p>
-                    <NoticeInfo>
-                      <p class="writer">TF 팀</p>
-                      <p class="createdAt">{notice.created_at}</p>
-                    </NoticeInfo>
-                  </NoticeBox>
-                </Link>
-                <Line />
-              </>
-            );
-          })}
+            <PyeongChang
+              color="var(--orange)"
+              weight="700"
+              size="15px"
+              style={{ margin: "4px 8px" }}
+            >
+              NOTICE
+            </PyeongChang>
+            <object type="image/svg+xml" data={star3}>
+              <img src={star3} />
+            </object>
+          </SubTitle>
+          {isTf ? (
+            <NoticeWrite onClick={Write}>
+              <p>공지 작성하기 </p>
+              <object type="image/svg+xml" data={write}>
+                <img src={write} />
+              </object>
+            </NoticeWrite>
+          ) : null}
+        </SubTitleBox>
+        <Line />
+        <div>
+          {notices &&
+            notices.slice(offset, offset + limit).map(notice => {
+              return (
+                <>
+                  <Link
+                    to={`/notice/${notice.id}`}
+                    state={{ notice: notice }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <NoticeBox key={notice.id}>
+                      <p class="title">{"[공지]" + " " + notice.title}</p>
+                      <NoticeInfo>
+                        <p class="writer">TF 팀</p>
+                        <p class="createdAt">{notice.created_at}</p>
+                      </NoticeInfo>
+                    </NoticeBox>
+                  </Link>
+                  <Line />
+                </>
+              );
+            })}
+        </div>
+        <Pagination
+          total={notices.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </div>
-      <Pagination
-        total={notices.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
       <Footer />
     </>
   );
