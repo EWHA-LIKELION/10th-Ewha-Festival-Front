@@ -31,7 +31,7 @@ const TrashPage = () => {
   };
 
   return (
-    <>
+    <Back>
       <TitleBar>
         <span style={{ color: "var(--green1)" }}>쓰레</span>
         <span style={{ color: "var(--green2)" }}>기통 </span>
@@ -82,11 +82,15 @@ const TrashPage = () => {
         </LocationBox>
       </MainBox>
       <Footer />
-    </>
+    </Back>
   );
 };
 
 export default TrashPage;
+
+const Back = styled.div`
+  background-color: white;
+`;
 
 const MainBox = styled.div`
   display: flex;

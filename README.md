@@ -2,7 +2,7 @@
 
 ### 프로젝트 소개
 
-2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 TF팀과 협업하여 **부스 통합 안내 서비스**를 제작하였습니다. 
+2022 이화여대 대동제를 맞이해 '이화여대 멋쟁이 사자처럼 10기'가 대동제 TF팀과 협업하여 **부스 통합 안내 서비스**를 제작하였습니다.
 <br/> **Re:wha**는 nnn개의 부스들을 한 번에 조회 가능한 유일한 플랫폼으로써, 대동제를 즐기는 벗들의 편의와 즐거움을 증진시키고
 부스를 운영하는 벗들에겐 부스 홍보 효과를 제공합니다.
 <br/>
@@ -10,7 +10,9 @@
 많은 벗들에게 자신의 부스를 홍보 할 수 있는 기회가 되었습니다.
 
 ### 기능
+
 **Re:wha**가 제공하는 기능은 다음과 같습니다.
+
 1. 부스 위치 조회 기능
 2. 부스 이름, 메뉴 검색 기능
 3. TF팀 공지 게시판
@@ -38,7 +40,7 @@
     <tr width="100%">
          <td  align="center"><img src = "https://ifh.cc/g/J8FJYy.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
-        <td  align="center"><img src = "" width="80%"/></td>
+        <td  align="center"><img src = "https://ifh.cc/g/N5QXsb.jpg" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/ydn0yw.png" width="80px"/></td>
@@ -62,9 +64,10 @@
 - 알파 테스트 : 2022.09.08
 - 배포 : 2022.09.00
 - 버그 수정 : 2022.09.14
-<br/>
+  <br/>
 
 ## 🎉 프로젝트 시작
+
 ```
 git clone https://github.com/EWHA-LIKELION/10th-Ewha-Festival-Front.git
 npm install
@@ -77,7 +80,7 @@ npm start
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - ETC :
- <img src="https://img.shields.io/badge/Figma -F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/> 
+  <img src="https://img.shields.io/badge/Figma -F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/>
 
 </br>
 
