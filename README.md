@@ -40,7 +40,7 @@
     <tr width="100%">
          <td  align="center"><img src = "https://ifh.cc/g/J8FJYy.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/Vo4n9y.png" width="100px" /></td>
-        <td  align="center"><img src = "https://ifh.cc/g/N5QXsb.jpg" width="80%"/></td>
+        <td  align="center"><img src = "" width="10%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/3pJqOT.jpg" width="80px"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/KHNqkk.png" width="80%"/></td>
         <td  align="center"><img src = "https://ifh.cc/g/ydn0yw.png" width="80px"/></td>
