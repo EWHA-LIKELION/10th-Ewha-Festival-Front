@@ -13,7 +13,7 @@
 많은 벗들에게 자신의 부스를 홍보 할 수 있는 기회가 되었습니다.
 
 💚 [사이트 바로가기 - 배포용](https://rewha2022.com/) <br>
-💚 [사이트 바로가기 - 서버x, 보관용](https://curious-banoffee-6d8525.netlify.app/)
+💚 [사이트 바로가기 - 서버x, 아카이빙 용](https://rewha.swygbro.com/)
 
 ### 🎉 기능
 **Re:wha**가 제공하는 기능은 다음과 같습니다.
